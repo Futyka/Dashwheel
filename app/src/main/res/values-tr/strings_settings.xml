@@ -220,6 +220,8 @@
     <string name="about_tip_thanks">Teşekkürler, gerçekten yardımı oluyor.</string>
     <string name="about_project">Proje sayfası</string>
     <string name="about_project_detail">Kaynak kodu, sürümler ve hata raporları</string>
+    <string name="about_telegram">Telegram grubu</string>
+    <string name="about_telegram_detail">Sorular, haberler ve diğer sürücüler: t.me/Dashwheel</string>
     <string name="help_title">Yardım</string>
     <string name="help_row_detail">Her özellik wiki\'de açıklanmıştır</string>
     <string name="help_detail">Her özellik wiki\'de açıklanmıştır. Telefonunuzla tarayın ya da burada açın.</string>

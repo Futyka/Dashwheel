@@ -76,6 +76,7 @@ import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Handyman
 import androidx.compose.material.icons.filled.Image
@@ -1467,6 +1468,7 @@ private fun MoreWithGithubRow() {
 
 internal const val KOFI_URL = "https://ko-fi.com/deviloufr"
 private const val PROJECT_URL = "https://github.com/deviloufr-ai/Dashwheel"
+private const val TELEGRAM_URL = "https://t.me/Dashwheel"
 /** A Google Play listing, the package name appended (the Play edition's own, and the companion's). */
 internal const val PLAY_LISTING = "https://play.google.com/store/apps/details?id="
 
@@ -1548,6 +1550,9 @@ private fun AboutBody(m: TopBarModel) {
     if (help) WikiHelpDialog(WikiPage.HOME) { help = false }
     SettingsRow(Icons.Filled.Favorite, stringResource(R.string.about_project), stringResource(R.string.about_project_detail)) {
         context.launchSafely(Intent(Intent.ACTION_VIEW, Uri.parse(PROJECT_URL)))
+    }
+    SettingsRow(Icons.AutoMirrored.Filled.Send, stringResource(R.string.about_telegram), stringResource(R.string.about_telegram_detail)) {
+        context.launchSafely(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_URL)))
     }
 }
 

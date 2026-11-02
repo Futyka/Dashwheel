@@ -217,6 +217,8 @@
     <string name="about_tip_thanks">Merci, ça aide vraiment.</string>
     <string name="about_project">Page du projet</string>
     <string name="about_project_detail">Code source, versions et signalement de bugs</string>
+    <string name="about_telegram">Groupe Telegram</string>
+    <string name="about_telegram_detail">Questions, nouveautés et autres conducteurs : t.me/Dashwheel</string>
     <string name="help_title">Aide</string>
     <string name="help_row_detail">Chaque fonction expliquée, sur le wiki</string>
     <string name="help_detail">Chaque fonction expliquée sur le wiki. Scannez-le avec votre téléphone ou ouvrez-le ici.</string>

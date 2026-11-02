@@ -218,6 +218,8 @@
     <string name="about_tip_thanks">Köszönöm, sokat segít.</string>
     <string name="about_project">Projektoldal</string>
     <string name="about_project_detail">Forráskód, kiadások és hibajelentések</string>
+    <string name="about_telegram">Telegram-csoport</string>
+    <string name="about_telegram_detail">Kérdések, hírek és más sofőrök: t.me/Dashwheel</string>
     <string name="help_title">Súgó</string>
     <string name="help_row_detail">Minden funkció elmagyarázva, a wikin</string>
     <string name="help_detail">Minden funkció elmagyarázva a wikin. Olvassa be a telefonjával, vagy nyissa meg itt.</string>

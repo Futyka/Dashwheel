@@ -218,6 +218,8 @@
     <string name="about_tip_thanks">Спасибо, это правда помогает.</string>
     <string name="about_project">Страница проекта</string>
     <string name="about_project_detail">Исходный код, релизы и сообщения об ошибках</string>
+    <string name="about_telegram">Группа в Telegram</string>
+    <string name="about_telegram_detail">Вопросы, новости и другие водители: t.me/Dashwheel</string>
     <string name="help_title">Справка</string>
     <string name="help_row_detail">Все функции с пояснениями в вики</string>
     <string name="help_detail">Все функции с пояснениями в вики. Отсканируйте телефоном или откройте здесь.</string>
