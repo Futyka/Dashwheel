@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.openauto.dash.CameraControl
 import com.openauto.dash.Cap
 import com.openauto.dash.CapClaim
+import com.openauto.dash.DockShell
 import com.openauto.dash.IgnitionEvent
 import com.openauto.dash.IgnitionSource
 import com.openauto.dash.KeySource
@@ -17,6 +18,7 @@ import com.openauto.dash.McuReader
 import com.openauto.dash.MediaBridge
 import com.openauto.dash.PhoneBridge
 import com.openauto.dash.PopupTakeover
+import com.openauto.dash.PrivilegedShell
 import com.openauto.dash.SignalCatalogue
 import com.openauto.dash.SleepSurvival
 import com.openauto.dash.SysProps
@@ -108,6 +110,8 @@ internal object HcnIgnition : IgnitionSource {
 internal object HcnBus : VehicleBusSource {
     private const val TAG = "HcnBus"
     private const val POLL_MS = 300L
+    /** A shell round trip a poll is enough: a door is not opened three times a second. */
+    private const val SHELL_POLL_MS = 1_000L
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private val _listening = MutableStateFlow(false)
@@ -126,10 +130,23 @@ internal object HcnBus : VehicleBusSource {
         }
         ContextCompat.registerReceiver(context.applicationContext, receiver, filter, ContextCompat.RECEIVER_EXPORTED)
         _listening.value = true
+        val app = context.applicationContext
         job = scope.launch {
             var seen = false
+            var path: String? = null
             while (isActive) {
-                val doors = HcnProtocol.doors(SysProps::getOrNull)
+                var doors = HcnProtocol.doors(SysProps::getOrNull)
+                var viaShell = false
+                if (doors == null && PrivilegedShell.access.value.shell) {
+                    val props = shellProps(app)
+                    doors = HcnProtocol.doors { props[it]?.takeIf(String::isNotBlank) }
+                    viaShell = doors != null
+                }
+                val now = if (doors == null) "neither" else if (viaShell) "shell" else "direct"
+                if (now != path) {
+                    path = now
+                    Log.i(TAG, "door properties: $now (direct read, else the privileged shell)")
+                }
                 if (doors != null) {
                     if (!seen) {
                         seen = true
@@ -139,10 +156,22 @@ internal object HcnBus : VehicleBusSource {
                     }
                     publisher.put(K.DOORS, McuReader.DoorState(doors[0], doors[1], doors[2], doors[3], doors[4]))
                 }
-                delay(POLL_MS)
+                delay(if (viaShell) SHELL_POLL_MS else POLL_MS)
             }
         }
     }
+
+    /**
+     * The door properties through the privileged shell, one `getprop` a poll: on Android 12 and later a vendor
+     * property SELinux keeps from apps reads as unset in the app itself, while root, Shizuku and ADB see it.
+     */
+    private suspend fun shellProps(context: Context): Map<String, String> =
+        runCatching { DockShell.shell(context, "getprop | grep -F persist.vendor.cem.cardoor") }
+            .getOrDefault("").lines()
+            .mapNotNull { line -> PROP_LINE.find(line)?.let { it.groupValues[1] to it.groupValues[2] } }
+            .toMap()
+
+    private val PROP_LINE = Regex("""^\[([^\]]+)]: \[(.*)]$""")
 
     override fun stop() {
         job?.cancel()
