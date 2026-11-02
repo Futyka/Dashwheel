@@ -6,4 +6,15 @@
     <!-- The Ko-fi ask beside every release's notes, GitHub edition (ReleaseNotes.kt) -->
     <string name="update_support_title">A szabadidőmben készült</string>
     <string name="update_support_body">A Dashwheel ingyenes, és esténként, sok késő éjszakán készül. Ha jobbá teszi az utazásait, egy kávé kitart a következő kiadásig. Köszönöm!</string>
+    <!-- Settings > About > Previous version: the way back to an earlier build (issue #76) -->
+    <string name="update_previous">Előző verzió</string>
+    <string name="update_previous_detail">Visszatérés a csatorna egy korábbi buildjére</string>
+    <string name="update_previous_none">Nincs korábbi build, amire vissza lehetne térni</string>
+    <string name="update_previous_saved">%1$s a Download/Dashwheel mappában van</string>
+    <string name="update_previous_failed">A korábbi buildet nem sikerült telepíteni</string>
+    <string name="update_previous_title">Vissza a(z) %1$s verzióra</string>
+    <string name="update_previous_shell_body">A Dashwheel a(z) %1$s verziót telepíti e fölé, majd újraindul. A beállítások megmaradnak.</string>
+    <string name="update_previous_go">Visszatérés</string>
+    <string name="update_previous_manual_body">Az Android nem telepít régebbi verziót újabb fölé. Előbb távolítsa el a Dashwheelt, ezzel a beállítások és párosítások elvesznek, majd nyissa meg a Download/Dashwheel/%1$s fájlt a készülék fájlkezelőjében.</string>
+    <string name="update_previous_uninstall">Eltávolítás</string>
 </resources>

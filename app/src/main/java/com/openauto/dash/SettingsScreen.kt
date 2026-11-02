@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInWindow
+import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Swipe
 import androidx.compose.material.icons.filled.TouchApp
@@ -115,12 +116,14 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Straighten
 import androidx.compose.material.icons.filled.UnfoldLess
 import androidx.compose.material.icons.filled.UnfoldMore
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
@@ -1570,6 +1573,89 @@ private fun UpdateRow(m: TopBarModel) {
         beta = it
         UpdateManager.setBeta(context, it)
         m.onCheckUpdates()
+    }
+    PreviousVersionRow()
+}
+
+/**
+ * The way back after a bad build: the channel's last five builds older than
+ * this one ([UpdateManager.previousReleases]). A shell installs the pick over
+ * this version; without one the APK is saved in Download/Dashwheel and the
+ * driver uninstalls first, settings and pairings with it (issue #76).
+ */
+@Composable
+private fun PreviousVersionRow() {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    // Its own updater: a build going back must never show as the update on offer in ⋮.
+    val manager = remember { UpdateManager(context) }
+    val status by manager.status.collectAsState()
+    val shell = shellAccess().shell
+    // Android 9 writes Download itself, which needs the storage permission (see SaveLogRow).
+    val storage = rememberPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    var releases by remember { mutableStateOf<List<UpdateInfo>?>(null) }
+    var picked by remember { mutableStateOf<UpdateInfo?>(null) }
+    var uninstall by remember { mutableStateOf<UpdateStatus.Ready?>(null) }
+    var busy by remember { mutableStateOf(false) }
+    var none by remember { mutableStateOf(false) }
+    val detail = when (val s = status) {
+        is UpdateStatus.Downloading -> stringResource(R.string.dash_update_downloading, s.percent)
+        is UpdateStatus.Installing -> stringResource(R.string.dash_update_installing)
+        is UpdateStatus.Ready -> stringResource(R.string.update_previous_saved, s.file.name)
+        is UpdateStatus.Error -> stringResource(s.messageRes)
+        else -> stringResource(if (busy) R.string.dash_update_checking else if (none) R.string.update_previous_none else R.string.update_previous_detail)
+    }
+    SettingsRow(Icons.Filled.History, stringResource(R.string.update_previous), detail) {
+        if (busy || status is UpdateStatus.Downloading || status is UpdateStatus.Installing) return@SettingsRow
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && !storage.granted) { storage.request(); return@SettingsRow }
+        busy = true
+        scope.launch {
+            val list = manager.previousReleases()
+            busy = false
+            none = list.isEmpty()
+            if (list.isNotEmpty()) releases = list
+        }
+    }
+    releases?.let { list ->
+        AlertDialog(
+            modifier = Modifier.keepClearOfWindows(),
+            onDismissRequest = { releases = null },
+            containerColor = DashColors.Card,
+            title = { Text(stringResource(R.string.update_previous), color = DashColors.TextPrimary) },
+            text = {
+                Column {
+                    list.forEach { info ->
+                        SettingsRow(Icons.Filled.History, info.versionName, info.date) {
+                            releases = null
+                            if (shell) picked = info else scope.launch { manager.installPrevious(info) }
+                        }
+                    }
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = { releases = null }) { Text(stringResource(R.string.dash_close), color = DashColors.Muted) }
+            }
+        )
+    }
+    picked?.let { info ->
+        ConfirmDialog(
+            stringResource(R.string.update_previous_title, info.versionName),
+            stringResource(R.string.update_previous_shell_body, info.versionName),
+            stringResource(R.string.update_previous_go),
+            onConfirm = { picked = null; scope.launch { manager.installPrevious(info) } },
+            onDismiss = { picked = null }
+        )
+    }
+    // No shell: the file is saved, and Android takes it only once this version is gone.
+    LaunchedEffect(status) { if (!shell) uninstall = status as? UpdateStatus.Ready }
+    uninstall?.let { ready ->
+        ConfirmDialog(
+            stringResource(R.string.update_previous_title, ready.info.versionName),
+            stringResource(R.string.update_previous_manual_body, ready.file.name),
+            stringResource(R.string.update_previous_uninstall),
+            onConfirm = { uninstall = null; context.launchSafely(Intent(Intent.ACTION_DELETE, Uri.parse("package:${context.packageName}"))) },
+            onDismiss = { uninstall = null }
+        )
     }
 }
 

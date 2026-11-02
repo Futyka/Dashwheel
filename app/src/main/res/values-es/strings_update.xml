@@ -6,4 +6,15 @@
     <!-- The Ko-fi ask beside every release's notes, GitHub edition (ReleaseNotes.kt) -->
     <string name="update_support_title">Hecho en mi tiempo libre</string>
     <string name="update_support_body">Dashwheel es gratis y lo hago por las tardes y en muchas noches en vela. Si mejora tus viajes, un café me mantiene despierto hasta la próxima versión. ¡Gracias!</string>
+    <!-- Settings > About > Previous version: the way back to an earlier build (issue #76) -->
+    <string name="update_previous">Versión anterior</string>
+    <string name="update_previous_detail">Volver a una versión anterior de este canal</string>
+    <string name="update_previous_none">No hay una versión anterior a la que volver</string>
+    <string name="update_previous_saved">%1$s está en Download/Dashwheel</string>
+    <string name="update_previous_failed">No se pudo instalar la versión anterior</string>
+    <string name="update_previous_title">Volver a %1$s</string>
+    <string name="update_previous_shell_body">Dashwheel instala %1$s sobre esta versión y se reinicia. Tus ajustes se conservan.</string>
+    <string name="update_previous_go">Volver</string>
+    <string name="update_previous_manual_body">Android no puede instalar una versión más antigua sobre una más nueva. Desinstala primero Dashwheel, lo que borra tus ajustes y emparejamientos, y luego abre Download/Dashwheel/%1$s en el gestor de archivos de la unidad.</string>
+    <string name="update_previous_uninstall">Desinstalar</string>
 </resources>

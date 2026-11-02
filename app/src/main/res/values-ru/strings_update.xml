@@ -6,4 +6,15 @@
     <!-- The Ko-fi ask beside every release's notes, GitHub edition (ReleaseNotes.kt) -->
     <string name="update_support_title">Сделано в свободное время</string>
     <string name="update_support_body">Dashwheel бесплатен, я делаю его по вечерам и бессонными ночами. Если он делает ваши поездки лучше, чашка кофе поможет мне дотянуть до следующей версии. Спасибо!</string>
+    <!-- Settings > About > Previous version: the way back to an earlier build (issue #76) -->
+    <string name="update_previous">Предыдущая версия</string>
+    <string name="update_previous_detail">Вернуться к более старой сборке этого канала</string>
+    <string name="update_previous_none">Нет более старой сборки для возврата</string>
+    <string name="update_previous_saved">%1$s лежит в Download/Dashwheel</string>
+    <string name="update_previous_failed">Не удалось установить старую сборку</string>
+    <string name="update_previous_title">Вернуться к %1$s</string>
+    <string name="update_previous_shell_body">Dashwheel установит %1$s поверх этой версии и перезапустится. Настройки сохранятся.</string>
+    <string name="update_previous_go">Вернуться</string>
+    <string name="update_previous_manual_body">Android не ставит старую версию поверх новой. Сначала удалите Dashwheel, при этом настройки и сопряжения пропадут, затем откройте Download/Dashwheel/%1$s в файловом менеджере магнитолы.</string>
+    <string name="update_previous_uninstall">Удалить</string>
 </resources>

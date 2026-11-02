@@ -35,7 +35,9 @@ data class UpdateInfo(
     val versionName: String,
     val buildNumber: Long,
     val apkUrl: String,
-    val notes: String
+    val notes: String,
+    /** Release day, "2026-10-29"; empty when GitHub gave none. */
+    val date: String = ""
 )
 
 /** Update lifecycle observed by the UI. */
@@ -152,7 +154,56 @@ class UpdateManager(private val context: Context) {
         val tag = json.optString("tag_name")
         val buildNumber = parseBuildNumber(tag) ?: return null
         val apkUrl = firstApkAssetUrl(json) ?: return null
-        return UpdateInfo(versionName = tag, buildNumber = buildNumber, apkUrl = apkUrl, notes = json.optString("body"))
+        return UpdateInfo(
+            versionName = tag, buildNumber = buildNumber, apkUrl = apkUrl, notes = json.optString("body"),
+            date = json.optString("published_at").take(10)
+        )
+    }
+
+    /**
+     * The way back after a bad build: the channel's newest builds older than
+     * this one, newest first (stable leaves the pre-releases out). Empty when
+     * GitHub did not answer or nothing older is published.
+     */
+    suspend fun previousReleases(): List<UpdateInfo> = withContext(Dispatchers.IO) {
+        if (Edition.play) return@withContext emptyList()
+        val base = "https://api.github.com/repos/${BuildConfig.GITHUB_OWNER}/${BuildConfig.GITHUB_REPO}/releases"
+        val list = fetchJson("$base?per_page=30")?.let { runCatching { org.json.JSONArray(it) }.getOrNull() } ?: return@withContext emptyList()
+        val beta = beta(context)
+        (0 until list.length())
+            .mapNotNull { list.optJSONObject(it) }
+            .filter { !it.optBoolean("draft") && (beta || !it.optBoolean("prerelease")) && isMainTag(it.optString("tag_name")) }
+            .mapNotNull { releaseInfo(it) }
+            .filter { it.buildNumber < currentVersionCode }
+            .sortedByDescending { it.buildNumber }
+            .take(PREVIOUS_COUNT)
+    }
+
+    /**
+     * Goes back to [info], an older build ([previousReleases]). Android refuses
+     * an older APK over a newer one, so the file lands in the shared
+     * Download/Dashwheel folder (where a shell user can read it too) and a
+     * shell installs it with `pm install -d`, which keeps the settings and ends
+     * this process. Without a shell [status] stays [UpdateStatus.Ready] on
+     * that file: the driver uninstalls Dashwheel, then opens it by hand.
+     */
+    suspend fun installPrevious(info: UpdateInfo) {
+        if (Edition.play) return
+        if (!download(info, shared = true)) return
+        val file = (_status.value as? UpdateStatus.Ready)?.file ?: return
+        if (!withContext(Dispatchers.IO) { isOurUpdate(file, older = true) }) {
+            Log.w(TAG, "the downloaded file is not this app: dropped")
+            withContext(Dispatchers.IO) { runCatching { file.delete() } }
+            _status.value = UpdateStatus.Error(R.string.sys_update_download_failed)
+            return
+        }
+        if (!PrivilegedShell.access.value.shell) return
+        _status.value = UpdateStatus.Installing
+        val out = runCatching { DockShell.shell(context, "pm install -r -d '${file.path}'") }.getOrElse { it.message.orEmpty() }
+        // A success replaces the app and ends this process; still here, it was refused.
+        if (out.contains("Success")) return
+        Log.w(TAG, "going back to ${info.versionName} refused: $out")
+        _status.value = UpdateStatus.Error(R.string.update_previous_failed)
     }
 
     private fun fetchJson(url: String): String? {
@@ -253,11 +304,11 @@ class UpdateManager(private val context: Context) {
      * the releases, is let through to update to one as before.
      */
     @Suppress("DEPRECATION") // GET_SIGNATURES: the one flag Android 10 reads an APK file's signers with.
-    private fun isOurUpdate(apk: File): Boolean = runCatching {
+    private fun isOurUpdate(apk: File, older: Boolean = false): Boolean = runCatching {
         val pm = context.packageManager
         val info = pm.getPackageArchiveInfo(apk.path, PackageManager.GET_SIGNATURES) ?: return false
         if (info.packageName != context.packageName) return false
-        if (PackageInfoCompat.getLongVersionCode(info) <= currentVersionCode) return false
+        if (!older && PackageInfoCompat.getLongVersionCode(info) <= currentVersionCode) return false
         val theirs = info.signatures?.map { it.toCharsString() }?.toSet().orEmpty()
         // Not read (a system that doesn't tell): left to the installer's own check.
         if (BuildConfig.DEBUG || theirs.isEmpty()) return true
@@ -275,19 +326,26 @@ class UpdateManager(private val context: Context) {
      * remove it from the system's downloader and leave "Downloading 0 %" for
      * good. A caller that goes away now only stops waiting. A second call for
      * the same build joins the download under way.
+     *
+     * [shared]: into the shared Download/Dashwheel folder instead, named
+     * after the build, to outlive the app ([installPrevious]).
      */
-    suspend fun download(info: UpdateInfo): Boolean {
+    suspend fun download(info: UpdateInfo, shared: Boolean = false): Boolean {
         if (Edition.play) return false
         val running = downloadJob?.takeIf { it.isActive && downloadBuild == info.buildNumber }
-        val job = running ?: scope.async { runDownload(info) }.also {
+        val job = running ?: scope.async { runDownload(info, shared) }.also {
             downloadJob = it
             downloadBuild = info.buildNumber
         }
         return job.await()
     }
 
-    private suspend fun runDownload(info: UpdateInfo): Boolean {
-        val apkFile = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), APK_NAME)
+    @Suppress("DEPRECATION") // getExternalStoragePublicDirectory: the path the system's downloader writes the shared folder at.
+    private suspend fun runDownload(info: UpdateInfo, shared: Boolean): Boolean {
+        val publicName = "Dashwheel/Dashwheel-${info.versionName}.apk"
+        val apkFile = if (shared) File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), publicName)
+        else File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), APK_NAME)
+        // shortcut: a leftover in the shared folder another app wrote cannot be deleted on Android 10+, and the downloader then refuses; a new name per attempt if that ever shows.
         withContext(Dispatchers.IO) { if (apkFile.exists()) apkFile.delete() }
         prefs.edit().remove(KEY_DOWNLOADED).apply()
 
@@ -305,7 +363,8 @@ class UpdateManager(private val context: Context) {
                 .setMimeType("application/vnd.android.package-archive")
                 // The progress only: the dashboard itself says when it is ready.
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-                .setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, APK_NAME)
+            if (shared) request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, publicName)
+            else request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, APK_NAME)
             downloadId = downloadManager.enqueue(request)
         } catch (e: RuntimeException) {
             Log.w(TAG, "the download could not start", e)
@@ -431,6 +490,8 @@ class UpdateManager(private val context: Context) {
         private const val KEY_DISMISSED = "dismissed_build"
         private const val KEY_DOWNLOADED = "downloaded_build"
         private const val KEY_BETA = "beta"
+        /** How many earlier builds "Previous version" lists. */
+        private const val PREVIOUS_COUNT = 5
 
         /** The driver takes beta builds: every build of main that passed its tests, before it is promoted. */
         fun beta(context: Context): Boolean =

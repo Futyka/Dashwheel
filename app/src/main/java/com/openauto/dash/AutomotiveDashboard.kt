@@ -1089,7 +1089,6 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
     }
     // The head unit running hot is said once, tile or not (HeadUnitMonitor).
     LaunchedEffect(Unit) { withContext(Dispatchers.IO) { HeadUnitMonitor.watchHeat(context) } }
-    val checkForUpdates: () -> Unit = { scope.launch { updateManager.checkForUpdate() } }
 
     // Installing restarts the launcher, and the permission screen is another
     // app's: neither while the car moves.
@@ -1114,6 +1113,14 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
     val onUpdate: () -> Unit = {
         val info = updateStatus.updateInfo
         if (info != null) whenParked { releaseNotes = info }
+    }
+    // Asked by hand (Settings, the beta switch): a build found opens its notes
+    // at once, "not this version" or not; the timed checks stay silent (issue #76).
+    val checkForUpdates: () -> Unit = {
+        scope.launch {
+            updateManager.checkForUpdate()
+            updateManager.status.value.updateInfo?.let { info -> whenParked { releaseNotes = info } }
+        }
     }
     // A newer build downloads by itself on a connection that costs nothing
     // (never over a phone's hotspot), then asks once, parked: now or later.

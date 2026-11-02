@@ -6,4 +6,15 @@
     <!-- The Ko-fi ask beside every release's notes, GitHub edition (ReleaseNotes.kt) -->
     <string name="update_support_title">Sukurta laisvalaikiu</string>
     <string name="update_support_body">Dashwheel nemokamas ir kuriamas vakarais bei daugybę vėlyvų naktų. Jei jis pagerina jūsų važiavimus, kava padeda išlaikyti tempą iki kitos versijos. Ačiū!</string>
+    <!-- Settings > About > Previous version: the way back to an earlier build (issue #76) -->
+    <string name="update_previous">Ankstesnė versija</string>
+    <string name="update_previous_detail">Grįžti į ankstesnę šio kanalo versiją</string>
+    <string name="update_previous_none">Nėra ankstesnės versijos, į kurią grįžti</string>
+    <string name="update_previous_saved">%1$s yra Download/Dashwheel aplanke</string>
+    <string name="update_previous_failed">Nepavyko įdiegti ankstesnės versijos</string>
+    <string name="update_previous_title">Grįžti į %1$s</string>
+    <string name="update_previous_shell_body">Dashwheel įdiegs %1$s vietoje šios versijos ir pasileis iš naujo. Nustatymai liks.</string>
+    <string name="update_previous_go">Grįžti</string>
+    <string name="update_previous_manual_body">Android neleidžia įdiegti senesnės versijos ant naujesnės. Pirma pašalinkite Dashwheel, prarasite nustatymus ir susiejimus, tada atidarykite Download/Dashwheel/%1$s įrenginio failų tvarkyklėje.</string>
+    <string name="update_previous_uninstall">Pašalinti</string>
 </resources>

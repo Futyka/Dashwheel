@@ -6,4 +6,15 @@
     <!-- The Ko-fi ask beside every release's notes, GitHub edition (ReleaseNotes.kt) -->
     <string name="update_support_title">Fait sur mon temps libre</string>
     <string name="update_support_body">Dashwheel est gratuit, construit sur mes soirées et pas mal de nuits blanches. S\'il rend vos trajets meilleurs, un café me tient éveillé jusqu\'à la prochaine version. Merci !</string>
+    <!-- Settings > About > Previous version: the way back to an earlier build (issue #76) -->
+    <string name="update_previous">Version précédente</string>
+    <string name="update_previous_detail">Revenir à une version antérieure de ce canal</string>
+    <string name="update_previous_none">Aucune version antérieure disponible</string>
+    <string name="update_previous_saved">%1$s est dans Download/Dashwheel</string>
+    <string name="update_previous_failed">La version antérieure n\'a pas pu être installée</string>
+    <string name="update_previous_title">Revenir à %1$s</string>
+    <string name="update_previous_shell_body">Dashwheel installe %1$s par-dessus cette version et redémarre. Vos réglages restent.</string>
+    <string name="update_previous_go">Revenir</string>
+    <string name="update_previous_manual_body">Android ne peut pas installer une version plus ancienne par-dessus une plus récente. Désinstallez d\'abord Dashwheel, ce qui efface vos réglages et appairages, puis ouvrez Download/Dashwheel/%1$s dans le gestionnaire de fichiers de l\'autoradio.</string>
+    <string name="update_previous_uninstall">Désinstaller</string>
 </resources>
