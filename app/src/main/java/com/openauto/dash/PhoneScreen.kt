@@ -431,7 +431,7 @@ private fun KeypadPane(onCall: (String) -> Unit) {
     var number by remember { mutableStateOf("") }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         // Four rows of keys, the number above and Call below, in whatever height the dialog has.
-        val key = ((maxHeight - 56.dp - DashSize.TouchPrimary - 6 * DashSpace.Sm) / 4).coerceIn(DashSize.Touch, 72.dp)
+        val key = ((maxHeight - 56.dp - DashSize.TouchPrimary - DashSpace.Sm * 6) / 4).coerceIn(DashSize.Touch, 72.dp)
         val gap = DashSpace.Sm
         Column(
             modifier = Modifier.fillMaxHeight().align(Alignment.Center).widthIn(max = 420.dp),
