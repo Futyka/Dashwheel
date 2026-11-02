@@ -1735,8 +1735,10 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
                     // The tile went away (undo, template): close, but not mid-composition.
                     LaunchedEffect(Unit) { tileOptions = null }
                 } else key(page, index) {
+                    val hasDesigns = (tile as? DashboardItem.BuiltinWidget)?.kind?.let { it != BuiltinKind.DASH_BAR } == true
+                    val sideWidth = with(density) { sidePanelWidth(pagesArea.width.toDp(), pagesArea.height.toDp(), hasDesigns) }
                     val panelPx = if (vertical) min(pagesArea.height * 0.45f, with(density) { PANEL_SHEET_MAX.toPx() })
-                        else with(density) { PANEL_WIDTH.toPx() }
+                        else with(density) { sideWidth.toPx() }
                     val driverOnRight = CarProfileStore.current.driverOnRight
                     // Where the tile is, once it has said so (the frame after it was tapped).
                     val bounds = selectedTileBounds?.takeIf { it.first == selected }?.second
@@ -1744,8 +1746,8 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
                         ?: if (vertical) PanelSide.BOTTOM else if (driverOnRight) PanelSide.RIGHT else PanelSide.LEFT
                     val widget = tile as? DashboardItem.BuiltinWidget
                     val placing = when (side) {
-                        PanelSide.LEFT -> Modifier.align(AbsoluteAlignment.TopLeft).width(PANEL_WIDTH)
-                        PanelSide.RIGHT -> Modifier.align(AbsoluteAlignment.TopRight).width(PANEL_WIDTH)
+                        PanelSide.LEFT -> Modifier.align(AbsoluteAlignment.TopLeft).width(sideWidth)
+                        PanelSide.RIGHT -> Modifier.align(AbsoluteAlignment.TopRight).width(sideWidth)
                         PanelSide.TOP -> Modifier.align(Alignment.TopCenter).fillMaxWidth()
                         PanelSide.BOTTOM -> Modifier.align(Alignment.BottomCenter).fillMaxWidth()
                     }.then(
@@ -1810,6 +1812,7 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
                         } else null,
                         onRemove = { tileOptions = null; removeAt(page, index) },
                         onClose = { tileOptions = null },
+                        wide = !vertical && sideWidth > PANEL_WIDTH,
                         modifier = placing
                     )
                 }

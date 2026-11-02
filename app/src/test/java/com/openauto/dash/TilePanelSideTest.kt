@@ -1,6 +1,7 @@
 package com.openauto.dash
 
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.unit.dp
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -40,5 +41,21 @@ class TilePanelSideTest {
         val upright = Rect(0f, 0f, 720f, 1100f)
         assertEquals(PanelSide.BOTTOM, side(Rect(0f, 280f, 400f, 560f), vertical = true, area = upright))
         assertEquals(PanelSide.TOP, side(Rect(0f, 840f, 300f, 1020f), vertical = true, area = upright))
+    }
+
+    @Test
+    fun shortPagesWidenThePanelForAWidgetWithDesigns() {
+        // A short, wide head unit: the controls alone filled the narrow panel's height.
+        assertEquals(PANEL_WIDE_WIDTH, sidePanelWidth(1000.dp, 300.dp, hasDesigns = true))
+        // Nothing to set beside the controls, or room enough to stack them: the narrow panel.
+        assertEquals(PANEL_WIDTH, sidePanelWidth(1000.dp, 300.dp, hasDesigns = false))
+        assertEquals(PANEL_WIDTH, sidePanelWidth(1280.dp, 640.dp, hasDesigns = true))
+    }
+
+    @Test
+    fun theWidePanelLeavesAQuarterOfThePages() {
+        assertEquals(600.dp, sidePanelWidth(800.dp, 300.dp, hasDesigns = true))
+        // Never narrower than the side panel was.
+        assertEquals(PANEL_WIDTH, sidePanelWidth(400.dp, 300.dp, hasDesigns = true))
     }
 }

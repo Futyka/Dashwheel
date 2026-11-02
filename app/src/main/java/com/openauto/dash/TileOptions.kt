@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
@@ -64,6 +66,27 @@ internal enum class PanelSide { LEFT, RIGHT, TOP, BOTTOM }
 /** The side panel's width. */
 internal val PANEL_WIDTH = 360.dp
 
+/**
+ * Below this height a side panel can't stack a widget's designs over its
+ * controls: the controls alone took it all and the designs were left no room
+ * at all (a short, wide head unit). It widens instead and sets them side by
+ * side, as the upright sheet does.
+ */
+internal val PANEL_SHORT_HEIGHT = 560.dp
+
+/** The widened side panel's width, at most [PANEL_WIDE_SHARE] of the pages. */
+internal val PANEL_WIDE_WIDTH = 600.dp
+internal const val PANEL_WIDE_SHARE = 0.75f
+
+/**
+ * The side panel's width for pages [pagesWidth] by [pagesHeight]: the narrow
+ * one, or, for a tile with designs on short pages, the wide one.
+ */
+internal fun sidePanelWidth(pagesWidth: Dp, pagesHeight: Dp, hasDesigns: Boolean): Dp =
+    if (hasDesigns && pagesHeight < PANEL_SHORT_HEIGHT) {
+        maxOf(PANEL_WIDTH, minOf(PANEL_WIDE_WIDTH, pagesWidth * PANEL_WIDE_SHARE))
+    } else PANEL_WIDTH
+
 /** The upright sheet's tallest: it stays under half the pages, so the tile keeps room above or below it. */
 internal val PANEL_SHEET_MAX = 460.dp
 
@@ -103,10 +126,14 @@ internal fun TilePanel(
     onRemove: () -> Unit,
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
+    /** A side panel widened for short pages (see [sidePanelWidth]): the shelf and the controls side by side. */
+    wide: Boolean = false,
     /** The Dashboard bar's own actions, shown instead of the page picker (the bar is the same on every page). */
     barActions: (@Composable () -> Unit)? = null
 ) {
     val upright = side == PanelSide.TOP || side == PanelSide.BOTTOM
+    // Short pages: the side panel has widened to hold the shelf beside the controls.
+    val besideShelf = upright || (designs != null && wide)
     // The tile's own settings, the same page Settings opens (TileSettings.kt).
     val settings = (item as? DashboardItem.BuiltinWidget)?.let { tileSettings(it.kind) }
     SolidCard(modifier = modifier.keepClearOfWindows()) {
@@ -124,8 +151,8 @@ internal fun TilePanel(
                 SquareButton(Icons.Filled.Close, stringResource(R.string.dash_close), onClick = onClose)
             }
             if (settings != null) TileSettingsButton(settings)
-            if (upright) {
-                // Along the bottom: the shelf takes the width, the rest stands beside it.
+            if (besideShelf) {
+                // Along the bottom, or short pages: the shelf takes the width, the rest stands beside it.
                 Row(
                     modifier = if (designs != null) Modifier.weight(1f) else Modifier,
                     horizontalArrangement = Arrangement.spacedBy(14.dp)
@@ -134,7 +161,11 @@ internal fun TilePanel(
                         designs(Modifier.weight(1f).fillMaxHeight())
                         VerticalDivider(color = DashColors.Line)
                     }
-                    Column(modifier = Modifier.width(220.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    // Scrolls when the panel is shorter than the controls (a short screen).
+                    Column(
+                        modifier = Modifier.width(220.dp).verticalScroll(rememberScrollState()),
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
                         Controls(item, page, stacked = true, onZoom, onMoveTo, onRemove, barActions)
                     }
                 }
