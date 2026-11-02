@@ -32,6 +32,7 @@ import com.openauto.unitproto.UnitFamily
 import com.openauto.unitproto.fyt.FytProtocol
 import com.openauto.unitproto.hcn.HcnProtocol
 import com.openauto.unitproto.mtc.MtcProtocol
+import com.openauto.unitproto.nwd.NwdProtocol
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -39,7 +40,7 @@ import kotlinx.coroutines.flow.StateFlow
  * The families Dashwheel knows only a little about, each a [GenericAdapter]
  * with its few hooks: Topway and Allwinner (detection and the vendor
  * broadcasts), Reglink (how to live through its sleep), NWD (its launcher
- * choice). And the plain unit nothing was recognised on, which still gets
+ * choice, its voltage and headlights: [NwdBus]). And the plain unit nothing was recognised on, which still gets
  * the broadcasts: they cost nothing and some generic unit may send them.
  */
 internal object PlainAdapters {
@@ -56,7 +57,7 @@ internal object PlainAdapters {
     /** Every family's broadcasts: what the Signal Finder's sniffer hears whatever the unit was taken for. */
     val ALL_BROADCASTS: Set<String>
         get() = AccBroadcasts.ALL + KeyBroadcasts.ACTIONS + MtcProtocol.BROADCASTS +
-            setOf(FytProtocol.ACTION_ACC_ON, FytProtocol.ACTION_ACC_OFF, FytProtocol.ACTION_EXTERNAL_COMMAND) + QfAdapter.BROADCASTS + HcnProtocol.BROADCASTS
+            setOf(FytProtocol.ACTION_ACC_ON, FytProtocol.ACTION_ACC_OFF, FytProtocol.ACTION_EXTERNAL_COMMAND) + QfAdapter.BROADCASTS + HcnProtocol.BROADCASTS + NwdProtocol.BROADCASTS
 
     private val plainCatalogue = SignalCatalogue(broadcasts = AccBroadcasts.ALL + KeyBroadcasts.ACTIONS)
 
@@ -71,7 +72,9 @@ internal object PlainAdapters {
             )
             UnitFamily.NWD -> GenericAdapter(
                 family, emulator, AccBroadcastIgnition, KeyBroadcastSource, launcher = NwdLauncher,
-                catalogue = plainCatalogue.copy(propPrefixes = setOf("persist.nwd.", "ro.nwd."))
+                bus = NwdBus, busCaps = setOf(Cap.VOLTS, Cap.HEADLIGHTS),
+                // The MCU's input bits (headlights) and the CAN SDK's own table (CanSettingTableKey) live in Settings.System.
+                catalogue = plainCatalogue.copy(broadcasts = plainCatalogue.broadcasts + NwdProtocol.BROADCASTS, propPrefixes = setOf("persist.nwd.", "ro.nwd."), settingsSystem = true)
             )
             UnitFamily.TOPWAY -> GenericAdapter(family, emulator, AccBroadcastIgnition, KeyBroadcastSource, catalogue = plainCatalogue, vendorPackages = TOPWAY_PACKAGES)
             else -> GenericAdapter(family, emulator, AccBroadcastIgnition, KeyBroadcastSource, catalogue = plainCatalogue)

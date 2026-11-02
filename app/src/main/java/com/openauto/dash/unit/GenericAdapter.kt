@@ -36,6 +36,9 @@ internal class GenericAdapter(
     override val keys: KeySource? = null,
     override val survival: SleepSurvival? = null,
     override val launcher: LauncherTakeover? = null,
+    override val bus: VehicleBusSource? = null,
+    /** What [bus] can put, claimed with it. */
+    busCaps: Set<Cap> = emptySet(),
     override val catalogue: SignalCatalogue = SignalCatalogue.NONE,
     override val vendorPackages: Set<String> = emptySet()
 ) : UnitAdapter {
@@ -46,9 +49,9 @@ internal class GenericAdapter(
             if (keys != null) add(CapClaim(Cap.UNIT_KEYS))
             if (survival != null) add(CapClaim(Cap.SLEEP_SURVIVAL, survival.steps().minOfOrNull { it.need } ?: Need.NONE))
             if (launcher != null) add(CapClaim(Cap.LAUNCHER_TAKEOVER, launcher.need))
+            if (bus != null) { add(CapClaim(Cap.VEHICLE_BUS)); busCaps.forEach { add(CapClaim(it)) } }
         }
     )
-    override val bus: VehicleBusSource? = null
     override val phone: PhoneBridge? = null
     override val media: MediaBridge? = null
     override val volume: VolumeControl? = null
