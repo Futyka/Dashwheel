@@ -8,7 +8,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -226,8 +225,8 @@ internal fun CanvasRail(m: TopBarModel, onHome: () -> Unit, modifier: Modifier =
             RailButton(Icons.Filled.Apps, stringResource(R.string.dash_all_apps), onClick = m.onApps)
             RailButton(Icons.Filled.MusicNote, stringResource(R.string.apps_kind_media)) { openMusic(context, m.onApps) }
             RailButton(Icons.Filled.Phone, stringResource(R.string.settings_section_phone)) {
-                // A head unit without a dialler (its phone is a car app of its own) gets the drawer, not a dead button.
-                if (!context.launchSafely(Intent(Intent.ACTION_DIAL))) m.onApps()
+                // A head unit without a dialler opens its own phone app; the drawer only when it has none either.
+                UnitPhoneApp.open(context, m.onApps)
             }
             RailButton(Icons.Filled.DirectionsCar, obdStatusLabel(m.obdConnection), dot = obdStatusColor(m.obdConnection), onClick = m.onConnectObd)
         }

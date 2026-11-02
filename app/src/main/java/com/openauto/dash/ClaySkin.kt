@@ -1,7 +1,6 @@
 package com.openauto.dash
 
 import android.content.Context
-import android.content.Intent
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
@@ -496,7 +495,7 @@ internal fun ClayTopBar(m: TopBarModel) {
                 if (!narrow) {
                     ClayKey(Icons.Rounded.MusicNote, ClayHue.PINK, stringResource(R.string.clay_music), key) { clayOpenMusic(context, m.onApps) }
                     ClayKey(Icons.Rounded.Phone, ClayHue.MINT, stringResource(R.string.clay_phone), key) {
-                        context.launchSafely(Intent(Intent.ACTION_DIAL))
+                        UnitPhoneApp.open(context, m.onApps)
                     }
                 }
                 ClayKey(Icons.Rounded.Apps, ClayHue.BUTTER, stringResource(R.string.dash_all_apps), key, onClick = m.onApps)

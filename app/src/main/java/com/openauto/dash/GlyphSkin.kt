@@ -1,7 +1,6 @@
 package com.openauto.dash
 
 import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -421,7 +420,7 @@ internal fun GlyphTopBar(m: TopBarModel) {
                         glyphOpenMusic(context, m.onApps)
                     })
                     GlyphKey(stringResource(R.string.glyph_key_phone), Icons.Filled.Phone, stringResource(R.string.glyph_key_phone_cd), key, onClick = {
-                        context.launchSafely(Intent(Intent.ACTION_DIAL))
+                        UnitPhoneApp.open(context, m.onApps)
                     })
                 }
                 ObdMark(m.obdConnection, m.onConnectObd, shape = CircleShape) {

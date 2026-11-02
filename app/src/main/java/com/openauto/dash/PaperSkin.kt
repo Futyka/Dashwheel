@@ -1,6 +1,5 @@
 package com.openauto.dash
 
-import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -386,7 +385,7 @@ internal fun PaperTopBar(m: TopBarModel) {
                     }
                     PaperBarButton(stringResource(R.string.paper_music), stringResource(R.string.paper_music_cd)) { paperOpenMusic(context, m.onApps) }
                     PaperBarButton(stringResource(R.string.paper_phone), stringResource(R.string.paper_phone_cd)) {
-                        context.launchSafely(Intent(Intent.ACTION_DIAL))
+                        UnitPhoneApp.open(context, m.onApps)
                     }
                 }
             }

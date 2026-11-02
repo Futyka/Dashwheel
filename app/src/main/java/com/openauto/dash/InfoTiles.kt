@@ -103,7 +103,14 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import com.openauto.dash.link.RecentCall
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -603,6 +610,51 @@ internal fun loadFavourites(context: Context, limit: Int = 8): List<Favourite> {
     return out
 }
 
+/**
+ * The unit's starred contacts for the Quick dial, kept for the whole app and
+ * read again when the contacts change. A head unit's Bluetooth sync wipes its
+ * phonebook and writes it back now and then: read in between, the tile went
+ * empty for half a minute (issue #118). So a list that comes back empty is
+ * believed only after [WIPE_HOLD_MS]; a list with contacts at once.
+ */
+internal object UnitContacts {
+    /** Longer than a phonebook re-sync takes; a phone really unpaired empties the tile after this. */
+    private const val WIPE_HOLD_MS = 90_000L
+    /** A sync writes its contacts one by one: read once they settle, not on each. */
+    private const val SETTLE_MS = 2_000L
+
+    private val _favourites = MutableStateFlow<List<Favourite>>(emptyList())
+    val favourites: StateFlow<List<Favourite>> = _favourites.asStateFlow()
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val changed = MutableStateFlow(0)
+    private var started = false
+
+    /** Reads the contacts from now on (READ_CONTACTS granted); again when they change. */
+    @Synchronized
+    fun start(context: Context) {
+        if (started) return
+        started = true
+        val app = context.applicationContext
+        runCatching {
+            app.contentResolver.registerContentObserver(ContactsContract.Contacts.CONTENT_URI, true, object : android.database.ContentObserver(null) {
+                override fun onChange(selfChange: Boolean) = changed.update { it + 1 }
+            })
+        }
+        scope.launch {
+            changed.collectLatest { n ->
+                if (n > 0) delay(SETTLE_MS)
+                var read = loadFavourites(app)
+                if (read.isEmpty() && _favourites.value.isNotEmpty()) {
+                    // Being re-synced, most likely: the old list stands meanwhile. Any change reads again (and cancels this).
+                    delay(WIPE_HOLD_MS)
+                    read = loadFavourites(app)
+                }
+                _favourites.value = read
+            }
+        }
+    }
+}
+
 /** A missed call worth calling back: the phone's latest call, missed within the last [withinMs]. */
 internal fun callBack(calls: List<RecentCall>?, now: Long, withinMs: Long = CALL_BACK_MS): RecentCall? =
     calls?.maxByOrNull { it.at }?.takeIf { it.type == RecentCall.Type.MISSED && now - it.at in 0..withinMs }
@@ -626,10 +678,10 @@ internal class QuickDialSource(
 internal fun rememberQuickDialSource(): QuickDialSource {
     val context = LocalContext.current
     val perm = rememberPermission(Manifest.permission.READ_CONTACTS)
-    var own by remember { mutableStateOf<List<Favourite>>(emptyList()) }
     LaunchedEffect(perm.granted) {
-        if (perm.granted) own = withContext(Dispatchers.IO) { loadFavourites(context) }
+        if (perm.granted) UnitContacts.start(context)
     }
+    val own by UnitContacts.favourites.collectAsState()
     val lists by PhoneLink.lists.collectAsState()
     val favourites = phoneOrUnit(lists.favourites, if (perm.granted) own else emptyList())
     return QuickDialSource(favourites, callBack(lists.calls, System.currentTimeMillis()), lists.favourites != null, perm)
@@ -674,7 +726,7 @@ internal fun QuickDialCard(modifier: Modifier = Modifier) {
             Column(modifier = Modifier.fillMaxSize().padding(DashSpace.Lg)) {
                 TileHeader(stringResource(R.string.info_quickdial_title)) {
                     TextButton(
-                        onClick = { context.launchSafely(Intent(Intent.ACTION_DIAL)) },
+                        onClick = { UnitPhoneApp.open(context) },
                         modifier = Modifier.height(DashSize.Touch), contentPadding = PaddingValues(horizontal = 10.dp, vertical = 0.dp)
                     ) { Text(stringResource(R.string.info_quickdial_dialer), color = DashColors.AccentInk, style = MaterialTheme.typography.labelMedium) }
                 }
