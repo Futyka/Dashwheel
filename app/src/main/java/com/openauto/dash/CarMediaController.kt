@@ -385,6 +385,19 @@ class CarMediaController(private val context: Context) {
         if (_mediaState.value.isPlaying) controls.pause() else controls.play()
     }
 
+    /**
+     * Brings the player in front: the head unit's own one while it is the one
+     * shown, else the app of the session playing, else the last one seen
+     * playing, else the system's music app (issue #119: a tap on the media
+     * tile). False when none opened.
+     */
+    fun openPlayer(): Boolean {
+        if (DemoMode.isOn) return false
+        val pkg = (stockShown ?: activeController?.packageName ?: getLastMediaPackage(context))?.takeIf { it != context.packageName }
+        if (pkg != null && AppLauncher.launch(context, pkg)) return true
+        return context.launchSafely(Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_MUSIC))
+    }
+
     private fun startLastPlayer() {
         val last = getLastMediaPackage(context)?.takeIf { context.packageManager.getLaunchIntentForPackage(it) != null }
         val launch = last?.let { context.packageManager.getLaunchIntentForPackage(it) }

@@ -9,6 +9,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -89,7 +90,14 @@ internal fun OriginalMediaCard(
                 .padding(18.dp),
             verticalArrangement = Arrangement.Center
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            // The cover and the titles open the player (issue #119); without access, they lead to it as the line says.
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(DashShape.Medium)
+                    .clickable { if (hasAccess) controller.openPlayer() else CarMediaController.openNotificationAccessSettings(context) },
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Box(
                     modifier = Modifier
                         .size(72.dp)

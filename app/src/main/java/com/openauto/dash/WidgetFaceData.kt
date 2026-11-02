@@ -673,7 +673,9 @@ private fun mediaFace(env: SkinTileEnv): WidgetFace {
                 stringResource(R.string.info_media_play_pause), primary = true, onClick = { controller.playPause() }
             ),
             FaceAction(Icons.Filled.SkipNext, stringResource(R.string.info_media_next), onClick = { controller.next() })
-        )
+        ),
+        // A tap anywhere else on the tile opens the player itself.
+        onClick = { controller.openPlayer() }
     )
 }
 
