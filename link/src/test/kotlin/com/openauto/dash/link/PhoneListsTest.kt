@@ -42,7 +42,7 @@ class PhoneListsTest {
     fun contactsFitTheirCapByDroppingPhotosFromTheEnd() {
         val photo = "A".repeat(40_000)
         val many = (1..12).map { PhoneFavourite("Friend $it", "+3360000000$it", photo) }
-        val calls = (1..9).map { RecentCall("+33100000$it", null, RecentCall.Type.INCOMING, it.toLong()) }
+        val calls = (1..25).map { RecentCall("+33100000$it", null, RecentCall.Type.INCOMING, it.toLong()) }
         val sent = PhoneContacts.of(many, calls)
         assertEquals(PhoneContacts.MAX_FAVOURITES, sent.favourites.size)
         assertEquals(PhoneContacts.MAX_CALLS, sent.recentCalls.size)

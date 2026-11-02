@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">SZYBKIE WYBIERANIE</string>
-    <string name="info_quickdial_dialer">Klawiatura</string>
+    <string name="info_quickdial_dialer">Telefon</string>
     <string name="info_quickdial_needs_access">Pokazuj tu ulubione kontakty</string>
     <string name="info_quickdial_allow">Zezwól na kontakty</string>
     <string name="info_quickdial_empty">Oznacz kontakty gwiazdką w aplikacji Kontakty, aby je tu zobaczyć</string>

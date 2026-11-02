@@ -40,7 +40,7 @@ Voice input uses Android's speech recognition and text-to-speech services on the
 When you pair the Companion with the car, the two apps talk over the phone's hotspot on a local TCP connection, encrypted with a secret created at pairing and shown as a QR code. Over that link the phone can share, each only after you turn it on in the Companion's setup checklist:
 
 - notifications, so messages show on the car's screen and you can reply from there
-- calls: who is calling, answering and hanging up from the car, and your favourites and recent calls for the Quick dial
+- calls: who is calling, answering and hanging up from the car, and your favourites and recent calls for the Quick dial and the car's Phone screen
 - your next calendar events for the Agenda tile
 - your phone's GPS position, for a head unit with a poor GPS
 - an "On my way" text message, sent from your phone when you ask for it on the car's screen

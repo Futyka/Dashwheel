@@ -205,8 +205,8 @@ data class DialResult(val number: String, val placed: Boolean) : LinkMessage
 
 /**
  * Phone → head unit: the phone's starred contacts and its last calls, for the
- * Quick dial tile. Sent when the link comes up and whenever the contacts or the
- * call log change on the phone.
+ * Quick dial tile and the car's Phone screen. Sent when the link comes up and
+ * whenever the contacts or the call log change on the phone.
  */
 @Serializable
 @SerialName("contacts")
@@ -218,7 +218,8 @@ data class PhoneContacts(
     companion object {
         /** A tile's width of avatars. */
         const val MAX_FAVOURITES = 8
-        const val MAX_CALLS = 5
+        /** A screen of the car's Phone screen's Recents; the Quick dial reads only the latest. */
+        const val MAX_CALLS = 20
         /** Photos are small, but ten of them add up: the list stays well under a frame. */
         const val MAX_BYTES = 256 * 1024
 

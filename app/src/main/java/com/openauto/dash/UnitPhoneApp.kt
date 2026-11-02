@@ -6,13 +6,13 @@ import android.content.pm.PackageManager
 import android.widget.Toast
 
 /**
- * The phone button, wherever a dashboard has one (the Quick dial's Dialer,
- * the rail's and the themes' phone keys): Android's dialer when the unit has
- * one, else the unit's own Bluetooth phone app. Most head units have no
- * dialer for [Intent.ACTION_DIAL]: their phone, contacts and call log are a
- * car app of their own (`com.qf.bluetooth`, `com.syu.bt`...). Asking only for
- * the dialer left the button dead there, or opened the app drawer (issue #118,
- * a Junsun V1 Plus).
+ * The unit's own phone app, for the Phone screen's "Unit's phone app" button
+ * and the fallbacks of a call (PhoneScreen.kt, [dialNumber]): Android's
+ * dialer when the unit has one, else the unit's own Bluetooth phone app. Most
+ * head units have no dialer for [Intent.ACTION_DIAL]: their phone, contacts
+ * and call log are a car app of their own (`com.qf.bluetooth`,
+ * `com.syu.bt`...). Asking only for the dialer left the phone buttons dead
+ * there, or opened the app drawer (issue #118, a Junsun V1 Plus).
  */
 internal object UnitPhoneApp {
     /** The firmwares' own Bluetooth phone apps, tried before anything that only looks like one. */
@@ -41,14 +41,18 @@ internal object UnitPhoneApp {
      * else [orElse] (the app drawer, say; a hint without one). False when nothing opened.
      */
     fun open(context: Context, orElse: (() -> Unit)? = null): Boolean {
-        val dial = Intent(Intent.ACTION_DIAL)
-        val hasDialer = runCatching { context.packageManager.resolveActivity(dial, PackageManager.MATCH_DEFAULT_ONLY) != null }.getOrDefault(false)
-        if (hasDialer && context.launchSafely(dial)) return true
+        if (hasDialer(context) && context.launchSafely(Intent(Intent.ACTION_DIAL))) return true
         val app = phoneApp(context)
         if (app != null && AppLauncher.launch(context, app)) return true
         if (orElse != null) orElse() else Toast.makeText(context, R.string.info_quickdial_no_phone_app, Toast.LENGTH_SHORT).show()
         return false
     }
+
+    /** Whether [open] has anything to open: Android's dialer, or a phone app of the unit's own. */
+    fun exists(context: Context): Boolean = hasDialer(context) || phoneApp(context) != null
+
+    private fun hasDialer(context: Context): Boolean =
+        runCatching { context.packageManager.resolveActivity(Intent(Intent.ACTION_DIAL), PackageManager.MATCH_DEFAULT_ONLY) != null }.getOrDefault(false)
 
     /** The unit's own phone app, or null when it has none Dashwheel can see. */
     fun phoneApp(context: Context): String? {

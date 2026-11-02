@@ -59,4 +59,19 @@
     <string name="phone_calling">Appel : %1$s</string>
     <string name="phone_dial_not_allowed">Pour appeler d\'ici, autorisez les Appels dans Dashwheel Compagnon.</string>
     <string name="phone_guidance_to">Itinéraire vers %1$s</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Contacts</string>
+    <string name="phone_tab_recents">Récents</string>
+    <string name="phone_tab_keypad">Clavier</string>
+    <string name="phone_favourites">Favoris</string>
+    <string name="phone_contacts_needs_access">Afficher ici les contacts de cet autoradio</string>
+    <string name="phone_contacts_empty">Pas encore de contacts sur cet autoradio. Connectez votre téléphone en Bluetooth avec le partage du répertoire, pour que l\'autoradio les reçoive.</string>
+    <string name="phone_recents_empty">Associez votre téléphone dans Réglages, Téléphone et écrans, pour voir ses derniers appels ici</string>
+    <string name="phone_recents_none">Pas encore d\'appels sur le téléphone</string>
+    <string name="phone_recent_missed">Manqué</string>
+    <string name="phone_recent_incoming">Reçu</string>
+    <string name="phone_recent_outgoing">Émis</string>
+    <string name="phone_keypad_call">Appeler</string>
+    <string name="phone_keypad_delete">Effacer le dernier chiffre</string>
+    <string name="phone_unit_app">Appli téléphone de l\'autoradio</string>
 </resources>

@@ -2389,6 +2389,14 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
 
     if (showObd) ObdDialog(obdConnection.value, onConnectObd, onPickDevice) { showObd = false }
 
+    // The Phone screen (PhoneScreen.kt): opened from any look's phone key and the Quick dial, shown here.
+    val showPhone by PhoneScreen.shown.collectAsState()
+    DisposableEffect(Unit) {
+        PhoneScreen.hosted(true)
+        onDispose { PhoneScreen.hosted(false) }
+    }
+    if (showPhone) PhoneDialog { PhoneScreen.close() }
+
     if (showSystemDialog) {
         AlertDialog(
             modifier = Modifier.keepClearOfWindows(),

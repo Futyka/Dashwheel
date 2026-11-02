@@ -420,7 +420,7 @@ internal fun GlyphTopBar(m: TopBarModel) {
                         glyphOpenMusic(context, m.onApps)
                     })
                     GlyphKey(stringResource(R.string.glyph_key_phone), Icons.Filled.Phone, stringResource(R.string.glyph_key_phone_cd), key, onClick = {
-                        UnitPhoneApp.open(context, m.onApps)
+                        PhoneScreen.open(context, m.onApps)
                     })
                 }
                 ObdMark(m.obdConnection, m.onConnectObd, shape = CircleShape) {

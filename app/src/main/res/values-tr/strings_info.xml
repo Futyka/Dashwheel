@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">HIZLI ARAMA</string>
-    <string name="info_quickdial_dialer">Tuş takımı</string>
+    <string name="info_quickdial_dialer">Telefon</string>
     <string name="info_quickdial_needs_access">Favori kişilerinizi burada gösterin</string>
     <string name="info_quickdial_allow">Rehbere izin ver</string>
     <string name="info_quickdial_empty">Burada görmek için Kişiler uygulamasında kişileri yıldızlayın</string>

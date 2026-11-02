@@ -495,7 +495,7 @@ internal fun ClayTopBar(m: TopBarModel) {
                 if (!narrow) {
                     ClayKey(Icons.Rounded.MusicNote, ClayHue.PINK, stringResource(R.string.clay_music), key) { clayOpenMusic(context, m.onApps) }
                     ClayKey(Icons.Rounded.Phone, ClayHue.MINT, stringResource(R.string.clay_phone), key) {
-                        UnitPhoneApp.open(context, m.onApps)
+                        PhoneScreen.open(context, m.onApps)
                     }
                 }
                 ClayKey(Icons.Rounded.Apps, ClayHue.BUTTER, stringResource(R.string.dash_all_apps), key, onClick = m.onApps)

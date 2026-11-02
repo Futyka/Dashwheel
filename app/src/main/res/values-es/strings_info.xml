@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">MARCACIÓN RÁPIDA</string>
-    <string name="info_quickdial_dialer">Teclado</string>
+    <string name="info_quickdial_dialer">Teléfono</string>
     <string name="info_quickdial_needs_access">Muestra aquí tus contactos favoritos</string>
     <string name="info_quickdial_allow">Permitir contactos</string>
     <string name="info_quickdial_empty">Marca contactos como favoritos en la app Contactos para verlos aquí</string>

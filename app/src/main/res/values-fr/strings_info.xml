@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">APPEL RAPIDE</string>
-    <string name="info_quickdial_dialer">Clavier</string>
+    <string name="info_quickdial_dialer">Téléphone</string>
     <string name="info_quickdial_needs_access">Afficher vos contacts favoris ici</string>
     <string name="info_quickdial_allow">Autoriser les contacts</string>
     <string name="info_quickdial_empty">Ajoutez des contacts aux favoris dans l\'appli Contacts pour les voir ici</string>

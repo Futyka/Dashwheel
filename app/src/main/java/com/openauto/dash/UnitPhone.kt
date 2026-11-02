@@ -22,4 +22,7 @@ object UnitPhone {
     fun accept() { UnitPlatform.adapter.phone?.accept() }
     fun decline() { UnitPlatform.adapter.phone?.decline() }
     fun hangUp() { UnitPlatform.adapter.phone?.hangUp() }
+
+    /** Calls [number] through the unit's Bluetooth, when its firmware takes a number (FYT); false otherwise. */
+    fun dial(number: String): Boolean = UnitPlatform.adapter.phone?.dial(number) == true
 }

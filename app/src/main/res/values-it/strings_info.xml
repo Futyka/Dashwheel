@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">CHIAMATA RAPIDA</string>
-    <string name="info_quickdial_dialer">Tastiera</string>
+    <string name="info_quickdial_dialer">Telefono</string>
     <string name="info_quickdial_needs_access">Mostra qui i tuoi contatti preferiti</string>
     <string name="info_quickdial_allow">Consenti contatti</string>
     <string name="info_quickdial_empty">Aggiungi contatti ai preferiti nell\'app Contatti per vederli qui</string>

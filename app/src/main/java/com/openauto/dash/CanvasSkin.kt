@@ -225,8 +225,8 @@ internal fun CanvasRail(m: TopBarModel, onHome: () -> Unit, modifier: Modifier =
             RailButton(Icons.Filled.Apps, stringResource(R.string.dash_all_apps), onClick = m.onApps)
             RailButton(Icons.Filled.MusicNote, stringResource(R.string.apps_kind_media)) { openMusic(context, m.onApps) }
             RailButton(Icons.Filled.Phone, stringResource(R.string.settings_section_phone)) {
-                // A head unit without a dialler opens its own phone app; the drawer only when it has none either.
-                UnitPhoneApp.open(context, m.onApps)
+                // Dashwheel's own phone screen; where none can show, the unit's phone app, else the drawer.
+                PhoneScreen.open(context, m.onApps)
             }
             RailButton(Icons.Filled.DirectionsCar, obdStatusLabel(m.obdConnection), dot = obdStatusColor(m.obdConnection), onClick = m.onConnectObd)
         }

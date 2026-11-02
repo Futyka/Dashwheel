@@ -855,7 +855,7 @@ private fun quickDialFace(): WidgetFace {
     val source = rememberQuickDialSource()
     val perm = source.access
     val favourites = source.favourites
-    val dialer = FaceAction(Icons.Filled.Dialpad, stringResource(R.string.info_quickdial_dialer), onClick = { UnitPhoneApp.open(context) })
+    val dialer = FaceAction(Icons.Filled.Dialpad, stringResource(R.string.info_quickdial_dialer), onClick = { PhoneScreen.open(context) })
     // Every call waits in the tile's strip first, as on the standard card: "Calling X", Cancel, three seconds.
     val pending = LocalPendingAction.current
     fun call(name: String, number: String) = pending.arm(context.getString(R.string.phone_calling, name)) { dialNumber(context, number) }

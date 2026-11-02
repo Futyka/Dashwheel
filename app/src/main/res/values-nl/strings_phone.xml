@@ -59,4 +59,19 @@
     <string name="phone_calling">%1$s bellen</string>
     <string name="phone_dial_not_allowed">Sta Oproepen toe in Dashwheel Companion om hier te bellen.</string>
     <string name="phone_guidance_to">Route naar %1$s</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Contacten</string>
+    <string name="phone_tab_recents">Recent</string>
+    <string name="phone_tab_keypad">Toetsen</string>
+    <string name="phone_favourites">Favorieten</string>
+    <string name="phone_contacts_needs_access">Toon hier de contacten van dit toestel</string>
+    <string name="phone_contacts_empty">Nog geen contacten op dit toestel. Verbind je telefoon via Bluetooth met gedeeld telefoonboek, zodat het toestel ze krijgt.</string>
+    <string name="phone_recents_empty">Koppel je telefoon onder Instellingen, Telefoon en schermen, om hier de laatste oproepen te zien</string>
+    <string name="phone_recents_none">Nog geen oproepen op de telefoon</string>
+    <string name="phone_recent_missed">Gemist</string>
+    <string name="phone_recent_incoming">Ontvangen</string>
+    <string name="phone_recent_outgoing">Gebeld</string>
+    <string name="phone_keypad_call">Bellen</string>
+    <string name="phone_keypad_delete">Laatste cijfer wissen</string>
+    <string name="phone_unit_app">Telefoon-app van het toestel</string>
 </resources>

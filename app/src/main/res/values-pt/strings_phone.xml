@@ -59,4 +59,19 @@
     <string name="phone_calling">A ligar a %1$s</string>
     <string name="phone_dial_not_allowed">Para ligar daqui, permita Chamadas no Dashwheel Companheiro.</string>
     <string name="phone_guidance_to">Rota para %1$s</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Contactos</string>
+    <string name="phone_tab_recents">Recentes</string>
+    <string name="phone_tab_keypad">Teclado</string>
+    <string name="phone_favourites">Favoritos</string>
+    <string name="phone_contacts_needs_access">Mostrar aqui os contactos desta unidade</string>
+    <string name="phone_contacts_empty">Ainda não há contactos nesta unidade. Ligue o telefone por Bluetooth com a lista telefónica partilhada, para que a unidade os receba.</string>
+    <string name="phone_recents_empty">Associe o telefone em Definições, Telefone e ecrãs, para ver aqui as últimas chamadas</string>
+    <string name="phone_recents_none">Ainda não há chamadas no telefone</string>
+    <string name="phone_recent_missed">Perdida</string>
+    <string name="phone_recent_incoming">Recebida</string>
+    <string name="phone_recent_outgoing">Efetuada</string>
+    <string name="phone_keypad_call">Ligar</string>
+    <string name="phone_keypad_delete">Apagar o último algarismo</string>
+    <string name="phone_unit_app">App de telefone da unidade</string>
 </resources>
