@@ -1013,3 +1013,27 @@ private fun CheckFirstBox(text: String, aiText: Resources) {
     }
 }
 
+/**
+ * The bar's OBD mark while the link is up (issue #121): the Car problems tile
+ * and the Car data tile side by side, as big as the screen allows.
+ */
+@Composable
+internal fun ObdDialog(connection: ObdConnectionState, onConnect: () -> Unit, onPickDevice: () -> Unit, onDismiss: () -> Unit) {
+    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
+        Surface(
+            shape = DashShape.Large,
+            color = DashColors.Card.copy(alpha = 1f),
+            // Docked app windows are drawn above dialogs on this unit; the ones under it step aside.
+            modifier = Modifier.widthIn(max = 960.dp).fillMaxWidth(0.94f).fillMaxHeight(0.94f).keepClearOfWindows()
+        ) {
+            Column(modifier = Modifier.padding(12.dp)) {
+                Row(modifier = Modifier.weight(1f)) {
+                    ObdDtcCard(connection, onConnect, Modifier.weight(1f).fillMaxHeight(), onPickDevice)
+                    Spacer(Modifier.width(12.dp))
+                    ObdAllCard(connection, onConnect, Modifier.weight(1f).fillMaxHeight(), onPickDevice)
+                }
+                TextButton(onClick = onDismiss, modifier = Modifier.align(Alignment.End)) { Text(stringResource(R.string.dash_close), color = DashColors.AccentInk) }
+            }
+        }
+    }
+}

@@ -62,6 +62,8 @@ internal class DashboardUiState(
 
     /** System-app install (root): unlocks embedding the real Google Maps app. */
     var showSystemDialog by mutableStateOf(false)
+    /** The car's fault codes and live readings, from the bar's OBD mark (FaultCodesTile.kt). */
+    var showObd by mutableStateOf(false)
 
     // The setup (SetupScreen.kt): its step while open, null while closed. A
     // fresh install starts on it; Settings and the bar's pill reopen it.

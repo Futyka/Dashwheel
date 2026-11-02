@@ -582,6 +582,7 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
     }
 
     var showSystemDialog by ui::showSystemDialog
+    var showObd by ui::showObd
 
     // The drive lock (DriveLock.kt): while the car moves, arranging, settings
     // and pickers wait. Anything open when it engages closes; a locked tap
@@ -1272,6 +1273,7 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
             }
         },
         onSystem = { whenParked { showSystemDialog = true } },
+        onObd = { showObd = true },
         onCheckUpdates = checkForUpdates,
         update = updateStatus,
         onUpdate = onUpdate,
@@ -2376,6 +2378,8 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
             }
         )
     }
+
+    if (showObd) ObdDialog(obdConnection.value, onConnectObd, onPickDevice) { showObd = false }
 
     if (showSystemDialog) {
         AlertDialog(

@@ -3,12 +3,15 @@ package com.openauto.dash
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -71,6 +74,17 @@ internal fun skinHandles(item: DashboardItem): Boolean = DashColors.Skin != Dash
 
 @Composable
 internal fun SkinTile(item: DashboardItem, env: SkinTileEnv) {
+    // A tap on a skin's media tile, off its buttons, opens the player like the standard tile's cover does (issue #119).
+    // Without notification access each skin's own "tap to enable" line keeps the tap.
+    val opensPlayer = item is DashboardItem.BuiltinWidget && item.kind == BuiltinKind.MEDIA && env.hasMediaAccess && !env.editing
+    Box(
+        if (opensPlayer) Modifier.clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { env.mediaController.openPlayer() }
+        else Modifier
+    ) { SkinTileContent(item, env) }
+}
+
+@Composable
+private fun SkinTileContent(item: DashboardItem, env: SkinTileEnv) {
     when (DashColors.Skin) {
         DashSkin.ORBIT -> OrbitTile(item, env)
         DashSkin.COCKPIT -> CockpitTile(item, env)

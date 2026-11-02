@@ -397,7 +397,7 @@ private fun BarReadout(item: BarItem, m: TopBarModel) {
             )
         }
         BarItem.PHONE -> PhonePill()
-        BarItem.OBD -> ObdDot(m.obdConnection, m.onConnectObd)
+        BarItem.OBD -> ObdDot(m.obdConnection, m.onConnectObd, m.onObd)
         BarItem.OUTSIDE -> ValueReadout(item, rememberOutsideTempC()?.let { units.tempTight(it) } ?: "–")
         // Empty room, drawn by BarReadouts itself.
         BarItem.SPACE, BarItem.STRETCH -> Unit
@@ -504,9 +504,9 @@ private fun WifiStrength(lit: Int, color: Color, modifier: Modifier = Modifier) 
     }
 }
 
-/** The OBD link as a small dot and three letters: the bar's own pill takes less room. Tapped while idle, it connects. */
+/** The OBD link as a small dot and three letters: the bar's own pill takes less room. Tapped while idle, it connects; while linked, it opens the car's codes and readings. */
 @Composable
-private fun ObdDot(state: ObdConnectionState, onConnect: () -> Unit) {
+private fun ObdDot(state: ObdConnectionState, onConnect: () -> Unit, onOpen: () -> Unit) {
     val color = obdStatusColor(state)
     val label = obdStatusLabel(state)
     val tap = rememberTapFeedback()
@@ -516,7 +516,7 @@ private fun ObdDot(state: ObdConnectionState, onConnect: () -> Unit) {
             .tourTarget(TourTarget.OBD)
             .heightIn(min = DashSize.Touch)
             .clip(RoundedCornerShape(10.dp))
-            .clickable(enabled = state.isIdle) { tap(); onConnect() }
+            .clickable(enabled = state.isIdle || state == ObdConnectionState.CONNECTED) { tap(); if (state == ObdConnectionState.CONNECTED) onOpen() else onConnect() }
             .padding(horizontal = 6.dp)
             .semantics(mergeDescendants = true) { contentDescription = label }
     ) {

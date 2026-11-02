@@ -145,6 +145,8 @@ internal data class TopBarModel(
     val onLayout: (DashLayout) -> Unit,
     val onApps: () -> Unit,
     val onConnectObd: () -> Unit,
+    /** The link is up: opens the car's fault codes and live readings (issue #121). */
+    val onObd: () -> Unit = {},
     val onSplit: () -> Unit,
     val onToggleEdit: () -> Unit,
     val onTemplates: () -> Unit,
@@ -293,7 +295,7 @@ internal fun StandardTopBar(m: TopBarModel) {
                             SetupPill(onClick = { m.onSetup(false) }, compact = narrow || m.demo)
                         }
                     }
-                    Box(Modifier.layoutId(BarRank.OBD)) { ObdPill(m.obdConnection, m.onConnectObd) }
+                    Box(Modifier.layoutId(BarRank.OBD)) { ObdPill(m.obdConnection, m.onConnectObd, onOpen = m.onObd) }
                     Box(Modifier.layoutId(BarRank.MORE)) {
                         MorePicker(m, geminiInBar = true) { open ->
                             BarButton(onClick = open, description = stringResource(R.string.dash_more)) {
@@ -661,7 +663,8 @@ internal fun obdTapOpensHelp(state: ObdConnectionState, phoneBlocking: Boolean):
  * What the OBD mark of every bar does, whatever a skin draws as [content]: a
  * [DashSize.TouchPrimary] target with the tap feedback that connects while
  * the link is idle, the steps for the phone when its Android Auto holds the
- * adapter, and the spot the tour lights up.
+ * adapter, the spot the tour lights up, and with [onOpen] a tap while linked
+ * that opens the car's codes and readings.
  */
 @Composable
 internal fun ObdMark(
@@ -670,6 +673,7 @@ internal fun ObdMark(
     modifier: Modifier = Modifier,
     shape: Shape = DashShape.Pill,
     clickLabel: String? = null,
+    onOpen: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     val label = obdStatusLabel(state)
@@ -684,9 +688,13 @@ internal fun ObdMark(
             .heightIn(min = DashSize.TouchPrimary)
             .widthIn(min = DashSize.TouchPrimary)
             .clip(shape)
-            .clickable(enabled = state.isIdle, onClickLabel = clickLabel, role = Role.Button) {
+            .clickable(enabled = state.isIdle || (onOpen != null && state == ObdConnectionState.CONNECTED), onClickLabel = clickLabel, role = Role.Button) {
                 tap()
-                if (obdTapOpensHelp(state, phoneBlocking)) help = true else onConnect()
+                when {
+                    state == ObdConnectionState.CONNECTED -> onOpen?.invoke()
+                    obdTapOpensHelp(state, phoneBlocking) -> help = true
+                    else -> onConnect()
+                }
             }
             .semantics(mergeDescendants = true) { contentDescription = label },
         contentAlignment = Alignment.Center
@@ -699,7 +707,7 @@ internal fun ObdMark(
  * the letters OBD. What a tap does is [ObdMark]'s.
  */
 @Composable
-internal fun ObdPill(state: ObdConnectionState, onConnect: () -> Unit, modifier: Modifier = Modifier) {
+internal fun ObdPill(state: ObdConnectionState, onConnect: () -> Unit, modifier: Modifier = Modifier, onOpen: (() -> Unit)? = null) {
     val color = obdStatusColor(state)
     val off = state == ObdConnectionState.DISCONNECTED
     val connecting = state == ObdConnectionState.CONNECTING
@@ -707,7 +715,7 @@ internal fun ObdPill(state: ObdConnectionState, onConnect: () -> Unit, modifier:
     val halo = DashColors.Glow
     val ink = if (off) DashColors.Muted else color
     val shape = DashShape.Pill
-    ObdMark(state, onConnect, modifier) {
+    ObdMark(state, onConnect, modifier, onOpen = onOpen) {
         Row(
             modifier = Modifier
                 .padding(horizontal = 4.dp)
