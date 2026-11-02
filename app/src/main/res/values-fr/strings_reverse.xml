@@ -10,6 +10,8 @@
     <string name="reverse_layout_camera">Caméra</string>
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">Vous pouvez aussi changer depuis l\'écran de recul.</string>
+    <string name="reverse_radar_over">Radar sur l\'image</string>
+    <string name="reverse_radar_over_detail">Les arcs du radar de recul, en transparence en bas de l\'image tant qu\'un capteur voit quelque chose.</string>
     <string name="reverse_stock_title">Lignes de l\'app voiture</string>
     <string name="reverse_stock_keep">Garder</string>
     <string name="reverse_stock_hide">Masquer</string>

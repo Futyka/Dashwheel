@@ -137,6 +137,12 @@ internal fun ReverseViewSheet(onDismiss: () -> Unit) {
             onChoose = { ReverseView.setLayout(context, it) }
         )
         SwitchHint(stringResource(R.string.reverse_layout_hint))
+        if (layout == ReverseLayout.CAMERA) {
+            val radarOver by ReverseView.radarOverPicture.collectAsState()
+            SwitchRow(stringResource(R.string.reverse_radar_over), stringResource(R.string.reverse_radar_over_detail), checked = radarOver) {
+                ReverseView.setRadarOverPicture(context, it)
+            }
+        }
 
         // The radar's look only matters where the radar shows.
         if (layout != ReverseLayout.CAMERA) {

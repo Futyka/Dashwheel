@@ -63,6 +63,11 @@
     <string name="alert_enlarge">Zeigen</string>
     <string name="alert_speak">Ansagen</string>
     <string name="alert_also_spoken">Auch angesagt</string>
+    <string name="alert_at">Wo es sitzt</string>
+    <string name="alert_at_top">Oben</string>
+    <string name="alert_at_start">Links</string>
+    <string name="alert_at_end">Rechts</string>
+    <string name="alert_at_bottom">Unten</string>
     <string name="alert_show">Diesen Hinweis zeigen</string>
     <string name="alert_speak_call_detail">Sagt beim Klingeln, wer anruft</string>
     <string name="alert_speak_doors_detail">Sagt, welche Tür offen ist, wenn sie sich während der Fahrt öffnet oder du mit offener Tür losfährst</string>

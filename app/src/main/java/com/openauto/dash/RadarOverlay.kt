@@ -71,6 +71,8 @@ object RadarOverlay {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
     private var started = false
     private var window: AlertWindow? = null
+    /** Where [window] was built to sit: a new one when the driver moves the radar (#124). */
+    private var windowAt: CardAt? = null
     private var hiding: Job? = null
 
     /** A second without anything near before the radar goes, so it doesn't flicker. */
@@ -147,11 +149,17 @@ object RadarOverlay {
             }
         }
         scope.launch {
-            style.collect { style ->
+            combine(style, AlertStyleStore.radarAt) { s, at -> s to at }.collect { (style, chosen) ->
                 if (style != null) {
                     hiding?.cancel()
+                    val at = placementOf(AlertKind.RADAR, chosen, app)
+                    if (at != windowAt) {
+                        window?.removeNow()
+                        window = null
+                        windowAt = at
+                    }
                     val w = window ?: AlertWindow(
-                        app, "radar", AlertKind.RADAR.cardAt.gravity, aboveCamera = { true }, rank = AlertKind.RADAR.rank,
+                        app, "radar", at.gravity, aboveCamera = { true }, rank = AlertKind.RADAR.rank,
                         onOutsideTap = ::dismiss
                     ).also { window = it }
                     if (w.canShow()) w.show(style) { RadarAlertContent(style) }
@@ -314,5 +322,5 @@ internal fun RadarHost() {
     val r = radar ?: return
     val s = style ?: return
     if (SplitAccessibilityService.isConnected || android.provider.Settings.canDrawOverlays(androidx.compose.ui.platform.LocalContext.current)) return
-    AlertPopup(s, AlertKind.RADAR.cardAt.alignment) { RadarAlert(r, s) }
+    AlertPopup(s, placementOf(AlertKind.RADAR).alignment) { RadarAlert(r, s) }
 }

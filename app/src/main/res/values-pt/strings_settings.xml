@@ -63,6 +63,11 @@
     <string name="alert_enlarge">Mostrar</string>
     <string name="alert_speak">Dizer em voz alta</string>
     <string name="alert_also_spoken">Também dito em voz alta</string>
+    <string name="alert_at">Onde fica</string>
+    <string name="alert_at_top">Em cima</string>
+    <string name="alert_at_start">À esquerda</string>
+    <string name="alert_at_end">À direita</string>
+    <string name="alert_at_bottom">Em baixo</string>
     <string name="alert_show">Mostrar este alerta</string>
     <string name="alert_speak_call_detail">Diz quem está a ligar enquanto toca</string>
     <string name="alert_speak_doors_detail">Diz que porta está aberta se abrir em andamento ou se arrancar com uma aberta</string>

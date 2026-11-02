@@ -11,6 +11,8 @@
     <string name="reverse_layout_camera">Kamera</string>
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">Magán a tolatási képernyőn is válthat.</string>
+    <string name="reverse_radar_over">Radar a kép fölött</string>
+    <string name="reverse_radar_over_detail">A tolatóradar ívei áttetszően a kép alján, amíg egy érzékelő észlel valamit.</string>
     <string name="reverse_stock_title">Az autó alkalmazásának vonalai</string>
     <string name="reverse_stock_keep">Megtartás</string>
     <string name="reverse_stock_hide">Elrejtés</string>

@@ -63,6 +63,11 @@
     <string name="alert_enlarge">Mostrar</string>
     <string name="alert_speak">Decirlo en voz alta</string>
     <string name="alert_also_spoken">También en voz alta</string>
+    <string name="alert_at">Dónde se coloca</string>
+    <string name="alert_at_top">Arriba</string>
+    <string name="alert_at_start">Izquierda</string>
+    <string name="alert_at_end">Derecha</string>
+    <string name="alert_at_bottom">Abajo</string>
     <string name="alert_show">Mostrar este aviso</string>
     <string name="alert_speak_call_detail">Dice quién llama mientras suena</string>
     <string name="alert_speak_doors_detail">Dice qué puerta está abierta si se abre en marcha o si arranca con una abierta</string>

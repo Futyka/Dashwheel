@@ -34,6 +34,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AcUnit
 import androidx.compose.material.icons.filled.AirlineSeatReclineNormal
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.ChevronRight
@@ -442,6 +446,36 @@ private fun AlertStyleDialog(kind: AlertKind, onDismiss: () -> Unit) {
                         repeat(3 - row.size) { Spacer(Modifier.weight(1f)) }
                     }
                 }
+                // The card is the one design the radar's place moves: on a portrait screen its right edge crosses the picture (#124).
+                if (kind == AlertKind.RADAR && chosen == AlertStyle.CARD) {
+                    Label(stringResource(R.string.alert_at))
+                    SegmentedSwitch(
+                        options = listOf(CardAt.TOP, CardAt.START, CardAt.END, CardAt.BOTTOM),
+                        chosen = placementOf(kind),
+                        icon = {
+                            when (it) {
+                                CardAt.TOP -> Icons.Filled.KeyboardArrowUp
+                                CardAt.START -> Icons.Filled.KeyboardArrowLeft
+                                CardAt.BOTTOM -> Icons.Filled.KeyboardArrowDown
+                                else -> Icons.Filled.KeyboardArrowRight
+                            }
+                        },
+                        title = {
+                            stringResource(
+                                when (it) {
+                                    CardAt.TOP -> R.string.alert_at_top
+                                    CardAt.START -> R.string.alert_at_start
+                                    CardAt.BOTTOM -> R.string.alert_at_bottom
+                                    else -> R.string.alert_at_end
+                                }
+                            )
+                        }
+                    ) {
+                        AlertStyleStore.setRadarAt(context, it)
+                        AlertPreview.show(context, kind)
+                    }
+                    Spacer(Modifier.height(12.dp))
+                }
                 if (kind == AlertKind.CALL) {
                     Text(stringResource(R.string.alert_call_note), color = DashColors.TextSecondary, style = MaterialTheme.typography.bodySmall)
                     Spacer(Modifier.height(8.dp))
@@ -532,6 +566,7 @@ private fun StyleThumbnail(kind: AlertKind, style: AlertStyle, modifier: Modifie
     val alert = kind.tint()
     val frame = DashColors.Line
     val square = alertSquare
+    val at = placementOf(kind)
     Canvas(modifier.clip(DashShape.Small)) {
         val w = size.width
         val h = size.height
@@ -544,9 +579,10 @@ private fun StyleThumbnail(kind: AlertKind, style: AlertStyle, modifier: Modifie
         repeat(3) { i -> drawRoundRect(tile, Offset(gap + i * (tw + gap), h * 0.12f), Size(tw, h * 0.76f), r) }
         when (style) {
             AlertStyle.PILL -> drawRoundRect(alert, Offset(w * 0.36f, h * 0.05f), Size(w * 0.28f, h * 0.12f), if (square) r else CornerRadius(h))
-            AlertStyle.CARD -> when (kind.cardAt) {
+            AlertStyle.CARD -> when (at) {
                 CardAt.TOP -> drawRoundRect(alert, Offset(w * 0.3f, h * 0.07f), Size(w * 0.4f, h * 0.22f), r)
                 CardAt.TOP_END -> drawRoundRect(alert, Offset(w * 0.56f, h * 0.07f), Size(w * 0.4f, h * 0.22f), r)
+                CardAt.START -> drawRoundRect(alert, Offset(w * 0.04f, h * 0.2f), Size(w * 0.16f, h * 0.6f), r)
                 CardAt.END -> drawRoundRect(alert, Offset(w * 0.8f, h * 0.2f), Size(w * 0.16f, h * 0.6f), r)
                 CardAt.BOTTOM -> drawRoundRect(alert, Offset(w * 0.3f, h * 0.71f), Size(w * 0.4f, h * 0.22f), r)
             }

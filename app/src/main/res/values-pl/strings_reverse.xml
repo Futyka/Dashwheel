@@ -10,6 +10,8 @@
     <string name="reverse_layout_camera">Kamera</string>
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">Możesz też przełączać na samym ekranie cofania.</string>
+    <string name="reverse_radar_over">Radar na obrazie</string>
+    <string name="reverse_radar_over_detail">Łuki radaru parkowania, półprzezroczyste u dołu obrazu, dopóki czujnik coś wykrywa.</string>
     <string name="reverse_stock_title">Linie aplikacji auta</string>
     <string name="reverse_stock_keep">Zostaw</string>
     <string name="reverse_stock_hide">Ukryj</string>

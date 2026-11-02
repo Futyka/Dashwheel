@@ -11,6 +11,8 @@
     <string name="reverse_layout_camera">Камера</string>
     <string name="reverse_layout_radar">Парктроник</string>
     <string name="reverse_layout_hint">Переключать можно и на самом экране заднего хода.</string>
+    <string name="reverse_radar_over">Радар поверх картинки</string>
+    <string name="reverse_radar_over_detail">Дуги парктроника полупрозрачно внизу картинки, пока датчик что-то видит.</string>
     <string name="reverse_stock_title">Штатные линии</string>
     <string name="reverse_stock_keep">Оставить</string>
     <string name="reverse_stock_hide">Скрыть</string>

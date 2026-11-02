@@ -63,6 +63,11 @@
     <string name="alert_enlarge">Mutasd</string>
     <string name="alert_speak">Felolvasás</string>
     <string name="alert_also_spoken">Felolvasva is</string>
+    <string name="alert_at">Hol jelenjen meg</string>
+    <string name="alert_at_top">Fent</string>
+    <string name="alert_at_start">Balra</string>
+    <string name="alert_at_end">Jobbra</string>
+    <string name="alert_at_bottom">Lent</string>
     <string name="alert_show">Riasztás megjelenítése</string>
     <string name="alert_speak_call_detail">Csengetéskor bemondja, ki hív</string>
     <string name="alert_speak_doors_detail">Bemondja, melyik ajtó van nyitva, ha menet közben kinyílik egy, vagy nyitott ajtóval indul el</string>

@@ -63,6 +63,11 @@
     <string name="alert_enlarge">Tonen</string>
     <string name="alert_speak">Uitspreken</string>
     <string name="alert_also_spoken">Ook uitgesproken</string>
+    <string name="alert_at">Waar het staat</string>
+    <string name="alert_at_top">Boven</string>
+    <string name="alert_at_start">Links</string>
+    <string name="alert_at_end">Rechts</string>
+    <string name="alert_at_bottom">Onder</string>
     <string name="alert_show">Deze melding tonen</string>
     <string name="alert_speak_call_detail">Zegt wie er belt terwijl het belt</string>
     <string name="alert_speak_doors_detail">Zegt welke deur open is als er een opengaat tijdens het rijden of je vertrekt met een open deur</string>

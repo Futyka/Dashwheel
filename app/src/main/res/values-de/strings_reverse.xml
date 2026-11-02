@@ -10,6 +10,8 @@
     <string name="reverse_layout_camera">Kamera</string>
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">Du kannst auch auf dem Rückfahrbild umschalten.</string>
+    <string name="reverse_radar_over">Radar über dem Bild</string>
+    <string name="reverse_radar_over_detail">Die Bögen des Parkradars, durchscheinend unten im Bild, solange ein Sensor etwas sieht.</string>
     <string name="reverse_stock_title">Linien der Auto-App</string>
     <string name="reverse_stock_keep">Behalten</string>
     <string name="reverse_stock_hide">Ausblenden</string>

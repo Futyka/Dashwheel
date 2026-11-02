@@ -63,6 +63,11 @@
     <string name="alert_enlarge">Pokaż</string>
     <string name="alert_speak">Mów na głos</string>
     <string name="alert_also_spoken">Również wypowiadane</string>
+    <string name="alert_at">Gdzie się pojawia</string>
+    <string name="alert_at_top">U góry</string>
+    <string name="alert_at_start">Po lewej</string>
+    <string name="alert_at_end">Po prawej</string>
+    <string name="alert_at_bottom">U dołu</string>
     <string name="alert_show">Pokazuj ten alert</string>
     <string name="alert_speak_call_detail">Mówi, kto dzwoni, gdy telefon dzwoni</string>
     <string name="alert_speak_doors_detail">Mówi, które drzwi są otwarte, gdy otworzą się w czasie jazdy lub ruszysz z otwartymi</string>

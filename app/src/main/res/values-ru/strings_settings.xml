@@ -63,6 +63,11 @@
     <string name="alert_enlarge">Показать</string>
     <string name="alert_speak">Озвучить</string>
     <string name="alert_also_spoken">С озвучкой</string>
+    <string name="alert_at">Где показывать</string>
+    <string name="alert_at_top">Сверху</string>
+    <string name="alert_at_start">Слева</string>
+    <string name="alert_at_end">Справа</string>
+    <string name="alert_at_bottom">Снизу</string>
     <string name="alert_show">Показывать это оповещение</string>
     <string name="alert_speak_call_detail">Называет, кто звонит, пока звонит телефон</string>
     <string name="alert_speak_doors_detail">Называет открытую дверь, если она открылась в пути или вы тронулись с открытой</string>

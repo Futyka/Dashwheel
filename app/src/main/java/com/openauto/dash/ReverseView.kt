@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -44,6 +45,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -207,6 +209,10 @@ internal object ReverseView {
     private val _radarLook = MutableStateFlow(ReverseRadarLook.GROUND)
     val radarLook: StateFlow<ReverseRadarLook> = _radarLook.asStateFlow()
 
+    private val _radarOverPicture = MutableStateFlow(false)
+    /** The "Camera" layout with the radar see-through over the picture, while a sensor sees something (#125). */
+    val radarOverPicture: StateFlow<Boolean> = _radarOverPicture.asStateFlow()
+
     private val _tailgate = MutableStateFlow(DEFAULT_TAILGATE_M)
     /** Room the tailgate needs behind the bumper to open, in metres; 0 hides its line. */
     val tailgate: StateFlow<Float> = _tailgate.asStateFlow()
@@ -297,6 +303,7 @@ internal object ReverseView {
         _ownCamera.value = Edition.full && p.getBoolean("own_camera", false)
         _tailgate.value = p.getFloat("tailgate", DEFAULT_TAILGATE_M)
         _radarLook.value = ReverseRadarLook.entries.firstOrNull { it.name == p.getString("radar_look", null) } ?: ReverseRadarLook.GROUND
+        _radarOverPicture.value = p.getBoolean("radar_over_picture", false)
         _secondScreen.value = when (val saved = p.getString("second_screen", null)) {
             null -> ReverseLayout.BOTH
             SECOND_SCREEN_OFF -> null
@@ -353,6 +360,11 @@ internal object ReverseView {
     fun setSecondScreen(context: Context, shown: ReverseLayout?) {
         _secondScreen.value = shown
         prefs(context).edit().putString("second_screen", shown?.name ?: SECOND_SCREEN_OFF).apply()
+    }
+
+    fun setRadarOverPicture(context: Context, over: Boolean) {
+        _radarOverPicture.value = over
+        prefs(context).edit().putBoolean("radar_over_picture", over).apply()
     }
 
     fun setRadarLook(context: Context, look: ReverseRadarLook) {
@@ -1040,6 +1052,11 @@ private fun FullScreen(
                         radar, steering, top, lookStyle, above
                     )
                 }
+            }
+            val radarOver by ReverseView.radarOverPicture.collectAsState()
+            if (layout == ReverseLayout.CAMERA && radarOver && pictureUp && !adjusting && radar?.closest != null) {
+                // The parking radar's arcs see-through over the near end of the picture, only while a sensor sees something (#125).
+                RadarFromAbove(radar, Modifier.align(Alignment.BottomCenter).fillMaxWidth().fillMaxHeight(1f / 3).alpha(0.6f))
             }
         }
         // Everything along the top, over the far end of the picture: the bottom, right behind the bumper, stays clear.

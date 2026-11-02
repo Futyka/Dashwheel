@@ -64,6 +64,11 @@
     <string name="alert_enlarge">Show</string>
     <string name="alert_speak">Speak it</string>
     <string name="alert_also_spoken">Also spoken</string>
+    <string name="alert_at">Where it sits</string>
+    <string name="alert_at_top">Top</string>
+    <string name="alert_at_start">Left</string>
+    <string name="alert_at_end">Right</string>
+    <string name="alert_at_bottom">Bottom</string>
     <string name="alert_show">Show this alert</string>
     <string name="alert_speak_call_detail">Says who is calling as the phone rings</string>
     <string name="alert_speak_doors_detail">Says which door is open if one opens while driving or you set off with one open</string>

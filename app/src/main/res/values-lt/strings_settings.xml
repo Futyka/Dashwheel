@@ -63,6 +63,11 @@
     <string name="alert_enlarge">Rodyti</string>
     <string name="alert_speak">Įgarsinti</string>
     <string name="alert_also_spoken">Taip pat įgarsinama</string>
+    <string name="alert_at">Kur rodyti</string>
+    <string name="alert_at_top">Viršuje</string>
+    <string name="alert_at_start">Kairėje</string>
+    <string name="alert_at_end">Dešinėje</string>
+    <string name="alert_at_bottom">Apačioje</string>
     <string name="alert_show">Rodyti šį įspėjimą</string>
     <string name="alert_speak_call_detail">Pasako, kas skambina, kai telefonas skamba</string>
     <string name="alert_speak_doors_detail">Pasako, kurios durys atidarytos, jei jos atsidaro važiuojant arba pajudate su atidarytomis</string>

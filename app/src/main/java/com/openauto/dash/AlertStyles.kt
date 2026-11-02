@@ -1,6 +1,7 @@
 package com.openauto.dash
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.PixelFormat
 import android.os.SystemClock
 import android.util.Log
@@ -30,6 +31,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -246,6 +249,7 @@ internal class ShrinkOnTheMove {
 enum class CardAt(val gravity: Int, val alignment: Alignment) {
     TOP(Gravity.TOP or Gravity.CENTER_HORIZONTAL, Alignment.TopCenter),
     TOP_END(Gravity.TOP or Gravity.END, Alignment.TopEnd),
+    START(Gravity.START or Gravity.CENTER_VERTICAL, Alignment.CenterStart),
     END(Gravity.END or Gravity.CENTER_VERTICAL, Alignment.CenterEnd),
     BOTTOM(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, Alignment.BottomCenter)
 }
@@ -257,6 +261,10 @@ object AlertStyleStore {
 
     private val _styles = MutableStateFlow<Map<AlertKind, AlertStyle>>(emptyMap())
     val styles: StateFlow<Map<AlertKind, AlertStyle>> = _styles
+
+    private val _radarAt = MutableStateFlow<CardAt?>(null)
+    /** Where the driver put the parking radar's card; null until they do ([placementOf]). */
+    val radarAt: StateFlow<CardAt?> = _radarAt
 
     private val _spoken = MutableStateFlow(SPOKEN_FIRST)
     /** The alerts also said out loud ([AlertVoice]); the doors until the driver says otherwise. */
@@ -270,6 +278,7 @@ object AlertStyleStore {
             p.getString(kind.key, null)?.let { name -> AlertStyle.entries.firstOrNull { it.name == name } }?.let { kind to it }
         }.toMap()
         _spoken.value = AlertKind.entries.filter { p.getBoolean("speak_${it.key}", it in SPOKEN_FIRST) }.toSet()
+        _radarAt.value = p.getString("at_radar", null)?.let { name -> CardAt.entries.firstOrNull { it.name == name } }
         SpokenEvents.load(context)
     }
 
@@ -278,10 +287,33 @@ object AlertStyleStore {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString(kind.key, style.name).apply()
     }
 
+    fun setRadarAt(context: Context, at: CardAt) {
+        _radarAt.value = at
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString("at_radar", at.name).apply()
+    }
+
     fun setSpoken(context: Context, kind: AlertKind, on: Boolean) {
         _spoken.update { if (on) it + kind else it - kind }
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putBoolean("speak_${kind.key}", on).apply()
     }
+}
+
+/**
+ * Where [kind]'s card sits: the parking radar where the driver put it ([chosen],
+ * [AlertStyleStore.radarAt]), else beside a landscape camera picture and under a
+ * portrait one, where the right edge would cross it (#124); the rest in their fixed place.
+ */
+fun placementOf(kind: AlertKind, chosen: CardAt?, portrait: Boolean): CardAt =
+    if (kind != AlertKind.RADAR) kind.cardAt else chosen ?: if (portrait) CardAt.BOTTOM else CardAt.END
+
+fun placementOf(kind: AlertKind, chosen: CardAt?, context: Context): CardAt =
+    placementOf(kind, chosen, context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
+
+/** [placementOf] as the screen stands, following the driver's choice. */
+@Composable
+fun placementOf(kind: AlertKind): CardAt {
+    val chosen by AlertStyleStore.radarAt.collectAsState()
+    return placementOf(kind, chosen, LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT)
 }
 
 /** [kind]'s chosen design; its default until one is chosen (or when the chosen one doesn't suit it). */
@@ -631,6 +663,7 @@ internal fun AlertPopup(style: AlertStyle, cardAlignment: Alignment, content: @C
     val (alignment, offset) = when (style) {
         AlertStyle.CARD, AlertStyle.BUBBLE, AlertStyle.ICON -> cardAlignment to when (cardAlignment) {
             Alignment.TopEnd -> IntOffset(-margin, margin)
+            Alignment.CenterStart -> IntOffset(margin, 0)
             Alignment.CenterEnd -> IntOffset(-margin, 0)
             Alignment.BottomCenter -> IntOffset(0, -margin * 4)
             else -> IntOffset(0, margin)

@@ -10,6 +10,8 @@
     <string name="reverse_layout_camera">Camera</string>
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">Je kunt ook wisselen op het achteruitrijscherm zelf.</string>
+    <string name="reverse_radar_over">Radar over het beeld</string>
+    <string name="reverse_radar_over_detail">De bogen van de parkeerradar, doorzichtig onder in het beeld zolang een sensor iets ziet.</string>
     <string name="reverse_stock_title">Lijnen van de auto-app</string>
     <string name="reverse_stock_keep">Houden</string>
     <string name="reverse_stock_hide">Verbergen</string>

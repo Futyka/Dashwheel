@@ -11,6 +11,8 @@
     <string name="reverse_layout_camera">Camera</string>
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">You can also switch on the reverse screen itself.</string>
+    <string name="reverse_radar_over">Radar over the picture</string>
+    <string name="reverse_radar_over_detail">The parking radar\'s arcs, see-through at the bottom of the picture while a sensor sees something.</string>
     <string name="reverse_stock_title">Car app\'s lines</string>
     <string name="reverse_stock_keep">Keep</string>
     <string name="reverse_stock_hide">Hide</string>
