@@ -10,6 +10,14 @@
     <string name="look_home_own">Saját kezdőlappal érkezik</string>
     <string name="look_home_own_off">Saját kezdőlapja van. Az elrendezés ki van kapcsolva.</string>
     <string name="look_home_keeps">A kezdőlap marad, ahogy van</string>
+    <string name="look_font_title">Betűtípus</string>
+    <string name="look_font_own">A témáé</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Keskeny</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Laza</string>
+    <string name="look_font_light">Vékony</string>
     <string name="start_anim_title">Indítási animáció</string>
     <string name="start_anim_detail">A műszerfal és alkalmazásai indulása közben fut. Válassz egyet a megtekintéshez.</string>
     <string name="start_anim_still">Állókép</string>

@@ -10,6 +10,14 @@
     <string name="look_home_own">Arrive avec son propre Accueil</string>
     <string name="look_home_own_off">A son propre Accueil. Disposer est désactivé.</string>
     <string name="look_home_keeps">L\'Accueil reste tel quel</string>
+    <string name="look_font_title">Police</string>
+    <string name="look_font_own">Celle du thème</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Condensée</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Décontractée</string>
+    <string name="look_font_light">Fine</string>
     <string name="start_anim_title">Animation de démarrage</string>
     <string name="start_anim_detail">S\'affiche pendant le démarrage du tableau de bord et de ses apps. Choisissez-en une pour la voir.</string>
     <string name="start_anim_still">Image fixe</string>

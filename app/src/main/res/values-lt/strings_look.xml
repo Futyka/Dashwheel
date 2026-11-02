@@ -11,6 +11,14 @@
     <string name="look_home_own">Turi savo Home</string>
     <string name="look_home_own_off">Turi savo Home. Išdėstymas pagal išvaizdą išjungtas.</string>
     <string name="look_home_keeps">Home lieka toks, koks yra</string>
+    <string name="look_font_title">Šriftas</string>
+    <string name="look_font_own">Išvaizdos</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Siauras</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Laisvas</string>
+    <string name="look_font_light">Lengvas</string>
     <string name="start_anim_title">Paleidimo animacija</string>
     <string name="start_anim_detail">Rodoma, kol paleidžiamas skydelis ir jo programos. Pasirinkite, kad pamatytumėte.</string>
     <string name="start_anim_still">Nejudantis vaizdas</string>

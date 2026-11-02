@@ -496,10 +496,10 @@ fun OpenAutoDashTheme(content: @Composable () -> Unit) {
             WindowInsetsControllerCompat(window, view).isAppearanceLightStatusBars = light
         }
     }
-    // The driving type scale (DashType.kt): nothing under 14 sp, labels at 16 sp.
+    // The driving type scale (DashType.kt) in the driver's font: nothing under 14 sp, labels at 16 sp.
     // The skin's corners for every stock dialog and menu (SkinChrome).
     // The driver's units reach every tile and pop-up from here (Units).
     ProvideUnits {
-        MaterialTheme(colorScheme = colorScheme, typography = DashTypography, shapes = skinChrome().shapes, content = content)
+        MaterialTheme(colorScheme = colorScheme, typography = DashColors.Typography, shapes = skinChrome().shapes, content = content)
     }
 }

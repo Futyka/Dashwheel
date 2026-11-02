@@ -10,6 +10,14 @@
     <string name="look_home_own">Со своим главным экраном</string>
     <string name="look_home_own_off">Есть свой главный экран. Расстановка выключена.</string>
     <string name="look_home_keeps">Главный экран не меняется</string>
+    <string name="look_font_title">Шрифт</string>
+    <string name="look_font_own">Как в теме</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Узкий</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Небрежный</string>
+    <string name="look_font_light">Тонкий</string>
     <string name="start_anim_title">Анимация запуска</string>
     <string name="start_anim_detail">Показывается, пока запускаются панель и её приложения. Выберите, чтобы посмотреть.</string>
     <string name="start_anim_still">Неподвижный кадр</string>

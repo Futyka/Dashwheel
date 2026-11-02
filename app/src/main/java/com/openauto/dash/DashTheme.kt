@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.annotation.StringRes
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
@@ -178,8 +180,28 @@ internal fun contrastRatio(a: Color, b: Color): Float {
     return (hi + 0.05f) / (lo + 0.05f)
 }
 
-/** A theme's hero face: the system sans, or its condensed cut (a cluster's numerals). */
-enum class DashFont { SANS, CONDENSED }
+/**
+ * A theme's hero face: the system sans, or its condensed cut (a cluster's
+ * numerals). The rest are the driver's own picks for every text (Settings →
+ * Look, [DashThemeStore.font]); each is a face the system ships, no asset bundled.
+ */
+enum class DashFont(@StringRes val titleRes: Int, private val system: String?) {
+    SANS(R.string.look_font_sans, null),
+    CONDENSED(R.string.look_font_condensed, "sans-serif-condensed"),
+    SERIF(R.string.look_font_serif, "serif"),
+    MONO(R.string.look_font_mono, "monospace"),
+    CASUAL(R.string.look_font_casual, "casual"),
+    LIGHT(R.string.look_font_light, "sans-serif-light");
+
+    /** The face as a font family, built once; a unit without it draws the default sans. */
+    val family: FontFamily by lazy {
+        when {
+            system == null -> FontFamily.Default
+            this == CONDENSED -> CondensedFamily
+            else -> FontFamily(android.graphics.Typeface.create(system, android.graphics.Typeface.NORMAL))
+        }
+    }
+}
 
 /** The standard bar's centre: the clock, or a car-style cluster (speed, revs, fuel and temperature). */
 enum class DashBarStyle { STANDARD, CLUSTER }
@@ -534,6 +556,7 @@ object DashThemeStore {
     private const val KEY = "mode"
     private const val KEY_APPEARANCE = "appearance"
     private const val KEY_EFFECTS = "effects"
+    private const val KEY_FONT = "font"
     private const val KEY_BAR_AUTO_HIDE = "bar_auto_hide"
     private const val KEY_BAR_HIDE_SECONDS = "bar_hide_seconds"
     private const val KEY_RAIL = "side_rail"
@@ -595,6 +618,19 @@ object DashThemeStore {
     fun saveEffects(context: Context, effects: DashEffects) {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
             .putString(KEY_EFFECTS, effects.name).apply()
+    }
+
+    /** The driver's font for every text, or null to leave each look its own face; state, so the app follows at once. */
+    var font: DashFont? by mutableStateOf(null)
+        private set
+
+    fun loadFont(context: Context): DashFont? = runCatching {
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString(KEY_FONT, null)?.let { DashFont.valueOf(it) }
+    }.getOrNull().also { font = it }
+
+    fun saveFont(context: Context, font: DashFont?) {
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putString(KEY_FONT, font?.name).apply()
+        this.font = font
     }
 
     /** Whether the bottom bar hides itself when unused (BarAutoHide.kt); off by default. */
@@ -735,6 +771,8 @@ object DashColors {
      */
     @Composable
     fun Sync(mode: DashThemeMode, appearance: DashAppearance, effects: DashEffects = DashEffects.FULL) {
+        val context = LocalContext.current
+        remember { DashThemeStore.loadFont(context) }
         val target = paletteFor(mode, appearance.isLight())
         if (effectsLevel != effects) effectsLevel = effects
         val fade = remember { Animatable(1f) }
@@ -817,12 +855,28 @@ object DashColors {
     val BackgroundStops get() = current.BackgroundStops
     val Skin get() = current.Skin
     val Light get() = current.Light
-    val Font get() = current.Font
+    /** The driver's font (Settings → Look), else the look's hero face. */
+    val Font get() = DashThemeStore.font ?: current.Font
     val HeroWeight get() = current.HeroWeight
     val BarStyle get() = current.BarStyle
 
     /** The hero face as a font family (the condensed cut comes from the system). */
-    fun heroFamily(): FontFamily = if (current.Font == DashFont.CONDENSED) CondensedFamily else FontFamily.Default
+    fun heroFamily(): FontFamily = Font.family
+
+    /** The driving type scale ([DashTypography]) in the driver's font, so every text without a family of its own follows it. */
+    val Typography: Typography get() {
+        val font = DashThemeStore.font ?: return DashTypography
+        return typographies.getOrPut(font) { DashTypography.inFamily(font.family) }
+    }
+    private val typographies = HashMap<DashFont, Typography>()
+
+    private fun Typography.inFamily(f: FontFamily) = copy(
+        displayLarge = displayLarge.copy(fontFamily = f), displayMedium = displayMedium.copy(fontFamily = f), displaySmall = displaySmall.copy(fontFamily = f),
+        headlineLarge = headlineLarge.copy(fontFamily = f), headlineMedium = headlineMedium.copy(fontFamily = f), headlineSmall = headlineSmall.copy(fontFamily = f),
+        titleLarge = titleLarge.copy(fontFamily = f), titleMedium = titleMedium.copy(fontFamily = f), titleSmall = titleSmall.copy(fontFamily = f),
+        bodyLarge = bodyLarge.copy(fontFamily = f), bodyMedium = bodyMedium.copy(fontFamily = f), bodySmall = bodySmall.copy(fontFamily = f),
+        labelLarge = labelLarge.copy(fontFamily = f), labelMedium = labelMedium.copy(fontFamily = f), labelSmall = labelSmall.copy(fontFamily = f)
+    )
 
     /** Diagonal accent → accent2 gradient for primary controls. */
     val AccentBrush: Brush get() {

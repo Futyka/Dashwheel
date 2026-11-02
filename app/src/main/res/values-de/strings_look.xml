@@ -10,6 +10,14 @@
     <string name="look_home_own">Bringt einen eigenen Start mit</string>
     <string name="look_home_own_off">Hat einen eigenen Start. Anordnen ist aus.</string>
     <string name="look_home_keeps">Start bleibt, wie er ist</string>
+    <string name="look_font_title">Schrift</string>
+    <string name="look_font_own">Wie das Design</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Schmal</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Leger</string>
+    <string name="look_font_light">Leicht</string>
     <string name="start_anim_title">Startanimation</string>
     <string name="start_anim_detail">Läuft, während das Dashboard und seine Apps starten. Zum Ansehen eine auswählen.</string>
     <string name="start_anim_still">Standbild</string>

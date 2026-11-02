@@ -44,6 +44,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -418,7 +419,7 @@ private fun LookCard(mode: DashThemeMode, selected: Boolean, modifier: Modifier,
 
 /**
  * Day and night beside the effects on a wide screen, one under the other
- * upright: the settings that dress every look.
+ * upright, then the font: the settings that dress every look.
  */
 @Composable
 internal fun LookLightAndEffects(theme: ThemeState) {
@@ -433,6 +434,49 @@ internal fun LookLightAndEffects(theme: ThemeState) {
                 AppearanceSetting(theme)
                 Spacer(Modifier.height(20.dp))
                 EffectsSetting(theme)
+            }
+        }
+    }
+    Spacer(Modifier.height(20.dp))
+    FontSetting()
+}
+
+/**
+ * The font of every text ([DashThemeStore.font]): each look's own face, or
+ * one of the system's for the whole app. Each chip is set in its own face.
+ */
+@Composable
+private fun FontSetting() {
+    val context = LocalContext.current
+    val chosen = DashThemeStore.font
+    val tap = rememberTapFeedback()
+    SettingsSection(stringResource(R.string.look_font_title))
+    Row(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())
+    ) {
+        (listOf(null) + DashFont.entries).forEach { font ->
+            val picked = font == chosen
+            Box(
+                modifier = Modifier
+                    .heightIn(min = DashSize.TouchPrimary)
+                    .clip(DashShape.Pill)
+                    .then(
+                        if (picked) Modifier.background(DashColors.AccentBrush, DashShape.Pill)
+                        else Modifier.border(1.dp, DashColors.Line, DashShape.Pill)
+                    )
+                    .selectable(selected = picked, role = Role.RadioButton) { tap(); DashThemeStore.saveFont(context, font) }
+                    .padding(horizontal = 20.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    if (font == null) stringResource(R.string.look_font_own) else stringResource(font.titleRes),
+                    color = if (picked) DashColors.OnAccent else DashColors.TextPrimary,
+                    fontFamily = font?.family ?: FontFamily.Default,
+                    fontWeight = if (picked) FontWeight.SemiBold else FontWeight.Normal,
+                    style = MaterialTheme.typography.bodyLarge,
+                    maxLines = 1
+                )
             }
         }
     }

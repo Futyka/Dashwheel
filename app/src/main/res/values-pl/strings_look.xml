@@ -10,6 +10,14 @@
     <string name="look_home_own">Ma własny Start</string>
     <string name="look_home_own_off">Ma własny Start. Układanie jest wyłączone.</string>
     <string name="look_home_keeps">Start zostaje bez zmian</string>
+    <string name="look_font_title">Czcionka</string>
+    <string name="look_font_own">Jak w motywie</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Wąska</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Swobodna</string>
+    <string name="look_font_light">Cienka</string>
     <string name="start_anim_title">Animacja startowa</string>
     <string name="start_anim_detail">Wyświetla się podczas uruchamiania pulpitu i jego aplikacji. Wybierz, aby zobaczyć.</string>
     <string name="start_anim_still">Nieruchomy obraz</string>

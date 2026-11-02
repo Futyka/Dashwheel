@@ -10,6 +10,14 @@
     <string name="look_home_own">Heeft een eigen Start</string>
     <string name="look_home_own_off">Heeft een eigen Start. Indelen staat uit.</string>
     <string name="look_home_keeps">Start blijft zoals hij is</string>
+    <string name="look_font_title">Lettertype</string>
+    <string name="look_font_own">Die van het thema</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Smal</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Losjes</string>
+    <string name="look_font_light">Licht</string>
     <string name="start_anim_title">Startanimatie</string>
     <string name="start_anim_detail">Speelt terwijl het dashboard en zijn apps starten. Kies er een om hem te zien.</string>
     <string name="start_anim_still">Stilstaand beeld</string>

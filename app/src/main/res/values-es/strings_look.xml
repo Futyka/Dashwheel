@@ -10,6 +10,14 @@
     <string name="look_home_own">Trae su propio Inicio</string>
     <string name="look_home_own_off">Tiene su propio Inicio. Disponer está desactivado.</string>
     <string name="look_home_keeps">Inicio se queda como está</string>
+    <string name="look_font_title">Fuente</string>
+    <string name="look_font_own">La del tema</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Condensada</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Informal</string>
+    <string name="look_font_light">Fina</string>
     <string name="start_anim_title">Animación de inicio</string>
     <string name="start_anim_detail">Se reproduce mientras arrancan el panel y sus apps. Elige una para verla.</string>
     <string name="start_anim_still">Imagen fija</string>

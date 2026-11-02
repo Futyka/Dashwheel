@@ -10,6 +10,14 @@
     <string name="look_home_own">Traz o seu próprio Início</string>
     <string name="look_home_own_off">Tem o seu próprio Início. Dispor está desligado.</string>
     <string name="look_home_keeps">O Início fica como está</string>
+    <string name="look_font_title">Fonte</string>
+    <string name="look_font_own">A do tema</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Condensada</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Informal</string>
+    <string name="look_font_light">Fina</string>
     <string name="start_anim_title">Animação de arranque</string>
     <string name="start_anim_detail">Aparece enquanto o painel e as suas apps arrancam. Escolha uma para a ver.</string>
     <string name="start_anim_still">Imagem fixa</string>

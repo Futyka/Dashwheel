@@ -11,6 +11,15 @@
     <string name="look_home_own">Comes with its own Home</string>
     <string name="look_home_own_off">Has its own Home. Arrange Home is off.</string>
     <string name="look_home_keeps">Home stays as it is</string>
+    <!-- Settings, Look: the font of every text (LookPage.kt, DashFont) -->
+    <string name="look_font_title">Font</string>
+    <string name="look_font_own">Look\'s own</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Condensed</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Casual</string>
+    <string name="look_font_light">Light</string>
     <string name="start_anim_title">Start-up animation</string>
     <string name="start_anim_detail">Plays while the dashboard and its apps start. Choose one to see it.</string>
     <string name="start_anim_still">Still picture</string>

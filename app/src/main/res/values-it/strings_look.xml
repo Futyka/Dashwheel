@@ -10,6 +10,14 @@
     <string name="look_home_own">Ha la sua Home</string>
     <string name="look_home_own_off">Ha la sua Home. Disporre è spento.</string>
     <string name="look_home_keeps">La Home resta com\'è</string>
+    <string name="look_font_title">Carattere</string>
+    <string name="look_font_own">Quello del tema</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Condensato</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Informale</string>
+    <string name="look_font_light">Leggero</string>
     <string name="start_anim_title">Animazione di avvio</string>
     <string name="start_anim_detail">Si vede mentre partono la dashboard e le sue app. Scegline una per vederla.</string>
     <string name="start_anim_still">Immagine fissa</string>
