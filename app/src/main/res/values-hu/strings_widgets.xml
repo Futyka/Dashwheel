@@ -173,4 +173,6 @@
     <string name="widgets_switch_bluetooth_detail">Be- vagy kikapcsolja a Bluetootht</string>
     <string name="widgets_switch_mobile_data_detail">Be- vagy kikapcsolja a SIM-kártya adatforgalmát</string>
     <string name="widgets_switch_screen_off_detail">Kikapcsolja a képernyőt, mint a fejegység gombja</string>
+    <string name="widgets_consumption">Fogyasztás</string>
+    <string name="widgets_consumption_blurb">Mennyit fogyaszt az autó most, az utolsó tankolás óta és átlagosan</string>
 </resources>

@@ -96,6 +96,7 @@ enum class BuiltinKind(
     SPEED_LIMIT(R.string.widgets_limit, WidgetCategory.DRIVING, R.string.widgets_limit_blurb, 3, 2),
     PARKING_TIMER(R.string.widgets_park, WidgetCategory.NAVIGATION, R.string.widgets_park_blurb, 3, 2),
     FUEL_LOG(R.string.widgets_fuel, WidgetCategory.VEHICLE, R.string.widgets_fuel_blurb, 4, 3),
+    CONSUMPTION(R.string.widgets_consumption, WidgetCategory.VEHICLE, R.string.widgets_consumption_blurb, 4, 2),
     WEATHER_ALERTS(R.string.widgets_wx, WidgetCategory.INFO, R.string.widgets_wx_blurb, 4, 2),
     ENGINE_TEMPS(R.string.widgets_temps, WidgetCategory.VEHICLE, R.string.widgets_temps_blurb, 4, 2),
     COMMUTE(R.string.widgets_commute, WidgetCategory.NAVIGATION, R.string.widgets_commute_blurb, 4, 2),

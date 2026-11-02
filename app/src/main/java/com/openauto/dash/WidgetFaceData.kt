@@ -129,6 +129,7 @@ internal fun rememberWidgetFace(kind: BuiltinKind, env: SkinTileEnv): WidgetFace
     BuiltinKind.SPEED_LIMIT -> speedLimitFace()
     BuiltinKind.PARKING_TIMER -> parkingTimerFace()
     BuiltinKind.FUEL_LOG -> fuelLogFace()
+    BuiltinKind.CONSUMPTION -> consumptionFace()
     BuiltinKind.WEATHER_ALERTS -> weatherAlertsFace()
     BuiltinKind.ENGINE_TEMPS -> engineTempsFace()
     BuiltinKind.COMMUTE -> commuteFace()

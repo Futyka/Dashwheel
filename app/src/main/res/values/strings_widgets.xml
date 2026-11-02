@@ -173,4 +173,6 @@
     <string name="widgets_switch_bluetooth_detail">Turns Bluetooth on or off</string>
     <string name="widgets_switch_mobile_data_detail">Turns the SIM card\'s data on or off</string>
     <string name="widgets_switch_screen_off_detail">Turns the screen off like the unit\'s own key</string>
+    <string name="widgets_consumption">Consumption</string>
+    <string name="widgets_consumption_blurb">What the car burns now, since the last fill-up and on average</string>
 </resources>

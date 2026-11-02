@@ -172,4 +172,6 @@
     <string name="widgets_switch_bluetooth_detail">Schaltet Bluetooth ein oder aus</string>
     <string name="widgets_switch_mobile_data_detail">Schaltet die Daten der SIM-Karte ein oder aus</string>
     <string name="widgets_switch_screen_off_detail">Schaltet den Bildschirm aus wie die Taste des Geräts</string>
+    <string name="widgets_consumption">Verbrauch</string>
+    <string name="widgets_consumption_blurb">Was das Auto jetzt, seit dem letzten Tanken und im Schnitt verbraucht</string>
 </resources>

@@ -172,4 +172,6 @@
     <string name="widgets_switch_bluetooth_detail">Liga ou desliga o Bluetooth</string>
     <string name="widgets_switch_mobile_data_detail">Liga ou desliga os dados do cartão SIM</string>
     <string name="widgets_switch_screen_off_detail">Desliga o ecrã como a tecla do aparelho</string>
+    <string name="widgets_consumption">Consumo</string>
+    <string name="widgets_consumption_blurb">O que o carro gasta agora, desde o último abastecimento e em média</string>
 </resources>

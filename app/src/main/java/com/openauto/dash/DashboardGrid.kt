@@ -767,6 +767,7 @@ internal fun TileContent(
             BuiltinKind.SPEED_LIMIT -> SpeedLimitCard(modifier = Modifier.fillMaxSize())
             BuiltinKind.PARKING_TIMER -> ParkingTimerCard(modifier = Modifier.fillMaxSize())
             BuiltinKind.FUEL_LOG -> FuelLogCard(modifier = Modifier.fillMaxSize())
+            BuiltinKind.CONSUMPTION -> ConsumptionCard(modifier = Modifier.fillMaxSize())
             BuiltinKind.WEATHER_ALERTS -> WeatherAlertsCard(modifier = Modifier.fillMaxSize())
             BuiltinKind.ENGINE_TEMPS -> EngineTempsCard(modifier = Modifier.fillMaxSize())
             BuiltinKind.COMMUTE -> CommuteCard(modifier = Modifier.fillMaxSize())

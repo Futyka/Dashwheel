@@ -1037,6 +1037,7 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
         DriveLog.start(context)
         FuelLog.start(context)
         SinceFill.start(context)
+        FuelUsed.start(context)
         LpgTank.start(context)
         BarItems.setContext(context)
         Radios.start(context)

@@ -256,6 +256,7 @@ internal fun kindIcon(kind: BuiltinKind): ImageVector = when (kind) {
     BuiltinKind.SPEED_LIMIT -> Icons.Filled.Speed
     BuiltinKind.PARKING_TIMER -> Icons.Filled.LocalParking
     BuiltinKind.FUEL_LOG -> Icons.Filled.LocalGasStation
+    BuiltinKind.CONSUMPTION -> Icons.Filled.LocalGasStation
     BuiltinKind.WEATHER_ALERTS -> Icons.Filled.Warning
     BuiltinKind.ENGINE_TEMPS -> Icons.Filled.Thermostat
     BuiltinKind.COMMUTE -> Icons.Filled.Commute

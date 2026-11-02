@@ -172,4 +172,6 @@
     <string name="widgets_switch_bluetooth_detail">Active ou coupe le Bluetooth</string>
     <string name="widgets_switch_mobile_data_detail">Active ou coupe les données de la carte SIM</string>
     <string name="widgets_switch_screen_off_detail">Éteint l\'écran comme la touche du poste</string>
+    <string name="widgets_consumption">Consommation</string>
+    <string name="widgets_consumption_blurb">Ce que la voiture consomme maintenant, depuis le dernier plein et en moyenne</string>
 </resources>

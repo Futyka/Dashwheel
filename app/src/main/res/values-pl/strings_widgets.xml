@@ -176,4 +176,6 @@
     <string name="widgets_switch_bluetooth_detail">Włącza lub wyłącza Bluetooth</string>
     <string name="widgets_switch_mobile_data_detail">Włącza lub wyłącza dane karty SIM</string>
     <string name="widgets_switch_screen_off_detail">Wyłącza ekran jak przycisk radia</string>
+    <string name="widgets_consumption">Spalanie</string>
+    <string name="widgets_consumption_blurb">Ile auto pali teraz, od ostatniego tankowania i średnio</string>
 </resources>
