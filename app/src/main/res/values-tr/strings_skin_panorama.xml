@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Panorama skin -->
+    <string name="skin_panorama_talk">Konuş</string>
+    <string name="skin_panorama_talk_cd">Asistanla konuş</string>
+    <string name="skin_panorama_revs">Devir</string>
+    <string name="skin_panorama_rpm">dev/dk</string>
+    <string name="skin_panorama_gear">vites %1$s</string>
+    <string name="skin_panorama_fuel">Yakıt</string>
+    <string name="skin_panorama_fuel_range">Yakıt · %1$s</string>
+    <string name="skin_panorama_coolant">Soğutma suyu</string>
+    <string name="skin_panorama_speed_limit_cd">Hız limiti %1$d</string>
+    <string name="skin_panorama_battery">Batarya</string>
+    <string name="skin_panorama_load">Yük</string>
+    <string name="skin_panorama_doors">Kapılar</string>
+    <string name="skin_panorama_doors_closed">kapalı</string>
+    <string name="skin_panorama_doors_open">açık</string>
+    <string name="skin_panorama_tyres">Lastikler</string>
+    <string name="skin_panorama_service">Servis</string>
+    <string name="skin_panorama_service_due">zamanı geldi</string>
+    <string name="skin_panorama_car_cd">Aracınız</string>
+    <string name="skin_panorama_car_open_cd">Aracınız, bir kapı açık</string>
+    <string name="skin_panorama_next_turn">Sonraki dönüş</string>
+    <string name="skin_panorama_arrival">Varış %1$s</string>
+    <string name="skin_panorama_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+    <plurals name="skin_panorama_service_days">
+        <item quantity="one">%d gün içinde</item>
+        <item quantity="other">%d gün içinde</item>
+    </plurals>
+</resources>

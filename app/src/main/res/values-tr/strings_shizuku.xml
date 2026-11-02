@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="shizuku_search_detail">Root olmadan kabuk komutları</string>
+    <string name="shizuku_detail_none">Yüklü değil. Dashwheel\'e root olmadan kabuk verir</string>
+    <string name="shizuku_detail_off">Yüklü, başlatılmamış. Başlatmak için Shizuku\'yu açın</string>
+    <string name="shizuku_detail_old">Çok eski. Shizuku\'yu güncelleyin</string>
+    <string name="shizuku_detail_ask">Çalışıyor. Shizuku\'da Dashwheel\'e izin verin</string>
+    <string name="shizuku_detail_on">Kullanımda: kabuk komutları onun üzerinden çalışır</string>
+    <string name="shizuku_body">Shizuku, root\'un çalıştıracağı kabuk komutlarını çalıştırır: uygulama pencerelerini taşıma, araç uygulamasının anahtarları, ses tuşları. Root\'lu bir cihaz onu açılışta başlatır; diğerleri her açılıştan sonra Shizuku uygulamasından başlatır.</string>
+    <string name="shizuku_get">Shizuku\'yu edin</string>
+    <string name="shizuku_open">Shizuku\'yu aç</string>
+    <string name="shizuku_allow">İzin ver</string>
+    <plurals name="settings_shell_more">
+        <item quantity="one">%d tane daha bu cihazda root veya Shizuku gerektirir</item>
+        <item quantity="other">%d tane daha bu cihazda root veya Shizuku gerektirir</item>
+    </plurals>
+</resources>

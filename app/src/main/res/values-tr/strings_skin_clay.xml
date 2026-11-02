@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Clay skin -->
+    <string name="clay_talk">Konuş</string>
+    <string name="clay_talk_cd">Asistanla konuş</string>
+    <string name="clay_map">Harita</string>
+    <string name="clay_music">Müzik</string>
+    <string name="clay_phone">Telefon</string>
+    <string name="clay_arrival">Varış %1$s</string>
+    <string name="clay_rpm">dev/dk</string>
+    <string name="clay_gear">Vites %1$s</string>
+    <string name="clay_coolant">Soğutma suyu</string>
+    <string name="clay_battery">Batarya</string>
+    <string name="clay_load">Yük</string>
+    <string name="clay_fuel">Yakıt</string>
+    <string name="clay_speed_limit_cd">Hız limiti %1$d</string>
+    <string name="clay_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+</resources>

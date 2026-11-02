@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Demo mode: a made-up drive that shows every tile working (DemoMode.kt) -->
+    <string name="demo_menu_start">Demo modu</string>
+    <string name="demo_menu_stop">Demoyu durdur</string>
+    <!-- Settings → Advanced: what the demo does -->
+    <string name="demo_settings_detail">Yapay bir sürüş her kutucuğu doldurur. Hiçbir şey kaydedilmez.</string>
+    <string name="demo_badge">Demo · yapay veri</string>
+    <string name="demo_stop">Durdur</string>
+    <!-- Fake turn-by-turn instructions; %1$s = street name -->
+    <string name="demo_nav_right">%1$s yönüne sağa dönün</string>
+    <string name="demo_nav_left">%1$s yönüne sola dönün</string>
+    <string name="demo_nav_straight">%1$s boyunca devam edin</string>
+    <!-- Fake notifications -->
+    <string name="demo_notif_message">Yoldayım, 10 dakikaya görüşürüz</string>
+    <string name="demo_notif_event_title">Diş hekimi randevusu</string>
+    <string name="demo_notif_event_text">Yarın 9:30</string>
+    <!-- The mechanic's canned advice on the demo's fault code (P0401, EGR flow too low) -->
+    <string name="demo_p0401_summary">EGR valfi yeterince egzoz gazını geri göndermiyor, büyük olasılıkla kurum yüzünden. Sürmeye devam edebilirsiniz; yakında temizletin.</string>
+    <string name="demo_p0401_meaning">EGR akışı çok düşük</string>
+    <string name="demo_p0401_explanation">Motor, emisyonları azaltmak için egzozun bir kısmını emişe geri gönderir. Bilgisayar istediğinden azını aldı; bu motorda bu genelde kurumla tıkanmış bir valf demektir.</string>
+    <string name="demo_p0401_cause_1">EGR valfi kurumla tıkanmış</string>
+    <string name="demo_p0401_cause_2">EGR valfi sıkışmış ya da motoru arızalı</string>
+    <string name="demo_p0401_cause_3">EGR soğutucusu veya borusu tıkalı</string>
+    <string name="demo_p0401_check_first">EGR valfini sökün ve kuruma bakın</string>
+    <string name="demo_p0401_repair">Valfi temizleyin, sıkışıyorsa değiştirin</string>
+    <string name="demo_p0401_cost">Temizlik için yaklaşık 80 ila 150 €, yeni valf için 250 ila 400 €</string>
+    <string name="demo_p0401_driving">Evet. Onarılana kadar hafif düzensiz rölanti ve daha yüksek yakıt tüketimi bekleyin.</string>
+</resources>

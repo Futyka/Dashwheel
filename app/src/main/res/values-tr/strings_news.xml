@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="news_battery_title">Akü dinlenmede zayıf</string>
+    <string name="news_battery_text">Motor kapalıyken akü %1$s V okudu. Araç zor çalışıyorsa aküyü test ettirin.</string>
+    <string name="news_upkeep_soon">%1$s yaklaşıyor</string>
+    <string name="news_upkeep_due">%1$s zamanı geldi</string>
+    <string name="news_fault_title">Motor arıza kodları: %1$s</string>
+    <string name="news_fault_text">Ne anlama geldiklerini görmek için araçta Yapay zeka tamirciyi açın.</string>
+    <string name="news_filter_title">Partikül filtresi uzun bir sürüş istiyor</string>
+    <string name="news_filter_text">Art arda %1$d kısa yolculuk. Yakında hızlı bir yolda 20 dakikalık bir sürüş planlayın.</string>
+</resources>

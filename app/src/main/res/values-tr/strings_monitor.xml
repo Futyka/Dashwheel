@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="monitor_kind">Cihaz monitörü</string>
+    <string name="monitor_kind_blurb">CPU, bellek, sıcaklık ve en yoğun uygulamalar</string>
+    <string name="monitor_cpu">CPU</string>
+    <string name="monitor_ram">RAM</string>
+    <string name="monitor_chip">Çip</string>
+    <string name="monitor_storage">Depolama</string>
+    <string name="monitor_up">Açık %1$s</string>
+    <string name="monitor_apps_running">Çalışan uygulamalar</string>
+    <plurals name="monitor_apps_count">
+        <item quantity="one">%1$d uygulama</item>
+        <item quantity="other">%1$d uygulama</item>
+    </plurals>
+    <string name="monitor_busiest">En yoğun: %1$s</string>
+    <string name="monitor_no_shell">CPU ve çalışan uygulamalar için root gerekir</string>
+    <string name="monitor_reading">Ana ünite okunuyor…</string>
+    <string name="monitor_stop">Durdur</string>
+    <string name="monitor_stop_hint">Bir uygulamayı durdurmak belleğini boşaltır. Navigasyon ve müzik de onunla durur.</string>
+    <string name="monitor_system">Sistem</string>
+    <string name="monitor_hot_alert">Ana ünite ısınıyor, %1$d derece.</string>
+    <string name="gear_kind">Vites</string>
+    <string name="gear_kind_blurb">Takılı vites ve geri vites</string>
+    <string name="gear_reverse">Geri</string>
+    <string name="gear_free">Boşta</string>
+    <string name="gear_stopped">Durduruldu</string>
+    <string name="gear_nth">Vites %1$d</string>
+    <string name="gear_needs_data">OBD adaptörü veya araç kutusu gerekir</string>
+    <string name="design_gear_gate">Vites kapısı</string>
+    <string name="design_gear_gate_desc">Vitesler sıra halinde, takılı olan yanar</string>
+    <string name="monitor_title">CİHAZ MONİTÖRÜ</string>
+    <string name="gear_title">VİTES</string>
+    <plurals name="monitor_cores">
+        <item quantity="one">%1$d çekirdek</item>
+        <item quantity="other">%1$d çekirdek</item>
+    </plurals>
+    <string name="monitor_board_title">İkinci ekran</string>
+    <string name="monitor_board_clock">Saat</string>
+    <string name="monitor_board_under_powered">Güç yetersiz: yavaşlıyor</string>
+    <string name="monitor_board_hot">Çok sıcak: yavaşlıyor</string>
+    <string name="monitor_board_throttled">Yazılımı tarafından kısıtlanıyor</string>
+</resources>

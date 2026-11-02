@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ambient skin -->
+    <string name="ambient_turn_left">%1$s sonra sola</string>
+    <string name="ambient_turn_right">%1$s sonra sağa</string>
+    <string name="ambient_turn_in">%1$s sonra</string>
+    <string name="ambient_talk">Konuş</string>
+    <string name="ambient_talk_cd">Asistanla konuş</string>
+    <string name="ambient_listening">Dinliyor</string>
+    <string name="ambient_speed_limit_cd">Hız limiti %1$d</string>
+    <string name="ambient_rpm">dev/dk</string>
+    <string name="ambient_coolant">Soğutma suyu %1$s</string>
+    <string name="ambient_battery">Batarya %1$s</string>
+    <string name="ambient_load">Yük %1$s</string>
+    <string name="ambient_fuel">Yakıt %1$d %%</string>
+    <string name="ambient_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+</resources>

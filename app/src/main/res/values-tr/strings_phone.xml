@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Phone link: the driver's phone over its hotspot, with the Dashwheel Companion app. -->
+    <string name="settings_section_phone">Telefon</string>
+    <string name="phone_from_phone">Telefonunuzdan</string>
+    <string name="phone_status_connected">Bağlı cihaz: %1$s</string>
+    <string name="phone_status_connected_detail">Bildirimleri ve mesajları Bildirimler widget\'ında görünür.</string>
+    <string name="phone_status_searching">Telefonunuz Wi-Fi\'da aranıyor</string>
+    <string name="phone_status_searching_detail">Telefonun hotspot\'unu açın ve bu ana üniteyi ona bağlayın; gerisini Dashwheel Companion halleder.</string>
+    <string name="phone_status_unpaired">Telefon eşleştirilmedi</string>
+    <string name="phone_status_unpaired_detail">Mesajlarını burada görmek ve yanıtlamak için telefonunuzu eşleştirin.</string>
+    <string name="phone_pair">Telefon eşleştir</string>
+    <string name="phone_pair_detail">Dashwheel Companion ile taranacak kodu gösterir</string>
+    <string name="phone_gps">Telefonun GPS\'ini kullan</string>
+    <string name="phone_gps_detail">Telefon bağlıyken GPS\'i bu ünitenin yerine geçer: daha çok uydu, saniyeler içinde konum</string>
+    <string name="phone_gps_in_use">Kullanımda: telefondan %1$d uydu</string>
+    <string name="phone_gps_waiting">Telefondan henüz konum gelmedi. Companion uygulamasında araç için Konum\'a izin verin</string>
+    <string name="phone_gps_refused">Bu ünite buna izin vermedi. Root veya ünitenin ADB\'si gerekir</string>
+    <string name="phone_paired_on">Eşleşme tarihi: %1$s</string>
+    <string name="phone_unnamed">Telefon</string>
+    <string name="phone_forgotten">Telefonda kaldırıldı: yeniden eşleştirin</string>
+    <string name="phone_forget">Unut</string>
+    <string name="phone_forget_title">%1$s unutulsun mu?</string>
+    <string name="phone_forget_body">Mesajları ve aramaları artık burada görünmez. Yeniden eşleştirmek için yeni bir kod gerekir.</string>
+    <string name="phone_pair_title">Telefon eşleştir</string>
+    <string name="phone_pair_step1">1. Telefona Dashwheel Companion\'ı yükleyin: bu kodu telefonun kamerasıyla tarayın.</string>
+    <string name="phone_pair_step2">2. Telefonun Wi-Fi hotspot\'unu açın ve bu ana üniteyi ona bağlayın.</string>
+    <string name="phone_pair_step3">3. Uygulamada Araç eşleştir\'e dokunun ve bu kodu tarayın.</string>
+    <string name="phone_pair_waiting">Telefon bekleniyor…</string>
+    <string name="phone_pair_done">%1$s ile eşleştirildi</string>
+    <string name="phone_done">Tamamlandı</string>
+    <string name="phone_read_aloud">Sesli oku</string>
+    <string name="phone_quick_replies">Hızlı yanıtlar</string>
+    <string name="phone_quick_1">Araba kullanıyorum, sonra yanıtlarım.</string>
+    <string name="phone_quick_2">Yoldayım.</string>
+    <string name="phone_quick_3">Tamam, teşekkürler.</string>
+    <string name="phone_dictate">Yanıt söyle</string>
+    <string name="phone_send">Gönder</string>
+    <string name="phone_sending">Telefon üzerinden gönderiliyor…</string>
+    <string name="phone_sent">Yanıt gönderildi</string>
+    <string name="phone_failed">Telefon bunu yapamadı: mesaj kaybolmuş olabilir.</string>
+    <string name="phone_no_link">Telefon bağlı değil.</string>
+    <string name="phone_mark_read">Okundu olarak işaretle</string>
+    <string name="phone_clear">Telefonda temizle</string>
+    <string name="phone_pair_qr_download">Uygulamayı indir</string>
+    <string name="phone_pair_qr_pair">Eşleştirme kodu: uygulamada tarayın</string>
+    <string name="phone_call_incoming">Gelen arama</string>
+    <string name="phone_call_outgoing">Aranıyor</string>
+    <string name="phone_call_unknown">Bilinmeyen numara</string>
+    <string name="phone_call_answer">Cevapla</string>
+    <string name="phone_call_decline">Reddet</string>
+    <string name="phone_call_hang_up">Kapat</string>
+    <string name="phone_call_no_control">Buradan cevaplamak için Dashwheel Companion\'da Aramalar\'a izin verin.</string>
+    <string name="phone_overlay">Aramaları diğer uygulamaların üzerinde göster</string>
+    <string name="phone_overlay_detail">Gelen arama, başka bir uygulama tüm ekrandayken bile görünür.</string>
+    <!-- Text typed on the phone, for the field selected on the car screen (PhoneKeyboard). -->
+    <string name="phone_text_copied">Telefonunuzdaki metin kopyalandı: yapıştırmak için bir metin alanını basılı tutun</string>
+    <!-- Quick dial and Agenda from the phone, and places sent from it (PhoneLink, InfoTiles, NavHandoff). -->
+    <string name="phone_quickdial_empty">Favorilerini burada görmek için telefonunuzu Ayarlar, Telefon ve ekranlar\'dan eşleştirin</string>
+    <string name="phone_agenda_empty">Ajandasını burada görmek için telefonunuzu Ayarlar, Telefon ve ekranlar\'dan eşleştirin</string>
+    <string name="phone_call_back">%1$s kişisini geri ara</string>
+    <string name="phone_calling">%1$s aranıyor</string>
+    <string name="phone_dial_not_allowed">Buradan aramak için Dashwheel Companion\'da Aramalar\'a izin verin.</string>
+    <string name="phone_guidance_to">%1$s yol tarifi</string>
+</resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Chrome skin -->
+    <string name="chrome_talk_cd">Asistanla konuş</string>
+    <string name="chrome_navigation">Navigasyon</string>
+    <string name="chrome_left_in">Sola</string>
+    <string name="chrome_right_in">Sağa</string>
+    <string name="chrome_next_in">Sonraki dönüş</string>
+    <string name="chrome_arrival">Varış</string>
+    <string name="chrome_to_go">Kalan</string>
+    <string name="chrome_limit">Limit %1$d</string>
+    <string name="chrome_range">Menzil</string>
+    <string name="chrome_fuel">Yakıt</string>
+    <string name="chrome_revs">Devir</string>
+    <string name="chrome_coolant">Soğutma suyu</string>
+    <string name="chrome_battery">Batarya</string>
+    <string name="chrome_load">Yük</string>
+    <string name="chrome_engine">Motor</string>
+    <string name="chrome_weather">Hava durumu</string>
+    <string name="chrome_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+</resources>

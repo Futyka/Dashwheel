@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Add-widget catalogue: section headings -->
+    <string name="apps_category_driving">Sürüş</string>
+    <string name="apps_category_navigation">Navigasyon</string>
+    <string name="apps_category_vehicle">Araç</string>
+    <string name="apps_category_info">Bilgi &amp; iletişim</string>
+    <string name="apps_category_apps">Medya</string>
+
+    <!-- Add-widget catalogue: built-in tiles (name, then one-line description) -->
+    <string name="apps_kind_navmap">Harita</string>
+    <string name="apps_kind_navmap_blurb">Arama ve rota özellikli ücretsiz 3B harita</string>
+    <string name="apps_kind_navigation">Yol tarifi</string>
+    <string name="apps_kind_navigation_blurb">Google Haritalar / Waze\'den bir sonraki dönüş</string>
+    <string name="apps_kind_pip_anchor">Haritalar penceresi</string>
+    <string name="apps_kind_pip_anchor_blurb">Yüzen Haritalar penceresini buraya yerleştirir</string>
+    <string name="apps_kind_media">Müzik çalar</string>
+    <string name="apps_kind_media_blurb">Şimdi çalan, kontrollerle</string>
+    <string name="apps_kind_telemetry">Motor göstergeleri</string>
+    <string name="apps_kind_telemetry_blurb">Hız göstergesi, devir, soğutma suyu, yük, akü</string>
+    <string name="apps_kind_obd_dtc">Araç sorunları</string>
+    <string name="apps_kind_obd_dtc_blurb">Aracın kendi uyarıları ve motorun arıza kodları, açıklamalı</string>
+    <string name="apps_kind_obd_all">Tüm araç verileri</string>
+    <string name="apps_kind_obd_all_blurb">Her canlı OBD değeri</string>
+    <string name="apps_kind_range">Yakıt &amp; menzil</string>
+    <string name="apps_kind_range_blurb">Depo seviyesi ve kalan km</string>
+    <string name="apps_kind_doors">Kapılar</string>
+    <string name="apps_kind_doors_blurb">Araçtan kapı ve bagaj durumu</string>
+    <string name="apps_kind_can_mon">CAN izleyici</string>
+    <string name="apps_kind_can_mon_blurb">Ham CAN çerçeveleri, sinyal bulmak için</string>
+    <string name="apps_kind_speed_hud">Hız</string>
+    <string name="apps_kind_speed_hud_blurb">OBD veya GPS\'ten büyük dijital hız</string>
+    <string name="apps_kind_compass">Pusula</string>
+    <string name="apps_kind_compass_blurb">Yön, rakım ve GPS hızı</string>
+    <string name="apps_kind_trip">Yol bilgisayarı</string>
+    <string name="apps_kind_trip_blurb">Bu sürüş ve son dolumdan beri, yakıt ve maliyetle</string>
+    <string name="apps_kind_gforce">G kuvveti</string>
+    <string name="apps_kind_gforce_blurb">Viraj ve fren g kuvveti</string>
+    <string name="apps_kind_parking">Park yeri</string>
+    <string name="apps_kind_parking_blurb">Park ettiğiniz yeri kaydedin, yürüyerek geri dönün</string>
+    <string name="apps_kind_clock">Saat</string>
+    <string name="apps_kind_clock_blurb">Saat ve tarih, büyük</string>
+    <string name="apps_kind_weather">Hava durumu</string>
+    <string name="apps_kind_weather_blurb">Aracın bulunduğu yerin hava durumu, hesap gerekmez</string>
+    <string name="apps_kind_calendar">Ajanda</string>
+    <string name="apps_kind_calendar_blurb">Sonraki takvim etkinlikleriniz</string>
+    <string name="apps_kind_quick_dial">Hızlı arama</string>
+    <string name="apps_kind_quick_dial_blurb">Favori kişiler, tek dokunuşla arama</string>
+    <string name="apps_kind_notifications">Bildirimler</string>
+    <string name="apps_kind_notifications_blurb">Uygulamalarınızdan mesajlar ve uyarılar</string>
+    <string name="apps_kind_audio">Ses</string>
+    <string name="apps_kind_audio_blurb">Ses seviyesi, sessiz, ses ve Bluetooth ayarları</string>
+
+    <!-- Add-widget catalogue: dialog -->
+    <string name="apps_pick_launch_bar">Uygulama başlatma çubuğu</string>
+    <string name="apps_pick_launch_bar_blurb">Favori uygulamalarınız bir sırada</string>
+    <string name="apps_pick_system_widget">Sistem widget\'ı…</string>
+    <string name="apps_pick_system_widget_blurb">Yüklü herhangi bir uygulama widget\'ı</string>
+    <string name="apps_cancel">İptal</string>
+    <string name="apps_save">Kaydet</string>
+
+    <!-- Launch bar tile and its editor -->
+    <string name="apps_launch_bar_empty">Başlatma çubuğu: uygulama eklemek için kaleme dokunun</string>
+    <string name="apps_launch_bar_edit">Başlatma çubuğunu düzenle</string>
+    <string name="apps_launch_bar_editor_title">Başlatma çubuğu uygulamaları</string>
+    <string name="apps_launch_bar_editor_empty">Henüz uygulama yok. En çok açtıklarınızı ekleyin.</string>
+    <string name="apps_move_left">Sola taşı</string>
+    <string name="apps_move_right">Sağa taşı</string>
+    <string name="apps_remove">Kaldır</string>
+    <string name="apps_add_app">Uygulama ekle</string>
+    <plurals name="apps_launch_bar_full">
+        <item quantity="one">Çubuk dolu (%1$d uygulama)</item>
+        <item quantity="other">Çubuk dolu (%1$d uygulama)</item>
+    </plurals>
+    <string name="apps_launch_bar_add_title">Başlatma çubuğuna ekle</string>
+
+    <!-- App picker and all-apps drawer -->
+    <string name="apps_choose_app">Bir uygulama seçin</string>
+    <string name="apps_all_apps">Tüm uygulamalar</string>
+    <string name="apps_close_drawer">Uygulama çekmecesini kapat</string>
+    <string name="apps_no_apps_found">Uygulama bulunamadı</string>
+
+    <!-- Docked app window tile (%1$s is the app name; the tile title is ALL CAPS) -->
+    <string name="apps_window_title">%1$s PENCERESİ</string>
+    <string name="apps_window_maps_docked_beside">Haritalar panonun yanına yerleşti.</string>
+    <string name="apps_window_docked">Yerleşti: %1$s (%2$s)</string>
+    <string name="apps_window_tap_to_raise">Pencere gizlendi mi? Öne getirmek için buraya dokunun.</string>
+    <string name="apps_window_gave_up">Sistem %1$s uygulamasını olduğu yerde tutuyor</string>
+    <string name="apps_window_moving">%1$s buraya taşınıyor…</string>
+    <string name="apps_window_opening">%1$s burada açılıyor…</string>
+    <string name="apps_window_maps_hint">Google Haritalar buraya yerleşir.\nAşağıdan açın veya navigasyonu başlatıp Ana ekran tuşuna basın.</string>
+    <string name="apps_window_app_hint">%1$s burada, bu kutucuk boyutunda bir pencerede çalışır.</string>
+    <string name="apps_window_open">%1$s uygulamasını burada aç</string>
+    <string name="apps_window_open_full">%1$s uygulamasını burada tam aç</string>
+    <string name="apps_window_error_gave_up">Pencere olarak açık tutulamadı</string>
+    <string name="apps_window_error_no_shell">Root (Magisk) yok ve %1$d portundaki ADB soketi dinlemiyor</string>
+
+    <!-- Docked app window tile: diagnostics (%1$s / %2$s are pixel rectangles or system output) -->
+    <string name="apps_window_diag_position">Pencere %1$s → hedef %2$s</string>
+    <string name="apps_window_diag_last">Son: %1$s</string>
+    <string name="apps_window_diag_seen">Pencereler: %1$s</string>
+
+    <!-- Floating split-screen swap button (accessibility label) -->
+    <string name="apps_swap_split_panes">Bölünmüş ekran uygulamalarını değiştir</string>
+    <!-- The add sheet (AddSheet.kt): widgets, apps and windows in one place -->
+    <string name="apps_add_title">%1$s panosuna ekle</string>
+    <string name="apps_tab_widgets">Widget\'lar</string>
+    <string name="apps_tab_apps">Uygulamalar</string>
+    <string name="apps_search">Ara</string>
+    <string name="apps_category_all">Hepsi</string>
+    <string name="apps_embed_app_starting">%1$s açılıyor</string>
+    <string name="apps_embed_app_missing">%1$s yüklü değil</string>
+    <string name="apps_embed_app_blocked">%1$s bu ünitede kutucuk içinde çalışmıyor. Bunun yerine pencere olarak ekleyin.</string>
+    <string name="apps_embed_under_dashboard">Zaten panonun altında</string>
+    <string name="apps_pair_pick_first">Sol taraf için uygulamaya dokunun.</string>
+    <string name="apps_pair_pick_second">Solda %1$s. Şimdi sağ taraf için uygulamaya dokunun.</string>
+    <string name="apps_pair_change">Değiştir</string>
+    <string name="apps_kind_maps_inside">İçeride Google Haritalar</string>
+    <string name="apps_kind_maps_inside_blurb">Gerçek Google Haritalar uygulaması, bu kutucukta çalışır</string>
+    <string name="apps_kind_dash_bar">Pano çubuğu</string>
+    <string name="apps_kind_dash_bar_blurb">Panolarınız ve uygulamalarınız, her biri tek dokunuşla, bu panoda</string>
+    <string name="apps_most_used">En çok kullanılan</string>
+    <string name="apps_kind_screen_light">Pi ekran parlaklığı</string>
+    <string name="apps_kind_screen_light_blurb">İkinci ekranın arka ışığı, gündüz ve gece</string>
+    <string name="apps_kind_radios">Wi-Fi ve Bluetooth</string>
+    <string name="apps_kind_radios_blurb">Ana ünitenin Wi-Fi ve Bluetooth\'unu açıp kapatın</string>
+    <string name="apps_radio_wifi">Wi-Fi</string>
+    <string name="apps_radio_bluetooth">Bluetooth</string>
+    <string name="apps_radio_on">Açık</string>
+    <string name="apps_radio_off">Kapalı</string>
+    <string name="apps_radio_switching">Değiştiriliyor</string>
+
+    <!-- Add sheet: what a widget is missing right now, and the kinds already placed -->
+    <string name="apps_needs_obd">OBD adaptörü gerekir</string>
+    <string name="apps_needs_phone">Telefon gerekir</string>
+    <string name="apps_needs_internet">İnternet gerekir</string>
+    <string name="apps_needs_root">Root gerekir</string>
+    <string name="apps_needs_carbox">Araç kutusu gerekir</string>
+    <string name="apps_on_dashboard">Bir panoda</string>
+    <string name="apps_as_icon">Simge</string>
+    <string name="apps_as_icon_detail">Uygulamayı açar</string>
+    <string name="apps_in_tile">Kutucukta</string>
+    <string name="apps_in_tile_inside">Kutucuğun içinde, bu panoda çalışır</string>
+    <string name="apps_in_tile_window">Kutucuk boyutunda bir pencerede açık kalır</string>
+    <string name="apps_side_by_side">Yan yana</string>
+    <string name="apps_side_by_side_detail">Bölünmüş ekranda aynı anda iki uygulama</string>
+    <string name="apps_icon_size">Simge boyutu</string>
+</resources>

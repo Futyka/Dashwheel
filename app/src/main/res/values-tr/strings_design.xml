@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="design_title">Bir pano tarif edin</string>
+    <string name="design_hint">Otoyol: hız limiti, yakıt, müzik</string>
+    <string name="design_say">Söyle</string>
+    <string name="design_make">Oluştur</string>
+    <string name="design_listening">Dinliyor… siz durunca kendiliğinden gönderilir.</string>
+    <string name="design_thinking">Yerleştiriliyor…</string>
+    <string name="design_nothing_heard">Bir şey duyulmadı. Tekrar deneyin.</string>
+    <string name="design_no_tiles">Uygun kutucuk bulunamadı. Başka sözcükler deneyin.</string>
+</resources>

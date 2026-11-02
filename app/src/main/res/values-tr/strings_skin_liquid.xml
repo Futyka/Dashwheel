@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Liquid skin -->
+    <string name="liquid_talk_cd">Asistanla konuş</string>
+    <string name="liquid_show_dashboard">Göster: %1$s</string>
+    <string name="liquid_speed_limit_cd">Hız limiti %1$d</string>
+    <string name="liquid_arrival">Varış %1$s</string>
+    <string name="liquid_revs">Devir</string>
+    <string name="liquid_rpm">dev/dk</string>
+    <string name="liquid_battery">Batarya</string>
+    <string name="liquid_load">Yük</string>
+    <string name="liquid_coolant">Soğutma suyu</string>
+    <string name="liquid_engine">Motor</string>
+    <string name="liquid_range">Menzil</string>
+    <string name="liquid_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+    <string name="liquid_car_cd">Aracınız</string>
+    <string name="liquid_car_open_cd">Aracınız, bir kapı açık</string>
+    <string name="liquid_doors">Kapılar</string>
+    <string name="liquid_doors_open">açık</string>
+</resources>

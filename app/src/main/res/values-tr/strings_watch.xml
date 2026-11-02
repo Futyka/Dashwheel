@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The sensor watch (SensorWatch.kt): the car's usual readings, learned drive after drive. -->
+    <string name="watch_title">Sensör izleme</string>
+    <string name="watch_explanation">Dashwheel aracınızın olağan değerlerini öğrenir ve son sürüşler bundan saptığında, bir arıza kodu görünmeden önce sizi uyarır.</string>
+    <string name="watch_settings_detail">Bir değer aracın olağanından saptığında uyarır</string>
+    <string name="watch_settings_learning">Arabanızın her zamanki okumalarını öğrenme</string>
+    <string name="watch_readings">Değerler</string>
+    <string name="watch_drifted">%1$s saptı</string>
+    <string name="watch_learning">Öğreniyor: %1$d / %2$d sürüş</string>
+    <string name="watch_usual_only">Genelde %1$s</string>
+    <string name="watch_usual_recent">Genelde %1$s, son zamanlarda %2$s</string>
+    <string name="watch_state_drift">Saptı</string>
+    <string name="watch_state_learning">Öğreniyor</string>
+    <string name="watch_state_normal">Normal</string>
+    <string name="watch_forget">Yeniden başla</string>
+    <string name="watch_forget_hint">Parçayı değiştirdiniz mi? Yeni olağanı öğrenmesi için yeniden başlayın.</string>
+    <string name="watch_resting_volts">Dinlenmede akü</string>
+    <string name="watch_charging_volts">Şarj voltajı</string>
+    <string name="watch_warmup">Isınma süresi</string>
+    <string name="watch_settled_coolant">Isınınca soğutma suyu</string>
+    <string name="watch_idle_rpm">Rölanti devri</string>
+    <string name="watch_filter_km">Partikül filtresi temizliği</string>
+    <!-- Spoken: %1$s the last drives' value, %2$s the usual one, numbers only: the unit is a word here. -->
+    <string name="watch_say_resting_low">Akü birkaç sürüştür dinlenmede olağandan düşük: %2$s yerine %1$s volt. Test ettirmekte fayda var.</string>
+    <string name="watch_say_charging_low">Şarj voltajı olağan %2$s yerine %1$s volta düştü. Alternatörü ve kayışını kontrol ettirmekte fayda var.</string>
+    <string name="watch_say_charging_high">Şarj voltajı olağan %2$s yerine %1$s volta yükseldi. Alternatörün regülatörünü kontrol ettirmekte fayda var.</string>
+    <string name="watch_say_warmup_slow">Motorun ısınması daha uzun sürüyor: olağan %2$s yerine %1$s dakika. Termostat açık kalıyor olabilir.</string>
+    <string name="watch_say_coolant_low">Motor ısındıktan sonra olağandan soğuk çalışıyor: %2$s yerine %1$s derece. Termostat açık kalıyor olabilir.</string>
+    <string name="watch_say_coolant_high">Motor olağandan sıcak çalışıyor: %2$s yerine %1$s derece. Soğutma suyu seviyesini ve fanı kontrol ettirmekte fayda var.</string>
+    <string name="watch_say_idle_high">Rölanti devri olağan %2$s yerine dakikada %1$s devire çıktı.</string>
+    <string name="watch_say_idle_low">Rölanti devri olağan %2$s yerine dakikada %1$s devire düştü.</string>
+    <!-- %3$s: watch_unit_km or watch_unit_miles. -->
+    <string name="watch_say_filter_often">Partikül filtresi kendini daha sık temizliyor: genelde %2$s iken son zamanlarda her %1$s %3$s.</string>
+    <string name="watch_unit_km">kilometrede</string>
+    <string name="watch_unit_miles">milde</string>
+    <!-- Phone notice. -->
+    <string name="news_drift_title">%1$s saptı</string>
+    <string name="news_drift_text">Son zamanlarda %1$s, genelde %2$s. Henüz arıza kodu yok.</string>
+</resources>

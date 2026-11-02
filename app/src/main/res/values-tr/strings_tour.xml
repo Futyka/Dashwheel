@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- First-run tour (TourScreen.kt): six tips over the real dashboard -->
+    <string name="tour_welcome_kicker">Dashwheel\'e hoş geldiniz</string>
+    <string name="tour_welcome_title">Temel özelliklere kısa bir tur</string>
+    <string name="tour_welcome_body">Birkaç kısa ipucu. Yaklaşık bir dakika. İstediğiniz zaman durabilirsiniz.</string>
+    <string name="tour_topic_swipe">Pano değiştirme</string>
+    <string name="tour_topic_arrange">Taşıma ve boyutlandırma</string>
+    <string name="tour_topic_add">Bir şeyler ekleme</string>
+    <string name="tour_topic_look">Görünümü değiştirme</string>
+    <string name="tour_topic_obd">Araç verileri</string>
+    <string name="tour_topic_hands">Eller serbest</string>
+    <string name="tour_show_me">Göster</string>
+    <string name="tour_not_now">Şimdi değil</string>
+    <string name="tour_tip">İpucu %1$d / %2$d</string>
+    <string name="tour_skip">Turu geç</string>
+    <string name="tour_next">İleri</string>
+    <string name="tour_back">Geri</string>
+    <string name="tour_finish">Bitir</string>
+    <string name="tour_read_aloud">Sesli oku</string>
+    <string name="tour_swipe_title">Pano değiştirmek için kaydırın</string>
+    <string name="tour_swipe_body">Ana ekran ortadadır. Yanındaki ikisi için sola veya sağa kaydırın. Daha fazla pano yukarıya ve aşağıya eklenebilir.</string>
+    <string name="tour_try_swipe">Deneyin: ekranı kaydırın</string>
+    <string name="tour_arrange_title">Kutucukları taşıyın ve boyutlandırın</string>
+    <string name="tour_arrange_body">Seçenekleri için bir kutucuğa dokunun, taşımak için basılı tutun, boyutunu değiştirmek için köşesini sürükleyin. Panonun kendisini basılı tutmak da düzenlemeyi başlatır.</string>
+    <string name="tour_arrange_hint">Daha sonra bunu menüden, Panoları düzenle ile açın.</string>
+    <string name="tour_add_title">Widget veya uygulama ekleyin</string>
+    <string name="tour_add_body">Bu panoya müzik, araç verileri, hava durumu veya herhangi bir uygulama koymak için Ekle\'ye dokunun.</string>
+    <string name="tour_add_hint">Aceleniz mi var? Şablonlar bir panonun tamamını tek seferde doldurur.</string>
+    <string name="tour_look_title">Kendinize göre yapın</string>
+    <string name="tour_look_body">Menüyü, sonra Ayarlar\'ı, sonra Görünüm\'ü açın. Bir tema ve gündüz veya gece renkleri seçin.</string>
+    <string name="tour_obd_title">OBD adaptörünü takın</string>
+    <string name="tour_obd_body">Direksiyonun altındaki sokete takılır. Android\'in Bluetooth ayarlarında bir kez eşleştirin, sonra Dashwheel kendiliğinden yeniden bağlanır.</string>
+    <string name="tour_obd_off">Takılı değil</string>
+    <string name="tour_obd_looking">Aranıyor</string>
+    <string name="tour_obd_connected">Bağlandı</string>
+    <string name="tour_hands_title">Gözünüz yolda kalsın</string>
+    <string name="tour_hands_body">Direksiyon düğmeleriniz pano değiştirebilir, şarkı atlayabilir veya sesli asistanı başlatabilir. Önemli bir şey olduğunda Dashwheel kendiliğinden konuşur.</string>
+    <string name="tour_hands_hint">Düğmeleri Ayarlar, Sürüş, Direksiyon düğmeleri\'nden ayarlayın.</string>
+    <string name="tour_wheel_dashboard">Sonraki pano</string>
+    <string name="tour_wheel_music">Müzik</string>
+    <string name="tour_wheel_voice">Sesli asistan</string>
+    <string name="tour_wheel_alerts">Sesli uyarılar</string>
+    <string name="tour_done_title">Her şey hazır</string>
+    <string name="tour_done_body">Bu turu istediğiniz zaman Ayarlar, Genel, Hakkında\'dan tekrar izleyin.</string>
+    <string name="tour_start_driving">Sürüşe başla</string>
+    <string name="tour_settings_row">Temel özellikler turu</string>
+    <string name="tour_settings_row_detail">Pano hakkında altı kısa ipucu</string>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tab_tools">Araçlar</string>
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_connection">Bağlantı</string>
+    <string name="scan_code">Kod tara</string>
+    <string name="back">Geri</string>
+    <string name="tools_fix">Sor ve düzelt</string>
+    <string name="tools_yours">Kendinize göre yapın</string>
+    <string name="tools_data">Araç verileri</string>
+    <string name="tools_photo_detail">Bir uyarı lambası ya da servis defterinin bir sayfası</string>
+    <string name="tools_look_detail">3 fotoğraftan, bir 3B modelden ya da bir dosyadan</string>
+    <string name="tools_reg_detail">Araç için plaka, şasi no ve ilk tescil</string>
+    <string name="tools_send_detail">Herhangi bir uygulamada bir yeri ya da metni Araca gönder ile paylaşın: yer aracın hedefi olur, metin ekranına yazılır.</string>
+    <string name="drives_all">Tüm sürüşler</string>
+    <string name="road_home_detail">Ön camın arkasındaki tutucusunda duran telefon yolu izler.</string>
+    <string name="road_finder_ready">Araç bulucu hazır</string>
+    <string name="pair_setup_later">Henüz izin verilecek bir şey yok: araç eşleştirildikten sonra Ayarlar gerekenleri ister.</string>
+</resources>

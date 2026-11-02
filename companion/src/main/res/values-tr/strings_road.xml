@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="road_title">Yol izleme</string>
+    <string name="road_detail">Telefonu ön camın arkasındaki bir tutucuya koyun: kamerası yolu izler ve araç sizi hızla yaklaşan öndeki araca, çizgiye basan tekerleğe ya da çok yakın takibe karşı uyarır.</string>
+    <string name="road_start">Yol izleme\'yi başlat</string>
+    <string name="road_model_get">Araç bulucuyu indir, 7,6 MB</string>
+    <string name="road_model_retry">Yeniden dene</string>
+    <string name="road_model_getting">Araç bulucu indiriliyor: %1$d%%</string>
+    <string name="road_model_failed">Araç bulucu indirilemedi. Telefonun internetini kontrol edip yeniden deneyin.</string>
+    <string name="road_model_none">Araç bulucu olmadan yalnızca şerit izlenir.</string>
+    <string name="road_note">Bir yardımcıdır, güvenlik sistemi değil: gözünüz yolda olsun. Telefonu şarjda ve güçlü güneşten uzak tutun.</string>
+    <string name="road_camera_needed">Yol izleme\'nin yolu görmek için kameraya ihtiyacı var.</string>
+    <string name="road_allow_camera">Kameraya izin ver</string>
+    <string name="road_linked">Uyarılar %1$s üzerinde</string>
+    <string name="road_not_linked">Bağlı araç yok: uyarılar bu telefonda</string>
+    <string name="road_lane_seen">Şerit bulundu</string>
+    <string name="road_lane_looking">Şerit aranıyor</string>
+    <string name="road_speed">%1$d km/sa</string>
+    <string name="road_horizon_hint">Noktalı çizgiyi ufka sürükleyin</string>
+    <string name="road_lead_m">%1$d m</string>
+    <string name="road_warn_collision">Fren</string>
+    <string name="road_warn_lane">Şeridinize dikkat</string>
+    <string name="road_warn_close">Çok yakın</string>
+    <string name="road_warn_moved_off">Trafik ilerliyor</string>
+    <string name="road_dim">Karart</string>
+    <string name="road_bright">Aydınlat</string>
+    <string name="road_stop">Durdur</string>
+    <string name="road_place_title">Telefonu yerleştirin</string>
+    <string name="road_place_moved">Telefon oynadı: yeniden yerleştirin</string>
+    <string name="road_place_level_ok">Düz</string>
+    <string name="road_place_level_left">Sol ucu biraz alçaltın</string>
+    <string name="road_place_level_right">Sağ ucu biraz alçaltın</string>
+    <string name="road_place_aim_ok">Yola dönük</string>
+    <string name="road_place_aim_down">Kamerayı biraz aşağı eğin</string>
+    <string name="road_place_aim_up">Kamerayı biraz yukarı eğin</string>
+    <string name="road_place_dash_ok">Görüntüde az torpido var</string>
+    <string name="road_place_dash">Çok fazla torpido: telefonu daha yukarı takın</string>
+    <string name="road_place_pillar_ok">Kenarlar açık</string>
+    <string name="road_place_pillar">Ön cam direği görüntüde: telefonu ortaya doğru kaydırın</string>
+    <string name="road_place_dark">Şu an kontrol etmek için çok karanlık</string>
+    <string name="road_place_keeps">Hepsi yeşil olunca kendiliğinden saklanır</string>
+    <string name="road_place_done">Tamam</string>
+    <string name="road_place_later">Sonra</string>
+    <string name="road_place_button">Yerleştir</string>
+</resources>

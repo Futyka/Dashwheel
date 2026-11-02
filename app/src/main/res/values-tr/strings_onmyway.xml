@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- "On my way": the arrival time texted by the phone (OnMyWay.kt). -->
+<resources>
+    <string name="onmyway_button">Yoldayım</string>
+    <string name="onmyway_title">Varış saatinizi mesajla gönderin</string>
+    <string name="onmyway_no_contacts">Telefonda numarası olan favori kişi yok. Telefonun rehberinde bir kişiye yıldız ekleyin.</string>
+    <string name="onmyway_text_to">%1$s yönüne yoldayım, %2$s civarında orada olurum.</string>
+    <string name="onmyway_text_eta">Yoldayım, %1$s civarında orada olurum.</string>
+    <string name="onmyway_text_plain">Yoldayım.</string>
+    <string name="onmyway_sent">%1$s kişisine gönderildi</string>
+    <string name="onmyway_sending">%1$s kişisine gönderiliyor</string>
+    <string name="onmyway_failed">Telefon %1$s kişisine mesaj gönderemedi</string>
+    <string name="onmyway_no_answer">Telefondan yanıt yok</string>
+    <string name="phone_battery_percent">%1$d %%</string>
+    <string name="message_alert_read">Sesli oku</string>
+    <string name="message_alert_reply">Yanıtla</string>
+    <string name="message_alert_try">Deneyin</string>
+    <string name="message_alert_sample">Geç kalıyorum, 7\'de görüşürüz.</string>
+</resources>

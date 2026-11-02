@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fuel prices nearby (FuelPrices.kt, FuelPricesTile.kt) -->
+    <string name="fuel_kind">Yakıt fiyatları</string>
+    <string name="fuel_kind_blurb">Yakındaki en ucuz istasyonlar, yol tarifi için dokunun</string>
+    <string name="fuel_title">YAKINDAKİ YAKIT</string>
+    <string name="fuel_loading">İstasyonlar aranıyor…</string>
+    <string name="fuel_none">%1$d km içinde bu yakıtı satan istasyon yok. Fiyatlar Fransa\'yı, Tankerkönig anahtarıyla Almanya\'yı kapsar.</string>
+    <string name="fuel_error">Fiyatlar şu an alınamıyor</string>
+    <string name="fuel_cheapest">En ucuz %1$s</string>
+    <string name="fuel_navigate">yol tarifi için dokunun</string>
+    <string name="fuel_allow_location">Konum izni</string>
+    <plurals name="fuel_stations">
+        <item quantity="one">%2$d km içinde %1$d istasyon</item>
+        <item quantity="other">%2$d km içinde %1$d istasyon</item>
+    </plurals>
+</resources>

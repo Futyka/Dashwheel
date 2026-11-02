@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Terrain skin -->
+    <string name="terrain_talk_cd">Asistanla konuş</string>
+    <string name="terrain_car_cd">Aracınız</string>
+    <string name="terrain_range">Menzil</string>
+    <string name="terrain_next_turn">Sonraki dönüş</string>
+    <string name="terrain_weather_next">Hava durumu · sonraki %1$d sa</string>
+    <string name="terrain_rain_from">%1$s itibariyle yağmur</string>
+    <string name="terrain_rain_until">%1$s saatine kadar yağmur</string>
+    <string name="terrain_rain_for">%1$d sa boyunca</string>
+    <string name="terrain_dry">%1$d sa yağmur yok</string>
+    <string name="terrain_rain_hours_cd">Sonraki 6 saatin %1$d saati yağmurlu</string>
+    <string name="terrain_music">Müzik</string>
+    <string name="terrain_playing">Oynatılıyor</string>
+    <string name="terrain_paused">Durduruldu</string>
+    <string name="terrain_engine">Motor</string>
+    <string name="terrain_speed">Hız</string>
+    <string name="terrain_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+    <string name="terrain_compass">K,KD,D,GD,G,GB,B,KB</string>
+    <string name="terrain_altitude">Rakım</string>
+    <string name="terrain_heading">Yön</string>
+    <plurals name="terrain_more_problems">
+        <item quantity="one">%d sorun daha</item>
+        <item quantity="other">%d sorun daha</item>
+    </plurals>
+</resources>

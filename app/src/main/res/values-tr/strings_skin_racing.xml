@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Racing skin: words on the HUD (caps, as the game shows them) -->
+    <string name="skin_racing_finish">BİTİŞ</string>
+    <string name="skin_racing_stage">ETAP</string>
+    <string name="skin_racing_fuel">YAKIT</string>
+    <string name="skin_racing_rpm">RPM</string>
+    <string name="skin_racing_temp">SICAKLIK</string>
+    <string name="skin_racing_batt">AKÜ</string>
+    <string name="skin_racing_load">YÜK</string>
+    <string name="skin_racing_live">CANLI</string>
+    <string name="skin_racing_linking">BAĞLANIYOR</string>
+    <string name="skin_racing_no_obd_tap">OBD YOK · DOKUN</string>
+    <string name="skin_racing_obd_error_tap">OBD HATASI · DOKUN</string>
+    <string name="skin_racing_connect_obd">OBD adaptörüne bağlan</string>
+    <string name="skin_racing_choose_adapter">Başka bir OBD adaptörü seç</string>
+    <string name="skin_racing_left">SOL</string>
+    <string name="skin_racing_right">SAĞ</string>
+    <string name="skin_racing_tap_open_maps">HARİTALARI AÇMAK İÇİN DOKUN</string>
+    <string name="skin_racing_tap_to_allow">İZİN VERMEK İÇİN DOKUN</string>
+    <string name="skin_racing_open_navigation">Navigasyonu aç</string>
+    <string name="skin_racing_allow_access">Bildirimlere izin ver</string>
+    <string name="skin_racing_start_music">BİR MÜZİK UYGULAMASI BAŞLAT</string>
+    <string name="skin_racing_unknown_artist">BİLİNMEYEN SANATÇI</string>
+    <string name="skin_racing_cd_previous">Önceki parça</string>
+    <string name="skin_racing_cd_next">Sonraki parça</string>
+    <string name="skin_racing_cd_play">Oynat</string>
+    <string name="skin_racing_cd_pause">Duraklat</string>
+    <string name="skin_racing_open_clock">Alarmları aç</string>
+    <string name="skin_racing_loading">YÜKLENİYOR</string>
+    <string name="skin_racing_feels">HİSSEDİLEN %1$d°</string>
+    <string name="skin_racing_wind_kmh">RÜZGAR %1$d KM/SA</string>
+    <string name="skin_racing_wind_mph">RÜZGAR %1$d MPH</string>
+    <string name="skin_racing_open_app">%1$s uygulamasını aç</string>
+    <string name="skin_racing_edit_launch_bar">Başlatma çubuğunu düzenleyin</string>
+    <string name="skin_racing_launch_bar_empty">HENÜZ UYGULAMA YOK · KALEME DOKUN</string>
+    <string name="skin_racing_gear">Vites %1$s</string>
+</resources>

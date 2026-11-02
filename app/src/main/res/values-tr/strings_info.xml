@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Shared -->
+    <string name="info_waiting_gps">GPS bekleniyor…</string>
+    <string name="info_no_gps">GPS yok</string>
+    <string name="info_open">Aç</string>
+    <string name="info_clear">Temizle</string>
+    <string name="info_reset">Sıfırla</string>
+    <string name="info_grant_access">Erişim izni ver</string>
+    <string name="info_connect">Bağlan</string>
+
+    <!-- Weather tile -->
+    <string name="info_weather_title">HAVA DURUMU</string>
+    <string name="info_weather_refresh">Hava durumunu yenile</string>
+    <string name="info_weather_details">Hissedilen %1$d° · Rüzgar %2$d km/sa</string>
+    <string name="info_weather_details_range">Hissedilen %1$d° · Rüzgar %2$d km/sa · %3$d° / %4$d°</string>
+    <string name="info_weather_loading">Hava durumu yükleniyor…</string>
+    <string name="info_weather_unavailable">Hava durumu alınamıyor</string>
+    <string name="info_weather_unavailable_detail">Hava durumu alınamıyor (%1$s)</string>
+    <string name="info_weather_no_internet">internet bağlantısı yok: ünitenin Wi-Fi\'ını veya hotspot\'unu kontrol edin</string>
+    <string name="info_weather_no_answer">hava durumu servisi yanıt vermedi</string>
+    <string name="info_as_of">%1$s itibarıyla</string>
+
+    <!-- Weather conditions (WMO codes), also used by the skins -->
+    <string name="info_wx_clear">Açık</string>
+    <string name="info_wx_mostly_clear">Çoğunlukla açık</string>
+    <string name="info_wx_partly_cloudy">Parçalı bulutlu</string>
+    <string name="info_wx_overcast">Kapalı</string>
+    <string name="info_wx_fog">Sis</string>
+    <string name="info_wx_drizzle">Çisenti</string>
+    <string name="info_wx_freezing_drizzle">Dondurucu çisenti</string>
+    <string name="info_wx_rain">Yağmur</string>
+    <string name="info_wx_freezing_rain">Dondurucu yağmur</string>
+    <string name="info_wx_snow">Kar</string>
+    <string name="info_wx_showers">Sağanak</string>
+    <string name="info_wx_snow_showers">Kar sağanağı</string>
+    <string name="info_wx_thunderstorm">Gök gürültülü fırtına</string>
+    <string name="info_wx_hail_storm">Dolu fırtınası</string>
+    <string name="info_wx_unknown">Bilinmiyor</string>
+
+    <!-- Agenda tile -->
+    <string name="info_agenda_title">AJANDA</string>
+    <string name="info_agenda_needs_access">Takviminizdeki yaklaşan etkinlikleri gösterin</string>
+    <string name="info_agenda_allow">Takvime izin ver</string>
+    <string name="info_agenda_empty">Önümüzdeki 36 saatte bir şey yok</string>
+    <string name="info_agenda_no_title">Başlıksız</string>
+    <string name="info_agenda_all_day">Tüm gün</string>
+
+    <!-- Quick dial tile -->
+    <string name="info_quickdial_title">HIZLI ARAMA</string>
+    <string name="info_quickdial_dialer">Tuş takımı</string>
+    <string name="info_quickdial_needs_access">Favori kişilerinizi burada gösterin</string>
+    <string name="info_quickdial_allow">Rehbere izin ver</string>
+    <string name="info_quickdial_empty">Burada görmek için Kişiler uygulamasında kişileri yıldızlayın</string>
+    <string name="info_quickdial_no_phone_app">Bu ünitede telefon uygulaması bulunamadı</string>
+
+    <!-- Notifications tile -->
+    <string name="info_notif_title">BİLDİRİMLER</string>
+    <string name="info_notif_needs_access">Uygulamalarınızdaki mesajları ve uyarıları gösterin</string>
+    <string name="info_notif_empty">Yeni bildirim yok</string>
+    <string name="info_notif_phone_access">Bildirimlerini burada görmek için telefonunuzda Dashwheel\'e Bildirim erişimi verin.</string>
+
+    <!-- Audio tile -->
+    <string name="info_audio_title">SES</string>
+    <string name="info_audio_mute">Sessize al</string>
+    <string name="info_audio_unmute">Sesi aç</string>
+    <string name="info_audio_sound">Ses</string>
+
+    <!-- Speed HUD tile (the title is also the Original theme's speed gauge label) -->
+    <string name="info_speed_title">HIZ</string>
+    <string name="info_speed_no_signal">Sinyal yok</string>
+
+    <!-- Compass tile -->
+    <string name="info_compass_title">PUSULA</string>
+    <string name="info_compass_no_heading">Yön için hareket edin</string>
+    <string name="info_compass_altitude">Rakım</string>
+    <string name="info_compass_gps_speed">GPS hızı</string>
+    <string name="info_compass_accuracy">Doğruluk</string>
+
+    <!-- Compass points (dial letters and heading abbreviations) -->
+    <string name="info_dir_n">K</string>
+    <string name="info_dir_ne">KD</string>
+    <string name="info_dir_e">D</string>
+    <string name="info_dir_se">GD</string>
+    <string name="info_dir_s">G</string>
+    <string name="info_dir_sw">GB</string>
+    <string name="info_dir_w">B</string>
+    <string name="info_dir_nw">KB</string>
+
+    <!-- Trip computer tile -->
+    <string name="info_trip_title">YOLCULUK</string>
+    <string name="info_trip_since">%1$s itibarıyla</string>
+    <string name="info_trip_time">Süre</string>
+    <string name="info_trip_moving">Hareket</string>
+    <string name="info_trip_average">Ortalama</string>
+    <string name="info_trip_top">En yüksek</string>
+    <string name="info_trip_this_drive">Bu sürüş</string>
+    <string name="info_trip_since_fill">Son dolumdan beri</string>
+    <string name="info_trip_fuel">Yakıt</string>
+    <string name="info_trip_cost">Maliyet</string>
+    <string name="info_trip_no_fill">Henüz kayıtlı dolum yok</string>
+    <string name="info_duration_hm">%1$dsa %2$02ddk</string>
+    <string name="info_duration_ms">%1$ddk %2$02dsn</string>
+
+    <!-- G-force tile -->
+    <string name="info_gforce_title">G KUVVETİ</string>
+    <string name="info_gforce_reset_peaks">Zirveleri sıfırla</string>
+    <string name="info_gforce_lateral">Yanal</string>
+    <string name="info_gforce_accel_brake">Hızlanma / frenleme</string>
+    <string name="info_gforce_peaks">Zirveler</string>
+
+    <!-- Parking tile -->
+    <string name="info_parking_title">PARK</string>
+    <string name="info_parking_prompt">Aracın yerini hatırla</string>
+    <string name="info_parking_save">Park yerini kaydet</string>
+    <string name="info_parking_dir_right">Park edilen araç %1$d° sağda</string>
+    <string name="info_parking_dir_left">Park edilen araç %1$d° solda</string>
+    <string name="info_parking_distance_unknown">Mesafe bilinmiyor</string>
+    <string name="info_parking_parked">Park edildi: %1$s</string>
+    <string name="info_parking_parked_dir">Park edildi: %1$s · %2$s</string>
+    <string name="info_parking_walk">Yürüyerek git</string>
+    <string name="info_parking_map_label">Park edilen araç</string>
+    <string name="info_ago_just_now">az önce</string>
+    <string name="info_ago_minutes">%1$d dk önce</string>
+    <string name="info_ago_hours">%1$d sa %2$02d dk önce</string>
+    <string name="info_ago_days">%1$d gün önce</string>
+
+    <!-- Media tile (both the current and the Original theme) -->
+    <string name="info_now_playing">ŞİMDİ ÇALIYOR</string>
+    <string name="info_paused">DURAKLATILDI</string>
+    <string name="info_nothing_playing">Bir şey çalmıyor</string>
+    <string name="info_media_access_needed">Medya erişimi gerekiyor</string>
+    <string name="info_media_tap_to_enable">Etkinleştirmek için dokunun</string>
+    <string name="info_media_previous">Önceki</string>
+    <string name="info_media_play_pause">Oynat/duraklat</string>
+    <string name="info_media_next">Sonraki</string>
+    <string name="info_media_grant_access">Medya erişimine izin ver</string>
+
+    <!-- Original theme telemetry tile -->
+    <string name="info_telemetry_title">MOTOR GÖSTERGELERİ</string>
+    <string name="info_obd_live">Canlı</string>
+    <string name="info_gauge_rpm">DEVİR</string>
+    <string name="info_unit_rpm">d/dk</string>
+    <string name="info_chip_coolant">Soğutma suyu</string>
+    <string name="info_chip_load">Yük</string>
+    <string name="info_chip_battery">Akü</string>
+
+    <!-- Directions tile -->
+    <string name="info_directions_title">YOL TARİFİ</string>
+    <string name="info_directions_no_route">Rota yok</string>
+    <string name="info_directions_access_title">Bildirim erişimi gerekiyor</string>
+    <string name="info_directions_access_hint">Yol tarifi Google Haritalar\'ın navigasyon bildiriminden gelir.</string>
+    <string name="info_directions_idle_title">Aktif rota yok</string>
+    <string name="info_directions_idle_hint">Google Haritalar\'da veya Waze\'de navigasyonu başlatın, bir sonraki dönüş burada görünür.</string>
+    <string name="info_directions_open_maps">%1$s uygulamasını aç</string>
+    <string name="info_nav_continue">Devam et</string>
+
+    <!-- Map navigator (MapLibre panel) -->
+    <string name="info_map_where_to">Nereye?</string>
+    <string name="info_map_search">Ara</string>
+    <string name="info_map_clear_route">Rotayı temizle</string>
+    <string name="info_map_ready">Navigasyona hazır</string>
+    <string name="info_map_start">Başlat</string>
+    <string name="info_map_gps_not_ready">GPS hazır değil: Başlat yine de Google Haritalar\'ı açar</string>
+    <string name="info_map_no_route">Rota bulunamadı</string>
+    <string name="info_map_routing_failed">Rota oluşturulamadı</string>
+    <string name="info_map_routing_failed_detail">Rota oluşturulamadı (%1$s)</string>
+    <string name="info_map_address_not_found">Adres bulunamadı</string>
+    <string name="info_map_duration_hm">%1$d sa %2$02d dk</string>
+    <string name="info_map_duration_min">%1$d dk</string>
+    <string name="info_map_stop">Durdur</string>
+    <string name="info_map_arrived">Vardınız</string>
+    <string name="info_map_rerouting">Yeni rota bulunuyor</string>
+    <string name="info_map_voice_on">Sesi aç</string>
+    <string name="info_map_voice_off">Sesi kapat</string>
+    <string name="info_map_other_app">Google Haritalar veya Waze ile git</string>
+    <string name="info_audio_by_keys">Ses, ana ünitenin ses tuşlarıyla ayarlanır</string>
+    <string name="info_audio_unavailable">Ses buradan değiştirilemiyor: düğmeyi kullanın</string>
+    <string name="info_map_stop_title">Navigasyon durdurulsun mu?</string>
+    <string name="info_map_stop_body">Harita yol tarifi vermeyi bırakır. Haritadan yeniden başlatın.</string>
+    <string name="info_directions_running_title">%1$s çalışıyor</string>
+    <string name="info_directions_running_hint">Bir sonraki dönüşü burada henüz okunamıyor.</string>
+</resources>

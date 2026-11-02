@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings, Look: the look in use, its Home, the looks by family (LookPage.kt) -->
+    <string name="look_family_new">Yeni</string>
+    <string name="look_family_scenes">Sahneler</string>
+    <string name="look_family_dials">Kadranlar</string>
+    <string name="look_family_calm">Sakin</string>
+    <string name="look_family_colours">Yalnızca renkler</string>
+    <string name="look_arrange_home">Ana ekranı görünüme göre düzenle</string>
+    <string name="look_arrange_home_detail">Kendi Ana ekranı olan bir görünüm widget\'larını Ana ekrana koyar, Geri al ile</string>
+    <string name="look_home_own">Kendi Ana ekranıyla gelir</string>
+    <string name="look_home_own_off">Kendi Ana ekranı var. Ana ekranı düzenle kapalı.</string>
+    <string name="look_home_keeps">Ana ekran olduğu gibi kalır</string>
+    <!-- Settings, Look: the font of every text (LookPage.kt, DashFont) -->
+    <string name="look_font_title">Yazı tipi</string>
+    <string name="look_font_own">Görünümün kendi</string>
+    <string name="look_font_sans">Sans</string>
+    <string name="look_font_condensed">Dar</string>
+    <string name="look_font_serif">Serif</string>
+    <string name="look_font_mono">Mono</string>
+    <string name="look_font_casual">Serbest</string>
+    <string name="look_font_light">İnce</string>
+    <string name="start_anim_title">Açılış animasyonu</string>
+    <string name="start_anim_detail">Gösterge paneli ve uygulamaları başlarken oynar. Görmek için birini seçin.</string>
+    <string name="start_anim_still">Sabit resim</string>
+    <string name="start_anim_welcome">Karşılama ışıkları</string>
+    <string name="start_anim_assemble">Birleşme</string>
+    <string name="start_anim_ignition">Kontak</string>
+    <string name="start_anim_road">Gece yolu</string>
+    <string name="start_anim_blueprint">Teknik çizim</string>
+    <string name="start_anim_aurora">Aurora</string>
+    <string name="start_greet_morning">Günaydın</string>
+    <string name="start_greet_afternoon">İyi günler</string>
+    <string name="start_greet_evening">İyi akşamlar</string>
+</resources>

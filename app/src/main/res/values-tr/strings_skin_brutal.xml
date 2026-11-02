@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brutal skin -->
+    <string name="brutal_talk">Konuş</string>
+    <string name="brutal_talk_cd">Asistanla konuş</string>
+    <string name="brutal_next_turn">Sonraki dönüş</string>
+    <string name="brutal_speed">Hız %1$s</string>
+    <string name="brutal_limit">Limit</string>
+    <string name="brutal_weather">Hava durumu</string>
+    <string name="brutal_rain">Yağmur</string>
+    <string name="brutal_rain_from">%1$s itibariyle</string>
+    <string name="brutal_rain_until">%1$s saatine kadar</string>
+    <string name="brutal_feels">Hissedilen %1$s</string>
+    <string name="brutal_now_playing">Şimdi oynatılıyor</string>
+    <string name="brutal_range">Menzil</string>
+    <string name="brutal_coolant">Soğutma suyu</string>
+    <string name="brutal_fuel">Yakıt</string>
+    <string name="brutal_outside">Dış sıcaklık</string>
+    <string name="brutal_battery">Batarya</string>
+    <string name="brutal_all_good">Her şey normal</string>
+    <string name="brutal_check_car">Aracı kontrol et</string>
+</resources>

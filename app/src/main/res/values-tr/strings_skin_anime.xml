@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Anime skin: comic words on the stickers -->
+    <string name="skin_anime_turn_in">%1$s SONRA!</string>
+    <string name="skin_anime_fuel">yakıt</string>
+    <string name="skin_anime_fuel_low">yakıt az!</string>
+    <string name="skin_anime_to_go">kaldı</string>
+    <string name="skin_anime_engine_cold">motor uyanıyor</string>
+    <string name="skin_anime_engine_happy">motor mutlu</string>
+    <string name="skin_anime_engine_hot">motor sıcak!</string>
+    <string name="skin_anime_battery">batarya</string>
+    <string name="skin_anime_rpm">dev/dk</string>
+    <string name="skin_anime_load">yük</string>
+    <string name="skin_anime_talk">BENİMLE KONUŞ!</string>
+    <string name="skin_anime_talk_end">HOŞÇA KAL!</string>
+</resources>

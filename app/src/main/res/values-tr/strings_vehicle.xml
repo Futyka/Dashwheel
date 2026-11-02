@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- OBD tiles: shared -->
+    <string name="vehicle_obd_not_connected">OBD bağlı değil</string>
+    <string name="vehicle_connect">Bağlan</string>
+    <string name="vehicle_speed">Hız</string>
+    <string name="vehicle_rpm">Devir</string>
+    <string name="vehicle_coolant">Soğutma sıvısı</string>
+    <string name="vehicle_battery">Batarya</string>
+    <string name="vehicle_fuel">Yakıt</string>
+    <string name="vehicle_close">Kapat</string>
+    <string name="vehicle_cancel">İptal</string>
+    <string name="vehicle_reset">Sıfırla</string>
+    <string name="vehicle_capture_a">Yakala A</string>
+    <string name="vehicle_capture_b">Yakala B</string>
+
+    <!-- Telemetry tile -->
+    <string name="vehicle_telemetry_title">MOTOR GÖSTERGELERİ</string>
+    <string name="vehicle_live">Canlı</string>
+    <string name="vehicle_speed_caps">HIZ</string>
+    <string name="vehicle_rpm_caps">DEVİR</string>
+    <string name="vehicle_load">Yük</string>
+
+    <!-- Fault codes tile -->
+    <string name="vehicle_fault_codes_title">ARAÇ SORUNLARI</string>
+    <string name="vehicle_scan">Tara</string>
+    <string name="vehicle_clear">Kodları sil</string>
+
+    <!-- OBD data tile -->
+    <string name="vehicle_obd_data_title">ARAÇ VERİSİ</string>
+    <string name="vehicle_intake_air">Emme havası</string>
+    <string name="vehicle_throttle">Gaz kelebeği</string>
+    <string name="vehicle_engine_load">Motor yükü</string>
+    <string name="vehicle_fuel_level">Yakıt seviyesi</string>
+
+    <!-- Fuel & range tile -->
+    <string name="vehicle_fuel_range_title">YAKIT &amp; MENZİL</string>
+    <string name="vehicle_via_canbox">araç kutusundan</string>
+    <string name="vehicle_via_obd">OBD\'den</string>
+    <string name="vehicle_fuel_no_obd">Bu aracın OBD\'si yakıtı bildirmiyor. Bunun yerine araç kutusundan öğrenin: root gerekir.</string>
+    <string name="vehicle_fuel_none">Henüz yakıt seviyesi yok. OBD adaptörünü bağlayın: her araç bildirmez.</string>
+    <string name="vehicle_find_fuel_signal">Yakıt sinyalini bul</string>
+    <string name="vehicle_try_obd_fuel_pid">OBD yakıt PID\'ini dene</string>
+    <string name="vehicle_km_to_empty">BİTENE KADAR KM</string>
+    <string name="vehicle_range_approx">≈ menzil</string>
+    <string name="vehicle_in_tank">Depoda</string>
+    <string name="vehicle_avg_use">Ort. tüketim</string>
+    <string name="vehicle_learn_fuel">Yakıtı araç kutusundan öğren</string>
+    <string name="vehicle_recalibrate_fuel">Yakıtı yeniden kalibre et</string>
+    <string name="vehicle_find_range_signal">Menzili araç kutusundan oku</string>
+    <string name="vehicle_learn_range">Menzil araç kutusundan</string>
+    <string name="vehicle_change_range">Menzil sinyalini değiştir</string>
+    <string name="vehicle_range_from_car">yol bilgisayarı</string>
+
+    <!-- Fuel signal finder dialog -->
+    <string name="vehicle_finder_help">Göstergenizin gösterdiği seviyeyi ayarlayın, Yakala A\'ya dokunun, sonra bunu kapatıp aracı normal kullanın. Günler sonra gösterge biraz düşünce yeniden açın, yeni değeri ayarlayın ve Yakala B\'ye dokunun. Yakala A yeniden başlatmalarda korunur. Yalnızca yakıtla birlikte değişen baytlar sunulur.</string>
+    <string name="vehicle_dash_reads">Gösterge değeri</string>
+    <string name="vehicle_waiting_canbox">Araç kutusu verisi bekleniyor: root gerekir</string>
+    <string name="vehicle_finder_step_a">Göstergenizin gösterdiği yakıt seviyesini ayarlayın, sonra Yakala A\'ya dokunun.</string>
+    <string name="vehicle_finder_step_b">A %%%1$d ile yakalandı, kaydedildi. Bunu kapatıp normal sürebilirsiniz; gösterge birkaç %% düşünce geri gelin, yeni değeri ayarlayın, sonra Yakala B.</string>
+    <string name="vehicle_finder_same">A ve B aynı seviyede. B\'yi farklı bir yakıt seviyesinde yakalayın.</string>
+    <string name="vehicle_finder_none">Hiçbir bayt değişimi izlemedi. Daha büyük bir düşüşten sonra B\'yi yeniden yakalayın.</string>
+    <string name="vehicle_finder_candidates">Yakıtla birlikte değişen baytlar</string>
+    <string name="vehicle_finder_frame">çerçeve %1$s · bayt %2$d</string>
+    <string name="vehicle_finder_raw">%1$d → %2$d · dolu≈%3$d</string>
+    <string name="vehicle_forget_current">Geçerli olanı unut</string>
+
+    <!-- Range signal finder dialog -->
+    <string name="vehicle_range_finder_help">Ünitenin yol bilgisayarını açın ve gösterdiği menzili (bitene kadar km) yazın, sonra Ara\'ya dokunun. Canlı değeri yol bilgisayarıyla uyuşmaya devam eden sinyali seçin.</string>
+    <string name="vehicle_range_car_shows">Yol bilgisayarı gösteriyor</string>
+    <string name="vehicle_range_search">Arama</string>
+    <string name="vehicle_range_none">Hiçbir sinyal bu değeri taşımıyor. Sayıyı kontrol edin, yol bilgisayarını birkaç saniye açık bırakın ve yeniden arayın.</string>
+    <string name="vehicle_range_candidates">Bu değeri taşıyan sinyaller: yol bilgisayarını izleyeni seçin</string>
+    <string name="vehicle_range_frame">çerçeve %1$s · bayt %2$d–%3$d</string>
+
+    <!-- OBD adapter picker -->
+    <string name="vehicle_select_adapter">OBD adaptörü seç</string>
+    <string name="vehicle_no_paired">Eşleşmiş Bluetooth cihazı ve USB adaptörü yok. OBD adaptörünüzü Bluetooth ayarlarından eşleştirin ya da bir USB adaptör takın.</string>
+    <string name="vehicle_bt_settings">Bluetooth ayarları</string>
+
+    <!-- OBD adapter status messages -->
+    <string name="vehicle_unknown_device">Bilinmeyen cihaz</string>
+    <string name="vehicle_no_response">Adaptörden yanıt yok</string>
+    <string name="vehicle_no_dtc_answer">Motor bilgisayarı arıza kodu isteğine yanıt vermedi. Biraz sonra yeniden deneyin.</string>
+    <string name="vehicle_lamp_no_codes">Motor arıza lambası yanıyor ama kod gelmedi. Motor çalışırken yeniden deneyin.</string>
+    <string name="vehicle_pending">Beklemede</string>
+    <string name="vehicle_lamp_on">Motor arıza lambası yanıyor</string>
+    <string name="vehicle_lamp_off">Motor arıza lambası sönük</string>
+    <string name="vehicle_engine_off_hint">Motor kapalı: kontak açıkken motor arıza lambası kendi kendini test etmek için yanar ve motor çalışınca söner. Motor çalışınca tarama kendiliğinden yinelenir.</string>
+    <string name="vehicle_obd_scope">Standart OBD yalnızca motor ve emisyon arızalarını görür; ABS, hava yastığı ve gövde uyarıları için Citroën\'in tanılama aracı gerekir.</string>
+    <string name="vehicle_clear_rejected">Adaptör \"%1$s\" yanıtını verdi. Kontağı AÇIN (motor kapalı) ve yeniden deneyin.</string>
+
+    <!-- Doors tile -->
+    <string name="vehicle_doors_title">KAPILAR</string>
+    <string name="vehicle_waiting_mcu">Araç kutusu verisi bekleniyor</string>
+    <string name="vehicle_waiting_mcu_root">Araç kutusu verisi bekleniyor: root gerekir</string>
+    <string name="vehicle_door_front_left">Ön sol</string>
+    <string name="vehicle_door_front_right">Ön sağ</string>
+    <string name="vehicle_door_rear_left">Arka sol</string>
+    <string name="vehicle_door_rear_right">Arka sağ</string>
+    <string name="vehicle_door_tailgate">Bagaj kapağı</string>
+    <string name="vehicle_door_bonnet">Kaput</string>
+    <string name="vehicle_door_any_open">Bir kapı açık</string>
+    <string name="vehicle_doors_all_closed">Hepsi kapalı</string>
+    <string name="vehicle_door_open_caps">AÇIK</string>
+    <string name="vehicle_door_closed">kapalı</string>
+
+    <!-- CAN monitor (debug tile) -->
+    <string name="vehicle_can_monitor_title">CAN İZLEYİCİ: bir sinyal bul</string>
+    <string name="vehicle_can_monitor_help">Kapılar KAPALI → Yakala A. Sonra kapıyı AÇIN → Yakala B. Yalnızca farklı olan ayrık sinyaller gösterilir.</string>
+    <string name="vehicle_can_a_closed">A ✓ kapalı</string>
+    <string name="vehicle_can_b_open">B ✓ açık</string>
+    <string name="vehicle_can_prompt">Karşılaştırmak için Yakala A (kapalı), sonra B (açık).</string>
+    <string name="vehicle_can_no_diff">Temiz bir ayrık fark yok. Sensörler kaymasın diye motor KAPALIYKEN yapın ve Yakala B sırasında kapıyı açık tutun.</string>
+    <string name="vehicle_can_row_closed">kapalı: %1$s</string>
+    <string name="vehicle_can_row_open">açık: %1$s</string>
+
+    <!-- Fault code (DTC) descriptions: title + what to check -->
+    <string name="vehicle_dtc_p0300_title">Rastgele/çoklu silindir ateşleme hatası</string>
+    <string name="vehicle_dtc_p0300_fix">Bujileri ve bobinleri (THP: bobinler bilinen zayıf nokta), enjektörleri ve vakum kaçaklarını kontrol edin. Buji/bobinleri takım olarak değiştirin.</string>
+    <string name="vehicle_dtc_p0301_title">1. silindir ateşleme hatası</string>
+    <string name="vehicle_dtc_p0301_fix">1. silindirin bobin/bujisini başka silindirle değiştirin; hata onu izlerse o bobin/bujiyi yenileyin. 1. enjektörü de kontrol edin.</string>
+    <string name="vehicle_dtc_p0302_title">2. silindir ateşleme hatası</string>
+    <string name="vehicle_dtc_p0302_fix">Ayırmak için bobin/bujiyi yer değiştirin; 2. enjektörü ve kompresyonu kontrol edin.</string>
+    <string name="vehicle_dtc_p0303_title">3. silindir ateşleme hatası</string>
+    <string name="vehicle_dtc_p0303_fix">Ayırmak için bobin/bujiyi yer değiştirin; 3. enjektörü ve kompresyonu kontrol edin.</string>
+    <string name="vehicle_dtc_p0304_title">4. silindir ateşleme hatası</string>
+    <string name="vehicle_dtc_p0304_fix">Ayırmak için bobin/bujiyi yer değiştirin; 4. enjektörü ve kompresyonu kontrol edin.</string>
+    <string name="vehicle_dtc_p0016_title">Krank/eksantrik mili uyumsuzluğu (bank 1 sensör A)</string>
+    <string name="vehicle_dtc_p0016_fix">Klasik 1.6 THP uzamış triger zinciri. Zinciri, gergiyi ve eksantrik/krank sensörlerini kontrol edin. Çoğu zaman triger zinciri seti gerekir.</string>
+    <string name="vehicle_dtc_p0017_title">Krank/eksantrik uyumsuzluğu (bank 1 sensör B)</string>
+    <string name="vehicle_dtc_p0017_fix">Büyük olasılıkla uzamış triger zinciri / gergi (1.6 THP). Zinciri ve dişlileri inceleyin.</string>
+    <string name="vehicle_dtc_p0011_title">Emme eksantrik zamanlaması fazla avanslı (bank 1)</string>
+    <string name="vehicle_dtc_p0011_fix">VVT/eksantrik ayarlayıcı ya da yağ kontrol valfi. Yağ seviyesini/kalitesini, VVT selenoidini ve triger zinciri aşınmasını kontrol edin.</string>
+    <string name="vehicle_dtc_p0341_title">Eksantrik konum sensörü aralığı</string>
+    <string name="vehicle_dtc_p0341_fix">Eksantrik sensörünü ve kablolarını kontrol edin; triger (zincir) ayarının doğru olduğunu doğrulayın.</string>
+    <string name="vehicle_dtc_p0340_title">Eksantrik konum sensörü devresi</string>
+    <string name="vehicle_dtc_p0340_fix">Eksantrik sensörünü test edin/değiştirin; soketi ve kabloları inceleyin.</string>
+    <string name="vehicle_dtc_p0299_title">Turbo basıncı düşük</string>
+    <string name="vehicle_dtc_p0299_fix">THP/HDi\'de yaygın. Basınç kaçaklarını (hortumlar/intercooler), wastegate/turbo aktüatörünü ve diverter valfini kontrol edin.</string>
+    <string name="vehicle_dtc_p0234_title">Turbo basıncı yüksek</string>
+    <string name="vehicle_dtc_p0234_fix">Takılı kalan wastegate aktüatörünü, basınç selenoidini ve takılı VNT\'yi (HDi) kontrol edin.</string>
+    <string name="vehicle_dtc_p0087_title">Yakıt rayı basıncı çok düşük</string>
+    <string name="vehicle_dtc_p0087_fix">HDi: yakıt filtresini, alçak basınç beslemesini, yüksek basınç pompasını ve ray basınç regülatörünü kontrol edin; hava/kaçak arayın.</string>
+    <string name="vehicle_dtc_p0089_title">Yakıt basınç regülatörü performansı</string>
+    <string name="vehicle_dtc_p0089_fix">Ray basınç regülatörünü/ölçüm valfini ve pompayı kontrol edin; yakıt filtresini inceleyin.</string>
+    <string name="vehicle_dtc_p0093_title">Büyük yakıt kaçağı saptandı</string>
+    <string name="vehicle_dtc_p0093_fix">HDi: enjektör geri dönüş hattında, yüksek basınç borularında ve pompa contalarında dizel kaçağı arayın.</string>
+    <string name="vehicle_dtc_p0420_title">Katalizör verimi eşiğin altında (bank 1)</string>
+    <string name="vehicle_dtc_p0420_fix">Çoğu zaman yıpranmış katalitik konvertör ya da yavaşlamış arka oksijen sensörü. Önce egzoz kaçaklarını ve ateşleme hatalarını eleyin.</string>
+    <string name="vehicle_dtc_p0401_title">EGR akışı yetersiz</string>
+    <string name="vehicle_dtc_p0401_fix">EGR valfini temizleyin ya da değiştirin; EGR soğutucusunda ve kanallarda karbon kontrol edin (HDi\'de yaygın).</string>
+    <string name="vehicle_dtc_p0402_title">EGR akışı fazla</string>
+    <string name="vehicle_dtc_p0402_fix">Açık takılı kalan EGR valfini ve kumandasını kontrol edin; karbon birikimini temizleyin.</string>
+    <string name="vehicle_dtc_p2463_title">DPF kurum birikimi çok yüksek</string>
+    <string name="vehicle_dtc_p2463_fix">HDi dizel: rejenerasyon için uzun bir otoyol sürüşü yapın; DPF basınç sensörünü ve katkı (Eolys) seviyesini kontrol edin. Zorla rejenerasyon gerekebilir.</string>
+    <string name="vehicle_dtc_p242f_title">DPF tıkanıklığı (kül birikimi)</string>
+    <string name="vehicle_dtc_p242f_fix">DPF ömrünün sonunda ya da tıkalı; zorla rejenerasyon ya da DPF temizliği/değişimi gerekebilir.</string>
+    <string name="vehicle_dtc_p0113_title">Emme havası sıcaklık sensörü yüksek</string>
+    <string name="vehicle_dtc_p0113_fix">IAT sensörünü ve kablo/soketini kontrol edin; sensörü temizleyin ya da değiştirin (çoğu zaman MAF/emme içinde).</string>
+    <string name="vehicle_dtc_p0128_title">Soğutma sıvısı termostat sıcaklığının altında</string>
+    <string name="vehicle_dtc_p0128_fix">Genellikle açık takılı kalan termostat. Termostatı değiştirin; soğutma sıvısı seviyesini ve sensörü doğrulayın.</string>
+    <string name="vehicle_dtc_p0135_title">Oksijen sensörü ısıtıcısı (bank 1 sensör 1)</string>
+    <string name="vehicle_dtc_p0135_fix">Ön oksijen sensörü ısıtıcı devresini ve sigortasını kontrol edin; ısıtıcı kopuksa sensörü değiştirin.</string>
+    <string name="vehicle_dtc_p0130_title">Oksijen sensörü devresi (bank 1 sensör 1)</string>
+    <string name="vehicle_dtc_p0130_fix">Ön oksijen sensörünü ve kablolarını inceleyin; yavaşlamış/arızalıysa değiştirin.</string>
+    <string name="vehicle_dtc_p0171_title">Karışım çok fakir (bank 1)</string>
+    <string name="vehicle_dtc_p0171_fix">Emme/vakum kaçaklarını (yaygın), kirli MAF\'ı, zayıf yakıt pompasını/enjektörleri kontrol edin.</string>
+    <string name="vehicle_dtc_p0172_title">Karışım çok zengin (bank 1)</string>
+    <string name="vehicle_dtc_p0172_fix">Kaçıran enjektörleri, yüksek yakıt basıncını, kirli MAF\'ı ya da arızalı oksijen sensörünü kontrol edin.</string>
+    <string name="vehicle_dtc_p0505_title">Rölanti hava kontrol sistemi</string>
+    <string name="vehicle_dtc_p0505_fix">Gaz kelebeği gövdesini temizleyin; emme kaçaklarını ve gaz kelebeği motorunun çalışmasını kontrol edin.</string>
+    <string name="vehicle_dtc_p2100_title">Gaz kelebeği aktüatör motoru devresi</string>
+    <string name="vehicle_dtc_p2100_fix">Gaz kelebeği gövdesi motorunu ve kablolarını kontrol edin; gaz kelebeği gövdesi değişimi gerekebilir.</string>
+
+    <!-- Fault codes not in the table: described from the code's structure -->
+    <string name="vehicle_dtc_unknown_code">Bilinmeyen kod</string>
+    <string name="vehicle_dtc_fallback_title">%1$s %2$s arızası: %3$s</string>
+    <string name="vehicle_dtc_fallback_fix">Kayıtlı açıklama yok. İlgili kodları tarayın, etkilenen devrenin sensörünü/kablolarını kontrol edin ve modele özel öneriler için \"%1$s Citroën C4 Picasso\" diye arayın.</string>
+    <string name="vehicle_dtc_system_powertrain">Güç aktarımı</string>
+    <string name="vehicle_dtc_system_chassis">Şasi</string>
+    <string name="vehicle_dtc_system_body">Gövde</string>
+    <string name="vehicle_dtc_system_network">Ağ</string>
+    <string name="vehicle_dtc_system_unknown">Bilinmiyor</string>
+    <string name="vehicle_dtc_scope_generic">genel</string>
+    <string name="vehicle_dtc_scope_manufacturer">üreticiye özel</string>
+    <string name="vehicle_dtc_area_fuel_air">yakıt &amp; hava ölçümü</string>
+    <string name="vehicle_dtc_area_ignition">ateşleme / ateşleme hatası</string>
+    <string name="vehicle_dtc_area_emissions">emisyon / yardımcı</string>
+    <string name="vehicle_dtc_area_idle">hız / rölanti kontrolü</string>
+    <string name="vehicle_dtc_area_computer">bilgisayar / çıkışlar</string>
+    <string name="vehicle_dtc_area_transmission">şanzıman</string>
+    <string name="vehicle_dtc_area_system">sistem</string>
+
+    <!-- Why the adapter is not connected -->
+    <string name="vehicle_obd_connecting_to">%1$s cihazına bağlanılıyor…</string>
+    <string name="vehicle_obd_pairing_pin">Eşleştirme: iletişim kutusuna adaptörün PIN\'ini girin</string>
+    <string name="vehicle_obd_switching_bt_on">Ünitenin Bluetooth\'u açılıyor…</string>
+    <string name="vehicle_obd_adapter">Adaptör: %1$s</string>
+    <string name="vehicle_choose_adapter">Adaptör seç</string>
+    <string name="vehicle_err_bt_off">Ünitede Bluetooth kapalı</string>
+    <string name="vehicle_err_not_paired">%1$s üniteyle eşleşmemiş: yeniden eşleştirmek için OBD\'ye dokunun</string>
+    <string name="vehicle_err_pairing_failed">%1$s ile eşleştirme bitmedi: OBD\'ye dokunun ve PIN\'ini girin</string>
+    <string name="vehicle_err_bt_still_off">Ünitenin Bluetooth\'u kapalı ve açılmıyor: üniteyi yeniden başlatın, sonra OBD\'ye dokunun</string>
+    <string name="vehicle_err_bt_stuck">Ünitede Android\'in Bluetooth\'u takıldı: üniteyi yeniden başlatın, sonra OBD\'ye dokunun</string>
+    <string name="vehicle_err_refused">%1$s bağlantıyı reddetti: bir telefon ya da başka bir uygulama almış, güç yok ya da menzil dışında</string>
+    <string name="vehicle_err_silent">%1$s bağlandı ama hiç yanıt vermedi: kontağı açın, sonra OBD\'ye dokunun</string>
+    <string name="vehicle_usb_cable">USB kablosu</string>
+    <string name="vehicle_obd_usb_allow">İletişim kutusunda Dashwheel\'in adaptörü kullanmasına izin verin</string>
+    <string name="vehicle_err_usb_none">Takılı USB adaptör yok</string>
+    <string name="vehicle_err_usb_tap">Dashwheel\'in %1$s cihazını kullanmasına izin vermek için OBD\'ye dokunun</string>
+    <string name="vehicle_err_usb_denied">Dashwheel\'in %1$s cihazını kullanmasına izin verilmedi</string>
+    <string name="vehicle_err_usb_open">%1$s açılamadı: çıkarıp yeniden takın</string>
+    <string name="vehicle_err_usb_silent">%1$s hiç OBD adaptörü gibi yanıt vermedi</string>
+    <string name="vehicle_err_phone_not_linked">OBD telefon üzerinden gidiyor: önce telefonu bağlayın</string>
+    <string name="vehicle_err_phone_no_adapter">OBD telefon üzerinden gidiyor: adaptörü companion uygulamasından seçin</string>
+    <string name="vehicle_obd_asking_phone">Telefondan adaptör isteniyor</string>
+    <string name="vehicle_err_phone_relay">Telefon %1$s cihazına ulaşamadı: takılı ve telefonla eşleşmiş olduğunu kontrol edin</string>
+    <string name="vehicle_err_in_call">OBD arama sırasında duraklatıldı ve arama bitince geri gelir</string>
+    <string name="vehicle_err_phone_aa">%1$s üzerindeki Android Auto, OBD adaptörünü engelliyor</string>
+    <string name="vehicle_phone_aa_fix">Nasıl düzeltilir</string>
+    <string name="vehicle_phone_aa_title">Android Auto OBD\'yi engelliyor</string>
+    <string name="vehicle_phone_aa_body">Telefon ve OBD adaptörü ünitenin Bluetooth\'unu paylaşır. Telefondaki Android Auto kablosuz başlamayı deneyip durur ve onu ele geçirir.</string>
+    <string name="vehicle_phone_aa_step1">Telefonda Ayarlar, sonra Uygulamalar, sonra Android Auto\'yu açın.</string>
+    <string name="vehicle_phone_aa_step2">İzinler, sonra Yakındaki cihazlar\'a dokunun ve İzin verme\'yi seçin.</string>
+    <string name="vehicle_phone_aa_step3">Aracı kapatıp yeniden açın.</string>
+    <string name="vehicle_phone_aa_note">Aramalar, müzik ve USB kablolu Android Auto çalışmaya devam eder.</string>
+    <string name="vehicle_phone_aa_say">%1$s üzerindeki Android Auto OBD\'yi engelliyor. Düzeltme adımları ekranda.</string>
+    <string name="vehicle_err_permission">Bluetooth izni verilmedi</string>
+    <string name="vehicle_obd_connect_from_bar">Çubuktaki OBD düğmesiyle bağlanın</string>
+    <string name="vehicle_recent_alerts">Geçmiş uyarılar</string>
+    <string name="vehicle_speed_fix">Hız düzeltmesi</string>
+    <string name="vehicle_speed_fix_detail">Hız ölçerine uyacak şekilde, arabadan veya 15 km/s üzerindeki GPS\'ten gösterilen hıza eklenir</string>
+    <string name="vehicle_speed_fix_less">Düzeltmeyi azalt</string>
+    <string name="vehicle_speed_fix_more">Düzeltmeyi artır</string>
+    <string name="vehicle_speed_fix_now">Şu anki hız: %1$d km/sa. Hız göstergenizle eşleşene kadar ayarlayın.</string>
+    <string name="vehicle_speed_fix_not_connected">Düzeltilmiş hızı canlı görmek için OBD adaptörünü bağlayın.</string>
+    <string name="vehicle_clear_confirm_title">Arıza kodları silinsin mi?</string>
+    <string name="vehicle_clear_confirm_body">Araçtan kalıcı olarak silinirler. Bir servis arızayı bulmak için onlara ihtiyaç duyar.</string>
+    <string name="vehicle_err_unit_bt_aa">Bir telefonun kablosuz Android Auto\'su ünitenin Bluetooth\'unu meşgul tutuyor, bu yüzden %1$s bağlanamıyor: telefonda kablosuz Android Auto\'yu kapatın</string>
+    <string name="vehicle_err_unit_bt_restarted">Ünitenin Bluetooth\'u takılmıştı ve yeniden başlatıldı: %1$s bir dakika içinde yeniden bağlanır</string>
+</resources>

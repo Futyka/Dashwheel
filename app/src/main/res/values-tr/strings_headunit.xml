@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Settings, System, Head unit: the firmware family and what it offers (HeadUnitCard.kt). -->
+<resources>
+    <string name="unit_card_title">Ana ünite</string>
+    <string name="unit_detected">%1$s, tespit edildi</string>
+    <string name="unit_chosen">%1$s, seçiminiz</string>
+    <string name="unit_choose_title">Ünitem</string>
+    <string name="unit_auto">Otomatik</string>
+    <string name="unit_restart">Dashwheel\'i yeniden başlat</string>
+    <string name="unit_restart_hint">Seçim, Dashwheel yeniden başlatıldığında geçerli olur.</string>
+    <string name="unit_caps_section">Bu yazılımın sunduğu özellikler</string>
+    <string name="unit_state_live">Çalışıyor</string>
+    <string name="unit_state_ready">Hazır</string>
+    <string name="unit_needs_settings">Ayarlar izni veya kabuk gerekir</string>
+    <string name="unit_needs_shell">Root, Shizuku veya ünitenin ADB\'si gerekir</string>
+    <string name="unit_needs_root">Root gerekir</string>
+    <string name="unit_survival_section">Uyku boyunca açık kalma</string>
+    <string name="unit_apply">Uygula</string>
+    <string name="unit_applied">Tamamlandı</string>
+    <string name="unit_open_whitelist">Beyaz liste uygulamasını aç</string>
+    <string name="unit_fyt_keys_title">Direksiyon tuşlarını devral</string>
+    <string name="unit_fyt_keys_detail">Yazılım, direksiyon ve panel tuşlarını Dashwheel\'e verir. Bu sırada kendi uygulamaları onları kaybeder.</string>
+    <string name="unit_needs_firmware">%1$s yazılımı gerekir</string>
+    <string name="unit_family_qf">QF (Hizpo, ROCO K706)</string>
+    <string name="unit_family_fyt">FYT (Joying, Atoto, Mekede)</string>
+    <string name="unit_family_mtc">Microntek (Dasaita, Xtrons, Eonon)</string>
+    <string name="unit_family_topway">Topway TS</string>
+    <string name="unit_family_reglink">Reglink (MediaTek)</string>
+    <string name="unit_family_allwinner">Allwinner</string>
+    <string name="unit_family_hcn">HCN (Junsun)</string>
+    <string name="unit_family_nwd">Nowadays</string>
+    <string name="unit_family_generic">Düz Android</string>
+    <string name="unit_cap_ignition">Kontak</string>
+    <string name="unit_cap_bus">Araç veri yolu</string>
+    <string name="unit_cap_doors">Kapılar</string>
+    <string name="unit_cap_steering">Direksiyon açısı</string>
+    <string name="unit_cap_climate">Klima kontrolü</string>
+    <string name="unit_cap_body">Yol bilgisayarı</string>
+    <string name="unit_cap_speed">Hız ve devir</string>
+    <string name="unit_cap_volts">Akü voltajı</string>
+    <string name="unit_cap_temp">Dış sıcaklık</string>
+    <string name="unit_cap_phone">Ünitedeki aramalar</string>
+    <string name="unit_cap_media">Ünitenin oynatıcıları</string>
+    <string name="unit_cap_volume">Ünitenin ses seviyesi</string>
+    <string name="unit_cap_launcher">Yazılımın başlatıcı seçimi</string>
+    <string name="unit_cap_popups">Yazılım pencereleri değiştirildi</string>
+    <string name="unit_cap_camera">Geri görüş kamerası</string>
+    <string name="unit_cap_tyres">Lastikler</string>
+</resources>

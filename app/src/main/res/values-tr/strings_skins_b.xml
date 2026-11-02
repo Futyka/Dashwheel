@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Horizon skin: top bar -->
+    <string name="horizon_cd_all_apps">Tüm uygulamalar</string>
+    <string name="horizon_cd_screen_layout">Google Haritalar konumu: %1$s</string>
+    <string name="horizon_cd_more">Daha fazla</string>
+    <!-- Horizon skin: telemetry and speed -->
+    <string name="horizon_connect_obd">OBD\'ye bağlan</string>
+    <string name="horizon_obd_connecting">OBD\'ye bağlanıyor…</string>
+    <string name="horizon_obd_error_retry">OBD hatası · yeniden denemek için dokunun</string>
+    <string name="horizon_obd_tap_connect">OBD\'ye bağlanmak için dokunun</string>
+    <string name="horizon_rpm_value">%1$s dev/dk</string>
+    <string name="horizon_coolant_value">%1$d° soğutma suyu</string>
+    <string name="horizon_load_value">%1$d %% yük</string>
+    <!-- Horizon skin: music -->
+    <string name="horizon_cd_previous_track">Önceki parça</string>
+    <string name="horizon_cd_pause">Duraklat</string>
+    <string name="horizon_cd_play">Oynat</string>
+    <string name="horizon_cd_next_track">Sonraki parça</string>
+    <string name="horizon_allow_media_access">Müzik erişimi izni ver</string>
+    <string name="horizon_music_caps">MÜZİK</string>
+    <string name="horizon_now_playing_caps">ŞİMDİ OYNATILIYOR</string>
+    <string name="horizon_paused_caps">DURDURULDU</string>
+    <string name="horizon_tap_allow_notification_access">Bildirim erişimi izni vermek için tıklayın</string>
+    <string name="horizon_play_something">Herhangi bir müzik uygulamasında bir şeyler çalın</string>
+    <string name="horizon_unknown_artist">Bilinmeyen sanatçı</string>
+    <!-- Horizon skin: directions -->
+    <string name="horizon_start_navigation">Google Haritalar veya Waze\'de navigasyonu başlatın</string>
+    <string name="horizon_open_navigation">Navigasyonu aç</string>
+    <!-- Horizon skin: clock (a weather condition, lower case, set in the part of the day: "clear evening") -->
+    <string name="horizon_mood_morning">%1$s sabah</string>
+    <string name="horizon_mood_afternoon">%1$s öğleden sonra</string>
+    <string name="horizon_mood_evening">%1$s akşam</string>
+    <string name="horizon_mood_night">%1$s gece</string>
+    <string name="horizon_open_clock">Saati aç</string>
+    <string name="horizon_loading">Yükleniyor…</string>
+    <!-- Horizon skin: weather and range -->
+    <string name="horizon_weather_at_car">Araçtaki hava durumu</string>
+    <string name="horizon_feels">Hissedilen %1$d°</string>
+    <string name="horizon_wind">rüzgar %1$d km/sa</string>
+    <string name="horizon_range_fuel">menzil · %1$d %% yakıt</string>
+    <!-- Horizon skin: apps and launch bar -->
+    <string name="horizon_open_app">%1$s uygulamasını aç</string>
+    <string name="horizon_launch_bar_empty">Henüz uygulama yok · eklemek için kaleme dokunun</string>
+    <string name="horizon_cd_edit_launch_bar">Başlatma çubuğunu düzenleyin</string>
+    <!-- Tape Deck skin: top bar -->
+    <string name="tape_apps_caps">MENÜ</string>
+    <string name="tape_cd_all_apps">Tüm uygulamalar</string>
+    <string name="tape_layout_caps">DÜZEN</string>
+    <string name="tape_cd_screen_layout">Google Haritalar konumu: %1$s</string>
+    <string name="tape_cd_more">Daha fazla</string>
+    <!-- Tape Deck skin: telemetry and speed -->
+    <string name="tape_temp_caps">SICAKLIK</string>
+    <string name="tape_batt_caps">AKÜ</string>
+    <string name="tape_load_caps">YÜK</string>
+    <string name="tape_cd_choose_adapter">OBD adaptörü seç</string>
+    <string name="tape_rpm_caps">RPM</string>
+    <string name="tape_telemetry_caps">TELEMETRİ</string>
+    <string name="tape_live_caps">CANLI</string>
+    <string name="tape_linking_caps">BAĞLANIYOR</string>
+    <string name="tape_obd_error_tap">OBD HATASI · DOKUN</string>
+    <string name="tape_no_obd_tap">OBD YOK · DOKUN</string>
+    <string name="tape_speed_caps">HIZ</string>
+    <string name="tape_tap_to_enable_caps">ETKİNLEŞTİRMEK İÇİN DOKUN</string>
+    <!-- Tape Deck skin: cassette deck -->
+    <string name="tape_unknown_artist_caps">BİLİNMEYEN SANATÇI</string>
+    <string name="tape_start_music_app_caps">BİR MÜZİK UYGULAMASI BAŞLAT</string>
+    <string name="tape_cd_grant_media_access">Müzik erişimi izni ver</string>
+    <string name="tape_grant_access_caps">ERİŞİM İZNİ VER</string>
+    <string name="tape_cd_previous_track">Önceki parça</string>
+    <string name="tape_cd_pause">Duraklat</string>
+    <string name="tape_cd_play">Oynat</string>
+    <string name="tape_cd_next_track">Sonraki parça</string>
+    <string name="tape_cd_open_music_app">Müzik uygulamasını aç</string>
+    <string name="tape_play_caps">OYNAT</string>
+    <string name="tape_pause_caps">DURAKLAT</string>
+    <string name="tape_stop_caps">DURDUR</string>
+    <string name="tape_hifi_stereo_caps">HI-FI STEREO</string>
+    <!-- Tape Deck skin: directions CRT -->
+    <string name="tape_tap_grant_notification_access_caps">BİLDİRİM ERİŞİMİNE İZİN VERMEK İÇİN TIKLAYIN</string>
+    <string name="tape_tap_open_maps_caps">HARİTALARI AÇMAK İÇİN DOKUN</string>
+    <string name="tape_eta_caps">VARIŞ %1$s</string>
+    <!-- Tape Deck skin: weather neon sign -->
+    <string name="tape_loading_caps">YÜKLENİYOR</string>
+    <string name="tape_feels_wind_caps">Hissedilen %1$d° · Rüzgar %2$d KM/H</string>
+    <string name="tape_low_high_caps">MİN %1$d° · MAKS %2$d°</string>
+    <!-- Tape Deck skin: fuel and range -->
+    <string name="tape_fuel_range_caps">YAKIT &amp; MENZİL</string>
+    <string name="tape_fuel_caps">YAKIT</string>
+    <string name="tape_range_caps">MENZİL</string>
+    <!-- Tape Deck skin: radio presets -->
+    <string name="tape_presets_empty_caps">KAYIT YOK · UYGULAMA EKLEMEK İÇİN KALEME DOKUN</string>
+    <string name="tape_cd_edit_launch_bar">Başlatma çubuğunu düzenleyin</string>
+    <!-- In-app updater -->
+    <string name="sys_update_check_failed">Güncellemeler kontrol edilemedi</string>
+    <string name="sys_update_download_failed">İndirme başarısız</string>
+    <string name="sys_update_downloading">Güncelleme indiriliyor</string>
+    <!-- System-app install (shown after "Failed: " in the install dialog) -->
+    <string name="sys_install_su_failed">su ile yükleme başarısız</string>
+    <string name="sys_install_failed">yükleme başarısız</string>
+    <string name="sys_install_failed_not_root">%1$s (adbd root değil: uid=%2$s)</string>
+</resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- What the car says by itself: Settings -> Alerts -> What the car says (HandsFreeSettings.kt, SpokenEvents.kt) -->
+    <string name="voice_section">Aracın söyledikleri</string>
+    <string name="voice_warnings">Sesli uyarılar ve ipuçları</string>
+    <string name="voice_warnings_detail">Motor, akü, partikül filtresi, frenler, yakıt, ana ünite ısısı</string>
+    <string name="voice_messages">Mesajlar</string>
+    <string name="voice_messages_detail">Mesajın kimden geldiğini gösterir ve söyler</string>
+    <string name="voice_faults">Yeni arıza kodları</string>
+    <string name="voice_faults_detail">Tarama onları bulduğunda ismiyle bir kez söyler</string>
+    <string name="voice_limit_detail">Limitin üzerinde kaldığınızda uyarır, limit başına bir kez</string>
+    <string name="voice_weather">Hava durumu uyarıları</string>
+    <string name="voice_weather_detail">Bulunduğunuz ve gideceğiniz yerdeki turuncu ve kırmızı uyarılar</string>
+    <string name="voice_lpg">LPG az</string>
+    <string name="voice_lpg_detail">İkinci depo azaldığında söyler</string>
+    <string name="voice_menu_quiet">Sessize al</string>
+    <string name="voice_menu_back">Sesi aç</string>
+    <string name="voice_where">Aracın kendiliğinden söyledikleri Ayarlar, Uyarılar bölümünden açılıp kapatılır.</string>
+    <!-- Spoken -->
+    <string name="voice_say_message">%1$s mesaj gönderdi</string>
+    <string name="voice_no_message">Mesaj yok.</string>
+    <string name="voice_status_range">Yaklaşık %1$d kilometrelik yakıt kaldı.</string>
+    <string name="voice_status_no_faults">Arıza kodu yok.</string>
+    <string name="voice_status_nothing">Bildirilecek bir şey yok.</string>
+    <string name="voice_quiet_on">Bir sonraki çalıştırmaya kadar sessiz. Acil uyarılar yine söylenir.</string>
+    <string name="voice_quiet_off">Ses yeniden açık.</string>
+    <string name="voice_no_position">Konum henüz bilinmiyor.</string>
+    <string name="voice_no_fuel_prices">Buralarda yakıt fiyatı yok.</string>
+    <plurals name="voice_fuel_station">
+        <item quantity="one">Yakındaki en ucuz istasyon %1$s, %2$d kilometre uzakta.</item>
+        <item quantity="other">Yakındaki en ucuz istasyon %1$s, %2$d kilometre uzakta.</item>
+    </plurals>
+    <string name="voice_guidance_stopped">Navigasyon durduruldu.</string>
+    <string name="voice_guidance_none">Durdurulacak navigasyon yok.</string>
+</resources>

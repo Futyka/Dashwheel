@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Experimental: the driver's own car in place of the drawn one (MyCarLook.kt, MyCarLookSheet.kt) -->
+    <string name="mycar_title">Araba resmi</string>
+    <string name="mycar_settings_detail">Deneysel: araba göstergesinde kendi arabanızın resmi</string>
+    <string name="mycar_experimental">Deneysel: çizili aracın yerine kendi aracınız. Bir 3D modelden yapılmış araç paketi ya da aracın yandan bir resmini kullanın.</string>
+    <string name="mycar_empty">Henüz resim yok. Bir dosya seçin ya da telefon uygulamasından gönderin.</string>
+    <string name="mycar_working">Hazırlanıyor</string>
+    <string name="mycar_ready">Aracınızın resmi yerinde</string>
+    <string name="mycar_failed">Bu resim okunamadı. JPG ya da PNG deneyin.</string>
+    <string name="mycar_model_on_phone">Bir 3D model telefonda aracınız olur: Dashwheel Companion, Araç sekmesi, 3D modelden.</string>
+    <string name="mycar_no_picker">Bu ünitede dosya seçici yok. Dosyayı buraya koyun: %1$s</string>
+    <string name="mycar_pick">Dosya seç</string>
+    <string name="mycar_remove">Kaldır</string>
+    <string name="mycar_remove_title">Aracınızın resmi kaldırılsın mı?</string>
+    <string name="mycar_remove_body">Kutucuklar çizili araca döner.</string>
+    <string name="mycar_cancel">İptal</string>
+    <string name="mycar_views">Görünümler: %1$s</string>
+    <string name="mycar_view_side">yan</string>
+    <string name="mycar_view_top">üstten</string>
+    <string name="mycar_view_hero">üç çeyrek</string>
+    <string name="mycar_view_open">kapılar açık</string>
+    <string name="mycar_show_title">Göster</string>
+    <string name="mycar_show_drawn">Çizili araç</string>
+    <string name="mycar_show_mine">Aracım</string>
+    <string name="mycar_style_title">Stil</string>
+    <string name="mycar_style_photo">Fotoğraf</string>
+    <string name="mycar_style_photo_hint">Resim olduğu gibi</string>
+    <string name="mycar_style_tinted">Renkli</string>
+    <string name="mycar_style_tinted_hint">Görünümün renginde, gölgeleri korunur</string>
+    <string name="mycar_style_outline">Çizgi</string>
+    <string name="mycar_style_outline_hint">Yalnızca çizgileri, görünümün renginde</string>
+    <string name="mycar_where">Lastik haritası ve Araç silueti tasarımlarında ve Aracım kutucuğunda gösterilir.</string>
+    <string name="mycar_phone_hint">Telefondan: Dashwheel companion uygulamasında Araba resmi, sonra Dosya seç.</string>
+    <string name="mycar_photos">3 fotoğraf</string>
+    <string name="mycar_photos_hint">Ya da aracın fotoğraflarını bir kerede seçin: yan, ön ve arka, varsa bir de üstten ve kapılar açıkken üstten. side, front, back, top ve open adlarıyla hiç karışmazlar.</string>
+    <string name="mycar_photos_no_car">Bu fotoğraflarda araç bulunamadı. Aracın tamamının düz bir arka planda olduğu fotoğraflar kullanın.</string>
+    <string name="mycar_doors_title">Açık kapılar</string>
+    <string name="mycar_doors_top">Üstten</string>
+    <string name="mycar_doors_3d">3D</string>
+    <string name="mycar_doors_top_hint">Aracınız üstten, kapılar üzerinde açılır</string>
+    <string name="mycar_doors_3d_hint">3D aracınız açık olana döner ve onu açar</string>
+</resources>

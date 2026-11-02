@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Moments: Home follows the drive (Moments.kt, MomentsScreen.kt) -->
+    <string name="moments_title">Anlar</string>
+    <string name="moments_hint">Ana ekran sürüşü takip eder. Dokunmak gerekmez.</string>
+    <string name="moments_apps_note">Ana ekranda bir kutucukta uygulama çalışıyor, bu yüzden Ana ekran olduğu gibi kalır.</string>
+    <string name="moments_settings_off">Kapalı: Ana ekran düzeniniz korunur</string>
+    <string name="moments_master">Kendiliğinden geçiş yap</string>
+    <string name="moments_now">Şimdi</string>
+    <string name="moments_any_time">Her zaman</string>
+    <string name="moments_starts">Başlar</string>
+    <string name="moments_ends">Biter</string>
+    <string name="moments_stays">Yerinde kalır</string>
+    <string name="moments_stays_body">Ekrana dokunurken asla geçiş yapmaz</string>
+    <string name="moments_on">Açık</string>
+    <string name="moments_off">Kapalı</string>
+    <string name="moments_change">Gösterdiğini değiştir</string>
+    <string name="moments_change_hint">Kopyada pencerelerdeki uygulamalar ve sistem widget\'ları yer almaz.</string>
+    <string name="moments_custom">Kendi seçiminiz</string>
+    <string name="moments_as_it_came">Geldiği gibi</string>
+    <string name="moments_copy_of">%1$s kopyası</string>
+    <string name="moments_back_home">Ana ekrana dön</string>
+    <string name="moment_engine_on">Motor çalıştı</string>
+    <string name="moment_engine_on_shows">Yakıt, hava durumu ve günün planı</string>
+    <string name="moment_engine_on_starts">Motor çalıştığında</string>
+    <string name="moment_engine_on_ends">Araç yola çıktığında</string>
+    <string name="moment_guiding">Yol tarifi</string>
+    <string name="moment_guiding_shows">Harita ve sonraki dönüş önde</string>
+    <string name="moment_guiding_starts">Haritalar veya Waze yol tarif ederken</string>
+    <string name="moment_guiding_ends">Rota bittiğinde</string>
+    <string name="moment_long">Uzun yolculuk</string>
+    <string name="moment_long_shows">Menzil, yakıt molaları ve bir dinlenme</string>
+    <string name="moment_long_starts">Direksiyonda bir saat sonra</string>
+    <string name="moment_long_ends">Park ettiğinizde</string>
+    <string name="moment_parked">Park edildi</string>
+    <string name="moment_parked_shows">Araç sağlığı ve mesajlar</string>
+    <string name="moment_parked_starts">Bir sürüşten sonra, 2 dk durunca</string>
+    <string name="moment_parked_ends">Araç yola çıktığında</string>
+    <string name="moment_fault">Bir sorun var</string>
+    <string name="moment_fault_shows">Arıza kodu ve motor değerleri</string>
+    <string name="moment_fault_starts">Bir arıza kodu göründüğünde</string>
+    <string name="moment_fault_ends">5 dk sonra ya da Ana ekran tuşuyla</string>
+</resources>

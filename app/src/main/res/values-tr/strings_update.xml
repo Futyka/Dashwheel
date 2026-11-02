@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Release notes of an available update (ReleaseNotes.kt), from the update strip -->
+    <string name="update_notes_title">%1$s sürümünde yenilikler</string>
+    <string name="update_notes_empty">Bu sürüm için sürüm notu yok.</string>
+    <!-- The Ko-fi ask beside every release's notes, GitHub edition (ReleaseNotes.kt) -->
+    <string name="update_support_title">Boş zamanımda yapıldı</string>
+    <string name="update_support_body">Dashwheel ücretsizdir ve akşamlarımda, pek çok geç gecede yapıldı. Sürüşlerinizi iyileştiriyorsa bir kahve beni bir sonraki sürüme kadar ayakta tutar. Teşekkürler!</string>
+    <!-- Settings > About > Previous version: the way back to an earlier build (issue #76) -->
+    <string name="update_previous">Önceki sürüm</string>
+    <string name="update_previous_detail">Bu kanalın daha eski bir derlemesine geri dön</string>
+    <string name="update_previous_none">Geri dönülecek daha eski derleme yok</string>
+    <string name="update_previous_saved">%1$s Download/Dashwheel klasöründe</string>
+    <string name="update_previous_failed">Eski derleme yüklenemedi</string>
+    <string name="update_previous_title">%1$s sürümüne geri dön</string>
+    <string name="update_previous_shell_body">Dashwheel %1$s sürümünü bu sürümün üstüne yükler ve yeniden başlar. Ayarlarınız kalır.</string>
+    <string name="update_previous_go">Geri dön</string>
+    <string name="update_previous_manual_body">Android daha eski bir sürümü yenisinin üstüne yükleyemez. Önce Dashwheel\'i kaldırın, bu ayarlarınızı ve eşleştirmelerinizi siler, sonra ünitenin dosya yöneticisinde Download/Dashwheel/%1$s dosyasını açın.</string>
+    <string name="update_previous_uninstall">Kaldır</string>
+</resources>

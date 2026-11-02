@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Kinetic skin -->
+    <string name="kinetic_menu">Menü</string>
+    <string name="kinetic_talk">Konuş</string>
+    <string name="kinetic_talk_cd">Asistanla konuş</string>
+    <string name="kinetic_arrival">Varış %1$s</string>
+    <string name="kinetic_ticker_coolant">Soğutma suyu %1$s</string>
+    <string name="kinetic_ticker_range">Menzil %1$s</string>
+    <string name="kinetic_sunset">Gün batımı: %1$s</string>
+    <string name="kinetic_sunrise">Gün doğumu: %1$s</string>
+    <string name="kinetic_metres">metre</string>
+    <string name="kinetic_kilometres">kilometre</string>
+    <string name="kinetic_miles">mil</string>
+    <string name="kinetic_feet">fit</string>
+    <string name="kinetic_yards">yarda</string>
+    <string name="kinetic_next">Sonraki</string>
+    <string name="kinetic_usual_drive">Şimdi çıkarsanız, her zamanki yolunuz</string>
+    <string name="kinetic_home_at">Ev %1$s</string>
+    <string name="kinetic_where_to">Nereye gideceksiniz?</string>
+    <string name="kinetic_limit">Limit %1$d</string>
+    <string name="kinetic_rpm">dev/dk</string>
+    <string name="kinetic_gear">Vites %1$s</string>
+    <string name="kinetic_coolant">Soğutma suyu</string>
+    <string name="kinetic_battery">Batarya</string>
+    <string name="kinetic_load">Yük</string>
+    <string name="kinetic_now_playing">Şimdi oynatılıyor</string>
+    <string name="kinetic_paused">Durduruldu</string>
+    <string name="kinetic_range">Menzil</string>
+    <string name="kinetic_fuel_left">Yakıt %1$d %%</string>
+    <string name="kinetic_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+    <string name="kinetic_car_cd">Aracınız ve menzili</string>
+</resources>

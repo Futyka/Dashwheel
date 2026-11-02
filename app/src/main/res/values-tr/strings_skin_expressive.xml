@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Expressive skin -->
+    <string name="expressive_talk">Konuş</string>
+    <string name="expressive_talk_cd">Asistanla konuş</string>
+    <string name="expressive_arrive">Varış %1$s</string>
+    <string name="expressive_rain_from">Yağmur %1$s</string>
+    <string name="expressive_rain_until">%1$s saatine kadar yağmur</string>
+    <string name="expressive_speed_limit_cd">Hız limiti %1$d</string>
+    <string name="expressive_rpm">dev/dk</string>
+    <string name="expressive_coolant">Soğutma suyu</string>
+    <string name="expressive_battery">Batarya</string>
+    <string name="expressive_load">Yük</string>
+    <string name="expressive_fuel">Yakıt</string>
+    <string name="expressive_car_cd">Aracınız</string>
+    <string name="expressive_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+</resources>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- First-run setup (SetupScreen.kt): the car, what the launcher may use, the look -->
+    <string name="setup_title">Dashwheel kurulumu</string>
+    <string name="setup_step">%1$d / 3 adım</string>
+    <string name="setup_skip">Atla</string>
+    <string name="setup_back">Geri</string>
+    <string name="setup_next">Devam et</string>
+    <string name="setup_done">Tamamlandı</string>
+    <string name="setup_car_title">Aracınız</string>
+    <string name="setup_car_body">Marka, model ve yıl yeterli. Tüm özellikler Ayarlar, Araç\'ta bekliyor.</string>
+    <string name="setup_car_make">Marka</string>
+    <string name="setup_car_model">Model</string>
+    <string name="setup_car_year">Yıl</string>
+    <string name="setup_car_fuel">Yakıt</string>
+    <string name="setup_car_gearbox">Şanzıman</string>
+    <string name="setup_later">Sonra</string>
+    <string name="setup_driver_side">Sürücü koltuğu</string>
+    <string name="setup_driver_left">Sol</string>
+    <string name="setup_driver_right">Sağ</string>
+    <string name="setup_access_title">Dashwheel neleri kullansın</string>
+    <string name="setup_access_body">Her biri isteğe bağlıdır. Açılan ekranda izin verin, sonra geri dönün.</string>
+    <string name="setup_access_notifications">Bildirimler</string>
+    <string name="setup_access_notifications_detail">Bu ünitedeki uygulamalardan müzik ve bir sonraki dönüş</string>
+    <string name="setup_access_location">Konum</string>
+    <string name="setup_access_location_detail">Harita, hava durumu, yolculuk ve park yeri</string>
+    <string name="setup_access_contacts">Rehber</string>
+    <string name="setup_access_contacts_detail">Hızlı aramadaki favori kişiler</string>
+    <string name="setup_access_calendar">Takvim</string>
+    <string name="setup_access_calendar_detail">Ajandadaki bugünkü randevular</string>
+    <string name="setup_access_obd">OBD adaptörü</string>
+    <string name="setup_access_obd_detail">Bluetooth üzerinden motor değerleri, yakıt ve arıza kodları</string>
+    <string name="setup_access_phone">Telefon</string>
+    <string name="setup_access_phone_detail">Telefonunuzdan mesajlar, aramalar ve ajandanız</string>
+    <string name="setup_access_a11y">Bölünmüş ekran ve düğmeler</string>
+    <string name="setup_access_a11y_detail">Yan yana iki uygulama, direksiyon düğmeleri, telefondan yazma</string>
+    <string name="setup_allow">İzin ver</string>
+    <string name="setup_choose">Seç</string>
+    <string name="setup_allowed">İzin verildi</string>
+    <string name="setup_pair">Eşleştir</string>
+    <string name="setup_paired">Eşleştirildi</string>
+    <string name="setup_obd_none">Adaptörüm yok</string>
+    <string name="setup_obd_no_adapter">Adaptör yok</string>
+    <string name="setup_no_reminder">Bir daha hatırlatma</string>
+    <string name="setup_look_title">Görünümü</string>
+    <string name="setup_look_body">Başlangıç için üç tane. Tüm temalar Ayarlar, Görünüm\'de.</string>
+    <string name="setup_pill">Kurulumu bitir</string>
+    <string name="setup_car_tiles_title">Araç kutucukları eklensin mi?</string>
+    <string name="setup_car_tiles_body">Panolarda motor göstergeleri, arıza kodları, akü ve ısınma.</string>
+    <string name="setup_again">Tekrar kur</string>
+    <string name="setup_again_detail">Araç, Dashwheel\'in neleri kullanacağı ve görünüm, adım adım</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="road_experimental">Deneysel</string>
+    <string name="rec_title">Yolu kaydet</string>
+    <string name="rec_detail">Yol izleme çalışırken yolun son iki dakikası bu telefonda tutulur. Bir darbe, sert fren, bir uyarı, dörtlüler ya da bir dokunuş; saat, yer ve aracın hızı görüntüye yazılmış bir dakikalık bir klip saklar.</string>
+    <string name="rec_legal">Çoğu ülkede serbest, birkaçında kısıtlı (Avusturya, Portekiz). Klipler bu telefonda kalır, hiçbir yere gönderilmez ve ses kaydedilmez.</string>
+    <string name="rec_clips_title">Klipler</string>
+    <string name="rec_no_clips">Henüz klip yok. Bir şey olduğunda ya da Klibi sakla\'ya dokunduğunuzda bir klip saklanır.</string>
+    <string name="rec_keep">Klibi sakla</string>
+    <string name="rec_state_recording">Kaydediliyor</string>
+    <string name="rec_state_keeping">Klip saklanıyor</string>
+    <string name="rec_state_hot">Çok sıcak: kayıt duraklatıldı</string>
+    <string name="rec_state_full">Telefon dolu: kayıt duraklatıldı</string>
+    <string name="rec_state_unsupported">Bu telefon yolu izlerken kayıt yapamıyor</string>
+    <string name="rec_trigger_impact">Darbe</string>
+    <string name="rec_trigger_brake">Sert fren</string>
+    <string name="rec_trigger_collision">Çarpışma uyarısı</string>
+    <string name="rec_trigger_hazard">Dörtlüler</string>
+    <string name="rec_trigger_button">Elle saklandı</string>
+    <string name="rec_share">Paylaş</string>
+    <string name="rec_notes">Notlar</string>
+    <string name="rec_delete">Sil</string>
+    <string name="rec_length">%1$d sn, %2$d MB</string>
+    <string name="rec_state_low">Pil zayıf: kayıt duraklatıldı</string>
+    <string name="road_plug_in">Telefonu şarja takın: %1$d%%</string>
+    <string name="rec_fetch_title">Bilgisayarım klipleri alsın</string>
+    <string name="rec_fetch_detail">Yalnızca Tailscale üzerinden, kendi bilgisayarınız için. Ona anahtarı içeren bu adresi verin.</string>
+    <string name="rec_fetch_no_tailscale">Adresi almak için bu telefonda Tailscale\'i açın.</string>
+</resources>

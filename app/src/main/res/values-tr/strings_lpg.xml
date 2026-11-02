@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The LPG tank (LpgTank.kt, LpgTankTile.kt) -->
+    <string name="lpg_kind">LPG tankı</string>
+    <string name="lpg_kind_blurb">LPG tankında ne kaldığı, gidilen mesafeden hesaplanır</string>
+    <string name="lpg_title">LPG</string>
+    <string name="lpg_off">Seviyesini takip etmek için LPG tankını ayarlayın.</string>
+    <string name="lpg_set_up">Ayarla</string>
+    <string name="lpg_first">Tankı ağzına kadar doldurun, sonra Dolu\'ya dokunun.</string>
+    <string name="lpg_full">Dolu</string>
+    <string name="lpg_left">%1$s L kaldı</string>
+    <string name="lpg_range">%1$d %2$s gidilebilir</string>
+    <string name="lpg_on_lpg">LPG\'de</string>
+    <string name="lpg_on_petrol">Benzinde</string>
+    <string name="lpg_pumped">Kaç litre alındı?</string>
+    <string name="lpg_save">Kaydet</string>
+    <string name="lpg_skip">Atla</string>
+    <string name="lpg_use">%1$s, tahmini</string>
+    <string name="lpg_use_learned">%1$s, pompada ölçüldü</string>
+    <string name="lpg_use_label">Tüketim</string>
+    <string name="lpg_explanation">Arabanın göstergesi sadece benzin deposunu biliyor. LPG seviyesi LPG\'de sürülen kilometrelerden hesaplanır, bu nedenle her dolumdan sonra Dolu\'ya dokunun.</string>
+    <string name="lpg_enable">LPG tankını takip et</string>
+    <string name="lpg_enable_detail">LPG göstergesindeki seviyeyi gösterir ve düşük olduğunda söyler</string>
+    <string name="lpg_tank_size">Tank, L</string>
+    <string name="lpg_use_setting">Tüketim, L/100 km</string>
+    <string name="lpg_price">Litre fiyatı</string>
+    <string name="lpg_tank_hint">Tam dolumda ne kadar alır: LPG tankı yalnızca yüzde 80\'e kadar dolar.</string>
+    <string name="lpg_use_hint">Aracın tüketiminden başlamak için boş bırakın; her dolum düzeltir.</string>
+    <string name="lpg_price_hint">En yakın istasyonun fiyatını almak için boş bırakın.</string>
+    <string name="lpg_mode_label">Araç ne zaman LPG ile çalışır</string>
+    <string name="lpg_mode_auto">Isınınca</string>
+    <string name="lpg_mode_always">Her zaman</string>
+    <string name="lpg_mode_manual">Ben geçirince</string>
+    <string name="lpg_mode_auto_detail">Çoğu sistem benzinle başlar. LPG, soğutma sıvısı geçiş sıcaklığına ulaşınca ya da OBD adaptörü yokken sürüşün ilk kilometresinden sonra sayılır.</string>
+    <string name="lpg_mode_manual_detail">Kutucuktan ya da bir direksiyon tuşuyla LPG ile benzin arasında geçiş yapın.</string>
+    <string name="lpg_switch_temp">Geçiş sıcaklığı, %1$s</string>
+    <string name="lpg_level">Seviye</string>
+    <string name="lpg_never_filled">Henüz tam dolum yok</string>
+    <string name="lpg_last_fill">Son tam dolum: %1$s</string>
+    <string name="lpg_full_now">Tank şimdi dolu</string>
+    <string name="lpg_settings_detail">İkinci tank, seviyesi mesafeden hesaplanır</string>
+    <plurals name="lpg_voice_low">
+        <item quantity="one">LPG azaldı: yaklaşık %1$d kilometre kaldı.</item>
+        <item quantity="other">LPG azaldı: yaklaşık %1$d kilometre kaldı.</item>
+    </plurals>
+    <string name="lpg_voice_full">LPG tankı dolu.</string>
+    <string name="lpg_voice_off">LPG tankı ayarlanmadı.</string>
+    <string name="lpg_voice_on_lpg">LPG\'de.</string>
+    <string name="lpg_voice_on_petrol">Benzinde.</string>
+    <string name="lpg_wheel_full">LPG tankı dolu</string>
+    <string name="lpg_wheel_switch">LPG ya da benzin</string>
+    <string name="lpg_warming">Benzin, ısınıyor</string>
+    <string name="lpg_lpg_off">LPG kapalı</string>
+    <string name="lpg_now">Şimdi</string>
+    <string name="lpg_off_hint">LPG\'yi kendiniz mi kapattınız? Kutucuktaki LPG işaretine dokunun ya da bir direksiyon tuşu kullanın. Geri açınca ya da dolum yapınca LPG yeniden sayılır.</string>
+    <string name="lpg_method_label">Kullanılan LPG nasıl hesaplanır</string>
+    <string name="lpg_method_average">Ortalama</string>
+    <string name="lpg_method_engine">Motor × katsayı</string>
+    <string name="lpg_method_engine_detail">LPG\'de bile motor bilgisayarı gereken benzini hesaplar. OBD\'den okunup katsayıyla çarpılınca şehir ve otoyol sürüşünü izler; adaptör yokken ortalama kullanılır.</string>
+    <string name="lpg_factor">Katsayı, benzin litresi başına LPG litresi</string>
+    <string name="lpg_factor_learned">Pompada ölçülen: %1$s</string>
+    <string name="lpg_flow_now">Motor okuması şu an: %1$s L/sa</string>
+    <string name="lpg_flow_none">Henüz motor okuması yok. Adaptör bağlanıp motor çalışınca görünür.</string>
+    <string name="lpg_voice_auto">Motor ısınınca LPG yeniden açık.</string>
+    <string name="lpg_voice_lpg_off">LPG kapalı. Benzin sayılıyor.</string>
+</resources>

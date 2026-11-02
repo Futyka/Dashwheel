@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paper skin -->
+    <string name="paper_map">Harita</string>
+    <string name="paper_map_cd">Haritayı aç</string>
+    <string name="paper_music">Müzik</string>
+    <string name="paper_music_cd">Müzik çaları aç</string>
+    <string name="paper_phone">Telefon</string>
+    <string name="paper_phone_cd">Telefonu aç</string>
+    <string name="paper_talk">Konuş</string>
+    <string name="paper_talk_cd">Asistanla konuş</string>
+    <string name="paper_refreshed">%1$s yenilendi</string>
+    <string name="paper_arrival">Varış</string>
+    <string name="paper_speed">Hız</string>
+    <string name="paper_limit">limit %1$d</string>
+    <string name="paper_limit_label">Limit</string>
+    <string name="paper_rain_next">Yağmur, sonraki %1$d sa</string>
+    <string name="paper_dry_next">Kuru, sonraki %1$d sa</string>
+    <string name="paper_rain_from">%1$s itibariyle</string>
+    <string name="paper_rain_until">%1$s saatine kadar</string>
+    <string name="paper_coolant">Soğutma suyu</string>
+    <string name="paper_battery">Batarya</string>
+    <string name="paper_revs">Devir</string>
+    <string name="paper_rpm">dev/dk</string>
+    <string name="paper_load">Yük</string>
+    <string name="paper_intake">Emme havası</string>
+    <string name="paper_range">Menzil</string>
+    <string name="paper_fuel">Yakıt</string>
+    <string name="paper_litres">Litre</string>
+    <string name="paper_prev">Önceki</string>
+    <string name="paper_play">Oynat</string>
+    <string name="paper_pause">Duraklat</string>
+    <string name="paper_next">Sonraki</string>
+    <string name="paper_no_route">Rota yok</string>
+    <string name="paper_edit">Düzenle</string>
+    <string name="paper_connect">Bağlan</string>
+    <string name="paper_launch_bar_empty">Düzenle ile uygulama ekleyin</string>
+</resources>

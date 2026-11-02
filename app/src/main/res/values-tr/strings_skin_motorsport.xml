@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Motorsport skin (MotorsportSkin.kt, MotorsportSkinTiles.kt). -->
+<resources>
+    <string name="skin_motorsport_cd_shift_lights">Vites ışıkları, motor devriyle yanar</string>
+    <string name="skin_motorsport_flag_green">YEŞİL BAYRAK</string>
+    <string name="skin_motorsport_flag_yellow">SARI BAYRAK</string>
+    <string name="skin_motorsport_flag_red">KIRMIZI BAYRAK</string>
+    <string name="skin_motorsport_connect_obd">OBD\'ye bağlan</string>
+    <string name="skin_motorsport_choose_adapter">OBD adaptörü seç</string>
+    <string name="skin_motorsport_gear_caps">VİTES</string>
+    <string name="skin_motorsport_speed_caps">HIZ</string>
+    <string name="skin_motorsport_rpm_caps">RPM</string>
+    <string name="skin_motorsport_tap_connect_caps">OBD\'YE BAĞLANMAK İÇİN DOKUN</string>
+    <string name="skin_motorsport_connecting_caps">BAĞLANIYOR</string>
+    <string name="skin_motorsport_obd_error_caps">OBD HATASI · TEKRAR İÇİN DOKUN</string>
+    <string name="skin_motorsport_live_caps">CANLI</string>
+    <string name="skin_motorsport_vs_usual_caps">NORMALE GÖRE</string>
+    <string name="skin_motorsport_tyre_fl">FL</string>
+    <string name="skin_motorsport_tyre_fr">FR</string>
+    <string name="skin_motorsport_tyre_rl">RL</string>
+    <string name="skin_motorsport_tyre_rr">RR</string>
+    <string name="skin_motorsport_water_caps">SU</string>
+    <string name="skin_motorsport_batt_caps">AKÜ</string>
+    <string name="skin_motorsport_air_caps">HAVA</string>
+    <string name="skin_motorsport_load_caps">YÜK</string>
+    <string name="skin_motorsport_track_caps">PİST</string>
+    <string name="skin_motorsport_finish_caps">BİTİŞ %1$s</string>
+    <string name="skin_motorsport_sector">S%1$d</string>
+    <string name="skin_motorsport_turn_left">L</string>
+    <string name="skin_motorsport_turn_right">R</string>
+    <string name="skin_motorsport_open_navigation">Navigasyonu aç</string>
+    <string name="skin_motorsport_tap_allow_caps">İZİN VERMEK İÇİN DOKUN</string>
+    <string name="skin_motorsport_tap_maps_caps">HARİTALARI AÇMAK İÇİN DOKUN</string>
+    <string name="skin_motorsport_team_radio_caps">TAKIM TELSİZİ</string>
+    <string name="skin_motorsport_on_air_caps">YAYINDA</string>
+    <string name="skin_motorsport_allow_media">Müzik erişimi izni ver</string>
+    <string name="skin_motorsport_start_music_caps">BİR MÜZİK UYGULAMASI BAŞLAT</string>
+    <string name="skin_motorsport_unknown_artist">Bilinmeyen sanatçı</string>
+    <string name="skin_motorsport_previous">Önceki parça</string>
+    <string name="skin_motorsport_play">Oynat</string>
+    <string name="skin_motorsport_pause">Duraklat</string>
+    <string name="skin_motorsport_next">Sonraki parça</string>
+    <string name="skin_motorsport_local_time_caps">YEREL SAAT</string>
+    <string name="skin_motorsport_open_clock">Saati aç</string>
+    <string name="skin_motorsport_conditions_caps">KOŞULLAR</string>
+    <string name="skin_motorsport_loading_caps">YÜKLENİYOR</string>
+    <string name="skin_motorsport_feels_caps">HİSSEDİLEN %1$d°</string>
+    <string name="skin_motorsport_wind_caps">RÜZGAR %1$d %2$s</string>
+    <string name="skin_motorsport_tyre_slicks">SLICK</string>
+    <string name="skin_motorsport_tyre_inters">INTER</string>
+    <string name="skin_motorsport_tyre_wets">YAĞMUR</string>
+    <string name="skin_motorsport_pit_board_caps">PİT PANOSU</string>
+    <string name="skin_motorsport_box_box_caps">BOX BOX · YAKIT AZ</string>
+    <string name="skin_motorsport_open_app">%1$s uygulamasını aç</string>
+    <string name="skin_motorsport_edit_launch_bar">Başlatma çubuğunu düzenleyin</string>
+    <string name="skin_motorsport_launch_bar_empty_caps">UYGULAMA YOK · EKLEMEK İÇİN KALEME DOKUN</string>
+</resources>

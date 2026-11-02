@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="access_a11y_title">Erişilebilirlik erişimi</string>
+    <string name="access_a11y_body">Dashwheel, iki uygulamayı yan yana koymak, direksiyon düğmelerine Geri gibi ayarladığınız işlemleri yaptırmak ve telefonunuzda dikte ettiğinizi seçili alana yazmak için Android\'in erişilebilirlik hizmetini kullanır.\n\nBunun için hangi uygulamaların nerede açık olduğunu, bastığınız düğmeleri ve yazdığınız alanı görür. Ekranda başka hiçbir şeyi okumaz. Hiçbir şey saklanmaz, gönderilmez veya paylaşılmaz: hepsi bu cihazda kalır.\n\nCompanion\'ın dokunmatik yüzeyiyle, yalnızca o sırada, telefonunuzun imlecinin ekranda olduğu yere dokunur ve kaydırır.</string>
+    <string name="access_notif_title">Bildirim erişimi</string>
+    <string name="access_notif_body">Dashwheel, çalan parçayı, sonraki dönüşü ve yeni mesajları panoda göstermek için bildirimleri okur. Bu cihazda kalırlar.</string>
+    <string name="access_open_settings">Ayarları aç</string>
+    <string name="access_agree">Kabul et</string>
+    <string name="access_not_now">Şimdi değil</string>
+    <string name="access_restricted_title">Android tarafından engellendi</string>
+    <string name="access_restricted_body">Android bunu dosyadan yüklenen uygulamalar için engeller. Ayarları açın ve Dashwheel\'e bir kez dokunun, sonra Uygulama bilgileri, ⋮, Kısıtlanmış ayarlara izin ver ve tekrar deneyin.</string>
+    <string name="access_app_info">Uygulama bilgileri</string>
+</resources>

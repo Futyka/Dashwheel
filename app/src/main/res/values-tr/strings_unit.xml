@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The head unit firmware family and what it lets Dashwheel do (UnitPlatform, Settings, System, Head unit). -->
+<resources>
+    <string name="unit_fyt_keys_note">Kabuk gerekir; bu sırada donanım yazılımının kendi uygulamaları direksiyon tuşlarını kaybeder</string>
+    <string name="unit_mtc_whitelist_title">Dashwheel\'i uyanık tut</string>
+    <string name="unit_mtc_whitelist_detail">Dashwheel\'i ünitenin uyku beyaz listesine ekleyin (BootControl uygulaması ya da ROM mod ayarları). Yoksa kontak kapanınca donanım yazılımı onu durdurur.</string>
+    <string name="unit_reglink_duraspeed_title">DuraSpeed\'i kapat</string>
+    <string name="unit_reglink_duraspeed_detail">MediaTek arka plan tasarrufu, kontak kapanınca Dashwheel\'i durdurur. Güvenli ayarlara yazabildiğinde Dashwheel her açılışta onu kendisi kapatır.</string>
+    <string name="unit_reglink_quickboot_title">Quick Boot\'u kapat</string>
+    <string name="unit_reglink_quickboot_detail">Ünitenin fabrika ayarlarında. Ünite, hızlı uykudan önce uygulamaları kapatmak yerine normal şekilde başlar.</string>
+    <string name="unit_reglink_whitelist_title">Dashwheel\'i ünitede beyaz listeye al</string>
+    <string name="unit_reglink_whitelist_detail">Donanım yazılımı, başlamasına, arkada çalışmasına ve uykuda kalmasına izin verilen uygulamaların üç listesini tutar. Dashwheel root ile kendini bunlara ekler.</string>
+</resources>

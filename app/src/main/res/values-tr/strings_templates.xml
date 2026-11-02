@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dashboard templates: ready-made widget sets for all 7 dashboards -->
+    <string name="templates_button">Şablonlar</string>
+    <string name="templates_daily">Günlük</string>
+    <string name="templates_daily_blurb">Önde harita ve müzik, bir kaydırma ötede araç ve gününüz</string>
+    <string name="templates_road_trip">Uzun yol</string>
+    <string name="templates_road_trip_blurb">Uzun sürüşler için büyük harita, menzil, hava durumu ve molalar</string>
+    <string name="templates_car_health">Araç sağlığı</string>
+    <string name="templates_car_health_blurb">Ana ekranda araç verileri ve arıza kodları</string>
+    <string name="templates_no_car_data">Henüz araç verisi kaynağı yok, bu yüzden araç verisi widget\'ları dışarıda bırakıldı.</string>
+    <string name="templates_fill_this">Bu panoyu doldur</string>
+    <string name="templates_fill_this_hint">Şablonun %1$s sayfası tek başına buraya gelir.</string>
+    <string name="templates_fill">Doldur</string>
+    <string name="templates_all_dashboards">Tüm panolar…</string>
+    <string name="templates_none_empty">Kaydırmalarda boş pano yok</string>
+    <string name="templates_pick_title">Bir başlangıç noktası seçin</string>
+    <string name="templates_pick_hint">Her birini kendi ekranınızda denemek için kaydırın</string>
+    <string name="templates_reach_home">Ana ekran</string>
+    <string name="templates_reach_row">Ana ekran ve yanındakiler</string>
+    <string name="templates_reach_all">Yedisi de</string>
+    <string name="templates_reach_all_note">Ana ekran ve çevresindeki panolar</string>
+    <string name="templates_use">%1$s kullan</string>
+    <string name="templates_undo_note">Geri al bir süre ekranda kalır</string>
+    <string name="templates_applied">%1$s panolarınızda</string>
+    <string name="templates_calm">Sakin</string>
+    <string name="templates_calm_blurb">Harita ve hızınız, başka bir şey yok</string>
+    <string name="templates_previous">Önceki şablon</string>
+    <string name="templates_next">Sonraki şablon</string>
+    <string name="share_button">Paylaş</string>
+    <string name="share_title">%1$s paylaş</string>
+    <string name="share_this">Bu panoyu paylaşın</string>
+    <string name="share_with_look">Görünümüyle birlikte</string>
+    <string name="share_with_look_detail">Tema, gündüz ve gece, ve çubuk</string>
+    <string name="share_scan">Telefonla tarayın veya kodu metin olarak iletin</string>
+    <string name="share_save_file">Dosya olarak kaydet</string>
+    <string name="share_widgets_left_out">Android widget\'ları bu ünitede kalır: dışarıda bırakıldılar.</string>
+    <string name="share_use">Paylaşılan bir pano kullan</string>
+    <string name="share_paste_hint">DW1: kod</string>
+    <string name="share_open_file">Dosya aç</string>
+    <string name="share_use_hint">Bir kod yazın veya yapıştırın, bir dosya açın ya da Dashwheel Companion uygulamasıyla bir QR kodu tarayın.</string>
+    <string name="share_missing_apps">Bu ünitede olmayan uygulamalar: %1$d. Kutucukları siz değiştirene kadar kalır.</string>
+    <string name="share_take_look">Görünümünü de kullan</string>
+    <string name="share_replace">Buraya koy</string>
+</resources>

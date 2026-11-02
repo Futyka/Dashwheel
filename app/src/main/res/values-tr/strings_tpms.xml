@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- A USB TPMS receiver of the driver's own (UsbTpms.kt, UsbTpmsSheet.kt). -->
+    <string name="tpms_usb_title">USB lastik sensörleri</string>
+    <string name="tpms_usb_detail">Üniteye takılı bir 433 MHz TPMS alıcısı</string>
+    <string name="tpms_usb_explanation">USB kablolu, CH340 çipli, 19200 baud bir TPMS alıcısı ve dört sensörü. Aşağıdan seçin: basınç ve sıcaklıkları Lastikler kutucuğunda ve lastik uyarılarında görünür.</string>
+    <string name="tpms_usb_unit_app">Ünitenin TPMS uygulaması, Dashwheel\'in kullandığı alıcıyı okuyamaz.</string>
+    <string name="tpms_usb_devices">USB seri cihazlar</string>
+    <string name="tpms_usb_none_plugged">Takılı USB seri cihaz yok</string>
+    <string name="tpms_usb_use">Kullan</string>
+    <string name="tpms_usb_forget">Unut</string>
+    <string name="tpms_usb_look_again">Yeniden ara</string>
+    <string name="tpms_usb_denied">İzin verilmedi: Android bir sonraki denemede yeniden sorar</string>
+    <string name="tpms_usb_allow">İzin ver</string>
+    <string name="tpms_usb_busy_hint">Başka bir uygulama ya da OBD bağlantısı onu kullanıyor. O uygulamayı kapatın ya da başka bir cihaz seçin.</string>
+    <string name="tpms_usb_repeat_hint">Alıcı her sensörün son okumasını yineler: duran bir sensör eski değerini korur.</string>
+    <string name="tpms_usb_unit">Basınç birimi</string>
+    <string name="tpms_usb_state_off">Ayarlanmadı</string>
+    <string name="tpms_usb_state_unplugged">Alıcı takılı değil</string>
+    <string name="tpms_usb_state_not_allowed">Dashwheel henüz kullanamıyor</string>
+    <string name="tpms_usb_state_busy">Alıcı başka yerde kullanımda</string>
+    <string name="tpms_usb_state_listening">Dinleniyor, sensörler bekleniyor</string>
+    <string name="tpms_usb_state_receiving">Lastikler alınıyor</string>
+    <!-- The alarm limits (Tyres.limits) and the receiver's status byte, in the USB tyre sensors sheet. -->
+    <string name="tpms_usb_status">durum %1$s</string>
+    <string name="tpms_limits">Alarm sınırları</string>
+    <string name="tpms_limits_hint">Lastikleri kim bildirirse bildirsin, lastik uyarısı ve sesi bu sınırlar aşılınca çalar.</string>
+    <string name="tpms_limit_low">Düşük basınç</string>
+    <string name="tpms_limit_low_detail">Bu değerde ya da altında lastik düşük sayılır. Aracın kendi basınçları ayarlıysa onların yüzde 80\'i geçerlidir.</string>
+    <string name="tpms_limit_high">Yüksek basınç</string>
+    <string name="tpms_limit_high_detail">Bu değerde ya da üstünde lastik yüksek sayılır</string>
+    <string name="tpms_limit_hot">Sıcak lastik</string>
+    <string name="tpms_limit_hot_detail">Bu değerde ya da üstünde lastik çok sıcak sayılır</string>
+</resources>

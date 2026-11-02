@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Car profile and car-care tiles (CarProfile.kt, CarCare.kt, CarCareTiles.kt, CarSettingsDialog.kt) -->
+
+    <!-- Widget picker -->
+    <string name="car_kind_filter">Partikül filtresi</string>
+    <string name="car_kind_filter_blurb">Kısa yolculuklar ve filtre temizliği</string>
+    <string name="car_kind_warmup">Motor ısınması</string>
+    <string name="car_kind_warmup_blurb">Soğutma sıvısı sıcaklığı, soğukken yavaş gidin</string>
+    <string name="car_kind_battery">Batarya</string>
+    <string name="car_kind_battery_blurb">Voltaj ve şarj</string>
+    <string name="car_kind_my_car">Aracım</string>
+    <string name="car_kind_my_car_blurb">Yağ, lastikler, servis ve diğer özellikler</string>
+    <string name="car_kind_eco">Ekonomik sürüş</string>
+    <string name="car_kind_eco_blurb">Sürüş puanı, yakıt ve maliyet</string>
+    <string name="car_kind_break">Mola hatırlatıcı</string>
+    <string name="car_kind_break_blurb">Sürüş süresi, 2 saatte sesli hatırlatma</string>
+    <string name="car_kind_fuel_dest">Varışa kadar yakıt</string>
+    <string name="car_kind_fuel_dest_blurb">Menzil rota için yeterli mi?</string>
+
+    <!-- Shared -->
+    <string name="car_waiting_obd">OBD adaptörü bekleniyor…</string>
+    <string name="car_unknown">Bilinmiyor</string>
+    <string name="car_running_for">Motor %1$s süredir çalışıyor</string>
+    <string name="car_gears">%1$d vites</string>
+    <string name="car_months">%1$d ay</string>
+
+    <!-- Particle filter -->
+    <string name="car_filter_title">PARTİKÜL FİLTRESİ</string>
+    <string name="car_filter_none">Bu araçta partikül filtresi yok. Ayarlar → Araç → Aracım bölümünden değiştirin.</string>
+    <string name="car_filter_unknown">Aracınızı Ayarlar → Araç → Aracım bölümünden ayarlayın.</string>
+    <plurals name="car_filter_short_unit">
+        <item quantity="one">kısa sürüş</item>
+        <item quantity="other">art arda kısa sürüş</item>
+    </plurals>
+    <string name="car_filter_ok">Filtre normal temizleniyor</string>
+    <string name="car_filter_needs_drive">60 km/sa üzerinde 20 dk sürüş planlayın</string>
+    <string name="car_filter_needs_drive_now">Filtrenin yakında uzun bir sürüşe ihtiyacı var</string>
+    <string name="car_filter_this_drive">Bu sürüş: sıcak motorla hızlı %1$d / %2$d dk</string>
+    <string name="car_filter_last_long">Son uzun sürüş: %1$s</string>
+    <string name="car_filter_last_long_never">Henüz uzun sürüş kaydedilmedi</string>
+    <string name="car_filter_additive">Yakıt katkısı kullanır: her serviste seviyesini kontrol ettirin</string>
+    <string name="car_filter_regen">Temizlik sürüyor</string>
+    <string name="car_filter_additive_low">Katkı %%%1$d ile düşük. Bir sonraki serviste doldurtun</string>
+
+    <!-- Warm-up -->
+    <string name="car_warmup_title">ISINMA</string>
+    <string name="car_warmup_cold">Soğuk: %1$d d/dk altında tutun</string>
+    <string name="car_warmup_warming">Isınıyor</string>
+    <string name="car_warmup_warm">Sıcak: tam güç uygun</string>
+
+    <!-- Battery -->
+    <string name="car_battery_title">BATARYA</string>
+    <string name="car_battery_charging">Normal şarj oluyor</string>
+    <string name="car_battery_charging_low">Şarj biraz düşük</string>
+    <string name="car_battery_not_charging">Şarj olmuyor: alternatörü kontrol edin</string>
+    <string name="car_battery_full">Tam dolu</string>
+    <string name="car_battery_good">İyi şarj</string>
+    <string name="car_battery_low">Düşük: bir sürüş onu şarj eder</string>
+    <string name="car_battery_weak">Zayıf batarya</string>
+    <string name="car_battery_hint_running">Motor çalışırken: 13,2–14,8 V normaldir</string>
+    <string name="car_battery_hint_off">Motor kapalıyken: 12,4 V ve üstü sağlıklıdır</string>
+    <string name="car_battery_capacity">%1$d Ah batarya</string>
+
+    <!-- Eco driving -->
+    <string name="car_eco_title">EKONOMİK SÜRÜŞ</string>
+    <string name="car_eco_title_last">SON SÜRÜŞ</string>
+    <string name="car_eco_empty">Bir sonraki sürüşünüzle başlar</string>
+    <string name="car_eco_too_early">Söylemek için çok erken</string>
+    <string name="car_eco_smooth">Yumuşak sürüş</string>
+    <string name="car_eco_fair">Orta: biraz sert</string>
+    <string name="car_eco_harsh">Sert: yavaşlayın</string>
+    <string name="car_eco_band">Devir %1$d–%2$d d/dk arasında</string>
+    <string name="car_eco_hard">Sert hızlanma / fren</string>
+    <string name="car_eco_hard_value">%1$d / %2$d</string>
+    <string name="car_eco_clutch">Yokuşta gazla tutuldu</string>
+    <string name="car_eco_fuel">%1$s km için yakıt</string>
+    <string name="car_eco_fuel_value">≈ %1$s L · %2$s %3$s</string>
+
+    <!-- Fuel to destination -->
+    <string name="car_fuel_dest_title">VARIŞA KADAR YAKIT</string>
+    <string name="car_fuel_dest_no_range">Menzil henüz bilinmiyor: Yakıt &amp; menzil kutucuğunu ayarlayın</string>
+    <string name="car_fuel_dest_no_nav">Kalan menzil. Karşılaştırmak için Haritalar ya da Waze ile navigasyonu başlatın.</string>
+    <string name="car_fuel_dest_spare_unit">km fazla</string>
+    <string name="car_fuel_dest_enough">Yakıt yeterli</string>
+    <string name="car_fuel_dest_tight">Kısıtlı: az pay var</string>
+    <string name="car_fuel_dest_short">Yolda yakıt alın</string>
+    <string name="car_fuel_dest_detail">%1$d km menzil · %2$d km kaldı</string>
+
+    <!-- Break reminder -->
+    <string name="car_break_title">SÜRÜŞ ZAMANI</string>
+    <string name="car_break_ok">Her 2 saatte bir mola</string>
+    <string name="car_break_due">Mola zamanı</string>
+    <string name="car_break_hint">15 dk duruş sıfırlar</string>
+
+    <!-- My car tile -->
+    <string name="car_my_car_title">ARACIM</string>
+    <string name="car_my_car_fetch_hint">Tüm özellikleri yapay zeka ile almak için dokunun</string>
+    <string name="car_my_car_name_hint">Aracınızı girmek için dokunun</string>
+    <string name="car_source_preset">Hazır ayar</string>
+    <string name="car_source_ai">Yapay zekadan</string>
+    <string name="car_source_user">Düzenlendi</string>
+    <string name="car_spec_engine">Motor</string>
+    <string name="car_spec_gearbox">Şanzıman</string>
+    <string name="car_spec_oil">Yağ</string>
+    <string name="car_spec_tyres">Lastikler</string>
+    <string name="car_spec_service">Servis</string>
+    <string name="car_gearbox_manual">Manuel</string>
+    <string name="car_gearbox_robotised">Robotize</string>
+    <string name="car_gearbox_automatic">Otomatik</string>
+    <string name="car_gearbox_dual_clutch">Çift kavramalı</string>
+    <string name="car_gearbox_cvt">CVT</string>
+    <string name="car_fuel_diesel">Dizel</string>
+    <string name="car_fuel_petrol">Benzin</string>
+    <string name="car_fuel_hybrid">Hibrit</string>
+    <string name="car_fuel_lpg">LPG</string>
+    <string name="car_fuel_electric">Elektrikli</string>
+
+    <!-- My car settings -->
+    <string name="car_menu">Aracım</string>
+    <string name="car_my_car_title_dialog">Aracım</string>
+    <string name="car_settings_explanation">Aracınızı tam olarak adlandırın, sonra özellikleri yapay zekaya doldurtun. Kaydetmeden önce kontrol edin.</string>
+    <string name="car_name">Araç</string>
+    <string name="car_name_hint">Marka, model, motor ve yıl</string>
+    <string name="car_fetch">Özellikleri yapay zeka ile al</string>
+    <string name="car_fetch_ok">Özellikler dolduruldu: kontrol edin, sonra Kaydet</string>
+    <string name="car_fetch_failed">Özellikler alınamadı: %1$s</string>
+    <string name="car_fetch_no_key">önce Ayarlar → Araç → Yapay zeka tamirci bölümüne bir Gemini anahtarı ekleyin</string>
+    <string name="car_fetch_needs_key">Özellikleri doldurmak için Ayarlar, Tanılama, Yapay zeka tamirci bölümüne bir Gemini anahtarı ekleyin</string>
+    <string name="car_section_engine">Motor</string>
+    <string name="car_section_gearbox">Şanzıman</string>
+    <string name="car_section_upkeep">Servis</string>
+    <string name="car_section_fuel_price">Yakıt fiyatı</string>
+    <string name="car_section_notes">Bilinen zayıf noktalar</string>
+    <string name="car_spec_power">Güç (hp)</string>
+    <string name="car_spec_torque">Tork (Nm)</string>
+    <string name="car_spec_torque_rpm">Tork başlangıcı (d/dk)</string>
+    <string name="car_spec_redline">Kırmızı çizgi (d/dk)</string>
+    <string name="car_spec_operating_temp">Çalışma sıcaklığı (°C)</string>
+    <string name="car_spec_battery">Batarya (Ah)</string>
+    <string name="car_spec_filter">Partikül filtresi</string>
+    <string name="car_spec_filter_detail">Dizel partikül filtresi (FAP / DPF)</string>
+    <string name="car_spec_additive">Filtre katkısı</string>
+    <string name="car_spec_additive_detail">Filtre bir yakıt katkısı kullanır (örn. Eolys)</string>
+    <string name="car_spec_gearbox_name">Şanzıman adı</string>
+    <string name="car_spec_gears">Vites</string>
+    <string name="car_spec_tank">Depo (L)</string>
+    <string name="car_spec_consumption">Olağan tüketim (L/100 km)</string>
+    <string name="car_spec_oil_capacity">Yağ (L)</string>
+    <string name="car_spec_oil_spec">Yağ sınıfı</string>
+    <string name="car_service_interval">Her %1$s km ya da %2$d ayda bir servis</string>
+    <string name="car_service_interval_km">Her %1$s km\'de bir servis</string>
+    <string name="car_service_interval_months">Her %1$d ayda bir servis</string>
+    <string name="car_service_interval_unknown">Servis aralığı ayarlanmadı</string>
+    <string name="car_service_from_servicing">Servisten değiştirin</string>
+    <string name="car_spec_timing">Triger kayışı / zinciri</string>
+    <string name="car_spec_tyre_size">Lastik ölçüsü</string>
+    <string name="car_spec_tyre_front">Ön (bar)</string>
+    <string name="car_spec_tyre_rear">Arka (bar)</string>
+    <string name="car_spec_fuel_price">Litre fiyatı</string>
+    <string name="car_spec_currency">Para birimi</string>
+    <string name="car_reset_preset">Hazır ayara dön: C4 Picasso 1.6 HDi BMP6</string>
+    <string name="car_save">Kaydet</string>
+
+    <!-- AI mechanic settings -->
+    <string name="car_ai_car">Araç</string>
+    <string name="car_ai_car_detail">%1$s. Ayarlar → Araç → Aracım bölümünden değiştirin.</string>
+
+    <!-- Spoken by CarCare, in the mechanic's language -->
+    <string name="car_say_cold_revs">Motor hâlâ soğuk. Birkaç dakika daha %1$d devrin altında tutun.</string>
+    <string name="car_say_clutch_hold">Aracı gazla değil frenle tutun. Bu şanzımanın debriyajını aşındırır.</string>
+    <string name="car_say_filter">Son %1$d sürüşünüz kısaydı. Fırsat bulunca, partikül filtresi kendini temizleyebilsin diye saatte 60 kilometrenin üzerinde 15 ila 20 dakika sürün.</string>
+    <string name="car_say_filter_regen">Partikül filtresi kendini temizliyor. Mümkünse yaklaşık 10 dakika daha sabit hızda sürmeye devam edin.</string>
+    <string name="car_say_filter_regen_standing">Partikül filtresi hâlâ temizleniyor. Mümkünse motoru kapatmadan önce birkaç dakika daha sürün.</string>
+    <string name="car_say_filter_soot">Partikül filtresi yüzde %1$d dolu. Yakında hızlı bir yolda 20 dakikalık bir sürüş planlamaya çalışın.</string>
+    <string name="car_say_filter_soot_short">Son %1$d sürüşünüz kısaydı ve partikül filtresi yüzde %2$d dolu. Yakında hızlı bir yolda 20 dakikalık bir sürüş planlamaya çalışın.</string>
+    <string name="car_say_filter_additive">Partikül filtresi katkısı yüzde %1$d ile düşük. Bir sonraki serviste doldurtun.</string>
+    <string name="car_say_break">%1$s süredir sürüyorsunuz. Mola zamanı.</string>
+    <string name="car_say_fuel_short">%1$d kilometrelik menziliniz %2$d kilometre uzaktaki varış noktasına yetmeyecek. Bir yakıt molası planlayın.</string>
+    <string name="car_hours_minutes">%1$s %2$s</string>
+    <plurals name="car_hours">
+        <item quantity="one">%1$d saat</item>
+        <item quantity="other">%1$d saat</item>
+    </plurals>
+    <plurals name="car_minutes">
+        <item quantity="one">%1$d dakika</item>
+        <item quantity="other">%1$d dakika</item>
+    </plurals>
+
+    <!-- Which side the driver sits on (templates) -->
+    <string name="car_spec_driver_side">Sürücü sağda</string>
+    <string name="car_spec_driver_side_detail">Sağdan direksiyon: şablonlar ana kutucukları sağa koyar</string>
+    <string name="car_battery_trip_range">Bu yolculuk: %1$s ila %2$s V</string>
+    <string name="car_kind_status">Araç durumu</string>
+    <string name="car_kind_status_blurb">Aracın hesapladığı değerler: menzil, yakıt tüketimi, yolculuk sayısı, kilometre ve farlar</string>
+    <string name="car_status_title">ARAÇ DURUMU</string>
+    <string name="car_status_waiting">Aracın verisi bekleniyor</string>
+    <string name="car_status_lights">Farlar</string>
+    <string name="car_status_lights_off">Kapalı</string>
+    <string name="car_status_hazard">Dörtlü flaşör</string>
+    <string name="car_status_main_beam">Uzun far</string>
+    <string name="car_status_dipped">Kısa far</string>
+    <string name="car_status_sidelights">Park lambaları</string>
+    <string name="car_status_front_fog">Ön sis</string>
+    <string name="car_status_rear_fog">Arka sis</string>
+    <string name="car_status_odometer">Kilometre</string>
+    <string name="car_status_trip">Yolculuk</string>
+    <string name="car_status_consumption">Tüketim</string>
+    <string name="car_status_range">Menzil</string>
+    <string name="car_status_parking_brake">El freni</string>
+    <string name="car_status_on">Açık</string>
+    <string name="car_status_off">Kapalı</string>
+    <string name="car_status_km">km</string>
+    <string name="car_status_trip_n">Yolculuk %1$d</string>
+    <string name="car_status_message">Araç mesajı</string>
+    <string name="car_warn_code">Mesaj %1$s</string>
+    <string name="car_say_car_warning">Araç diyor ki: %1$s</string>
+    <string name="car_warn_engine_temp">Motor çok sıcak, aracı durdurun</string>
+    <string name="car_warn_oil_pressure">Yağ basıncı arızası, aracı durdurun</string>
+    <string name="car_warn_brakes">Fren arızası</string>
+    <string name="car_warn_engine_stop">Motor arızası, aracı durdurun</string>
+    <string name="car_warn_coolant">Soğutma sıvısı seviyesi düşük</string>
+    <string name="car_warn_oil_level">Motor yağı seviyesi düşük</string>
+    <string name="car_warn_dpf">Partikül filtresi tıkanma riski</string>
+    <string name="car_warn_steering">Direksiyon hidroliği arızası</string>
+    <string name="car_warn_abs">ABS arızası</string>
+    <string name="car_warn_esp">ESP arızası</string>
+    <string name="car_warn_gearbox">Şanzıman arızası, tamir ettirin</string>
+    <string name="car_warn_additive">Partikül filtresi katkısı düşük</string>
+    <string name="car_warn_battery">Batarya şarj arızası</string>
+    <string name="car_warn_airbag">Hava yastığı ya da emniyet kemeri arızası</string>
+    <string name="car_warn_water_diesel">Dizel filtresinde su var</string>
+    <string name="car_warn_engine_repair">Motor arızası, tamir ettirin</string>
+    <string name="car_warn_pollution">Emisyon sistemi arızası</string>
+    <string name="car_warn_open">Bir kapı, bagaj, kaput ya da yakıt kapağı açık</string>
+    <string name="car_warn_tyres">Lastik basıncı düşük</string>
+    <string name="car_warn_washer">Cam suyu az</string>
+    <string name="car_warn_fuel">Yakıt az</string>
+    <string name="car_warn_ice">Buzlanma riski</string>
+    <string name="car_kind_tyres">Lastikler</string>
+    <string name="car_kind_tyres_blurb">Lastik sensörlerinden her lastiğin basıncı ve sıcaklığı</string>
+    <string name="car_tyres_title">LASTİKLER</string>
+    <string name="car_tyres_waiting">Lastik sensörleri bekleniyor</string>
+    <string name="car_tyres_spare">Yedek</string>
+    <string name="car_tyres_leak">Kaçak</string>
+    <string name="car_tyres_low">Düşük basınç</string>
+    <string name="car_tyres_high">Yüksek basınç</string>
+    <string name="car_tyres_hot">Çok sıcak</string>
+    <string name="car_tyres_no_signal">Sinyal yok</string>
+    <string name="car_tyres_sensor_battery">Sensör pili zayıf</string>
+    <string name="car_tyres_alert">Lastik uyarısı</string>
+    <string name="car_tyres_ok">Tüm lastikler iyi</string>
+    <string name="car_belt_fasten">Emniyet kemerinizi takın</string>
+
+    <!-- Registration certificate (CarProfile.withRegistration, CarSettingsDialog). -->
+    <string name="car_section_registration">Ruhsat</string>
+    <string name="car_spec_plate">Plaka</string>
+    <string name="car_spec_first_registration">İlk tescil</string>
+    <string name="car_spec_vin">Şasi no</string>
+    <string name="car_crit_air">Crit\'Air %1$d</string>
+    <string name="car_crit_air_unclassed">Crit\'Air etiketi yok: sınıflandırılamayacak kadar eski</string>
+    <string name="car_inspection_due">Sonraki araç muayenesi %1$s tarihinden önce</string>
+    <string name="car_inspection_unknown">Sonraki araç muayenesi: henüz bilinmiyor</string>
+    <string name="car_registration_from_phone">Bunları doldurmak için ruhsatı telefon uygulamasının Araç sekmesinden tarayın.</string>
+    <string name="car_registration_saved_plate">%1$s plakasının ruhsatı kaydedildi</string>
+    <string name="car_registration_saved">Ruhsat kaydedildi</string>
+    <string name="car_warn_puncture">Patlak lastik, aracı durdurun</string>
+    <string name="car_warn_suspension">Süspansiyon arızası</string>
+    <string name="car_warn_brake_pads">Fren balataları aşınmış</string>
+    <string name="car_warn_parking_brake">El freni arızası</string>
+    <string name="car_warn_cruise">Hız sabitleyici arızası</string>
+    <string name="car_warn_immobiliser">İmmobilizer arızası</string>
+    <string name="car_warn_steering_lock">Direksiyon kilidi arızası</string>
+    <string name="car_warn_hybrid">Hibrit sistem arızası</string>
+    <string name="car_warn_headlight_levelling">Far ayarı arızası</string>
+    <string name="car_warn_driving_aid">Sürüş destek sistemi arızası</string>
+    <string name="car_warn_pollution_start">Emisyon arızası: motor yeniden çalışmayabilir</string>
+    <string name="car_warn_bulb_dipped">Kısa far ampulü yanmıyor</string>
+    <string name="car_warn_bulb_main">Uzun far ampulü yanmıyor</string>
+    <string name="car_warn_bulb_brake">Fren lambası ampulü yanmıyor</string>
+    <string name="car_warn_bulb_brake_middle">Üçüncü fren lambası yanmıyor</string>
+    <string name="car_warn_bulb_brake_right_rear">Sağ arka fren lambası ampulü yanmıyor</string>
+    <string name="car_warn_bulb_brake_left_rear">Sol arka fren lambası ampulü yanmıyor</string>
+    <string name="car_warn_bulb_fog">Sis lambası ampulü yanmıyor</string>
+    <string name="car_warn_bulb_indicator">Sinyal ampulü yanmıyor</string>
+    <string name="car_warn_bulb_reversing">Geri vites lambası ampulü yanmıyor</string>
+    <string name="car_warn_bulb_sidelight">Park lambası ampulü yanmıyor</string>
+    <string name="car_warn_tpms">Lastik basınçları izlenmiyor</string>
+    <string name="tpms_box_reset">Lastikler sustu: TPMS kutusu yeniden takıldı</string>
+    <string name="car_warn_key_battery">Anahtar pili zayıf</string>
+    <string name="car_warn_more">ve %1$d tane daha</string>
+    <string name="car_map_back">Arka</string>
+    <string name="car_map_front">Ön</string>
+    <string name="car_map_top">Üst</string>
+    <string name="car3d_problem">Sorun %1$d</string>
+    <string name="car3d_whole_car">Tüm araç</string>
+    <string name="car3d_drag_hint">Aracı döndürmek için sürükleyin</string>
+    <string name="car3d_details">Detaylar</string>
+    <string name="mycar_view_back">arka</string>
+    <string name="mycar_view_front">ön</string>
+    <string name="mycar_ends_hint">Arkanın ve önün kesilmiş fotoğrafları: Araç sorunları kutucuğu bozuk bir lambayı bunların üzerinde gösterir</string>
+    <string name="mycar_add_back">Arka</string>
+    <string name="mycar_add_front">Ön</string>
+    <string name="car_verdict_stop">Güvenli olur olmaz durun</string>
+    <string name="car_verdict_drive">Sürebilirsiniz</string>
+    <string name="car_verdict_fine">Bildirilecek bir şey yok</string>
+    <string name="car_verdict_unread">Henüz okunmadı</string>
+    <string name="car_verdict_stop_hint">Bir sorun aracın durmasını gerektiriyor</string>
+    <string name="car_verdict_soon_hint">Yakında tamir ettirin</string>
+    <string name="car_verdict_fine_hint">Araçtan arıza kodu ya da uyarı yok</string>
+    <string name="car_verdict_unread_hint">Motoru okumak için OBD adaptörünü bağlayın</string>
+    <string name="car_problem_from_car">ARAÇ</string>
+    <string name="car_problem_from_code">MOTOR KODU</string>
+    <string name="car_problem_with_ai">+ YZ</string>
+</resources>

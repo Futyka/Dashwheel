@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Common buttons and labels -->
+    <string name="dash_cancel">İptal</string>
+    <string name="dash_done">Tamam</string>
+    <string name="dash_close">Kapat</string>
+    <string name="dash_add">Ekle</string>
+    <string name="dash_selected">Seçili</string>
+    <string name="dash_dismiss">Kapat</string>
+    <string name="dash_got_it">Anladım</string>
+
+    <!-- Top bar -->
+    <string name="dash_all_apps">Tüm uygulamalar</string>
+    <string name="dash_screen_layout">Google Haritalar konumu: %1$s</string>
+    <string name="dash_more">Daha fazla</string>
+    <string name="dash_obd_connected">OBD bağlı</string>
+    <string name="dash_obd_connecting">OBD bağlanıyor</string>
+    <string name="dash_obd_error">OBD hatası, yeniden bağlanmak için dokunun</string>
+    <string name="dash_obd_off">OBD kapalı, bağlanmak için dokunun</string>
+    <string name="dash_alert_battery">Akü %1$.1fV</string>
+    <string name="dash_alert_coolant">Soğutma suyu %1$d°C</string>
+
+    <!-- Top bar menu -->
+    <string name="dash_menu_edit_dashboards">Gösterge panellerini düzenle</string>
+    <string name="dash_menu_done_editing">Düzenleme bitti</string>
+    <string name="dash_menu_theme">Tema</string>
+
+    <!-- Edit bar (arranging a dashboard) -->
+    <string name="dash_arranging_dashboard">%1$s düzenleniyor</string>
+    <string name="dash_arranging_hint">Seçenekleri için bir kutucuğa dokunun, taşımak için basılı tutun, boyutlandırmak için köşesini sürükleyin.</string>
+    <string name="dash_undo">Geri al</string>
+    <string name="dash_reset_page">Gösterge panelini kaldır…</string>
+
+    <!-- Update banner -->
+    <string name="dash_update_downloading">Güncelleme indiriliyor… %1$d %%</string>
+    <string name="dash_update_installing">Yükleyici başlatılıyor…</string>
+    <string name="dash_menu_check_updates">Güncellemeleri kontrol et</string>
+    <string name="dash_update_checking">Güncellemeler kontrol ediliyor…</string>
+    <string name="dash_update_up_to_date">Dashwheel güncel, v%1$s</string>
+    <string name="dash_update">Güncelle</string>
+
+    <!-- Tiles while arranging -->
+    <string name="dash_resize_tile">%1$s boyutunu değiştir</string>
+    <string name="dash_app_window">%1$s penceresi</string>
+    <string name="dash_app_inside">%1$s içeride</string>
+    <string name="dash_describe_split_pair">bölünmüş çift</string>
+    <string name="dash_describe_launch_bar">başlatma çubuğu</string>
+    <string name="dash_describe_widget">widget</string>
+    <string name="dash_app_widget">Uygulama widget\'ı</string>
+    <string name="dash_shown_while_arranging">Düzenleme sırasında gösterilir</string>
+    <string name="dash_map_needs_gpu">Harita için gerçek bir GPU gerekir</string>
+    <string name="dash_not_on_emulator">Emülatörde kullanılamaz</string>
+
+    <!-- Layout notices -->
+    <string name="dash_notice_title">Düzene yer gerekiyor</string>
+    <string name="dash_notice_no_space">Bu gösterge panelinde o kutucuk için yer yok. Kaldırın, boyutlandırın ya da başka bir gösterge paneli kullanın.</string>
+    <string name="dash_notice_no_room_to_move">Diğer kutucukları kenara çekecek yer yok. Önce biraz yer açın.</string>
+    <string name="dash_notice_resize_overlap">Bu boyut başka bir kutucukla çakışıyor. Boyutlandırmadan önce yer açın.</string>
+    <string name="dash_full_title">Bu gösterge paneli dolu</string>
+    <string name="dash_full_body">Başka bir tane eklemek için bir kutucuğu kaldırın veya küçültün.</string>
+
+    <!-- Add to dashboard -->
+
+    <!-- Split screen -->
+    <string name="dash_swap_split">Bölünmüş uygulamaları sol/sağ değiştir</string>
+    <string name="dash_split_with">Ekranı şununla böl…</string>
+    <string name="dash_enable_split_title">Bölünmüş ekranı etkinleştir</string>
+    <string name="dash_enable_split_body">Dashwheel sistemin kendi bölünmüş ekranını, son uygulamalardakini kullanır. Ayarlar, Erişilebilirlik altında Dashwheel\'i bir kez açın.</string>
+    <string name="dash_open_settings">Ayarları aç</string>
+
+    <!-- System app install (root) -->
+    <string name="dash_system_app_title">Sistem uygulaması</string>
+    <string name="dash_system_app_body">Dashwheel\'i sistem uygulaması olarak kurar, böylece Android widget\'ları her seferinde sorulmadan eklenir. Root ya da ünitenin %1$d portundaki dahili ADB\'si, sonra yeniden başlatma gerekir.</string>
+    <string name="dash_root_checking">Root denetleniyor…</string>
+    <string name="dash_root_available">Root var. Magisk varsa Magisk modülü olarak kurulur.</string>
+    <string name="dash_root_missing">Root yok. %1$d portundaki dahili ADB denenecek.</string>
+    <string name="dash_install_system_app">Sistem uygulaması olarak kur</string>
+    <string name="dash_reboot_now">Şimdi yeniden başlat</string>
+    <string name="dash_system_installed">Kuruldu. Bitirmek için yeniden başlatın.</string>
+    <string name="dash_system_failed">Başarısız: %1$s</string>
+
+    <!-- System app-widget picker -->
+    <string name="dash_widget_unavailable">Widget eksik. Uygulaması kaldırılmış ya da değişmiş.</string>
+    <string name="dash_choose_widget">Bir widget seçin</string>
+    <string name="dash_no_widgets_found">Widget bulunamadı.</string>
+
+    <!-- Theme picker -->
+    <string name="dash_theme_picker_title">Gösterge paneli teması</string>
+    <string name="dash_appearance_auto">Otomatik</string>
+    <string name="dash_appearance_dark">Koyu</string>
+    <string name="dash_appearance_light">Açık</string>
+    <string name="dash_appearance_auto_hint">Her tema aracın gündüz/gece modunu izler</string>
+    <string name="dash_appearance_dark_hint">Her tema kendi koyu sürümünü kullanır</string>
+    <string name="dash_appearance_light_hint">Her tema kendi açık sürümünü kullanır</string>
+    <string name="dash_auto_by_car">Araç</string>
+    <string name="dash_auto_by_sun">Güneş</string>
+    <string name="dash_auto_by_times">Belirlenen saatler</string>
+    <string name="dash_auto_sun_today">Bugün aracın bulunduğu yerde %1$s ile %2$s arası açık</string>
+    <string name="dash_auto_sun_no_place">Araç GPS konumu alana kadar %1$s ile %2$s arası açık</string>
+    <string name="dash_auto_sun_polar">Burada güneş bütün gün batmıyor ya da doğmuyor</string>
+    <string name="dash_auto_light_from">Açık başlangıcı</string>
+    <string name="dash_auto_light_from_detail">Açık sürümün başladığı saat</string>
+    <string name="dash_auto_dark_from">Koyu başlangıcı</string>
+    <string name="dash_auto_dark_from_detail">Koyu sürümün başladığı saat</string>
+    <string name="dash_auto_earlier">Daha erken</string>
+    <string name="dash_auto_later">Daha geç</string>
+
+    <!-- Effects switch (theme picker): how much halo and glass a theme draws -->
+    <string name="dash_effects_title">Okunaklılık</string>
+    <string name="dash_effects_none">Düz, gün ışığı için</string>
+    <string name="dash_effects_reduced">Yumuşak</string>
+    <string name="dash_effects_full">Tam parıltı</string>
+    <string name="dash_effects_none_hint">Mat kartlar, düz rakamlar, parıltı yok: tam güneşte okunur</string>
+    <string name="dash_effects_reduced_hint">Daha yumuşak parıltı, cam korunur</string>
+    <string name="dash_effects_full_hint">Her tema tüm parıltısı ve camıyla</string>
+    <string name="dash_bar_title">Alt çubuk</string>
+    <string name="dash_bar_auto_hide">Çubuğu otomatik gizle</string>
+    <string name="dash_bar_auto_hide_detail">Kullanılmadığında kayarak gizlenir, gösterge panellerine daha fazla yer</string>
+    <string name="dash_bar_hide_after">%1$d sn sonra gizle</string>
+    <string name="dash_bar_hide_now">Hemen gizle</string>
+    <string name="dash_bar_swipe_up_detail">Gizliyken geri getirmek için alt kenardan yukarı kaydırın</string>
+    <string name="dash_bar_swipe_up_hint">Çubuk için yukarı kaydırın</string>
+    <string name="dash_bar_show">Çubuğu göster</string>
+
+    <!-- Moving: edits wait until the car has stopped -->
+    <string name="dash_drive_lock_notice">Değişiklik yapmak için park edin</string>
+    <string name="dash_obd_short" translatable="false">OBD</string>
+    <string name="dash_theme_night">Gece</string>
+    <string name="dash_theme_day">Gündüz</string>
+
+    <!-- Theme names and descriptions (the enum names are what gets saved) -->
+    <string name="dash_theme_standard">Standart</string>
+    <string name="dash_theme_standard_desc">Yumuşakça parlayan göstergelerle sade kartlar</string>
+    <string name="dash_theme_original">Orijinal</string>
+    <string name="dash_theme_original_desc">İlk başlatıcı görünümü: düz kartlar, çift ibreli göstergeler</string>
+    <string name="dash_theme_aurora">Aurora Glass</string>
+    <string name="dash_theme_aurora_desc">Cam paneller, parlayan göstergeler, degrade kontroller</string>
+    <string name="dash_theme_neon">Neon</string>
+    <string name="dash_theme_neon_desc">Mavi + mor fütüristik kokpit</string>
+    <string name="dash_theme_clean">Clean</string>
+    <string name="dash_theme_clean_desc">Minimal, yüksek kontrastlı ve kolay okunur</string>
+    <string name="dash_theme_premium_glass">Premium Glass</string>
+    <string name="dash_theme_premium_glass_desc">Gece füme cam, gündüz buzlu cam</string>
+    <string name="dash_theme_sporty">Sporty</string>
+    <string name="dash_theme_sporty_desc">Kırmızı performans kokpiti</string>
+    <string name="dash_theme_floating">Floating</string>
+    <string name="dash_theme_floating_desc">Kutucuk arka planı yok: widget\'lar ve simgeler fonun üstünde durur</string>
+    <string name="dash_theme_orbit">Orbit</string>
+    <string name="dash_theme_orbit_desc">Her şey yuvarlak: dönen bir plak, halka göstergeler, baloncuklar</string>
+    <string name="dash_theme_cockpit">Cockpit</string>
+    <string name="dash_theme_cockpit_desc">Dikişli deri üstünde krom çerçeveli analog kadranlar ve anahtarlar</string>
+    <string name="dash_theme_horizon">Horizon</string>
+    <string name="dash_theme_horizon_desc">Widget yok, yalnızca gökyüzü ve öndeki yol</string>
+    <string name="dash_theme_tape_deck">Tape Deck</string>
+    <string name="dash_theme_tape_deck_desc">80\'ler synthwave ana ünitesi: kaset, neon ızgara, LED rakamlar</string>
+    <string name="dash_theme_mistral">Mistral</string>
+    <string name="dash_theme_mistral_desc">C4 Picasso\'nun orta göstergesi: füme grafit üstünde soğuk beyaz rakamlar, kehribar uyarılar</string>
+    <string name="dash_theme_zenith">Zénith</string>
+    <string name="dash_theme_zenith_desc">Salon kabini: inci grisi, beyaz paneller, tek bir koyu mavi vurgu</string>
+    <string name="dash_theme_luxury">Luxury Classic</string>
+    <string name="dash_theme_luxury_desc">Gece lacivert cam, şampanya altını ince çizgiler, ince rakamlar</string>
+    <string name="dash_theme_eco_leaf">Eco Leaf</string>
+    <string name="dash_theme_eco_leaf_desc">Buzlu adaçayı yeşili, nane okumalar, sakin ve hafif</string>
+    <string name="dash_theme_cyber">Cyber Sport</string>
+    <string name="dash_theme_cyber_desc">Karbon siyahı, kırmızıdan macentaya, çubukta bir yarış göstergesi</string>
+    <string name="dash_theme_nordic">Nordic Minimal</string>
+    <string name="dash_theme_nordic_desc">Grafit ve buz mavisi, ince çizgiler, bağırmayan hiçbir şey</string>
+    <string name="dash_theme_canvas">Canvas</string>
+    <string name="dash_theme_canvas_desc">Harita ekranı doldurur, yolculuğunuz tek satırda. Varsayılan olarak yan çubuk gösterir; Ekran bölümünden değiştirin.</string>
+
+    <!-- Screen layouts (the enum names are what gets saved) -->
+    <string name="dash_layout_grid">Yalnızca gösterge panelleri</string>
+    <string name="dash_layout_grid_desc">Kaydırılabilir gösterge panelleri ekranı doldurur</string>
+    <string name="dash_layout_maps_left">Google Haritalar solda</string>
+    <string name="dash_layout_maps_left_desc">Google Haritalar sol yarıya sabit, gösterge panelleri sağda kayar</string>
+    <string name="dash_layout_maps_right">Google Haritalar sağda</string>
+    <string name="dash_layout_maps_right_desc">Google Haritalar sağ yarıya sabit, gösterge panelleri solda kayar</string>
+    <string name="dash_layout_maps_top">Google Haritalar üstte</string>
+    <string name="dash_layout_maps_bottom">Google Haritalar altta</string>
+    <string name="dash_layout_button">Düzen</string>
+    <string name="dash_layout_another_app">Gösterge panellerinin yanında başka bir uygulama…</string>
+    <string name="dash_layout_dock_dropped">Bu ünite Google Haritalar\'ı pencerede değil tam ekran açıyor. Yalnızca gösterge panellerine dönüldü.</string>
+    <string name="dash_update_dot_hint">Menüde bir güncelleme bekliyor</string>
+    <string name="dash_update_dot_menu">Menü tuşundaki nokta bu güncelleme</string>
+
+    <!-- The pages' places in the cross, and an empty page -->
+    <string name="dash_page_home">Ana ekran</string>
+    <string name="dash_page_left">Ana ekranın solu</string>
+    <string name="dash_page_right">Ana ekranın sağı</string>
+    <string name="dash_page_above">Ana ekranın üstü</string>
+    <string name="dash_page_above2">Ana ekranın iki üstü</string>
+    <string name="dash_page_below">Ana ekranın altı</string>
+    <string name="dash_page_below2">Ana ekranın iki altı</string>
+    <string name="dash_empty_title">Burada henüz bir şey yok</string>
+    <string name="dash_empty_body">Bir şablondan doldurun ya da kutucukları tek tek ekleyin.</string>
+    <!-- Updates without a strip (⋮ dot, Settings row, ready prompt); edit-mode confirms; tile options; theme gallery -->
+    <string name="dash_update_to">%1$s sürümüne güncelle</string>
+    <string name="dash_update_available_detail">v%1$s sürümünden daha yeni bir derleme. Yükleme Dashwheel\'i yeniden başlatır.</string>
+    <string name="dash_update_ready_detail">İndirildi ve yüklenmeye hazır</string>
+    <string name="dash_update_ready_title">Güncelleme hazır</string>
+    <string name="dash_update_ready_body">%1$s indirildi. Yükleme yarım dakika sürer ve Dashwheel\'i yeniden başlatır.</string>
+    <string name="dash_update_now">Şimdi güncelle</string>
+    <string name="dash_update_not_this_version">Bu sürüm değil</string>
+    <string name="dash_update_allow_installs">Dashwheel\'in güncelleme yüklemesine izin verin, sonra Güncelle\'ye yeniden dokunun</string>
+    <string name="dash_dashboard_options">Gösterge paneli seçenekleri</string>
+    <string name="dash_remove_dashboard_title">%1$s kaldırılsın mı?</string>
+    <string name="dash_remove_dashboard_body">Boşaltın ya da kutucuklarıyla birlikte kaydırmalardan çıkarın. Geri al onları geri getirir.</string>
+    <string name="dash_tile_move">Başka bir gösterge paneline taşı</string>
+    <string name="dash_tile_remove">Kaldır</string>
+    <string name="dash_tile_restart_app">Uygulamayı yeniden başlat</string>
+    <!-- The bar's Apps button, labelled -->
+    <string name="dash_apps">Uygulamalar</string>
+    <!-- Tiles on the dashboard that live on root or the unit's ADB, where Dashwheel has neither -->
+    <string name="dash_rootless_title">Root erişimi gerekiyor</string>
+    <plurals name="dash_rootless_body">
+        <item quantity="one">%1$s için root erişimi gerekiyor, Dashwheel\'in bu ana ünitede olmayan bir şey. Gösterge panelinizden kaldırılacak.</item>
+        <item quantity="other">%1$s için root erişimi gerekiyor, Dashwheel\'in bu ana ünitede olmayan bir şey. Gösterge panelinizden kaldırılacaklar.</item>
+    </plurals>
+    <!-- The bar's position chip (PagePosition.kt) -->
+    <string name="dash_position_chip">Gösterge paneli: %1$s</string>
+    <string name="dash_position_title">Bir gösterge paneline git</string>
+    <!-- Every dashboard at once, with + and - (DashboardsOverview.kt) -->
+    <string name="dash_dashboards">Gösterge panelleri</string>
+    <string name="dash_dashboards_hint">Açmak için birine dokunun</string>
+    <string name="dash_dashboard_add">Buraya bir gösterge paneli ekle</string>
+    <string name="dash_dashboard_removed">%1$s kaldırıldı</string>
+    <string name="dash_remove_empty">Boşalt</string>
+    <string name="dash_remove_take_out">Kaydırmalardan çıkar</string>
+    <string name="dash_bring_back_title">%1$s geri getirilsin mi?</string>
+    <string name="dash_bring_back_body">Kutucuk oraya gider ve gösterge paneli yeniden kaydırmalara katılır.</string>
+    <string name="dash_bring_back">Geri getir</string>
+    <string name="dash_moved_to">%1$s paneline taşındı</string>
+    <string name="dash_page_removed">%1$s, kaydırmaların dışında</string>
+    <string name="dash_way_home_up">Ana ekran için yukarı kaydırın</string>
+    <string name="dash_way_home_down">Ana ekran için aşağı kaydırın</string>
+    <string name="dash_add_tile">Kutucuk ekle</string>
+    <string name="dash_theme_futuristic">Futuristic</string>
+    <string name="dash_theme_futuristic_desc">Hareketli bir ışık ızgarası üstünde hologram olarak aracınız, okumalar üzerinde işaretli.</string>
+    <string name="dash_theme_simple">Simple</string>
+    <string name="dash_theme_simple_desc">Büyük okunaklı rakamlar, showroom\'daki gibi aydınlatılmış aracınız, birkaç büyük tuş.</string>
+    <string name="dash_theme_modern">Modern</string>
+    <string name="dash_theme_modern_desc">3B bir şehir üstünde buzlu cam kartlar, rota parlıyor.</string>
+    <string name="dash_theme_motorsport">Motorsport</string>
+    <string name="dash_theme_motorsport_desc">Bir yarış aracının ekranı: vites ışıkları, sektör süreleri, bayrağın rengini alan bir çerçeve.</string>
+    <string name="dash_theme_anime">Anime</string>
+    <string name="dash_theme_anime_desc">Gün batımı gökyüzünde çizgi roman kareleri, konuşan bir çıkartma olarak aracınız.</string>
+    <string name="dash_theme_racing">Racing</string>
+    <string name="dash_theme_racing_desc">Neonda bir gece sürüşü: çizgili güneş, yarış oyunu kadranları ve mini harita.</string>
+    <string name="dash_theme_panorama">Panorama</string>
+    <string name="dash_theme_panorama_desc">Işıklı bölmelerden kavisli bir cam bant, parlayan bir kaide üstünde aracınız ve bir direksiyon yuvası.</string>
+    <string name="dash_theme_liquid">Liquid</string>
+    <string name="dash_theme_liquid_desc">Parlak bir duvar kağıdı üstünde ışığı büken cam, ortada dönen aracınız.</string>
+    <string name="dash_theme_expressive">Expressive</string>
+    <string name="dash_theme_expressive_desc">Cesur şekiller ve çalan müziğin renkleri; her widget\'ın kendi şekli var.</string>
+    <string name="dash_theme_kinetic">Kinetic</string>
+    <string name="dash_theme_kinetic_desc">Önce sözcükler: sıradaki dönüş büyük hareketli yazıyla, gerisi altta akıp gidiyor.</string>
+    <string name="dash_theme_glyph">Glyph</string>
+    <string name="dash_theme_glyph_desc">Açık bir panel üstünde nokta matris rakamlar, gerçek görünümlü tuşlar ve kenarlarda ışık şeritleri.</string>
+    <string name="dash_theme_windshield">Windshield</string>
+    <string name="dash_theme_windshield_desc">Üstte göz attığınız her şeyi taşıyan tek bir bant, çizilmiş bir gece yolu üstünde.</string>
+    <string name="dash_theme_terrain">Terrain</string>
+    <string name="dash_theme_terrain_desc">Eş yükselti çizgilerinden bir manzara üstünde aracınız, sorun parçanın kendisine iğnelenmiş.</string>
+    <string name="dash_theme_ambient">Ambient</string>
+    <string name="dash_theme_ambient_desc">Az sözcüklü bir ışık alanı: sıradaki dönüşün yönünden sıcak bir parıltı yükselir.</string>
+    <string name="dash_theme_brutal">Brutal</string>
+    <string name="dash_theme_brutal_desc">Çığlık gibi düz renkler, kalın çizgiler ve kocaman yazı, tam güneşte okunmak için.</string>
+    <string name="dash_theme_clay">Clay</string>
+    <string name="dash_theme_clay_desc">Sıkabileceğiniz yumuşak pastel şekiller, büyük yuvarlak tuşlar ve kabarık 3B dönüş oku.</string>
+    <string name="dash_theme_chrome">Chrome</string>
+    <string name="dash_theme_chrome_desc">Sıvı krom harfler, holografik çipler ve müzikle hareket eden bir metal damla.</string>
+    <string name="dash_theme_spatial">Spatial</string>
+    <string name="dash_theme_spatial_desc">Gece 3B bir şehrin üstünde farklı derinliklerde süzülen cam pencereler.</string>
+    <string name="dash_theme_paper">Paper</string>
+    <string name="dash_theme_paper_desc">E-kağıt gibi gri üstüne mürekkep: noktalı bir harita, düz bilgiler ve hareket eden hiçbir şey.</string>
+    <string name="look_layout_applied">Ana ekran %1$s gibi düzenlendi</string>
+    <string name="dash_bar_size">Çubuk boyutu</string>
+    <string name="dash_bar_size_normal">Normal</string>
+    <string name="dash_bar_size_large">Büyük</string>
+    <string name="dash_bar_size_larger">Daha büyük</string>
+</resources>

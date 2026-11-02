@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Road watch (RoadAlertOverlay.kt): warnings from the camera of the phone behind the windscreen. -->
+    <string name="alert_kind_road">Yol izleme</string>
+    <string name="alert_kind_road_title">Yol izleme uyarıları</string>
+    <string name="alert_road_detail">Deneysel. Ön camın arkasındaki telefonun kamerasından uyarılar</string>
+    <string name="alert_road_how">Deneysel. Telefon ön camın arkasındaki tutucusundayken Dashwheel Companion\'da Yol izleme\'yi başlatın. Öndeki araca hızla yaklaşıldığında her zaman uyarılır.</string>
+    <string name="alert_road_lanes">Şerit uyarıları</string>
+    <string name="alert_road_lanes_detail">60 km/sa üzerinde çizgi üzerinde bir tekerlek, sinyal açıkken asla</string>
+    <string name="alert_road_moved_off">Trafik akıyor</string>
+    <string name="alert_road_moved_off_detail">Trafikte durunca: öndeki araç hareket ettiğinde bir söz</string>
+    <string name="alert_speak_road_detail">Çok yakın takip ve trafiğin akması sesli söylenir. Öndeki araç ve şerit her zaman bip sesi verir.</string>
+    <string name="road_warn_collision">Fren, öndeki araç</string>
+    <string name="road_warn_lane_left">Sol çizgiye dikkat</string>
+    <string name="road_warn_lane_right">Sağ çizgiye dikkat</string>
+    <string name="road_warn_close">Çok yakın</string>
+    <string name="road_warn_moved_off">Trafik akıyor</string>
+    <string name="road_say_close">Mesafenizi koruyun</string>
+    <string name="road_say_moved_off">Trafik akıyor</string>
+</resources>

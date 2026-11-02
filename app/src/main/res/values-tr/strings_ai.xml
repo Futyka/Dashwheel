@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings dialog (also the menu item) -->
+    <string name="ai_title">Yapay zeka tamirci</string>
+    <string name="ai_explanation">Yeni bir arıza kodu Gemini tarafından açıklanır ve sesli söylenir. Google\'a gönderilenler: kodlar, motor değerleri, araç modeli ve sesli soru sorduğunuzda sesiniz.</string>
+    <string name="ai_key">Gemini API anahtarı</string>
+    <string name="ai_key_hint">aistudio.google.com → Get API key adresinden ücretsiz</string>
+    <string name="ai_language">Yanıt dili</string>
+    <string name="ai_language_auto">Uygulamayla aynı</string>
+    <string name="ai_language_detail">Gemini\'nin yazılı yanıtları için</string>
+    <string name="ai_test">Test et</string>
+    <string name="ai_done">Tamamlandı</string>
+    <!-- Settings dialog: test results -->
+    <string name="ai_test_ok">Gemini çalışıyor: %1$s</string>
+    <string name="ai_test_failed">Çalışmadı: %1$s</string>
+    <string name="ai_test_waiting">Google\'a bağlanılıyor… %1$d sn</string>
+    <string name="ai_no_voice">Bu cihazda %1$s sesi yok: Android Ayarlar → Metin okuma bölümünden bir tane ekleyin.</string>
+    <!-- Spoken by the car, in the launcher's language -->
+    <string name="ai_say_ready">Yapay zeka tamirci hazır.</string>
+    <plurals name="ai_say_new_codes">
+        <item quantity="one">%1$d yeni motor arızası: %2$s. Park ettiğinizde Arıza kodları kutucuğuna bakın.</item>
+        <item quantity="other">%1$d yeni motor arızası: %2$s. Park ettiğinizde Arıza kodları kutucuğuna bakın.</item>
+    </plurals>
+    <plurals name="ai_say_new_codes_untitled">
+        <item quantity="one">%1$d yeni motor arızası. Park ettiğinizde Arıza kodları kutucuğuna bakın.</item>
+        <item quantity="other">%1$d yeni motor arızası. Park ettiğinizde Arıza kodları kutucuğuna bakın.</item>
+    </plurals>
+    <string name="ai_say_overheat">Uyarı, motor aşırı ısınıyor: %1$d derece. Güvenli olduğunda kenara çekin ve motoru kapatın.</string>
+    <string name="ai_say_not_charging">Akü şarj olmuyor: motor çalışırken %1$s volt. Bir servise gidin ve gerekmeyen şeyleri kapatın.</string>
+    <string name="ai_say_weak_battery">Akü zayıf: motor kapalıyken %1$s volt. Yakında test ettirin.</string>
+    <!-- Fault codes tile: labels around the AI advice (in the mechanic's language, like the advice) -->
+    <string name="ai_verdict_ok">Acil bir durum görünmüyor</string>
+    <string name="ai_verdict_soon">Yakında kontrol ettirin</string>
+    <string name="ai_verdict_stop">Sürüşü durdur</string>
+    <!-- When the built-in rules rate a fault more serious than the AI did (spoken, and shown in the verdict) -->
+    <string name="ai_rules_stop">Bu arıza motora zarar verebilir: güvenli olduğunda durun ve yola devam etmeden önce kontrol ettirin.</string>
+    <string name="ai_rules_soon">Bu arıza birkaç gün içinde servis gerektirir: o zamana kadar yumuşak sürün.</string>
+    <string name="ai_rules_raised">Yerleşik güvenlik kuralları bunu yapay zekadan daha ciddi değerlendirdi.</string>
+    <string name="ai_disclaimer">Yapay zeka tavsiyesi (%1$s): yanlış olabilir. Onarımdan önce bir servise danışın.</string>
+    <string name="ai_details_parked">Ayrıntılar park ettiğiniz zaman içindir. Sorunuzu yine de sesli sorabilirsiniz.</string>
+    <string name="ai_check_first">Önce kontrol edin: %1$s</string>
+    <string name="ai_details">Detaylar</string>
+    <string name="ai_close">Kapat</string>
+    <string name="ai_detail_overview">Genel bakış</string>
+    <string name="ai_detail_meaning">Anlamı</string>
+    <string name="ai_detail_symptoms">Fark edebilecekleriniz</string>
+    <string name="ai_detail_causes">Olası nedenler</string>
+    <string name="ai_detail_check_first">Önce kontrol edin</string>
+    <string name="ai_detail_checks">Adım adım</string>
+    <string name="ai_detail_repair">Olağan onarım</string>
+    <string name="ai_detail_cost">Tahmini maliyet</string>
+    <string name="ai_detail_diy">Kendim yapabilir miyim?</string>
+    <string name="ai_detail_driving">Sürmeye devam edebilir miyim?</string>
+    <string name="ai_ask">Soru sor</string>
+    <string name="ai_ask_send">Gönder</string>
+    <string name="ai_ask_listening">Dinliyor… sorunuzu sorun; siz durunca kendiliğinden gönderilir.</string>
+    <string name="ai_ask_thinking">Tamirci düşünüyor…</string>
+    <string name="ai_ask_you_asked">Sorunuz: %1$s</string>
+    <string name="ai_ask_nothing_heard">Bir soru duymadım. Dokunup tekrar sorun.</string>
+    <string name="ai_ask_mic_denied">Sesli sormak için mikrofona izin verin.</string>
+    <string name="ai_ask_mic_error">Mikrofon başlatılamadı.</string>
+    <string name="ai_ask_failed">Yanıt yok: %1$s</string>
+    <string name="ai_ask_replay">Tekrar dinle</string>
+    <!-- Fault codes tile: status -->
+    <string name="ai_no_codes">Arıza kodu yok</string>
+    <string name="ai_cleared">Silindi</string>
+    <string name="ai_scan_failed">Tarama başarısız</string>
+    <string name="ai_clear_failed">Silme başarısız</string>
+    <string name="ai_thinking">Yapay zeka tamirciye soruluyor…</string>
+    <string name="ai_retry">Tekrar dene</string>
+    <string name="ai_note_no_key">Anlaşılır tavsiyeler için Ayarlar → Araç → Yapay zeka tamirci bölümüne ücretsiz bir Gemini anahtarı ekleyin.</string>
+    <string name="ai_note_unavailable">Yapay zeka kullanılamıyor: %1$s</string>
+    <!-- Why asking Gemini failed (follows "AI unavailable: " / "Didn't work: ") -->
+    <string name="ai_error_quota">bugünkü ücretsiz kota doldu</string>
+    <string name="ai_error_key_refused">anahtar reddedildi</string>
+    <string name="ai_error_gemini">Gemini hatası %1$d</string>
+    <string name="ai_error_empty">Gemini boş yanıt verdi</string>
+    <string name="ai_error_unreadable">Gemini\'nin yanıtı okunamadı</string>
+    <string name="ai_error_offline">internet bağlantısı yok</string>
+    <string name="ai_error_no_dns">internet yok: Google bulunamıyor (ana ünitenin Wi-Fi veya hotspot bağlantısını kontrol edin)</string>
+    <string name="ai_error_no_access">Wi-Fi bağlı ama internet yok (giriş gerekebilir ya da telefonun mobil verisi yok)</string>
+    <string name="ai_error_timeout">Google zamanında yanıt vermedi: bağlantı çok yavaş ya da internet yok</string>
+    <string name="ai_error_gemini_busy">Google\'ın yapay zekası şu anda aşırı yüklü; birkaç dakika sonra tekrar deneyin</string>
+    <string name="ai_error_tls">güvenli bağlantı reddedildi: ana ünitenin tarih ve saatini kontrol edin</string>
+    <string name="ai_error_connect">Google\'a bağlanılamadı</string>
+    <string name="ai_error_unknown">bilinmeyen hata</string>
+    <string name="ai_say_overcharging">Akü voltajı çok yüksek: motor çalışırken %1$s volt. Şarj regülatörü arızalı olabilir: yakında kontrol ettirin.</string>
+    <!-- Asking the mechanic about the car as it is now (fault codes tile microphone, hands-free) -->
+    <string name="ai_ask_wheel_action">Yapay zeka tamirciye sor</string>
+    <!-- Spoken, in the mechanic's language -->
+    <string name="ai_ask_say_listening">Dinliyorum.</string>
+    <string name="ai_ask_say_nothing_heard">Bir soru duymadım.</string>
+    <string name="ai_ask_say_no_key">Yapay zeka tamirci için bir Gemini anahtarı gerekir. Araç ayarlarında, Yapay zeka tamirci altında bir tane ekleyin.</string>
+    <string name="ai_ask_say_mic">Mikrofona henüz izin verilmedi. İzin vermek için arıza kodları kutucuğundaki mikrofona bir kez dokunun.</string>
+    <string name="ai_gemini_live_missing">Gemini bu cihazda yüklü değil.</string>
+    <string name="ai_gemini_live_end">Sonlandır</string>
+    <string name="ai_gemini_live_show">Gemini Live\'ı göster</string>
+    <string name="ai_live_connecting">Bağlanıyor</string>
+    <string name="ai_live_listening">Dinliyor</string>
+    <string name="ai_live_thinking">Düşünüyor</string>
+    <string name="ai_live_speaking">Konuşuyor</string>
+    <string name="ai_live_failed">Gemini yanıt vermiyor. Bağlantıyı kontrol edin.</string>
+    <string name="ai_live_own">Aracı tanıyan Gemini</string>
+    <string name="ai_live_own_detail">Gemini anahtarınızı kullanır: aracı, yolculuğu ve panoyu okur ve bunlara göre hareket eder. Kapalı: Google\'ın Gemini uygulaması</string>
+</resources>

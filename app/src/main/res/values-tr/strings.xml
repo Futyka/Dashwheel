@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Dashwheel</string>
+    <string name="split_a11y_description">Dashwheel\'in uygulamaları gösterge panelinin yanında bölünmüş ekranda, son uygulamalar ekranının kullandığı sistem bölmesiyle açmasını sağlar. Kullandığı tek ekran içeriği, telefonunuzdan gönderilen metni yazmak için seçili metin alanıdır. Ayrıca donanım tuşlarını alır, böylece bir uygulama kutucuk içinde çalışırken Ana ekran ve Geri çalışmaya devam eder ve seçtiğiniz direksiyon tuşları ikinci ekranın sayfasını çevirir; diğer tuşlar dokunulmadan geçer. Telefonun dokunmatik yüzeyiyle, telefonun işaretçisinin ekranda bulunduğu yere dokunur ve kaydırır.</string>
+
+    <!-- Language picker; each language is listed under its own name. -->
+    <string name="language_menu">Dil</string>
+    <string name="language_title">Dil</string>
+    <string name="language_system">Sistem (%1$s)</string>
+    <string name="language_close">Kapat</string>
+</resources>

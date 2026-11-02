@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The driver's places (Places.kt): Settings -> Driving, the map tile, the steering wheel buttons -->
+    <string name="places_title">Yerlerim</string>
+    <string name="places_detail_empty">Ev ve iş yeri, bir dokunma veya bir düğme uzakta</string>
+    <string name="places_explanation">Bir kez ayarlayın. Sonra harita kutucuğunda görünürler.</string>
+    <string name="places_home">Ev adresi</string>
+    <string name="places_work">İş adresi</string>
+    <string name="places_not_set">Ayarlanmadı</string>
+    <string name="places_address_hint">Adres veya yer</string>
+    <string name="places_find">Bul</string>
+    <string name="places_here">Araç burada</string>
+    <string name="places_forget">Unut</string>
+    <string name="places_recent">Son hedefler</string>
+    <string name="places_forget_recent">Listeyi temizle</string>
+    <string name="places_offline">Bağlantı yok</string>
+    <string name="places_no_nav_app">Bu cihazda navigasyon uygulaması yok</string>
+    <!-- Spoken when a steering wheel button asks for a place that isn't set -->
+    <string name="places_no_home">Ev adresi ayarlanmadı. Ayarlar, Sürüş, Yerlerim\'den ayarlayın.</string>
+    <string name="places_no_work">İş adresi ayarlanmadı. Ayarlar, Sürüş, Yerlerim\'den ayarlayın.</string>
+</resources>

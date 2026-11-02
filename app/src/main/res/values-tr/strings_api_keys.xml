@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="api_keys_title">API anahtarlarınız</string>
+    <string name="api_keys_search_detail">Dashwheel\'in sizin için sorduğu hizmetlerin anahtarları, önce Gemini</string>
+    <string name="api_keys_none">Kayıtlı anahtar yok</string>
+    <string name="api_keys_explanation">Bazı özellikler kendi anahtarınızı gerektiren bir hizmete sorar. Buraya yapıştırın: bu cihazda kalır ve yalnızca o hizmete gider.</string>
+    <string name="api_keys_paste">Anahtarı yapıştır</string>
+    <string name="api_keys_show">Anahtarı göster</string>
+    <string name="api_keys_hide">Anahtarı gizle</string>
+    <string name="api_keys_set">Ayarla</string>
+    <string name="api_keys_not_set">Ayarlanmadı</string>
+    <string name="api_keys_get">Anahtar al</string>
+    <string name="api_keys_gemini_uses">Yapay zeka tamirci, sesli yanıtlar ve asistan</string>
+    <string name="api_keys_tankerkoenig">Tankerkönig anahtarı</string>
+    <string name="api_keys_tankerkoenig_uses">Almanya\'da yakıt fiyatları</string>
+    <string name="fuel_needs_tankerkoenig">Almanya\'daki fiyatlar için Tankerkönig anahtarı gerekir: Ayarlar, Uzman, API anahtarlarınız</string>
+    <string name="map_servers_overpass">Overpass sunucusu</string>
+    <string name="map_servers_overpass_detail">Hız limitleri, hız kameraları ve istasyon adları için. Herkese açık sunucular için boş bırakın.</string>
+    <plurals name="api_keys_set_count">
+        <item quantity="one">%d anahtar ayarlı</item>
+        <item quantity="other">%d anahtar ayarlı</item>
+    </plurals>
+</resources>

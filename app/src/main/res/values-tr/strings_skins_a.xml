@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cockpit skin: top bar -->
+    <string name="cockpit_apps">MENÜ</string>
+    <string name="cockpit_layout">DÜZEN</string>
+    <string name="cockpit_screen_layout_desc">Google Haritalar konumu: %1$s</string>
+    <string name="cockpit_more">Daha fazla</string>
+    <string name="cockpit_time_desc">Saat %1$s</string>
+    <string name="cockpit_out">DIŞ</string>
+    <string name="cockpit_connect_obd">OBD\'ye bağlan</string>
+    <!-- Cockpit skin: dial faces (C/H = cold/hot coolant, E/F = empty/full tank) -->
+    <string name="cockpit_dial_rpm_title">×1000 dev/dk</string>
+    <string name="cockpit_dial_temp">SICAKLIK</string>
+    <string name="cockpit_dial_fuel">YAKIT</string>
+    <string name="cockpit_dial_volt">VOLT</string>
+    <string name="cockpit_dial_load">YÜK</string>
+    <string name="cockpit_dial_cold">C</string>
+    <string name="cockpit_dial_hot">H</string>
+    <string name="cockpit_dial_empty">E</string>
+    <string name="cockpit_dial_full">F</string>
+    <string name="cockpit_dial_fuel_title">YAKIT</string>
+    <string name="cockpit_unit_rpm">dev/dk</string>
+    <!-- Cockpit skin: telemetry and speed -->
+    <string name="cockpit_speed_rpm_caption">KM/SA · %1$d RPM</string>
+    <string name="cockpit_obd_off">OBD KAPALI</string>
+    <string name="cockpit_battery">Batarya</string>
+    <string name="cockpit_coolant">Soğutma suyu</string>
+    <string name="cockpit_speed_warning">Hız uyarısı</string>
+    <string name="cockpit_tap_to_connect">BAĞLANMAK\nİÇİN DOKUN</string>
+    <string name="cockpit_tap_to_enable">ETKİNLEŞTİRMEK İÇİN DOKUN</string>
+    <!-- Cockpit skin: media -->
+    <string name="cockpit_grant_media_access">Müzik erişimi izni ver</string>
+    <string name="cockpit_previous">Önceki</string>
+    <string name="cockpit_play">Oynat</string>
+    <string name="cockpit_pause">Duraklat</string>
+    <string name="cockpit_next">Sonraki</string>
+    <string name="cockpit_vu_left">L</string>
+    <string name="cockpit_vu_right">R</string>
+    <!-- Cockpit skin: navigation, clock, weather, range -->
+    <string name="cockpit_open_navigation">Navigasyonu aç</string>
+    <string name="cockpit_tap_for_maps">HARİTA İÇİN DOKUN</string>
+    <string name="cockpit_open_alarms">Alarmları aç</string>
+    <string name="cockpit_clock">Saat</string>
+    <string name="cockpit_loading">YÜKLENİYOR…</string>
+    <string name="cockpit_feels_wind">Hissedilen %1$d° · Rüzgar %2$d KM/H</string>
+    <string name="cockpit_fuel_settings">Yakıt sinyali ayarları</string>
+    <string name="cockpit_range">MENZİL</string>
+    <!-- Cockpit skin: app toggles and launch bar -->
+    <string name="cockpit_open_app">%1$s uygulamasını aç</string>
+    <string name="cockpit_launch_bar_empty">BAŞLATMA ÇUBUĞU: UYGULAMA EKLEMEK İÇİN KALEME DOKUN</string>
+    <string name="cockpit_edit_launch_bar">Başlatma çubuğunu düzenleyin</string>
+    <!-- Orbit skin: top bar -->
+    <string name="orbit_all_apps">Tüm uygulamalar</string>
+    <string name="orbit_screen_layout_desc">Google Haritalar konumu: %1$s</string>
+    <string name="orbit_more">Daha fazla</string>
+    <!-- Orbit skin: speed dial and satellite bubbles -->
+    <string name="orbit_sat_coolant">soğutma suyu</string>
+    <string name="orbit_sat_battery">batarya</string>
+    <string name="orbit_sat_load">yük</string>
+    <string name="orbit_rpm_value">%1$s dev/dk</string>
+    <string name="orbit_tap_to_connect">Bağlanmak için dokunun</string>
+    <string name="orbit_connecting">Bağlanıyor…</string>
+    <string name="orbit_connect_obd">OBD\'ye bağlan</string>
+    <string name="orbit_tap_to_enable">Etkinleştirmek için dokunun</string>
+    <!-- Orbit skin: media -->
+    <string name="orbit_start_music">Herhangi bir uygulamada müzik başlatın</string>
+    <string name="orbit_previous_track">Önceki parça</string>
+    <string name="orbit_play">Oynat</string>
+    <string name="orbit_pause">Duraklat</string>
+    <string name="orbit_next_track">Sonraki parça</string>
+    <string name="orbit_grant_access">Erişim izni ver</string>
+    <!-- Orbit skin: navigation -->
+    <string name="orbit_tap_open_maps">Google Haritalar\'ı açmak için dokunun</string>
+    <string name="orbit_tap_allow_notifications">Bildirim erişimi izni vermek için tıklayın</string>
+    <!-- Orbit skin: clock and weather -->
+    <string name="orbit_open_alarms">Alarmları aç</string>
+    <string name="orbit_feels">Hissedilen %1$d°</string>
+    <string name="orbit_wind">Rüzgar %1$d km/sa</string>
+    <string name="orbit_feels_wind">Hissedilen %1$d° · %2$d km/h</string>
+    <string name="orbit_offline">Çevrimdışı</string>
+    <string name="orbit_loading">Yükleniyor…</string>
+    <!-- Orbit skin: fuel and range -->
+    <string name="orbit_to_empty">boşalana kadar</string>
+    <string name="orbit_liters_in_tank">≈ depoda %1$.0f L</string>
+    <string name="orbit_via_source">%1$s ile</string>
+    <string name="orbit_tap_to_recalibrate">yeniden kalibre etmek için dokunun</string>
+    <string name="orbit_recalibrate_fuel">Yakıtı yeniden kalibre et</string>
+    <string name="orbit_fuel_percent">yakıt %1$d %%</string>
+    <!-- Orbit skin: launch bar -->
+    <string name="orbit_launch_bar_empty">Başlatma çubuğu: uygulama eklemek için kaleme dokunun</string>
+    <string name="orbit_edit_launch_bar">Başlatma çubuğunu düzenleyin</string>
+</resources>

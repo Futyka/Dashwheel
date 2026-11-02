@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Photos the phone sends for the car's AI to read (PhotoAsk.kt). -->
+    <string name="photo_error_picture">Fotoğraf okunamadı.</string>
+    <string name="photo_booklet_nothing">Bu sayfada servis kaydı bulunamadı.</string>
+    <plurals name="photo_booklet_saved">
+        <item quantity="one">Telefondan %1$d servis kaydı kaydedildi</item>
+        <item quantity="other">Telefondan %1$d servis kaydı kaydedildi</item>
+    </plurals>
+</resources>

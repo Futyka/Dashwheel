@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="zoom_button">Yazı ve simge boyutu</string>
+    <string name="zoom_out">Daha küçük</string>
+    <string name="zoom_in">Daha büyük</string>
+    <string name="zoom_reset">Yüzde 100\'e sıfırla</string>
+    <string name="zoom_page">Yazı boyutu</string>
+    <string name="zoom_percent">%1$d %%</string>
+    <string name="zoom_window_inside">Yüzde 100 dışındaki her boyutta uygulama kutucuğun içinde çalışır.</string>
+</resources>

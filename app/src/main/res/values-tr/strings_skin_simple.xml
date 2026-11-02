@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Simple skin -->
+    <string name="skin_simple_talk">Konuş</string>
+    <string name="skin_simple_talk_cd">Asistanla konuş</string>
+    <string name="skin_simple_doors_closed">Kapılar kapalı</string>
+    <string name="skin_simple_fuel_chip">Yakıt %1$d %% · %2$s</string>
+    <string name="skin_simple_fuel_chip_short">Yakıt %1$d %%</string>
+    <string name="skin_simple_speed_limit_cd">Hız limiti %1$d</string>
+    <string name="skin_simple_no_signal_connect">Sinyal yok. OBD\'ye bağlanmak için dokunun</string>
+    <string name="skin_simple_car_cd">Aracınız</string>
+    <string name="skin_simple_car_open_cd">Aracınız, bir kapı açık</string>
+    <string name="skin_simple_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="boot_menu">Açılış logosu</string>
+    <string name="boot_title">Açılış logosu</string>
+    <string name="boot_search">%1$d araç markasında ara</string>
+    <string name="boot_no_match">Eşleşen marka yok.</string>
+    <string name="boot_downloading">Logo indiriliyor…</string>
+    <string name="boot_bg_black">Siyah</string>
+    <string name="boot_bg_white">Beyaz</string>
+    <string name="boot_show_name">Marka adını göster</string>
+    <string name="boot_show_name_detail">Logonun altına yazılır</string>
+    <string name="boot_install">Şimdi yükle</string>
+    <string name="boot_play">Şimdi oynat</string>
+    <string name="boot_restore">Orijinali geri yükle</string>
+    <string name="boot_close">Kapat</string>
+    <string name="boot_building">Animasyon oluşturuluyor…</string>
+    <string name="boot_installing">Yükleniyor…</string>
+    <string name="boot_restoring">Geri yükleniyor…</string>
+    <string name="boot_playing">Ekranda oynatılıyor…</string>
+    <string name="boot_installed">%1$s içinde yüklendi. Bir sonraki açılışta göreceksiniz.</string>
+    <string name="boot_install_failed">Yüklenemedi: %1$s</string>
+    <string name="boot_restored">Orijinal açılış animasyonu geri geldi.</string>
+    <string name="boot_nothing_to_restore">Geri yüklenecek bir şey yok: açılış animasyonu hiç değiştirilmedi.</string>
+    <string name="boot_restore_failed">Geri yüklenemedi: %1$s</string>
+    <string name="boot_restore_confirm_title">Orijinal geri yüklensin mi?</string>
+    <string name="boot_restore_confirm_body">Cihazın kendi açılış animasyonu ve sabit logosu geri konur.</string>
+    <string name="boot_play_failed">Oynatılamadı: %1$s</string>
+    <string name="boot_current">Şimdiki açılış logosu: %1$s</string>
+    <string name="boot_hint">Cihazın açılırken gösterdiğini bu markanın logosuyla değiştirir: Android animasyonu ve açıksa sabit logo. Ana ünitenin dahili root ADB\'sini kullanır ve /system\'e hiç dokunmaz. Orijinaller yedeklenir (dahili depolamada Dashwheel/boot_backup altına da) ve Geri yükle onları geri koyar. Logolar açık car-logos-dataset kaynağından gelir.</string>
+    <string name="boot_usb">USB\'ye kaydet</string>
+    <string name="boot_saving_usb">USB belleğe yazılıyor…</string>
+    <string name="boot_saved_usb">%1$s üzerine kaydedildi. Belleği çıkarıp tekrar takın: cihaz animasyonu içe aktarır. Sabit logo için: Ayarlar → Fabrika ayarları (8888) → Logo set → %2$s seçin → Update logo.</string>
+    <string name="boot_no_usb">USB bellek bulunamadı. Bir tane takıp tekrar deneyin.</string>
+    <string name="boot_still">Sabit logoyu da değiştir</string>
+    <string name="boot_still_detail">Android\'den önceki ilk görüntü. Varsayılan olarak kapalı: logo bölümüne yazılır, önce yedeklenir ve sonra doğrulanır.</string>
+    <string name="boot_still_confirm_title">Sabit logo değiştirilsin mi?</string>
+    <string name="boot_still_confirm_body">Sabit logo, önce yedeklenerek cihazın logo bölümüne yazılır.</string>
+    <string name="boot_still_done">Sabit logo da güncellendi.</string>
+    <string name="boot_still_failed">Sabit logo değiştirilmedi: %1$s</string>
+    <string name="boot_still_unsupported">bu cihazda sabit logo aracı yok</string>
+    <string name="boot_not_qf">Şimdi yükle yalnızca yapıldığı QF001 / K706 yazılımında çalışır. Bunun yerine USB\'ye kaydet\'i kullanın.</string>
+    <string name="boot_no_adb">Ana ünitenin dahili ADB\'si yanıt vermiyor (port %1$d) ve Dashwheel\'in root yetkisi yok. USB hata ayıklamayı açın (Ayarlar → Hakkında → Yapı numarasına 7 kez dokunun, sonra Geliştirici seçenekleri → USB hata ayıklama) ya da root verin ve tekrar deneyin.</string>
+</resources>

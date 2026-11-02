@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Experimental advanced readings (PidExplorer.kt, PidExplorerDialog.kt) -->
+    <string name="explore_title">Gelişmiş değerler</string>
+    <string name="explore_settings_detail">Deneysel: kurum yükü ve daha fazlası, yapay zeka önerir ve araç doğrular</string>
+    <string name="explore_soot_load">Kurum yükü</string>
+    <string name="explore_dpf_temp">Filtre sıcaklığı</string>
+    <string name="explore_dpf_pressure">Filtre basıncı</string>
+    <string name="explore_regen">Rejenerasyon</string>
+    <string name="explore_km_since_regen">Son rejenerasyondan beri</string>
+    <string name="explore_additive">Katkı seviyesi</string>
+    <string name="explore_oil_temp">Yağ sıcaklığı</string>
+    <string name="explore_explanation">Deneysel: yapay zeka bu araca özgü tanı isteklerini önerir ve aracın makul, kararlı bir değerle yanıtladıklarını tutar. Tutulan bir değer yine de yanlış olabilir.</string>
+    <string name="explore_search">Yapay zeka ile ara</string>
+    <string name="explore_searching">İstekler deneniyor… %1$d sn</string>
+    <string name="explore_verified">Doğrulanan değerler</string>
+    <string name="explore_none_verified">Henüz yok. Motor çalışırken adaptörü bağlayın ve arayın.</string>
+    <string name="explore_results">Denenenler</string>
+    <string name="explore_forget">Tümünü sıfırla</string>
+    <string name="explore_v_no_answer">yanıt yok</string>
+    <string name="explore_v_refused">reddedildi</string>
+    <string name="explore_v_unreadable">okunamadı</string>
+    <string name="explore_v_implausible">mantıksız</string>
+    <string name="explore_v_unstable">kararsız</string>
+    <string name="explore_v_ok">doğrulandı</string>
+    <string name="explore_silent">adaptör yanıt vermedi</string>
+    <string name="explore_not_in_demo">Demo modunda kullanılamaz</string>
+    <string name="explore_nothing_found">Hiçbiri doğrulanmadı. Bu araç bunları yalnızca servis cihazına veriyor olabilir.</string>
+    <string name="explore_source_standard">standart</string>
+    <string name="explore_source_ai">Yapay zeka</string>
+    <string name="explore_regen_yes">Rejenerasyon yapıyor</string>
+    <string name="explore_regen_no">Rejenerasyon yapmıyor</string>
+    <string name="explore_soot_status">Kurum yükü %1$d %%</string>
+</resources>

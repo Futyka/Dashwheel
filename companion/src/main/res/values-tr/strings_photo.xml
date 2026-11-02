@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ask about a photo (PhotoAskCard.kt): the car's AI reads a warning light or a service booklet page. -->
+    <string name="photo_title">Fotoğraf hakkında sor</string>
+    <string name="photo_detail">Ne anlama geldiğini öğrenmek için bir uyarı lambasını, ya da aracın bakım planını doldurmak için servis defterinin bir sayfasını fotoğraflayın.</string>
+    <string name="photo_offline">Önce telefonu araca bağlayın: fotoğrafı aracın yapay zekası okur.</string>
+    <string name="photo_kind_light">Uyarı lambası</string>
+    <string name="photo_kind_booklet">Servis defteri</string>
+    <string name="photo_take">Fotoğraf çek</string>
+    <string name="photo_choose">Fotoğraf seç</string>
+    <string name="photo_asking">Araç yapay zekasına soruyor…</string>
+    <string name="photo_no_answer">Araçtan yanıt yok. Araçta Dashwheel\'i güncelleyin ya da yeniden deneyin.</string>
+    <string name="photo_unreadable">Bu fotoğraf açılamadı.</string>
+    <string name="photo_privacy">Fotoğraf araç üzerinden Google\'ın yapay zekasına gider, sonra bu telefondan silinir.</string>
+    <string name="photo_severity_ok">Sürmeye devam edin</string>
+    <string name="photo_severity_soon">Yakında kontrol ettirin</string>
+    <string name="photo_severity_stop">Güvenli olduğunda durun</string>
+    <string name="photo_booklet_send">Araca kaydet</string>
+    <string name="photo_booklet_sent">Aracın bakım planına kaydedildi</string>
+    <string name="photo_every_km_months">Her %1$d km ya da %2$d ayda bir</string>
+    <string name="photo_every_km">Her %1$d km\'de bir</string>
+    <string name="photo_every_months">Her %1$d ayda bir</string>
+    <string name="photo_done_date_km">Son yapılan: %1$s, %2$d km\'de</string>
+    <string name="photo_done_date">Son yapılan: %1$s</string>
+    <string name="photo_done_km">Son yapılan: %1$d km\'de</string>
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spatial skin -->
+    <string name="spatial_talk_cd">Asistanla konuş</string>
+    <string name="spatial_rain_from">%1$s itibariyle yağmur</string>
+    <string name="spatial_rain_until">%1$s saatine kadar yağmur</string>
+    <string name="spatial_arrival">Varış %1$s</string>
+    <string name="spatial_tab_turn">Dönüş</string>
+    <string name="spatial_tab_arrival">Varış</string>
+    <string name="spatial_tab_fuel">Yakıt</string>
+    <string name="spatial_range">Menzil</string>
+    <string name="spatial_fuel_enough">Varmaya yetecek yakıt var</string>
+    <string name="spatial_fuel_short">Varmadan önce yakıt alın</string>
+    <string name="spatial_speed_limit_cd">Hız limiti %1$d</string>
+    <string name="spatial_rpm">dev/dk</string>
+    <string name="spatial_coolant">Soğutma suyu</string>
+    <string name="spatial_battery">Batarya</string>
+    <string name="spatial_load">Yük</string>
+    <string name="spatial_launch_bar_empty">Henüz uygulama yok. Eklemek için kaleme dokunun.</string>
+</resources>

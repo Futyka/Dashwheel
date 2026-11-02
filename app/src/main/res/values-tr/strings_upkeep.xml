@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Servicing planner (Maintenance.kt, MaintenanceTiles.kt) -->
+    <string name="upkeep_kind">Servis</string>
+    <string name="upkeep_kind_blurb">Yağ, kayış, sıvılar: neyin ne zaman gerektiği</string>
+    <string name="upkeep_oil">Yağ değişimi</string>
+    <string name="upkeep_air_filter">Hava filtresi</string>
+    <string name="upkeep_fuel_filter">Yakıt filtresi</string>
+    <string name="upkeep_cabin_filter">Kabin hava filtresi</string>
+    <string name="upkeep_brake_fluid">Fren yağı</string>
+    <string name="upkeep_coolant">Soğutma sıvısı</string>
+    <string name="upkeep_timing_belt">Triger kayışı</string>
+    <string name="upkeep_additive">Filtre katkısı</string>
+    <string name="upkeep_gearbox_oil">Şanzıman yağı</string>
+    <string name="upkeep_spark_plugs">Bujiler</string>
+    <string name="upkeep_inspection">Araç muayenesi</string>
+    <string name="upkeep_title">SERVİS</string>
+    <string name="upkeep_no_odometer">Kilometre bilgisini girin</string>
+    <string name="upkeep_needs_dates">Her öğenin en son ne zaman yapıldığını ayarlayın</string>
+    <string name="upkeep_all_good">Gereken yok</string>
+    <string name="upkeep_next_km">%1$s %2$s km sonra</string>
+    <plurals name="upkeep_next_days">
+        <item quantity="one">%1$s %2$d gün sonra</item>
+        <item quantity="other">%1$s %2$d gün sonra</item>
+    </plurals>
+    <string name="upkeep_overdue_km">%1$s %2$s km gecikti</string>
+    <plurals name="upkeep_overdue_days">
+        <item quantity="one">%1$s %2$d gün gecikti</item>
+        <item quantity="other">%1$s %2$d gün gecikti</item>
+    </plurals>
+    <string name="upkeep_due_today">%1$s bugün gerekiyor</string>
+    <string name="upkeep_say_due_today">%1$s bugün gerekiyor.</string>
+    <string name="upkeep_row_km">%1$s km</string>
+    <string name="upkeep_row_days">%1$d gün</string>
+    <string name="upkeep_not_set">Ayarlanmadı</string>
+    <string name="upkeep_dialog_title">Servis</string>
+    <string name="upkeep_settings_detail">Kilometre, servis planı ve sesli hatırlatmalar</string>
+    <string name="upkeep_explanation">Kilometreyi bir kez girin: sürüşleriniz buna eklenir. Her öğenin en son ne zaman tamamlandığını ayarlayın. Vadesi gelen şey başlangıçta söylenir.</string>
+    <string name="upkeep_odometer">Kilometre (km)</string>
+    <string name="upkeep_odometer_as_of">%1$s tarihinde eklendi, o zamandan bu yana %2$d km gidildi</string>
+    <string name="upkeep_fetch">Yapay zeka ile hizmet planını alın</string>
+    <string name="upkeep_fetch_ok">Aralıklar yapay zekadan dolduruldu: kontrol edin</string>
+    <string name="upkeep_fetch_failed">Plan alınamadı: %1$s</string>
+    <string name="upkeep_plan_ai">Aralıklar yapay zekadan</string>
+    <string name="upkeep_plan_default">Servis aralıkları henüz doğrulanmadı</string>
+    <string name="upkeep_section_items">Öğeler</string>
+    <string name="upkeep_every_km">Kaç km\'de bir?</string>
+    <string name="upkeep_every_months">Kaç ayda bir?</string>
+    <string name="upkeep_last_km">Son yapıldığı km</string>
+    <string name="upkeep_last_date">Son yapılma tarihi (YYYY-AA)</string>
+    <string name="upkeep_done_today">Bugün yapıldı</string>
+    <plurals name="upkeep_say_soon_km">
+        <item quantity="one">%1$s %2$d kilometre sonra gerekiyor.</item>
+        <item quantity="other">%1$s %2$d kilometre sonra gerekiyor.</item>
+    </plurals>
+    <plurals name="upkeep_say_soon_days">
+        <item quantity="one">%1$s %2$d gün sonra gerekiyor.</item>
+        <item quantity="other">%1$s %2$d gün sonra gerekiyor.</item>
+    </plurals>
+    <plurals name="upkeep_say_overdue_km">
+        <item quantity="one">%1$s %2$d kilometre gecikti.</item>
+        <item quantity="other">%1$s %2$d kilometre gecikti.</item>
+    </plurals>
+    <plurals name="upkeep_say_overdue_days">
+        <item quantity="one">%1$s %2$d gün gecikti.</item>
+        <item quantity="other">%1$s %2$d gün gecikti.</item>
+    </plurals>
+</resources>

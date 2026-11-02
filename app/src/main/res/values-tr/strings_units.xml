@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Settings, Display: units and clock (Units.kt) -->
+    <string name="units_title">Birimler</string>
+    <string name="units_speed">Hız ve mesafe</string>
+    <string name="units_temp">Sıcaklık</string>
+    <string name="units_economy">Yakıt tüketimi</string>
+    <string name="units_clock">Saat</string>
+    <string name="units_auto">Otomatik</string>
+    <string name="units_auto_hint">Otomatik ana ünitenin ayarlarını izler: %1$s</string>
+
+    <!-- Miles and mph versions of the lines that say km and km/h -->
+    <string name="units_eco_fuel_mi">%1$s mil için yakıt</string>
+    <string name="units_fuel_dest_spare_unit_mi">mil yedek</string>
+    <string name="units_fuel_dest_detail_mi">%1$d mil menzil · %2$d mil kaldı</string>
+    <string name="units_fuel_none_mi">%1$d mil içinde bu yakıtı satan istasyon yok. Fiyatlar yalnızca Fransa\'yı kapsar.</string>
+    <plurals name="units_fuel_stations_mi">
+        <item quantity="one">%2$d mil içinde %1$d istasyon</item>
+        <item quantity="other">%2$d mil içinde %1$d istasyon</item>
+    </plurals>
+    <string name="units_weather_details_mph">Hissedilen %1$d° · Rüzgar %2$d mph</string>
+    <string name="units_weather_details_range_mph">Hissedilen %1$d° · Rüzgar %2$d mph · %3$d° / %4$d°</string>
+    <string name="units_speed_fix_now_mph">Şu anki hız: %1$d mph. Hız göstergenizle eşleşene kadar ayarlayın.</string>
+    <string name="units_mi_to_empty">BOŞA KADAR MİL</string>
+    <string name="units_upkeep_next_mi">%1$s %2$s mil sonra</string>
+    <string name="units_upkeep_overdue_mi">%1$s %2$s mil gecikti</string>
+    <string name="units_upkeep_row_mi">%1$s mil</string>
+    <string name="units_upkeep_odometer_mi">Mil cinsinden kilometre sayacı</string>
+    <string name="units_upkeep_odometer_as_of_mi">%1$s girildi, o zamandan beri %2$d mil sürüldü</string>
+    <string name="units_upkeep_every_mi">Mil cinsinden aralık</string>
+    <string name="units_upkeep_last_mi">Son yapıldığı mil</string>
+    <string name="units_cockpit_feels_wind_mph">HİSSEDİLEN %1$d° · RÜZGAR %2$d MPH</string>
+    <string name="units_orbit_wind_mph">Rüzgar %1$d mph</string>
+    <string name="units_orbit_feels_wind_mph">hissedilen %1$d° · %2$d mph</string>
+    <string name="units_horizon_wind_mph">rüzgar %1$d mph</string>
+    <string name="units_tape_feels_wind_caps_mph">HİSSEDİLEN %1$d° · RÜZGAR %2$d MPH</string>
+    <string name="units_canvas_fuel_left_mi">%1$d mil yakıt kaldı</string>
+    <string name="units_alert_coolant_f">Soğutma suyu %1$d°F</string>
+    <string name="units_car_filter_needs_drive_mph">40 mph üstünde 20 dakikalık bir sürüş planlayın</string>
+
+    <!-- Said aloud: full words -->
+    <string name="units_briefing_fuel_low_mi">Yakıt az: yaklaşık %1$d mil kaldı, bir mola planlayın.</string>
+    <string name="units_voice_status_range_mi">Yaklaşık %1$d mil yakıt kaldı.</string>
+    <plurals name="units_voice_fuel_station_mi">
+        <item quantity="one">Yakındaki en ucuz istasyon %1$s, %2$d mil uzakta.</item>
+        <item quantity="other">Yakındaki en ucuz istasyon %1$s, %2$d mil uzakta.</item>
+    </plurals>
+    <plurals name="units_lpg_voice_low_mi">
+        <item quantity="one">LPG az: yaklaşık %1$d mil kaldı.</item>
+        <item quantity="other">LPG az: yaklaşık %1$d mil kaldı.</item>
+    </plurals>
+    <string name="units_car_say_fuel_short_mi">%1$d millik menziliniz %2$d mil uzaktaki hedefe yetmeyecek. Bir yakıt molası planlayın.</string>
+    <string name="units_car_say_filter_mph">Son %1$d sürüşünüz kısaydı. Fırsat bulunca, partikül filtresinin kendini temizleyebilmesi için 15 ila 20 dakika saatte 40 milin üstünde sürün.</string>
+    <plurals name="units_upkeep_say_overdue_mi">
+        <item quantity="one">%1$s %2$d mil gecikti.</item>
+        <item quantity="other">%1$s %2$d mil gecikti.</item>
+    </plurals>
+    <plurals name="units_upkeep_say_soon_mi">
+        <item quantity="one">%1$s %2$d mil sonra.</item>
+        <item quantity="other">%1$s %2$d mil sonra.</item>
+    </plurals>
+</resources>

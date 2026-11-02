@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Futuristic skin (FuturisticSkin*.kt) -->
+    <string name="skin_futuristic_cd_all_apps">Tüm uygulamalar</string>
+    <string name="skin_futuristic_cd_screen_layout">Google Haritalar konumu: %1$s</string>
+    <string name="skin_futuristic_cd_more">Daha fazla</string>
+    <string name="skin_futuristic_link_live">Bağlantı canlı</string>
+    <string name="skin_futuristic_link_off">Bağlantı kapalı</string>
+    <string name="skin_futuristic_link_linking">Bağlanıyor</string>
+    <string name="skin_futuristic_link_error">Bağlantı hatası</string>
+    <string name="skin_futuristic_connect_obd">OBD\'ye bağlan</string>
+    <string name="skin_futuristic_tap_connect_obd">OBD\'ye bağlanmak için dokunun</string>
+    <string name="skin_futuristic_choose_adapter">OBD adaptörü seç</string>
+    <string name="skin_futuristic_telemetry">Telemetri</string>
+    <string name="skin_futuristic_live">Canlı</string>
+    <string name="skin_futuristic_engine">Motor</string>
+    <string name="skin_futuristic_tyres">Lastikler</string>
+    <string name="skin_futuristic_doors">Kapılar</string>
+    <string name="skin_futuristic_doors_closed">Kapalı</string>
+    <string name="skin_futuristic_door_open">Açık</string>
+    <string name="skin_futuristic_rpm">RPM</string>
+    <string name="skin_futuristic_gear">Vites</string>
+    <string name="skin_futuristic_load">Yük</string>
+    <string name="skin_futuristic_next_manoeuvre">Sonraki manevra</string>
+    <string name="skin_futuristic_start_navigation">Navigasyona başla</string>
+    <string name="skin_futuristic_open_navigation">Navigasyonu aç</string>
+    <string name="skin_futuristic_tap_allow_access">Bildirim erişimi izni vermek için tıklayın</string>
+    <string name="skin_futuristic_eta">Varış %1$s</string>
+    <string name="skin_futuristic_now_playing">Şimdi oynatılıyor</string>
+    <string name="skin_futuristic_paused">Durduruldu</string>
+    <string name="skin_futuristic_music">Müzik</string>
+    <string name="skin_futuristic_play_something">Herhangi bir müzik uygulamasında bir şeyler çalın</string>
+    <string name="skin_futuristic_unknown_artist">Bilinmeyen sanatçı</string>
+    <string name="skin_futuristic_cd_previous">Önceki parça</string>
+    <string name="skin_futuristic_cd_play">Oynat</string>
+    <string name="skin_futuristic_cd_pause">Duraklat</string>
+    <string name="skin_futuristic_cd_next">Sonraki parça</string>
+    <string name="skin_futuristic_allow_media">Müzik erişimi izni ver</string>
+    <string name="skin_futuristic_open_clock">Saati aç</string>
+    <string name="skin_futuristic_loading">Yükleniyor</string>
+    <string name="skin_futuristic_weather_at_car">Araçtaki hava durumu</string>
+    <string name="skin_futuristic_feels">Hissedilen %1$d°</string>
+    <string name="skin_futuristic_wind">Rüzgar %1$d %2$s</string>
+    <string name="skin_futuristic_to_empty">Boşalana kadar</string>
+    <string name="skin_futuristic_recalibrate_fuel">Yakıtı yeniden kalibre et</string>
+    <string name="skin_futuristic_open_app">%1$s uygulamasını aç</string>
+    <string name="skin_futuristic_launch_bar_empty">Henüz uygulama yok, eklemek için kaleme dokunun</string>
+    <string name="skin_futuristic_cd_edit_launch_bar">Başlatma çubuğunu düzenleyin</string>
+</resources>

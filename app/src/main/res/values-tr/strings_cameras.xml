@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cams_kept_title">Cihazdaki hız kameraları</string>
+    <string name="cams_kept_row_detail">Harita veri sunucuları çöktüğünde kullanılmak üzere saklanır</string>
+    <string name="cams_kept_explanation">Sürüşlerinizde geçtiğiniz hız kameraları cihazda saklanır; burada istediğinizde bir ülkenin tamamı da. Hiçbir harita veri sunucusu yanıt vermediğinde kutucuk ve sesli uyarılar bunlarla devam eder. Bir ülke her hafta yeniden okunur.</string>
+    <string name="cams_kept_country">Ülke kodu</string>
+    <string name="cams_kept_download">İndir</string>
+    <string name="cams_kept_downloading">İndiriliyor</string>
+    <string name="cams_kept_failed">Hiçbir harita veri sunucusu yanıt vermedi. Daha sonra tekrar deneyin.</string>
+    <string name="cams_kept_section">Cihazda saklananlar</string>
+    <string name="cams_kept_no_country">Henüz ülke yok</string>
+    <string name="cams_kept_remove">Kaldır</string>
+    <string name="cams_kept_driven">Sürüşlerinizden: %1$s</string>
+    <plurals name="cams_kept_count">
+        <item quantity="one">%d kamera</item>
+        <item quantity="other">%d kamera</item>
+    </plurals>
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- My readings: the driver's own OBD requests and formulas (MyReadings.kt, MyReadingsTile.kt) -->
+    <string name="mine_title">Araç okumalarım</string>
+    <string name="mine_settings_detail">Kendi OBD istekleriniz ve formülleriniz</string>
+    <string name="mine_kind_blurb">Ayarlar\'da kurduğunuz kendi OBD okumalarınız ve formülleriniz</string>
+    <string name="mine_tile_empty">Ayarlar → Araç → Araç okumalarım bölümünden okuma ekleyin.</string>
+    <string name="mine_explanation">Araçtan herhangi bir okumayı isteğiyle sorun ya da kendi değerlerinizi diğerlerinden hesaplayın.</string>
+    <string name="mine_none">Henüz okuma yok.</string>
+    <string name="mine_add">Okuma ekle</string>
+    <string name="mine_examples_detail">Hava akışından hesaplanan LPG tüketimi. Sayıları aracınıza göre ayarlayın.</string>
+    <string name="mine_add_examples">Örnekleri ekle</string>
+    <string name="mine_ex_maf">Hava akışı</string>
+    <string name="mine_ex_lpg_lh">LPG tüketimi</string>
+    <string name="mine_ex_lpg_used">Kullanılan LPG</string>
+    <string name="mine_ex_lpg_l100">100 km başına LPG</string>
+    <string name="mine_kind_pid">Aracınızdan</string>
+    <string name="mine_kind_formula">Hesaplanan</string>
+    <string name="mine_kind_total">Toplam</string>
+    <string name="mine_new">Yeni okuma</string>
+    <string name="mine_delete">Sil</string>
+    <string name="mine_save">Kaydet</string>
+    <string name="mine_type">Tür</string>
+    <string name="mine_name">İsim</string>
+    <string name="mine_unit">Birim</string>
+    <string name="mine_key">Formüllerdeki adı</string>
+    <string name="mine_request">İstek</string>
+    <string name="mine_header">ECU adresi</string>
+    <string name="mine_reply">Yanıt adresi</string>
+    <string name="mine_session">Oturum</string>
+    <string name="mine_hint_address">0110 gibi standart OBD istekleri için adresleri ve oturumu boş bırakın.</string>
+    <string name="mine_formula">Formül</string>
+    <string name="mine_hint_pid">A\'dan H\'ye harfler yanıtın baytlarıdır, örneğin 0110 için (A*256+B)/100.</string>
+    <string name="mine_hint_formula">Aşağıdaki adları + - * / ile ve min, max, abs, round, if ile kullanın.</string>
+    <string name="mine_hint_total">Değeri saat başına toplar: L/sa litre olur, km/sa kilometre olur.</string>
+    <string name="mine_names">Adlar: %1$s</string>
+    <string name="mine_decimals">Ondalık</string>
+    <string name="mine_on_tile">Kutucukta</string>
+    <string name="mine_on_tile_detail">Araç okumalarım kutucuğunda gösterilir</string>
+    <string name="mine_test">Test et</string>
+    <string name="mine_answer">Yanıt: %1$s</string>
+    <string name="mine_no_answer">yanıt yok</string>
+    <string name="mine_value">Değer: %1$s</string>
+    <string name="mine_err_unknown">Bilinmeyen ad: %1$s</string>
+    <string name="mine_err_no_value">%1$s için henüz değer yok.</string>
+    <string name="mine_err_no_reading">Yanıt bu isteğe uymuyor.</string>
+    <string name="mine_err_math">Formül sıfıra bölüyor.</string>
+    <string name="mine_err_syntax">Formül okunamıyor.</string>
+    <string name="mine_reset">Sıfırla</string>
+    <string name="mine_err_name">Bir ad verin.</string>
+    <string name="mine_err_key">Formüllerdeki ad: önce bir harf, sonra harf, rakam ya da _. Tek başına A\'dan H\'ye ve yerleşik adlar kullanılamaz.</string>
+    <string name="mine_err_key_taken">Bu adı başka bir okuma kullanıyor.</string>
+    <string name="mine_err_request">Yalnızca onaltılık okuma istekleri: mod 01, 09, 21 ya da 22.</string>
+    <string name="mine_err_address">Adresler 3 ya da 8 onaltılık rakamdır ve yanıt adresi bir ECU adresi gerektirir.</string>
+    <string name="mine_err_session">Oturum: yalnızca 1001, 1003, 1081, 1092 ya da 10C0, bir ECU adresiyle.</string>
+    <string name="mine_err_no_bytes">A\'dan H\'ye harfler yalnızca araçtan gelen bir okumada anlam taşır.</string>
+</resources>

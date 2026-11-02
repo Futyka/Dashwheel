@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- The Canvas theme (CanvasSkin.kt): the journey line and its glass tiles. -->
+    <string name="canvas_rain">Yağmur</string>
+    <string name="canvas_rain_stops">Yağmur duruyor</string>
+    <string name="canvas_break">Mola</string>
+    <string name="canvas_sunset">Gün batımı</string>
+    <string name="canvas_fuel_left">%1$d km yakıt kaldı</string>
+    <string name="canvas_rain_from">%1$s itibarıyla yağmur</string>
+    <string name="canvas_rain_until">%1$s saatine kadar yağmur</string>
+    <string name="canvas_tab_map">Harita</string>
+    <string name="canvas_tab_media">Medya</string>
+    <string name="canvas_tab_car">Araç</string>
+    <string name="canvas_tab_info">Bilgi</string>
+    <string name="canvas_tab_trip">Yolculuk</string>
+    <string name="canvas_tab_phone">Telefon</string>
+    <string name="canvas_tab_weather">Hava durumu</string>
+    <string name="canvas_tab_service">Servis</string>
+    <string name="canvas_when_parked">Park edildi</string>
+    <string name="canvas_when_driving">Sürüş</string>
+    <string name="canvas_when_fault">Motor hatası</string>
+    <string name="canvas_when_navigating">Navigasyonda</string>
+    <string name="canvas_when_low_fuel">Yakıt az</string>
+    <string name="canvas_tab_add">Ekle</string>
+    <string name="canvas_tab_remove">Panoyu kaldır</string>
+    <string name="canvas_tab_done">Tamamlandı</string>
+    <string name="canvas_tab_name">İsim</string>
+    <string name="canvas_tab_when">Kendiliğinden ne zaman görünsün</string>
+    <string name="canvas_tab_when_hint">Park edildi, bir sürüşten sonra 2 dakika durmak demektir, açılışta hiç. Kapatmak için seçili olana tekrar dokunun.</string>
+    <string name="canvas_map_title">Panonun altında</string>
+    <string name="canvas_map_builtin">Yerleşik harita</string>
+    <string name="canvas_map_builtin_hint">Dashwheel\'in kendi haritası, kaydırdığınız panolarla.</string>
+    <string name="canvas_map_app_hint">Uygulama kutucukların altında çalışır ve onların almadığı her dokunuşu alır. Kenar çubuğundaki sekmeler kaydırmanın yerini alır: ad vermek için birini basılı tutun.</string>
+    <string name="canvas_bar_add_title">Çubuğa ekle</string>
+    <string name="canvas_bar_add_dashboard">Pano</string>
+    <string name="canvas_bar_add_dashboard_detail">Adı ve yeri olan yeni bir widget takımı.</string>
+    <string name="canvas_bar_add_dashboard_short">Pano ekle</string>
+    <string name="canvas_bar_add_app">Uygulama</string>
+    <string name="canvas_bar_add_app_detail">Tek dokunuşla açılır. Simgesi panoların altında durur.</string>
+    <string name="canvas_bar_add_app_short">Uygulama ekle</string>
+    <string name="canvas_tab_new">Yeni pano</string>
+    <string name="canvas_tab_place">Çubuktaki yeri</string>
+    <string name="canvas_tab_where">Nereye gidecek</string>
+    <string name="canvas_tab_create">Oluştur</string>
+    <string name="canvas_bar_app_remove">Çubuktan kaldır</string>
+    <string name="canvas_tab_engine">Motor</string>
+    <string name="canvas_tab_checks">Kontroller</string>
+    <string name="canvas_tab_eco">Eko</string>
+    <string name="canvas_when_taken">%1$s: artık %2$s üzerinde</string>
+    <string name="canvas_when_take_title">%1$s, %2$s panosundan alınsın mı?</string>
+    <string name="canvas_when_take_body">Orada artık kendiliğinden görünmez.</string>
+    <string name="canvas_when_take">Al</string>
+</resources>
