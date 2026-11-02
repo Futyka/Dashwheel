@@ -169,6 +169,8 @@
     <string name="bar_items_left">Antes en la barra</string>
     <string name="bar_items_right">Después en la barra</string>
     <string name="bar_items_reset">Restablecer la selección inicial</string>
+    <string name="bar_items_no_room">Algunos indicadores no caben en la barra, ni siquiera sin rótulos: súbelos o quita otro.</string>
+    <string name="bar_items_left_out">No cabe: no está en la barra</string>
     <string name="bar_item_fuel">Combustible</string>
     <string name="bar_item_speed">Velocidad</string>
     <string name="bar_item_revs">Revoluciones</string>

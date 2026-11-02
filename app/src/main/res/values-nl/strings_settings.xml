@@ -169,6 +169,8 @@
     <string name="bar_items_left">Eerder in de balk</string>
     <string name="bar_items_right">Later in de balk</string>
     <string name="bar_items_reset">Terug naar de beginkeuze</string>
+    <string name="bar_items_no_room">Sommige waarden passen niet in de balk, zelfs zonder bijschrift: zet ze hoger of haal er een andere uit.</string>
+    <string name="bar_items_left_out">Past niet: staat niet in de balk</string>
     <string name="bar_item_fuel">Brandstof</string>
     <string name="bar_item_speed">Snelheid</string>
     <string name="bar_item_revs">Toerental</string>

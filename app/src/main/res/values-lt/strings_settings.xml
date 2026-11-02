@@ -170,6 +170,8 @@
     <string name="bar_items_left">Anksčiau juostoje</string>
     <string name="bar_items_right">Vėliau juostoje</string>
     <string name="bar_items_reset">Atkurti pradinį rinkinį</string>
+    <string name="bar_items_no_room">Kai kurie rodmenys netelpa juostoje net be užrašų: perkelkite juos aukščiau arba išimkite kitą.</string>
+    <string name="bar_items_left_out">Netelpa: juostoje nerodomas</string>
     <string name="bar_item_fuel">Degalai</string>
     <string name="bar_item_speed">Greitis</string>
     <string name="bar_item_revs">Apsukos</string>

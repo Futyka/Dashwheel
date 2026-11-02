@@ -59,4 +59,11 @@ class BarLayoutTest {
         assertEquals(setOf(BarItem.SPACE, BarItem.STRETCH), BarItem.entries.filter { it.spacer }.toSet())
         assertFalse(BarItem.CLOCK.spacer)
     }
+
+    @Test
+    fun readoutsThatDontFit_tryTheTighterLooksFirst() {
+        assertEquals(listOf(BarLook.LABELS, BarLook.COMPACT, BarLook.MINIMAL), barLooksToTry(BarLook.LABELS))
+        assertEquals(listOf(BarLook.COMPACT, BarLook.MINIMAL), barLooksToTry(BarLook.COMPACT))
+        assertEquals(listOf(BarLook.MINIMAL), barLooksToTry(BarLook.MINIMAL))
+    }
 }

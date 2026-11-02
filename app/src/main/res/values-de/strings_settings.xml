@@ -169,6 +169,8 @@
     <string name="bar_items_left">Weiter vorne in der Leiste</string>
     <string name="bar_items_right">Weiter hinten in der Leiste</string>
     <string name="bar_items_reset">Auf die Startauswahl zurücksetzen</string>
+    <string name="bar_items_no_room">Einige Anzeigen passen nicht in die Leiste, auch ohne Beschriftung: Schiebe sie nach oben oder nimm eine andere heraus.</string>
+    <string name="bar_items_left_out">Passt nicht: nicht in der Leiste</string>
     <string name="bar_item_fuel">Kraftstoff</string>
     <string name="bar_item_speed">Tempo</string>
     <string name="bar_item_revs">Drehzahl</string>

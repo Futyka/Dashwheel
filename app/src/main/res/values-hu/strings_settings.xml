@@ -170,6 +170,8 @@
     <string name="bar_items_left">Előrébb a sávban</string>
     <string name="bar_items_right">Hátrébb a sávban</string>
     <string name="bar_items_reset">Alapkészlet visszaállítása</string>
+    <string name="bar_items_no_room">Néhány kijelzés nem fér el a sávon, felirat nélkül sem: vidd feljebb, vagy vegyél ki egy másikat.</string>
+    <string name="bar_items_left_out">Nem fér el: nincs a sávon</string>
     <string name="bar_item_fuel">Üzemanyag</string>
     <string name="bar_item_speed">Sebesség</string>
     <string name="bar_item_revs">Fordulat</string>

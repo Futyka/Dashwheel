@@ -171,6 +171,8 @@
     <string name="bar_items_left">Earlier in the bar</string>
     <string name="bar_items_right">Later in the bar</string>
     <string name="bar_items_reset">Reset to the starting set</string>
+    <string name="bar_items_no_room">Some readouts don\'t fit on the bar, even without captions: move them up, or take another out.</string>
+    <string name="bar_items_left_out">Doesn\'t fit: not on the bar</string>
     <string name="bar_item_fuel">Fuel</string>
     <string name="bar_item_speed">Speed</string>
     <string name="bar_item_revs">Revs</string>

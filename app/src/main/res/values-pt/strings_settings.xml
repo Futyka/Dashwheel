@@ -169,6 +169,8 @@
     <string name="bar_items_left">Mais cedo na barra</string>
     <string name="bar_items_right">Mais tarde na barra</string>
     <string name="bar_items_reset">Repor a seleção inicial</string>
+    <string name="bar_items_no_room">Alguns indicadores não cabem na barra, nem sem legendas: suba-os ou retire outro.</string>
+    <string name="bar_items_left_out">Não cabe: não está na barra</string>
     <string name="bar_item_fuel">Combustível</string>
     <string name="bar_item_speed">Velocidade</string>
     <string name="bar_item_revs">Rotações</string>

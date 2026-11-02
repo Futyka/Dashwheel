@@ -170,6 +170,8 @@
     <string name="bar_items_left">Ближе к началу</string>
     <string name="bar_items_right">Ближе к концу</string>
     <string name="bar_items_reset">Вернуть исходный набор</string>
+    <string name="bar_items_no_room">Некоторые показатели не помещаются на панели даже без подписей: поднимите их выше или уберите другой.</string>
+    <string name="bar_items_left_out">Не помещается: нет на панели</string>
     <string name="bar_item_fuel">Топливо</string>
     <string name="bar_item_speed">Скорость</string>
     <string name="bar_item_revs">Обороты</string>

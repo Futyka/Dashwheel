@@ -169,6 +169,8 @@
     <string name="bar_items_left">Plus tôt dans la barre</string>
     <string name="bar_items_right">Plus loin dans la barre</string>
     <string name="bar_items_reset">Réinitialiser à la sélection de départ</string>
+    <string name="bar_items_no_room">Certains indicateurs ne tiennent pas dans la barre, même sans légende : remontez-les, ou retirez-en un autre.</string>
+    <string name="bar_items_left_out">Ne tient pas : absent de la barre</string>
     <string name="bar_item_fuel">Carburant</string>
     <string name="bar_item_speed">Vitesse</string>
     <string name="bar_item_revs">Régime</string>

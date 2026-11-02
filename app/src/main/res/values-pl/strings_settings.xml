@@ -169,6 +169,8 @@
     <string name="bar_items_left">Wcześniej na pasku</string>
     <string name="bar_items_right">Dalej na pasku</string>
     <string name="bar_items_reset">Przywróć wybór początkowy</string>
+    <string name="bar_items_no_room">Niektóre wskaźniki nie mieszczą się na pasku, nawet bez podpisów: przesuń je wyżej albo usuń inny.</string>
+    <string name="bar_items_left_out">Nie mieści się: nie ma go na pasku</string>
     <string name="bar_item_fuel">Paliwo</string>
     <string name="bar_item_speed">Prędkość</string>
     <string name="bar_item_revs">Obroty</string>

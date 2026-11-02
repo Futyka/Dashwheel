@@ -74,7 +74,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.layout.Placeable
+import androidx.compose.ui.layout.SubcomposeLayout
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -166,6 +167,20 @@ internal object BarItems {
             ?.let { n -> BarLook.entries.firstOrNull { it.name == n } } ?: BarLook.COMPACT
     }
 
+    /**
+     * How many of the chosen readouts the bar last found room for, with the
+     * list it was drawn from: Settings marks the rest as left out. Null until
+     * the bar is drawn with the driver's readouts.
+     */
+    private val _fit = MutableStateFlow<Pair<List<BarItem>, Int>?>(null)
+    val fit: StateFlow<Pair<List<BarItem>, Int>?> = _fit.asStateFlow()
+
+    /** From the bar's measuring: [shown] of [items] fit. */
+    internal fun reportFit(items: List<BarItem>, shown: Int) {
+        val now = items to shown
+        if (_fit.value != now) _fit.value = now
+    }
+
     fun setLook(look: BarLook) {
         _look.value = look
         appContext?.getSharedPreferences(PREFS, Context.MODE_PRIVATE)?.edit()?.putString(KEY_LOOK, look.name)?.apply()
@@ -226,38 +241,49 @@ internal object Radios {
 }
 
 /**
- * The chosen readouts, left to right; those that no longer fit at the end are
- * left out whole, never squeezed. Centred, unless a [BarItem.STRETCH] takes
- * the room left over ([barPositions]).
+ * The chosen readouts, left to right. When they don't all fit in the chosen
+ * [BarLook], the bar tries the tighter looks first (captions on the gauges
+ * only, then none), so a 1280-wide unit still shows all it was asked for;
+ * only then are those that no longer fit at the end left out whole, never
+ * squeezed, and Settings says which ([BarItems.fit]). Centred, unless a
+ * [BarItem.STRETCH] takes the room left over ([barPositions]).
  */
 @Composable
 internal fun BarReadouts(items: List<BarItem>, m: TopBarModel, modifier: Modifier = Modifier) {
     val look by BarItems.look.collectAsState()
-    Layout(
-        content = {
-            CompositionLocalProvider(LocalBarLook provides look) {
-                items.forEach { item ->
-                    when (item) {
-                        BarItem.SPACE -> Spacer(Modifier.width(SPACE_WIDTH))
-                        BarItem.STRETCH -> Spacer(Modifier.layoutId(STRETCH_ID))
-                        else -> Box(Modifier.padding(horizontal = if (look == BarLook.LABELS) 10.dp else 8.dp)) { BarReadout(item, m) }
+    SubcomposeLayout(modifier) { constraints ->
+        val room = if (constraints.hasBoundedWidth) constraints.maxWidth else null
+        val looks = barLooksToTry(look)
+        var placed: List<Placeable> = emptyList()
+        var xs: List<Int> = emptyList()
+        for ((n, l) in looks.withIndex()) {
+            val measurables = subcompose(l) {
+                CompositionLocalProvider(LocalBarLook provides l) {
+                    items.forEach { item ->
+                        when (item) {
+                            BarItem.SPACE -> Spacer(Modifier.width(SPACE_WIDTH))
+                            BarItem.STRETCH -> Spacer(Modifier.layoutId(STRETCH_ID))
+                            else -> Box(Modifier.padding(horizontal = if (l == BarLook.LABELS) 10.dp else 8.dp)) { BarReadout(item, m) }
+                        }
                     }
                 }
             }
-        },
-        modifier = modifier
-    ) { measurables, constraints ->
-        val all = measurables.map { it.measure(Constraints(maxHeight = constraints.maxHeight)) }
-        val bounded = constraints.hasBoundedWidth
-        val xs = barPositions(all.map { it.width }, measurables.map { it.layoutId == STRETCH_ID }, if (bounded) constraints.maxWidth else null)
-        val placed = all.take(xs.size)
+            val all = measurables.map { it.measure(Constraints(maxHeight = constraints.maxHeight)) }
+            xs = barPositions(all.map { it.width }, measurables.map { it.layoutId == STRETCH_ID }, room)
+            placed = all.take(xs.size)
+            if (xs.size == all.size || n == looks.lastIndex) break
+        }
+        BarItems.reportFit(items, placed.size)
         val height = (placed.maxOfOrNull { it.height } ?: 0).coerceIn(constraints.minHeight, constraints.maxHeight)
-        val width = if (bounded) constraints.maxWidth else placed.sumOf { it.width }
+        val width = room ?: placed.sumOf { it.width }
         layout(width, height) {
             placed.forEachIndexed { i, p -> p.placeRelative(xs[i], (height - p.height) / 2) }
         }
     }
 }
+
+/** The looks the bar tries, in order, until its readouts all fit: the driver's [look], then each tighter one. */
+internal fun barLooksToTry(look: BarLook): List<BarLook> = BarLook.entries.drop(look.ordinal)
 
 /** A fixed [BarItem.SPACE]: about an icon's width, on the app's spacing scale. */
 private val SPACE_WIDTH = DashSpace.Xl
@@ -543,8 +569,13 @@ internal fun BarItemsSetting() {
     // Chosen ones first, in their order, then the rest. The spacers are
     // always among the rest as well: each tap there adds one more.
     val all = list + BarItem.entries.filter { it !in list || it.spacer }
+    // The readouts the bar had no room for, even without captions: from this index on.
+    val fit by BarItems.fit.collectAsState()
+    val shown = fit?.takeIf { it.first == list }?.second ?: list.size
+    if (shown < list.size) SwitchHint(stringResource(R.string.bar_items_no_room))
     all.forEachIndexed { i, item ->
         val on = i < list.size
+        val leftOut = on && i >= shown && !item.spacer
         val tap = rememberTapFeedback()
         // The whole row is the switch: a tap anywhere on the name puts it in the bar or takes it out
         // (this one: a spacer that is in more than once leaves only here).
@@ -562,11 +593,16 @@ internal fun BarItemsSetting() {
         ) {
             Icon(item.icon, contentDescription = null, tint = if (on) DashColors.Accent else DashColors.Muted, modifier = Modifier.size(22.dp))
             Spacer(Modifier.width(14.dp))
-            Text(
-                stringResource(item.label), color = if (on) DashColors.TextPrimary else DashColors.Muted,
-                fontWeight = if (on) FontWeight.SemiBold else FontWeight.Normal,
-                style = MaterialTheme.typography.bodyLarge, modifier = Modifier.weight(1f), maxLines = 1, overflow = TextOverflow.Ellipsis
-            )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    stringResource(item.label), color = if (on) DashColors.TextPrimary else DashColors.Muted,
+                    fontWeight = if (on) FontWeight.SemiBold else FontWeight.Normal,
+                    style = MaterialTheme.typography.bodyLarge, maxLines = 1, overflow = TextOverflow.Ellipsis
+                )
+                if (leftOut) {
+                    Text(stringResource(R.string.bar_items_left_out), color = DashColors.Warning, style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
+                }
+            }
             if (!on && item.spacer) {
                 Icon(Icons.Filled.Add, contentDescription = null, tint = DashColors.Muted, modifier = Modifier.padding(end = 14.dp).size(22.dp))
             }

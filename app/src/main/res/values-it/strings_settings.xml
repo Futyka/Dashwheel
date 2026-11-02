@@ -169,6 +169,8 @@
     <string name="bar_items_left">Prima nella barra</string>
     <string name="bar_items_right">Dopo nella barra</string>
     <string name="bar_items_reset">Ripristina la scelta iniziale</string>
+    <string name="bar_items_no_room">Alcuni indicatori non entrano nella barra, nemmeno senza didascalie: spostali più in alto o togline un altro.</string>
+    <string name="bar_items_left_out">Non entra: non è nella barra</string>
     <string name="bar_item_fuel">Carburante</string>
     <string name="bar_item_speed">Velocità</string>
     <string name="bar_item_revs">Giri</string>
