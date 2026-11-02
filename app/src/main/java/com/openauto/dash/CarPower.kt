@@ -20,6 +20,7 @@ import com.openauto.dash.vehicle.K
 import com.openauto.dash.vehicle.Source
 import com.openauto.dash.vehicle.SourceKind
 import com.openauto.dash.vehicle.Vehicle
+import com.openauto.dash.vehicle.speedKmhNow
 
 /*
  * The ignition, as the head unit's firmware announces it to every app
@@ -208,7 +209,8 @@ object CarPower {
         val now = System.currentTimeMillis()
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putLong(KEY_OFF_AT, now).apply()
         Log.i(TAG, "ignition off")
-        DebugLog.note(context, "ignition off")
+        // Moving at 14 V when it went off: the ACC signal flickered (wire, CAN box), not the car switched off.
+        DebugLog.note(context, "ignition off, ${speedKmhNow() ?: "?"} km/h, ${Vehicle.bus.now(K.BATTERY_VOLTS) ?: "?"} V")
         ResourceWatch.noteNow(context, "ignition off")
         DebugLog.snapshot(context, "ignition off")
         EmbeddedApp.carStopped(context)
