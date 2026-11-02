@@ -74,6 +74,8 @@ internal object ReverseCamera {
     private const val ROM_OPEN_WAIT_MS = 2_500L
     /** The ROM app closes its camera within about 0.1 s. */
     private const val CLOSE_WAIT_MS = 1_500L
+    /** Dashwheel's own close ([close]) waits for the camera's driver: a second or more on some units (#109). */
+    private const val OWN_CLOSE_WAIT_MS = 3_000L
     /** The ROM app's picture shows about this long after it opened the camera (its signal check). */
     private const val ROM_PICTURE_MS = 700L
     /** The camera's first frame came within a second on the K706; past this, it's not coming. */
@@ -111,6 +113,8 @@ internal object ReverseCamera {
     private var sampler: Job? = null
     private var frame: Bitmap? = null
     private val _cameraFree = MutableStateFlow(true)
+    /** The last [close] has run through on the camera's thread: its device is let go of. */
+    private val _closed = MutableStateFlow(true)
     private val _romPicture = MutableStateFlow(false)
     /** The ROM app's picture is on screen: the lines can go over it ([ReverseView]). */
     val romPicture: StateFlow<Boolean> = _romPicture.asStateFlow()
@@ -210,6 +214,8 @@ internal object ReverseCamera {
     private var startedAt = 0L
     private var romHadAt = 0L
     private var romLetGoAt = 0L
+    /** This reverse's second try at the picture, when and why ([openAgain]), for the debug log. */
+    private var retried: String? = null
     private var picture = WIDTH to HEIGHT
 
     fun hasPermission(context: Context) =
@@ -229,12 +235,18 @@ internal object ReverseCamera {
         val app = context.applicationContext
         view.surfaceTextureListener = object : TextureView.SurfaceTextureListener {
             override fun onSurfaceTextureAvailable(texture: SurfaceTexture, width: Int, height: Int) {
-                opening?.cancel()
+                // A try still going (a session on an earlier surface of this view) ends first.
+                close()
                 opening = scope.launch {
                     _state.value = State.TAKING
                     startedAt = SystemClock.elapsedRealtime()
                     romHadAt = 0L
                     romLetGoAt = 0L
+                    retried = null
+                    // The last reverse's camera may still be closing on its thread (#126): opened
+                    // over it, the new device gets no picture, and the ROM app would be stopped
+                    // before it even took the camera, the "in use" being Dashwheel's own.
+                    withTimeoutOrNull(OWN_CLOSE_WAIT_MS) { _closed.first { it } }
                     // As soon as the ROM app has the camera, it's asked to let go of it.
                     withTimeoutOrNull(ROM_OPEN_WAIT_MS) { _cameraFree.first { !it } }
                     if (!_cameraFree.value) romHadAt = SystemClock.elapsedRealtime()
@@ -324,7 +336,9 @@ internal object ReverseCamera {
         watchdog?.cancel()
         watchdog = scope.launch {
             delay(FIRST_FRAME_MS)
-            if (_state.value == State.OPENING) fail(context, "no picture")
+            if (_state.value != State.OPENING) return@launch
+            // Apart from this watchdog, which [openAgain]'s close cancels.
+            scope.launch { retryOrFail(context, texture, retry, "no picture") }
         }
         runCatching {
             manager.openCamera(id, object : CameraDevice.StateCallback() {
@@ -360,30 +374,39 @@ internal object ReverseCamera {
 
                 override fun onDisconnected(camera: CameraDevice) {
                     camera.close()
-                    scope.launch { if (mine == attempt && (device === camera || device == null)) fail(context, "camera taken back") }
+                    // The ROM app took it back (its start came after the stop): stopped once more.
+                    scope.launch { if (mine == attempt) retryOrFail(context, texture, retry, "camera taken back") }
                 }
 
                 override fun onError(camera: CameraDevice, error: Int) {
                     camera.close()
-                    scope.launch {
-                        if (mine != attempt) return@launch
-                        val busy = error == CameraDevice.StateCallback.ERROR_CAMERA_IN_USE || error == CameraDevice.StateCallback.ERROR_MAX_CAMERAS_IN_USE
-                        // The ROM app hadn't opened yet when it was stopped, and has since: once more.
-                        if (busy && retry && device == null) openAgain(context, texture, mine)
-                        else fail(context, "camera error $error")
-                    }
+                    // In use (the ROM app hadn't opened yet when it was stopped, and has since) or a
+                    // device fault while it was letting go: once more, unless the camera is disabled.
+                    val fatal = error == CameraDevice.StateCallback.ERROR_CAMERA_DISABLED
+                    scope.launch { if (mine == attempt) retryOrFail(context, texture, retry && !fatal, "camera error $error") }
                 }
             }, handler)
         }.onFailure { e ->
             // Refused at once: the ROM app opened the camera again in between. Once more.
-            if (retry && e is android.hardware.camera2.CameraAccessException && e.reason == android.hardware.camera2.CameraAccessException.CAMERA_IN_USE) {
-                scope.launch { openAgain(context, texture, mine) }
-            } else fail(context, "open refused: $e")
+            val busy = e is android.hardware.camera2.CameraAccessException && e.reason == android.hardware.camera2.CameraAccessException.CAMERA_IN_USE
+            scope.launch { if (mine == attempt) retryOrFail(context, texture, retry && busy, "open refused: $e") }
         }
     }
 
-    /** The second and last try of [attempt] number [mine], unless reverse ended while the ROM app was stopped. */
-    private suspend fun openAgain(context: Context, texture: SurfaceTexture, mine: Int) {
+    private suspend fun retryOrFail(context: Context, texture: SurfaceTexture, retry: Boolean, why: String) =
+        if (retry) openAgain(context, texture, why) else fail(context, why)
+
+    /**
+     * The second and last try of this reverse, [why] the first went wrong:
+     * Dashwheel's own device closed and let go of, the ROM app stopped once
+     * more, the camera opened again on the same surface. Unless reverse ended
+     * meanwhile.
+     */
+    private suspend fun openAgain(context: Context, texture: SurfaceTexture, why: String) {
+        retried = "second try after ${sinceStart()} ms ($why)"
+        close()
+        val mine = attempt
+        withTimeoutOrNull(OWN_CLOSE_WAIT_MS) { _closed.first { it } }
         val stopped = stopRomCamera(context)
         if (mine != attempt) return
         if (!stopped) return fail(context, "the car app's camera could not be stopped")
@@ -450,7 +473,7 @@ internal object ReverseCamera {
     private fun took(): String {
         val had = if (romHadAt == 0L) "car app never took the camera" else "car app took the camera after ${romHadAt - startedAt} ms"
         val let = if (romLetGoAt == 0L) "never let go" else "let go after ${romLetGoAt - startedAt} ms"
-        return "$had, $let"
+        return listOfNotNull(had, let, retried).joinToString(", ")
     }
 
     /** Ends this try at the picture; [texture], the view's surface when it is going, is released once the camera is closed. */
@@ -471,17 +494,21 @@ internal object ReverseCamera {
         device = null
         surface = null
         if (s == null && d == null && sf == null) {
-            texture?.release()
+            // On the camera's thread, behind a close still running there: its surface wraps this texture.
+            val t = texture ?: return
+            thread?.let { Handler(it.looper).post { t.release() } } ?: t.release()
             return
         }
         // Closing the camera waits for its driver, a second or more on some units:
         // on the camera's own thread, or the screen hangs on the last frame after
-        // reverse ends (#109).
+        // reverse ends (#109). The next open waits for it ([_closed]).
+        _closed.value = false
         val release = Runnable {
             runCatching { s?.close() }
             runCatching { d?.close() }
             sf?.release()
             texture?.release()
+            _closed.value = true
         }
         thread?.let { Handler(it.looper).post(release) } ?: release.run()
     }
