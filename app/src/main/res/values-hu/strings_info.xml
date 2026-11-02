@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">GYORSHÍVÁS</string>
-    <string name="info_quickdial_dialer">Tárcsázó</string>
+    <string name="info_quickdial_dialer">Telefon</string>
     <string name="info_quickdial_needs_access">Itt jelennek meg a csillagozott névjegyei</string>
     <string name="info_quickdial_allow">Névjegyek engedélyezése</string>
     <string name="info_quickdial_empty">Jelöljön meg névjegyeket csillaggal a Névjegyek alkalmazásban, és itt megjelennek</string>

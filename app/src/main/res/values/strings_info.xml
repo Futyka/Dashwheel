@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">QUICK DIAL</string>
-    <string name="info_quickdial_dialer">Dialer</string>
+    <string name="info_quickdial_dialer">Phone</string>
     <string name="info_quickdial_needs_access">Show your starred contacts here</string>
     <string name="info_quickdial_allow">Allow contacts</string>
     <string name="info_quickdial_empty">Star contacts in the Contacts app to see them here</string>

@@ -97,6 +97,8 @@ interface PhoneBridge {
     fun accept()
     fun decline()
     fun hangUp()
+    /** Places a call to [number] through the unit's Bluetooth; false when this firmware takes no number. */
+    fun dial(number: String): Boolean = false
 }
 
 /** The unit's own players: Bluetooth music and the radio. */

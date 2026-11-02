@@ -62,4 +62,19 @@
     <string name="phone_calling">Вызов: %1$s</string>
     <string name="phone_dial_not_allowed">Чтобы звонить отсюда, разрешите «Звонки» в Dashwheel Companion.</string>
     <string name="phone_guidance_to">Маршрут: %1$s</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Контакты</string>
+    <string name="phone_tab_recents">Недавние</string>
+    <string name="phone_tab_keypad">Клавиатура</string>
+    <string name="phone_favourites">Избранные</string>
+    <string name="phone_contacts_needs_access">Показывать здесь контакты этого устройства</string>
+    <string name="phone_contacts_empty">На этом устройстве пока нет контактов. Подключите телефон по Bluetooth с доступом к телефонной книге, чтобы устройство их получило.</string>
+    <string name="phone_recents_empty">Сопрягите телефон в разделе Настройки, Телефон и экраны, чтобы видеть здесь его последние вызовы</string>
+    <string name="phone_recents_none">На телефоне пока нет вызовов</string>
+    <string name="phone_recent_missed">Пропущенный</string>
+    <string name="phone_recent_incoming">Входящий</string>
+    <string name="phone_recent_outgoing">Исходящий</string>
+    <string name="phone_keypad_call">Позвонить</string>
+    <string name="phone_keypad_delete">Удалить последнюю цифру</string>
+    <string name="phone_unit_app">Приложение телефона устройства</string>
 </resources>

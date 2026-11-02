@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">БЫСТРЫЙ НАБОР</string>
-    <string name="info_quickdial_dialer">Набор номера</string>
+    <string name="info_quickdial_dialer">Телефон</string>
     <string name="info_quickdial_needs_access">Показывать здесь избранные контакты</string>
     <string name="info_quickdial_allow">Доступ к контактам</string>
     <string name="info_quickdial_empty">Добавьте контакты в избранное в приложении Контакты, чтобы видеть их здесь</string>

@@ -59,4 +59,19 @@
     <string name="phone_calling">Chiamata a %1$s</string>
     <string name="phone_dial_not_allowed">Per chiamare da qui, consenti Chiamate in Dashwheel Companion.</string>
     <string name="phone_guidance_to">Indicazioni per %1$s</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Contatti</string>
+    <string name="phone_tab_recents">Recenti</string>
+    <string name="phone_tab_keypad">Tastiera</string>
+    <string name="phone_favourites">Preferiti</string>
+    <string name="phone_contacts_needs_access">Mostra qui i contatti di questa unità</string>
+    <string name="phone_contacts_empty">Ancora nessun contatto su questa unità. Collega il telefono via Bluetooth con la rubrica condivisa, perché l\'unità li riceva.</string>
+    <string name="phone_recents_empty">Associa il telefono in Impostazioni, Telefono e schermi, per vedere qui le sue ultime chiamate</string>
+    <string name="phone_recents_none">Ancora nessuna chiamata sul telefono</string>
+    <string name="phone_recent_missed">Persa</string>
+    <string name="phone_recent_incoming">Ricevuta</string>
+    <string name="phone_recent_outgoing">Effettuata</string>
+    <string name="phone_keypad_call">Chiama</string>
+    <string name="phone_keypad_delete">Cancella l\'ultima cifra</string>
+    <string name="phone_unit_app">App telefono dell\'unità</string>
 </resources>

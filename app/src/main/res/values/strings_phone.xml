@@ -62,4 +62,19 @@
     <string name="phone_calling">Calling %1$s</string>
     <string name="phone_dial_not_allowed">To call from here, allow Calls in Dashwheel Companion.</string>
     <string name="phone_guidance_to">Directions to %1$s</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Contacts</string>
+    <string name="phone_tab_recents">Recents</string>
+    <string name="phone_tab_keypad">Keypad</string>
+    <string name="phone_favourites">Favourites</string>
+    <string name="phone_contacts_needs_access">Show this unit\'s contacts here</string>
+    <string name="phone_contacts_empty">No contacts on this unit yet. Connect your phone over Bluetooth with its phonebook shared, so the unit gets them.</string>
+    <string name="phone_recents_empty">Pair your phone in Settings, Phone and screens, to see its last calls here</string>
+    <string name="phone_recents_none">No calls on the phone yet</string>
+    <string name="phone_recent_missed">Missed</string>
+    <string name="phone_recent_incoming">Received</string>
+    <string name="phone_recent_outgoing">Dialled</string>
+    <string name="phone_keypad_call">Call</string>
+    <string name="phone_keypad_delete">Delete the last digit</string>
+    <string name="phone_unit_app">Unit\'s phone app</string>
 </resources>

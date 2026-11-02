@@ -62,4 +62,19 @@
     <string name="phone_calling">%1$s aranıyor</string>
     <string name="phone_dial_not_allowed">Buradan aramak için Dashwheel Companion\'da Aramalar\'a izin verin.</string>
     <string name="phone_guidance_to">%1$s yol tarifi</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Kişiler</string>
+    <string name="phone_tab_recents">Son aramalar</string>
+    <string name="phone_tab_keypad">Tuş takımı</string>
+    <string name="phone_favourites">Favoriler</string>
+    <string name="phone_contacts_needs_access">Bu ünitenin kişilerini burada göster</string>
+    <string name="phone_contacts_empty">Bu ünitede henüz kişi yok. Ünitenin alması için telefonunuzu rehber paylaşımı açık olarak Bluetooth ile bağlayın.</string>
+    <string name="phone_recents_empty">Son aramalarını burada görmek için telefonunuzu Ayarlar, Telefon ve ekranlar\'dan eşleştirin</string>
+    <string name="phone_recents_none">Telefonda henüz arama yok</string>
+    <string name="phone_recent_missed">Cevapsız</string>
+    <string name="phone_recent_incoming">Gelen</string>
+    <string name="phone_recent_outgoing">Giden</string>
+    <string name="phone_keypad_call">Ara</string>
+    <string name="phone_keypad_delete">Son rakamı sil</string>
+    <string name="phone_unit_app">Ünitenin telefon uygulaması</string>
 </resources>

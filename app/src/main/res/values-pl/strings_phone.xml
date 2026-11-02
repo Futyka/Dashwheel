@@ -59,4 +59,19 @@
     <string name="phone_calling">Połączenie: %1$s</string>
     <string name="phone_dial_not_allowed">Aby dzwonić tutaj, zezwól na Połączenia w Dashwheel Companion.</string>
     <string name="phone_guidance_to">Trasa do %1$s</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Kontakty</string>
+    <string name="phone_tab_recents">Ostatnie</string>
+    <string name="phone_tab_keypad">Klawiatura</string>
+    <string name="phone_favourites">Ulubione</string>
+    <string name="phone_contacts_needs_access">Pokaż tu kontakty z tego urządzenia</string>
+    <string name="phone_contacts_empty">Brak kontaktów na tym urządzeniu. Połącz telefon przez Bluetooth z udostępnioną książką telefoniczną, aby urządzenie je dostało.</string>
+    <string name="phone_recents_empty">Sparuj telefon w Ustawieniach, Telefon i ekrany, aby widzieć tu jego ostatnie połączenia</string>
+    <string name="phone_recents_none">Brak połączeń na telefonie</string>
+    <string name="phone_recent_missed">Nieodebrane</string>
+    <string name="phone_recent_incoming">Odebrane</string>
+    <string name="phone_recent_outgoing">Wybrane</string>
+    <string name="phone_keypad_call">Zadzwoń</string>
+    <string name="phone_keypad_delete">Usuń ostatnią cyfrę</string>
+    <string name="phone_unit_app">Aplikacja telefonu urządzenia</string>
 </resources>

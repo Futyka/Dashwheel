@@ -385,7 +385,7 @@ internal fun PaperTopBar(m: TopBarModel) {
                     }
                     PaperBarButton(stringResource(R.string.paper_music), stringResource(R.string.paper_music_cd)) { paperOpenMusic(context, m.onApps) }
                     PaperBarButton(stringResource(R.string.paper_phone), stringResource(R.string.paper_phone_cd)) {
-                        UnitPhoneApp.open(context, m.onApps)
+                        PhoneScreen.open(context, m.onApps)
                     }
                 }
             }

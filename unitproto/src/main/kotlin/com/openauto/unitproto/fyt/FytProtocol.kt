@@ -104,6 +104,7 @@ object FytMain {
 
 /** Module BT's command and update codes (fyt-dialer, from the decompiled com.syu.bt). */
 object FytBt {
+    /** strs[0] = the number to call (fyt-dialer). */
     const val C_DIAL = 7
     const val C_REDIAL = 8
     const val C_PICKUP = 9

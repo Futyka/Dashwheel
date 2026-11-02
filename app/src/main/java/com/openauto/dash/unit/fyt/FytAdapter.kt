@@ -373,6 +373,13 @@ internal class FytPhone(private val toolkit: FytToolkit) : PhoneBridge {
     override fun decline() { module?.cmd(FytBt.C_HANG) }
     override fun hangUp() { module?.cmd(FytBt.C_HANG) }
 
+    /** The number as strs[0] of [FytBt.C_DIAL], the way fyt-dialer places a call. */
+    override fun dial(number: String): Boolean {
+        val placed = module?.cmd(FytBt.C_DIAL, strs = arrayOf<String?>(number)) == true
+        if (placed) UnitPlatform.markUsed(Cap.PHONE_BRIDGE)
+        return placed
+    }
+
     companion object {
         private const val TAG = "FytPhone"
     }

@@ -48,7 +48,7 @@
 
     <!-- Quick dial tile -->
     <string name="info_quickdial_title">SNELKIEZEN</string>
-    <string name="info_quickdial_dialer">Kiezer</string>
+    <string name="info_quickdial_dialer">Telefoon</string>
     <string name="info_quickdial_needs_access">Toon hier je favoriete contacten</string>
     <string name="info_quickdial_allow">Contacten toestaan</string>
     <string name="info_quickdial_empty">Markeer contacten met een ster in de app Contacten om ze hier te zien</string>

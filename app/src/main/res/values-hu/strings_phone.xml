@@ -62,4 +62,19 @@
     <string name="phone_calling">Hívás: %1$s</string>
     <string name="phone_dial_not_allowed">Az innen történő híváshoz engedélyezze a Hívásokat a Dashwheel Companionben.</string>
     <string name="phone_guidance_to">Útvonal ide: %1$s</string>
+    <!-- The Phone screen (PhoneScreen.kt): the unit's contacts, the phone's last calls, a keypad. -->
+    <string name="phone_tab_contacts">Névjegyek</string>
+    <string name="phone_tab_recents">Legutóbbiak</string>
+    <string name="phone_tab_keypad">Billentyűzet</string>
+    <string name="phone_favourites">Kedvencek</string>
+    <string name="phone_contacts_needs_access">A készülék névjegyeinek megjelenítése itt</string>
+    <string name="phone_contacts_empty">Még nincsenek névjegyek ezen a készüléken. Csatlakoztassa a telefonját Bluetooth-on a telefonkönyv megosztásával, hogy a készülék megkapja őket.</string>
+    <string name="phone_recents_empty">Párosítsa a telefonját a Beállítások, Telefon és kijelzők részben, hogy itt lássa a legutóbbi hívásait</string>
+    <string name="phone_recents_none">Még nincs hívás a telefonon</string>
+    <string name="phone_recent_missed">Nem fogadott</string>
+    <string name="phone_recent_incoming">Fogadott</string>
+    <string name="phone_recent_outgoing">Tárcsázott</string>
+    <string name="phone_keypad_call">Hívás</string>
+    <string name="phone_keypad_delete">Az utolsó számjegy törlése</string>
+    <string name="phone_unit_app">A készülék telefon alkalmazása</string>
 </resources>

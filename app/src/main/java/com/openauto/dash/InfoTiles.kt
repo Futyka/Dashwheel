@@ -110,10 +110,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.Collator
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -610,12 +612,56 @@ internal fun loadFavourites(context: Context, limit: Int = 8): List<Favourite> {
     return out
 }
 
+/** One of this unit's contacts, for the Phone screen's list (PhoneScreen.kt): its default number, else its first. */
+internal data class UnitContact(val name: String, val number: String, val starred: Boolean)
+
+/** A number as the unit's phonebook lists it, with its contact's name and star. */
+internal data class ContactRow(val contactId: Long, val name: String, val number: String, val primary: Boolean, val starred: Boolean)
+
 /**
- * The unit's starred contacts for the Quick dial, kept for the whole app and
- * read again when the contacts change. A head unit's Bluetooth sync wipes its
- * phonebook and writes it back now and then: read in between, the tile went
- * empty for half a minute (issue #118). So a list that comes back empty is
- * believed only after [WIPE_HOLD_MS]; a list with contacts at once.
+ * Every contact with a number, one number each (its default one, else the
+ * first listed), by name as the unit's language sorts names. A contact with
+ * no name shows as its number.
+ */
+internal fun pickContacts(rows: List<ContactRow>): List<UnitContact> =
+    rows.filter { it.number.isNotBlank() }
+        .groupBy { it.contactId }.values
+        .map { numbers ->
+            val r = numbers.firstOrNull { it.primary } ?: numbers.first()
+            UnitContact(r.name.trim().ifBlank { r.number }, r.number, numbers.any { it.starred })
+        }
+        .sortedWith(compareBy(Collator.getInstance(), UnitContact::name))
+
+/** This unit's whole phonebook (the one its Bluetooth synced from the phone, mostly), one query. */
+internal fun loadContacts(context: Context): List<UnitContact> {
+    val rows = mutableListOf<ContactRow>()
+    runCatching {
+        context.contentResolver.query(
+            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+            arrayOf(
+                ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Phone.NUMBER,
+                ContactsContract.CommonDataKinds.Phone.IS_SUPER_PRIMARY,
+                ContactsContract.CommonDataKinds.Phone.STARRED
+            ),
+            null, null, null
+        )?.use { c ->
+            while (c.moveToNext()) {
+                rows += ContactRow(c.getLong(0), c.getString(1).orEmpty(), c.getString(2).orEmpty(), c.getInt(3) != 0, c.getInt(4) != 0)
+            }
+        }
+    }
+    return pickContacts(rows)
+}
+
+/**
+ * The unit's contacts, kept for the whole app and read again when they
+ * change: the starred ones for the Quick dial, and the whole phonebook
+ * while the Phone screen is open ([wantAll]). A head unit's Bluetooth sync
+ * wipes its phonebook and writes it back now and then: read in between, the
+ * tile went empty for half a minute (issue #118). So a list that comes back
+ * empty is believed only after [WIPE_HOLD_MS]; a list with contacts at once.
  */
 internal object UnitContacts {
     /** Longer than a phonebook re-sync takes; a phone really unpaired empties the tile after this. */
@@ -625,8 +671,13 @@ internal object UnitContacts {
 
     private val _favourites = MutableStateFlow<List<Favourite>>(emptyList())
     val favourites: StateFlow<List<Favourite>> = _favourites.asStateFlow()
+    /** Every contact with a number; null until a Phone screen first asked for them. */
+    private val _contacts = MutableStateFlow<List<UnitContact>?>(null)
+    val contacts: StateFlow<List<UnitContact>?> = _contacts.asStateFlow()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private val changed = MutableStateFlow(0)
+    /** Phone screens open: the whole phonebook is read only for them. */
+    private val wanted = MutableStateFlow(0)
     private var started = false
 
     /** Reads the contacts from now on (READ_CONTACTS granted); again when they change. */
@@ -641,17 +692,33 @@ internal object UnitContacts {
             })
         }
         scope.launch {
-            changed.collectLatest { n ->
-                if (n > 0) delay(SETTLE_MS)
-                var read = loadFavourites(app)
-                if (read.isEmpty() && _favourites.value.isNotEmpty()) {
-                    // Being re-synced, most likely: the old list stands meanwhile. Any change reads again (and cancels this).
-                    delay(WIPE_HOLD_MS)
-                    read = loadFavourites(app)
+            var settled = 0
+            combine(changed, wanted) { n, w -> n to (w > 0) }.collectLatest { (n, all) ->
+                if (n != settled) {
+                    delay(SETTLE_MS)
+                    settled = n
                 }
-                _favourites.value = read
+                read(app, all)
             }
         }
+    }
+
+    /** A Phone screen opened ([on]) or closed: the whole phonebook is read, and followed, only while one is open. */
+    fun wantAll(on: Boolean) = wanted.update { if (on) it + 1 else (it - 1).coerceAtLeast(0) }
+
+    private suspend fun read(app: Context, all: Boolean) {
+        var favourites = loadFavourites(app)
+        var contacts = if (all) loadContacts(app) else null
+        val wiped = (favourites.isEmpty() && _favourites.value.isNotEmpty()) ||
+            (contacts != null && contacts.isEmpty() && !_contacts.value.isNullOrEmpty())
+        if (wiped) {
+            // Being re-synced, most likely: the old lists stand meanwhile. Any change reads again (and cancels this).
+            delay(WIPE_HOLD_MS)
+            favourites = loadFavourites(app)
+            if (all) contacts = loadContacts(app)
+        }
+        _favourites.value = favourites
+        if (contacts != null) _contacts.value = contacts
     }
 }
 
@@ -697,12 +764,14 @@ internal fun quickDialColumns(widthDp: Float, favourites: Int): Int =
 
 /**
  * Calls [number]: through the linked phone, which places the call itself (its
- * sound on the car's Bluetooth as any call), else this unit's dialer with the
- * number in, as without a phone. Never through the phone during the demo:
- * its contacts are made up.
+ * sound on the car's Bluetooth as any call), else the unit's own Bluetooth
+ * when its firmware dials, else this unit's dialer with the number in, as
+ * without a phone. Never a real call during the demo: its contacts are made up.
  */
 internal fun dialNumber(context: Context, number: String) {
     if (!DemoMode.isOn && PhoneLink.dial(number)) return
+    // The unit's own Bluetooth, where its firmware takes a number to call (FYT).
+    if (!DemoMode.isOn && UnitPhone.dial(number)) return
     // A unit with no dialer (its phone is a car app of its own) at least opens that app.
     if (!context.launchSafely(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null)))) UnitPhoneApp.open(context)
 }
@@ -727,7 +796,7 @@ internal fun QuickDialCard(modifier: Modifier = Modifier) {
             Column(modifier = Modifier.fillMaxSize().padding(DashSpace.Lg)) {
                 TileHeader(stringResource(R.string.info_quickdial_title)) {
                     TextButton(
-                        onClick = { UnitPhoneApp.open(context) },
+                        onClick = { PhoneScreen.open(context) },
                         modifier = Modifier.height(DashSize.Touch), contentPadding = PaddingValues(horizontal = 10.dp, vertical = 0.dp)
                     ) { Text(stringResource(R.string.info_quickdial_dialer), color = DashColors.AccentInk, style = MaterialTheme.typography.labelMedium) }
                 }
