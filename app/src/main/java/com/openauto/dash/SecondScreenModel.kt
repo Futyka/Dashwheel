@@ -79,7 +79,9 @@ data class SecondScreenConfig(
     val brightnessDay: Int = 100,
     val brightnessNight: Int = 30,
     /** The last display linked could set its brightness: the levels stay offered while it is away. */
-    val brightnessWired: Boolean = false
+    val brightnessWired: Boolean = false,
+    /** The level the monitor was last brought to (it keeps it across power cuts), or null: the next one is counted from the bottom. */
+    val brightnessSet: Int? = null
 ) {
     /**
      * What [page] shows on the full display or, with [simple], on the simple

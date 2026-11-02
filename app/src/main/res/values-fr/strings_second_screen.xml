@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Pour un écran monté à l\'envers.</string>
     <string name="second_screen_brightness_day">Luminosité de jour</string>
     <string name="second_screen_brightness_night">Luminosité de nuit</string>
+    <string name="second_screen_brightness_resync">Recompter la luminosité</string>
+    <string name="second_screen_brightness_resync_detail">L\'écran descend à son niveau le plus bas puis remonte au niveau réglé. Pour un écran dont le niveau ne correspond plus, ou un nouvel écran.</string>
     <string name="second_screen_light_day">De jour</string>
     <string name="second_screen_light_night">De nuit</string>
     <string name="second_screen_light_down">Plus sombre</string>

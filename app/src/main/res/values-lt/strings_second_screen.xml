@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Ekranui, sumontuotam apverstam.</string>
     <string name="second_screen_brightness_day">Ryškumas dieną</string>
     <string name="second_screen_brightness_night">Ryškumas naktį</string>
+    <string name="second_screen_brightness_resync">Perskaičiuoti ryškumą</string>
+    <string name="second_screen_brightness_resync_detail">Ekranas nuleidžiamas iki žemiausio lygio ir vėl pakeliamas iki nustatyto. Ekranui, kurio lygis nebesutampa, arba naujam.</string>
     <string name="second_screen_light_day">Dieną</string>
     <string name="second_screen_light_night">Naktį</string>
     <string name="second_screen_light_down">Tamsiau</string>

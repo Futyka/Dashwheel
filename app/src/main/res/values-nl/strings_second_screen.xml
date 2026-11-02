@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Voor een scherm dat ondersteboven zit.</string>
     <string name="second_screen_brightness_day">Helderheid overdag</string>
     <string name="second_screen_brightness_night">Helderheid \'s nachts</string>
+    <string name="second_screen_brightness_resync">Helderheid opnieuw tellen</string>
+    <string name="second_screen_brightness_resync_detail">Het scherm gaat naar het laagste niveau en weer terug naar het ingestelde. Voor een scherm waarvan het niveau niet meer klopt, of een nieuw scherm.</string>
     <string name="second_screen_light_day">Overdag</string>
     <string name="second_screen_light_night">\'s Nachts</string>
     <string name="second_screen_light_down">Donkerder</string>

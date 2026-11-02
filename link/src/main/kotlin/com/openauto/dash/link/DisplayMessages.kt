@@ -104,10 +104,15 @@ data class DisplayMode(val mode: Mode, val rotate180: Boolean = false) : LinkMes
  * setting counts. Sent when the link comes up, at each day/night switch and
  * when the driver changes a level. Only a Pi wired to the monitor's buttons
  * ([DisplayHello.brightness]) acts on it.
+ *
+ * The monitor keeps its level across power cuts, so the head unit remembers
+ * the level it last had the Pi set and sends it as [from]: a Pi just started
+ * then counts from it instead of going down to the bottom first. [fresh] asks
+ * for that long way anyway (the driver pressed the reset, the count is lost).
  */
 @Serializable
 @SerialName("display_brightness")
-data class DisplayBrightness(val level: Int) : LinkMessage {
+data class DisplayBrightness(val level: Int, val from: Int? = null, val fresh: Boolean = false) : LinkMessage {
     companion object {
         const val MIN = 1
         const val MAX = 100

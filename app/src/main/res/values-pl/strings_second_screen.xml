@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Dla ekranu zamontowanego do góry nogami.</string>
     <string name="second_screen_brightness_day">Jasność w dzień</string>
     <string name="second_screen_brightness_night">Jasność w nocy</string>
+    <string name="second_screen_brightness_resync">Policz jasność od nowa</string>
+    <string name="second_screen_brightness_resync_detail">Ekran schodzi do najniższego poziomu i wraca do ustawionego. Dla ekranu, którego poziom już się nie zgadza, albo nowego.</string>
     <string name="second_screen_light_day">W dzień</string>
     <string name="second_screen_light_night">W nocy</string>
     <string name="second_screen_light_down">Ciemniej</string>

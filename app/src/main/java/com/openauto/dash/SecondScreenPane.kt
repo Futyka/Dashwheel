@@ -297,6 +297,9 @@ private fun SecondScreenSettings() {
             BrightnessRow(Icons.Filled.DarkMode, stringResource(R.string.second_screen_brightness_night), config.brightnessNight) { level ->
                 update { it.copy(brightnessNight = level) }
             }
+            SettingsRow(Icons.Filled.Brightness6, stringResource(R.string.second_screen_brightness_resync), stringResource(R.string.second_screen_brightness_resync_detail)) {
+                SecondScreenBrightness.resync(context)
+            }
         }
         Text(
             stringResource(R.string.second_screen_quality) + " · " + stringResource(R.string.second_screen_quality_detail),

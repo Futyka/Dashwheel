@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Fordítva felszerelt kijelzőhöz.</string>
     <string name="second_screen_brightness_day">Fényerő nappal</string>
     <string name="second_screen_brightness_night">Fényerő éjjel</string>
+    <string name="second_screen_brightness_resync">Fényerő újraszámolása</string>
+    <string name="second_screen_brightness_resync_detail">A képernyő a legalacsonyabb szintre megy, majd vissza a beállítottra. Olyan képernyőhöz, amelynek a szintje már nem egyezik, vagy egy újhoz.</string>
     <string name="second_screen_light_day">Nappal</string>
     <string name="second_screen_light_night">Éjjel</string>
     <string name="second_screen_light_down">Halványabb</string>

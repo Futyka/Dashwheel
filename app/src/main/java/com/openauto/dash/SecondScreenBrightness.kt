@@ -54,7 +54,11 @@ import kotlin.math.roundToInt
  * as the Auto look tells it ([AutoLight]: the headlights or the sun down,
  * the sun alone, or two set times), whatever look the dashboard wears: a
  * dark theme by day still wants a bright screen. A switch is taken once it
- * has held [SETTLE_MS] ([SettledDay]).
+ * has held [SETTLE_MS] ([SettledDay]). The monitor keeps its level across
+ * power cuts, so the level last set goes along ([SecondScreenConfig.brightnessSet]):
+ * a Pi just started counts from it instead of going down to the bottom first,
+ * which took seconds of button presses at every start. [resync] goes that long
+ * way once more, for a monitor whose level no longer matches.
  */
 object SecondScreenBrightness {
 
@@ -84,7 +88,7 @@ object SecondScreenBrightness {
                 if (connected?.display?.brightness == true) connected to SecondScreenRules.brightness(config, isDay) else null
             }.distinctUntilChanged().collect { wanted ->
                 wanted ?: return@collect
-                DisplayLink.send(DisplayBrightness(wanted.second))
+                send(context, wanted.second, fresh = false)
             }
         }
         // Remembered, so the levels can be set while the display is away.
@@ -94,6 +98,23 @@ object SecondScreenBrightness {
                 if (wired != SecondScreenStore.config.value.brightnessWired) SecondScreenStore.update(context) { it.copy(brightnessWired = wired) }
             }
         }
+    }
+
+    /** The level the monitor is remembered at goes along; it is the level asked for from now on. */
+    private fun send(context: Context, level: Int, fresh: Boolean) {
+        val from = SecondScreenStore.config.value.brightnessSet
+        DisplayLink.send(DisplayBrightness(level, from = from.takeUnless { fresh }, fresh = fresh))
+        if (from != level) SecondScreenStore.update(context) { it.copy(brightnessSet = level) }
+    }
+
+    /** The monitor is taken down to its bottom and back up to the level in use: for one whose level no longer matches. */
+    fun resync(context: Context) {
+        val connected = DisplayLink.state.value as? DisplayLinkState.Connected
+        if (connected?.display?.brightness != true) {
+            SecondScreenStore.update(context) { it.copy(brightnessSet = null) }
+            return
+        }
+        send(context, SecondScreenRules.brightness(SecondScreenStore.config.value, _day.value), fresh = true)
     }
 
     /** Moves the level in use now (day or night) by [delta]. */

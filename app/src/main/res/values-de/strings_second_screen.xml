@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Für einen kopfüber montierten Bildschirm.</string>
     <string name="second_screen_brightness_day">Helligkeit bei Tag</string>
     <string name="second_screen_brightness_night">Helligkeit bei Nacht</string>
+    <string name="second_screen_brightness_resync">Helligkeit neu abzählen</string>
+    <string name="second_screen_brightness_resync_detail">Der Bildschirm wird auf die niedrigste Stufe und wieder auf die eingestellte gebracht. Für einen Bildschirm, dessen Stufe nicht mehr stimmt, oder einen neuen.</string>
     <string name="second_screen_light_day">Bei Tag</string>
     <string name="second_screen_light_night">Bei Nacht</string>
     <string name="second_screen_light_down">Dunkler</string>

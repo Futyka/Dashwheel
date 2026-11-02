@@ -43,7 +43,8 @@ object SecondScreenStore {
             upsideDown = p.getBoolean("upside_down", d.upsideDown),
             brightnessDay = p.getInt("brightness_day", d.brightnessDay).coerceIn(BRIGHTNESS),
             brightnessNight = p.getInt("brightness_night", d.brightnessNight).coerceIn(BRIGHTNESS),
-            brightnessWired = p.getBoolean("brightness_wired", d.brightnessWired)
+            brightnessWired = p.getBoolean("brightness_wired", d.brightnessWired),
+            brightnessSet = p.getInt("brightness_set", 0).takeIf { it in BRIGHTNESS }
         )
         loaded = true
         return _config.value
@@ -82,6 +83,7 @@ object SecondScreenStore {
             .putInt("brightness_day", c.brightnessDay)
             .putInt("brightness_night", c.brightnessNight)
             .putBoolean("brightness_wired", c.brightnessWired)
+            .putInt("brightness_set", c.brightnessSet ?: 0)
             .apply()
     }
 

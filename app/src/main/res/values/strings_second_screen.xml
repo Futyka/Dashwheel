@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">For a screen mounted the other way up.</string>
     <string name="second_screen_brightness_day">Brightness by day</string>
     <string name="second_screen_brightness_night">Brightness at night</string>
+    <string name="second_screen_brightness_resync">Count the brightness again</string>
+    <string name="second_screen_brightness_resync_detail">The screen is taken down to its lowest level and back up to the one set. For a screen whose level no longer matches, or a new one.</string>
     <string name="second_screen_light_day">By day</string>
     <string name="second_screen_light_night">At night</string>
     <string name="second_screen_light_down">Dimmer</string>

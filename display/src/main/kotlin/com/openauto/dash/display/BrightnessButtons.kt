@@ -18,8 +18,10 @@ import com.openauto.dash.link.DisplayBrightness
  * - presses of [PRESS_MS] down and [GAP_MS] up all count (60 ms lost one in twenty).
  *
  * The level isn't readable, so the first change after a start goes the long
- * way (to 0, then up); later ones are counted from the level last set. The
- * latest wish wins: one asked while the buttons are busy follows once they're done.
+ * way (to 0, then up), unless the head unit remembers the level it last had
+ * set (the monitor keeps it across power cuts); later ones are counted from
+ * the level last set. The latest wish wins: one asked while the buttons are
+ * busy follows once they're done.
  */
 class BrightnessButtons(
     private val up: Int,
@@ -55,6 +57,8 @@ class BrightnessButtons(
 
     private val lock = Object()
     private var wanted: Int? = null
+    /** The next wish starts the long way, whatever level was counted to. */
+    private var startOver = false
     private var worker: Thread? = null
 
     /** The level last set, or null until the first one since the start. */
@@ -68,10 +72,16 @@ class BrightnessButtons(
         pins.release(down)
     }
 
-    /** Asks for [target]; returns at once, the buttons take a few seconds. */
-    fun set(target: Int) {
+    /**
+     * Asks for [target]; returns at once, the buttons take a few seconds. [from]
+     * is the level the monitor is at as the head unit remembers it, taken when
+     * nothing was set since the start; [fresh] goes the long way regardless.
+     */
+    fun set(target: Int, from: Int? = null, fresh: Boolean = false) {
         synchronized(lock) {
             wanted = target.coerceIn(DisplayBrightness.MIN, DisplayBrightness.MAX)
+            if (fresh) startOver = true
+            else if (level == null && from != null && worker?.isAlive != true) level = from.coerceIn(DisplayBrightness.MIN, DisplayBrightness.MAX)
             if (worker?.isAlive == true) return
             worker = Thread({ work() }, "display-brightness").apply { isDaemon = true; start() }
         }
@@ -79,7 +89,10 @@ class BrightnessButtons(
 
     private fun work() {
         while (true) {
-            val target = synchronized(lock) { wanted.also { wanted = null } } ?: return
+            val target = synchronized(lock) {
+                if (startOver) { level = null; startOver = false }
+                wanted.also { wanted = null }
+            } ?: return
             apply(target)
         }
     }

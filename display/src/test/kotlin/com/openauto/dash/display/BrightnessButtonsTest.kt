@@ -89,6 +89,25 @@ class BrightnessButtonsTest {
     }
 
     @Test
+    fun aLevelTheHeadUnitRemembersIsCountedFromNotFromTheBottom() {
+        val bench = Bench()
+        val buttons = BrightnessButtons(up = 17, down = 27, pins = bench, clock = bench)
+        buttons.set(35, from = 30)
+        val until = System.currentTimeMillis() + 5_000
+        while (buttons.level != 35 && System.currentTimeMillis() < until) Thread.sleep(10)
+        assertEquals(emptyList<Pair<Int, Long>>(), bench.holds)
+        // One + opens the closed bar, five step up.
+        assertEquals(List(6) { 17 }, bench.taps)
+        bench.taps.clear()
+        // Asked fresh: the long way again, whatever was counted to.
+        buttons.set(30, from = 35, fresh = true)
+        while (bench.holds.isEmpty() && System.currentTimeMillis() < until) Thread.sleep(10)
+        while (buttons.level != 30 && System.currentTimeMillis() < until) Thread.sleep(10)
+        assertEquals(listOf(27 to BrightnessButtons.HOLD_TO_MIN_MS), bench.holds)
+        assertEquals(List(31) { 17 }, bench.taps)
+    }
+
+    @Test
     fun levelsOutsideTheBarAreClamped() {
         val bench = Bench()
         val buttons = BrightnessButtons(up = 17, down = 27, pins = bench, clock = bench)

@@ -122,7 +122,7 @@ class DisplayServer(
             is ClusterState -> screen.data(message)
             is ClusterRoute -> screen.route(message.points)
             is ClusterArt -> screen.art(message)
-            is DisplayBrightness -> buttons?.set(message.level)
+            is DisplayBrightness -> buttons?.set(message.level, message.from, message.fresh)
             is DisplayTime -> if (LocalClock.set(pairing.dir, message)) screen.wordsChanged()
             is DisplayWords -> if (Words.set(pairing.dir, message)) {
                 log("words now in ${message.language.ifEmpty { "?" }}")

@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Для экрана, установленного вверх ногами.</string>
     <string name="second_screen_brightness_day">Яркость днём</string>
     <string name="second_screen_brightness_night">Яркость ночью</string>
+    <string name="second_screen_brightness_resync">Пересчитать яркость</string>
+    <string name="second_screen_brightness_resync_detail">Экран опускается до самого низкого уровня и возвращается к заданному. Для экрана, уровень которого больше не совпадает, или нового.</string>
     <string name="second_screen_light_day">Днём</string>
     <string name="second_screen_light_night">Ночью</string>
     <string name="second_screen_light_down">Темнее</string>

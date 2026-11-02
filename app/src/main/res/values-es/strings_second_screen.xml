@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Para una pantalla montada al revés.</string>
     <string name="second_screen_brightness_day">Brillo de día</string>
     <string name="second_screen_brightness_night">Brillo de noche</string>
+    <string name="second_screen_brightness_resync">Volver a contar el brillo</string>
+    <string name="second_screen_brightness_resync_detail">La pantalla baja a su nivel mínimo y vuelve al nivel fijado. Para una pantalla cuyo nivel ya no coincide, o una nueva.</string>
     <string name="second_screen_light_day">De día</string>
     <string name="second_screen_light_night">De noche</string>
     <string name="second_screen_light_down">Más oscuro</string>

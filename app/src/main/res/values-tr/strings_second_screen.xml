@@ -96,6 +96,8 @@
     <string name="second_screen_upside_down_detail">Ters takılmış bir ekran için.</string>
     <string name="second_screen_brightness_day">Gündüz parlaklığı</string>
     <string name="second_screen_brightness_night">Gece parlaklığı</string>
+    <string name="second_screen_brightness_resync">Parlaklığı yeniden say</string>
+    <string name="second_screen_brightness_resync_detail">Ekran en düşük seviyeye iner ve ayarlanan seviyeye geri çıkar. Seviyesi artık uyuşmayan veya yeni bir ekran için.</string>
     <string name="second_screen_light_day">Gündüz</string>
     <string name="second_screen_light_night">Gece</string>
     <string name="second_screen_light_down">Daha loş</string>
