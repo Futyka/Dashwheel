@@ -52,11 +52,13 @@
     <string name="info_quickdial_needs_access">Toon hier je favoriete contacten</string>
     <string name="info_quickdial_allow">Contacten toestaan</string>
     <string name="info_quickdial_empty">Markeer contacten met een ster in de app Contacten om ze hier te zien</string>
+    <string name="info_quickdial_no_phone_app">Geen telefoon-app gevonden op dit toestel</string>
 
     <!-- Notifications tile -->
     <string name="info_notif_title">MELDINGEN</string>
     <string name="info_notif_needs_access">Toon berichten en meldingen van je apps</string>
     <string name="info_notif_empty">Geen nieuwe meldingen</string>
+    <string name="info_notif_phone_access">Geef Dashwheel op je telefoon toegang tot meldingen om zijn meldingen hier te zien.</string>
 
     <!-- Audio tile -->
     <string name="info_audio_title">AUDIO</string>

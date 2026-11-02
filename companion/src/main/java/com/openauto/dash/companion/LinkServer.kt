@@ -183,6 +183,12 @@ object LinkServer {
         if (current.pairingId == id) current.close()
     }
 
+    /** What this phone can do for the car right now ([PhoneAbilities]); sent on link up and whenever one changes. */
+    fun abilities(context: Context) = PhoneAbilities(
+        sendsTexts = TextSender.canSend(context),
+        notifications = PhoneNotificationListener.instance != null
+    )
+
     /** Sends to the connected head unit, if any. Safe from any thread. */
     fun send(message: LinkMessage) {
         val current = session ?: return
@@ -355,7 +361,7 @@ object LinkServer {
         send(PhoneNotificationListener.syncMessage())
         send(PhoneCalls.snapshot())
         send(ObdRelay.offer(context))
-        send(PhoneAbilities(sendsTexts = TextSender.canSend(context)))
+        send(abilities(context))
         PhoneLists.linked()
         PhoneMedia.linked(context)
         PhoneBatteryWatch.current(context)?.let(::send)

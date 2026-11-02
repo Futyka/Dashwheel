@@ -27,7 +27,7 @@ class FuelFillsTest {
         assertEquals(sync, LinkCodec.decode(LinkCodec.encode(sync)))
         val notices = CarNotices(listOf(CarNotice("upkeep-OIL-SOON", CarNotice.UPKEEP, "Oil coming up", "In 800 km", 5)))
         assertEquals(notices, LinkCodec.decode(LinkCodec.encode(notices)))
-        listOf(PhoneAbilities(true), SendText("+33600000000", "On my way", 7), TextSent(7, true))
+        listOf(PhoneAbilities(true, notifications = true), SendText("+33600000000", "On my way", 7), TextSent(7, true))
             .forEach { assertEquals(it, LinkCodec.decode(LinkCodec.encode(it))) }
     }
 

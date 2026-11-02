@@ -52,11 +52,13 @@
     <string name="info_quickdial_needs_access">Show your starred contacts here</string>
     <string name="info_quickdial_allow">Allow contacts</string>
     <string name="info_quickdial_empty">Star contacts in the Contacts app to see them here</string>
+    <string name="info_quickdial_no_phone_app">No phone app found on this unit</string>
 
     <!-- Notifications tile -->
     <string name="info_notif_title">NOTIFICATIONS</string>
     <string name="info_notif_needs_access">Show messages and alerts from your apps</string>
     <string name="info_notif_empty">No new notifications</string>
+    <string name="info_notif_phone_access">Allow Notification access to Dashwheel on your phone to see its notifications here.</string>
 
     <!-- Audio tile -->
     <string name="info_audio_title">AUDIO</string>

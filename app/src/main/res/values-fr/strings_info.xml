@@ -52,11 +52,13 @@
     <string name="info_quickdial_needs_access">Afficher vos contacts favoris ici</string>
     <string name="info_quickdial_allow">Autoriser les contacts</string>
     <string name="info_quickdial_empty">Ajoutez des contacts aux favoris dans l\'appli Contacts pour les voir ici</string>
+    <string name="info_quickdial_no_phone_app">Aucune appli téléphone trouvée sur cet autoradio</string>
 
     <!-- Notifications tile -->
     <string name="info_notif_title">NOTIFICATIONS</string>
     <string name="info_notif_needs_access">Afficher les messages et alertes de vos applis</string>
     <string name="info_notif_empty">Aucune nouvelle notification</string>
+    <string name="info_notif_phone_access">Autorise l\'accès aux notifications pour Dashwheel sur ton téléphone pour voir ses notifications ici.</string>
 
     <!-- Audio tile -->
     <string name="info_audio_title">AUDIO</string>

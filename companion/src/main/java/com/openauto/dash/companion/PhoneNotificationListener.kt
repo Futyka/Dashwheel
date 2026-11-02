@@ -33,11 +33,14 @@ class PhoneNotificationListener : NotificationListenerService() {
         instance = this
         PhoneCalls.onListenerConnected(this)
         LinkServer.send(syncMessage())
+        // Granted while the car was already linked: it stops asking for the access.
+        LinkServer.send(LinkServer.abilities(this))
     }
 
     override fun onListenerDisconnected() {
         if (instance === this) instance = null
         PhoneCalls.onListenerDisconnected()
+        LinkServer.send(LinkServer.abilities(this))
     }
 
     override fun onDestroy() {

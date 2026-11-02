@@ -52,11 +52,13 @@
     <string name="info_quickdial_needs_access">Rodyti čia žvaigždute pažymėtus kontaktus</string>
     <string name="info_quickdial_allow">Leisti kontaktus</string>
     <string name="info_quickdial_empty">Pažymėkite kontaktus žvaigždute programoje Kontaktai, kad jie būtų rodomi čia</string>
+    <string name="info_quickdial_no_phone_app">Šiame įrenginyje nerasta telefono programos</string>
 
     <!-- Notifications tile -->
     <string name="info_notif_title">PRANEŠIMAI</string>
     <string name="info_notif_needs_access">Rodyti žinutes ir įspėjimus iš programų</string>
     <string name="info_notif_empty">Naujų pranešimų nėra</string>
+    <string name="info_notif_phone_access">Leisk Dashwheel prieigą prie pranešimų telefone, kad jo pranešimai būtų rodomi čia.</string>
 
     <!-- Audio tile -->
     <string name="info_audio_title">GARSAS</string>

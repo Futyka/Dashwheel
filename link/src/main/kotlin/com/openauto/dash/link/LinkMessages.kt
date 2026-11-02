@@ -539,10 +539,14 @@ data class CarNotice(val id: String, val kind: String, val title: String, val te
 @SerialName("notices")
 data class CarNotices(val notices: List<CarNotice>) : LinkMessage
 
-/** Phone → head unit, on link up: what this companion can do for the car beyond the basics. */
+/**
+ * Phone → head unit, on link up and when one changes: what this companion can
+ * do for the car beyond the basics. [notifications]: the driver granted it
+ * Notification access, so the phone's notifications reach the car.
+ */
 @Serializable
 @SerialName("abilities")
-data class PhoneAbilities(val sendsTexts: Boolean = false) : LinkMessage
+data class PhoneAbilities(val sendsTexts: Boolean = false, val notifications: Boolean = false) : LinkMessage
 
 /** Head unit → phone: send [text] by SMS to [number] ("On my way"); answered by [TextSent] with the same [id]. */
 @Serializable

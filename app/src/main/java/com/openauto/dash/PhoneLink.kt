@@ -364,6 +364,10 @@ object PhoneLink {
     /** The linked phone sends texts for the car ([PhoneAbilities]): "On my way". */
     val textsOn: StateFlow<Boolean> = _textsOn
 
+    private val _notificationsOn = MutableStateFlow(false)
+    /** The linked phone was granted Notification access, so its notifications reach the car ([PhoneAbilities]). */
+    val notificationsOn: StateFlow<Boolean> = _notificationsOn
+
     private val textIds = AtomicLong()
     private val textsWaiting = ConcurrentHashMap<Long, CompletableDeferred<Boolean>>()
 
@@ -682,6 +686,7 @@ object PhoneLink {
             // An OBD link relayed by the phone ends with it; the unit's own Bluetooth takes over.
             PhoneObd.linkDown()
             _textsOn.value = false
+            _notificationsOn.value = false
             HeadUnitMedia.phoneGone()
             _battery.value = null
             PhoneGps.linkDown()
@@ -768,7 +773,10 @@ object PhoneLink {
             is ObdRelayState -> PhoneObd.onState(message)
             is ObdRx -> PhoneObd.onRx(message)
             is FuelPrice -> main.post { FuelLog.setPrice(context, message.at, message.pricePerL) }
-            is PhoneAbilities -> _textsOn.value = message.sendsTexts
+            is PhoneAbilities -> {
+                _textsOn.value = message.sendsTexts
+                _notificationsOn.value = message.notifications
+            }
             is TextSent -> textsWaiting[message.id]?.complete(message.sent)
             is CarLogAck -> logsWaiting[message.id]?.complete(message.ok)
             is CarLookPart -> MyCarLook.receive(context, message) { send(it) }

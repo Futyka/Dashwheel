@@ -703,7 +703,8 @@ internal fun quickDialColumns(widthDp: Float, favourites: Int): Int =
  */
 internal fun dialNumber(context: Context, number: String) {
     if (!DemoMode.isOn && PhoneLink.dial(number)) return
-    context.launchSafely(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null)))
+    // A unit with no dialer (its phone is a car app of its own) at least opens that app.
+    if (!context.launchSafely(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null)))) UnitPhoneApp.open(context)
 }
 
 /**
@@ -825,6 +826,7 @@ internal fun NotificationsCard(hasAccess: Boolean, modifier: Modifier = Modifier
     val context = LocalContext.current
     val items by NotificationFeed.items.collectAsState()
     val phoneConnected = PhoneLink.state.collectAsState().value is PhoneLinkState.Connected
+    val phoneNotifications by PhoneLink.notificationsOn.collectAsState()
     val timeFmt = rememberTimeFormat()
     var opened by remember { mutableStateOf<NotifItem?>(null) }
 
@@ -836,6 +838,11 @@ internal fun NotificationsCard(hasAccess: Boolean, modifier: Modifier = Modifier
                         Text(stringResource(R.string.info_clear), color = DashColors.Muted, style = MaterialTheme.typography.labelMedium)
                     }
                 }
+            }
+            // Linked, but the phone keeps its notifications to itself (an older companion says nothing: its notifications tell).
+            if (phoneConnected && !phoneNotifications && items.none { it.fromPhone }) {
+                Text(stringResource(R.string.info_notif_phone_access), color = DashColors.Muted, style = MaterialTheme.typography.labelSmall,
+                    maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(bottom = 6.dp))
             }
             when {
                 !hasAccess && !phoneConnected && items.none { it.fromPhone } -> NeedsAccess(

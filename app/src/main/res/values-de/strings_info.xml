@@ -52,11 +52,13 @@
     <string name="info_quickdial_needs_access">Favoriten-Kontakte hier anzeigen</string>
     <string name="info_quickdial_allow">Kontakte erlauben</string>
     <string name="info_quickdial_empty">Kontakte in der Kontakte-App als Favoriten markieren, um sie hier zu sehen</string>
+    <string name="info_quickdial_no_phone_app">Keine Telefon-App auf diesem Gerät gefunden</string>
 
     <!-- Notifications tile -->
     <string name="info_notif_title">BENACHRICHTIGUNGEN</string>
     <string name="info_notif_needs_access">Nachrichten und Hinweise der Apps anzeigen</string>
     <string name="info_notif_empty">Keine neuen Benachrichtigungen</string>
+    <string name="info_notif_phone_access">Erlaube Dashwheel auf deinem Handy den Benachrichtigungszugriff, damit seine Benachrichtigungen hier erscheinen.</string>
 
     <!-- Audio tile -->
     <string name="info_audio_title">AUDIO</string>

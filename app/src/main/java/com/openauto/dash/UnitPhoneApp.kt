@@ -3,6 +3,7 @@ package com.openauto.dash
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.widget.Toast
 
 /**
  * The phone button, wherever a dashboard has one (the Quick dial's Dialer,
@@ -19,7 +20,8 @@ internal object UnitPhoneApp {
         "com.qf.bluetooth", // QF (Hizpo, ROCO)
         "com.syu.bt", // FYT / SYU (Joying, Junsun, Atoto, Teyes...)
         "com.microntek.bluetooth", // MTC (PX5, PX6)
-        "com.autochips.bluetooth" // AC8227 / AC8257 units
+        "com.autochips.bluetooth", // AC8227 / AC8257 units
+        "com.hcn.bluetoothservice" // HCN (Junsun), unverified: the family's Bluetooth package, if it has a launcher screen
     )
 
     /** Words in a package name that make it a phone app, best first. */
@@ -36,7 +38,7 @@ internal object UnitPhoneApp {
 
     /**
      * Opens the unit's phone: Android's dialer, else the unit's phone app,
-     * else [orElse] (the app drawer, say). False when nothing opened.
+     * else [orElse] (the app drawer, say; a hint without one). False when nothing opened.
      */
     fun open(context: Context, orElse: (() -> Unit)? = null): Boolean {
         val dial = Intent(Intent.ACTION_DIAL)
@@ -44,7 +46,7 @@ internal object UnitPhoneApp {
         if (hasDialer && context.launchSafely(dial)) return true
         val app = phoneApp(context)
         if (app != null && AppLauncher.launch(context, app)) return true
-        orElse?.invoke()
+        if (orElse != null) orElse() else Toast.makeText(context, R.string.info_quickdial_no_phone_app, Toast.LENGTH_SHORT).show()
         return false
     }
 

@@ -143,7 +143,6 @@ import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 import com.openauto.dash.link.DisplayPair
 import com.openauto.dash.link.PairingOffer
-import com.openauto.dash.link.PhoneAbilities
 import com.openauto.dash.link.TypeText
 import java.text.DateFormat
 import java.util.Date
@@ -1291,7 +1290,7 @@ private fun rememberSetupChecks(resumes: Int): SetupChecks {
     val askTexts = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {
         textsGranted = TextSender.canSend(context)
         // The car learns it can now ask for "On my way" texts.
-        LinkServer.send(PhoneAbilities(sendsTexts = textsGranted))
+        LinkServer.send(LinkServer.abilities(context))
     }
     var agendaGranted by remember(resumes) { mutableStateOf(granted(context, Manifest.permission.READ_CALENDAR)) }
     val askAgenda = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) {

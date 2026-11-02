@@ -52,11 +52,13 @@
     <string name="info_quickdial_needs_access">Mostrar aqui os contactos favoritos</string>
     <string name="info_quickdial_allow">Permitir contactos</string>
     <string name="info_quickdial_empty">Os contactos favoritos da app Contactos aparecem aqui</string>
+    <string name="info_quickdial_no_phone_app">Nenhuma app de telefone encontrada nesta unidade</string>
 
     <!-- Notifications tile -->
     <string name="info_notif_title">NOTIFICAÇÕES</string>
     <string name="info_notif_needs_access">Mostrar mensagens e alertas das apps</string>
     <string name="info_notif_empty">Sem notificações novas</string>
+    <string name="info_notif_phone_access">Permite o acesso às notificações ao Dashwheel no teu telemóvel para ver aqui as suas notificações.</string>
 
     <!-- Audio tile -->
     <string name="info_audio_title">ÁUDIO</string>
