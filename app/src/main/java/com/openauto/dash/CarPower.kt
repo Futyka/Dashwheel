@@ -97,7 +97,7 @@ object CarPower {
         val prefs = app.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         // Read before [noteBoot] marks the ignition on.
         val wokeUp = acc != null && startedBySwitchOn(on, prefs.getLong(KEY_OFF_AT, 0L), prefs.getLong(KEY_ON_AT, 0L))
-        noteBoot(app, on)
+        noteBoot(app, acc)
         val filter = IntentFilter().apply { src.actions.forEach(::addAction) }
         ContextCompat.registerReceiver(app, receiver, filter, ContextCompat.RECEIVER_EXPORTED)
         // The unit kills the app while it sleeps (a new process at nearly every
@@ -112,7 +112,7 @@ object CarPower {
      * is logged and kept in the prefs (last [KEY_LOST_KEEP] of them, newest
      * first) so a driver can report when it happens and what came before.
      */
-    private fun noteBoot(context: Context, ignitionOn: Boolean) {
+    private fun noteBoot(context: Context, ignition: Boolean?) {
         val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val boot = runCatching { Settings.Global.getInt(context.contentResolver, Settings.Global.BOOT_COUNT) }.getOrDefault(-1)
         val lastBoot = prefs.getInt(KEY_BOOT, -1)
@@ -120,19 +120,17 @@ object CarPower {
         val now = System.currentTimeMillis()
         val edit = prefs.edit().putInt(KEY_BOOT, boot)
         val reason = listOfNotNull(systemProperty("sys.boot.reason"), systemProperty("ro.boot.bootreason")).filter { it.isNotBlank() }
-        DebugLog.note(
-            context,
-            "app start, boot $boot (last seen $lastBoot), uptime ${android.os.SystemClock.elapsedRealtime() / 1000} s, " +
-                "ignition ${if (ignitionOn) "on" else "off"}, boot reason $reason"
-        )
+        val uptimeS = android.os.SystemClock.elapsedRealtime() / 1000
+        // "unknown" on a firmware that only broadcasts the ignition: nothing to read until the first one.
+        val ignitionWord = when (ignition) { true -> "on"; false -> "off"; null -> "unknown" }
+        DebugLog.note(context, "app start, boot $boot (last seen $lastBoot), uptime $uptimeS s, ignition $ignitionWord, boot reason $reason")
         // A boot comes up with the ignition already on, and no "on" broadcast
         // follows: it is marked here, or the next reboot of the same drive
         // would count as another lost sleep.
         val lost = boot != -1 && lastBoot != -1 && boot != lastBoot && offAt > 0 && offAt > prefs.getLong(KEY_ON_AT, 0L)
-        if (ignitionOn) edit.putLong(KEY_ON_AT, now)
+        if (ignition == true) edit.putLong(KEY_ON_AT, now)
         if (lost) {
-            val note = "boot $lastBoot->$boot, off ${java.util.Date(offAt)}, back ${java.util.Date(now)}, " +
-                "${(now - offAt) / 60_000} min later, uptime ${android.os.SystemClock.elapsedRealtime() / 1000} s"
+            val note = lostSleepNote(lastBoot, boot, offAt, now, uptimeS)
             Log.w(TAG, "deep sleep lost: $note")
             DebugLog.note(context, "deep sleep lost: $note")
             val kept = (listOf(note) + prefs.getString(KEY_LOST, "").orEmpty().split('\n').filter { it.isNotBlank() })
@@ -237,6 +235,18 @@ object CarPower {
     }
 
     private fun systemProperty(name: String): String? = SysProps.get(name)
+}
+
+/**
+ * One lost deep sleep for the log and the report: the boots, when the car
+ * went off and when the unit was back. A unit that boots with its clock
+ * behind the switch-off (many start at a date in the past until GPS or the
+ * network sets them, [UnitClock]) can't say how long it was off: the note
+ * says so instead of a negative wait.
+ */
+internal fun lostSleepNote(lastBoot: Int, boot: Int, offAt: Long, now: Long, uptimeS: Long): String {
+    val wait = if (now >= offAt) "${(now - offAt) / 60_000} min later" else "clock not set yet"
+    return "boot $lastBoot->$boot, off ${java.util.Date(offAt)}, back ${java.util.Date(now)}, $wait, uptime $uptimeS s"
 }
 
 /**

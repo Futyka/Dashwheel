@@ -43,6 +43,16 @@ class CarPowerTest {
     }
 
     @Test
+    fun aLostSleepSaysHowLongTheCarWasOffOrThatTheClockIsNotSetYet() {
+        val off = 1_000 * min
+        assertTrue(lostSleepNote(lastBoot = 5, boot = 6, offAt = off, now = off + 12 * min, uptimeS = 30).contains("12 min later"))
+        // The unit came back with its clock at a date before the switch-off: no wait can be told.
+        val note = lostSleepNote(lastBoot = 5, boot = 6, offAt = off, now = off - 600_000 * min, uptimeS = 30)
+        assertTrue(note, note.contains("clock not set yet"))
+        assertFalse(note, Regex("""-\d+ min""").containsMatchIn(note))
+    }
+
+    @Test
     fun aPowerUpIsTheSwitchOnOrTheUnitsStartNotAnAppRestart() {
         // The unit started a minute ago.
         assertTrue(poweredUpRecently(now = 1 * min, switchedOnAt = 0))

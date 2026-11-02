@@ -112,7 +112,23 @@ object CrashReports {
                 "thread: ${thread.name}\n\n$trace"
         )
         d.listFiles()?.sortedByDescending { it.name }?.drop(KEEP)?.forEach { it.delete() }
+        // One line in the event log, so a unit log sent later shows the crash among the restarts, not just a restart.
+        runCatching { DebugLog.noteNow(context, "crash on ${thread.name}: ${headline(error)}") }
     }
+
+    /** The crash in one line: the exception and where it was thrown. */
+    private fun headline(error: Throwable): String =
+        error.toString().lineSequence().first() + (error.stackTrace.firstOrNull()?.let { " at $it" } ?: "")
+
+    /** One line per crash still kept, newest first: when, and its first line. */
+    fun kept(context: Context): List<String> =
+        dir(context).listFiles()?.filter { it.name.startsWith("crash-") }?.sortedByDescending { it.name }?.map { f ->
+            val lines = runCatching { f.readLines() }.getOrDefault(emptyList())
+            val time = lines.firstOrNull()?.removePrefix("time: ") ?: f.name
+            // The trace starts after the header's blank line; its first line names the exception.
+            val what = lines.dropWhile { it.isNotBlank() }.firstOrNull { it.isNotBlank() } ?: "?"
+            "$time: $what"
+        }.orEmpty()
 
     /** The newest crash's text, if there is one. */
     fun latest(context: Context): File? = dir(context).listFiles()?.filter { it.name.startsWith("crash-") }?.maxByOrNull { it.name }
