@@ -23,12 +23,13 @@ class DriveLogRulesTest {
     }
 
     @Test
-    fun aTripThatWentNowhereStartsAfreshOnlyWhenTheCarMovesAgain() {
+    fun aTripStartsAfreshWhenTheCarMovesAgainAfterStandingStill() {
         val parked = TripState(startedAt = t0, updatedAt = t0)
         assertFalse(DriveLogRules.startsAfresh(parked, t0 + DriveLogRules.STOP_MS - 1))
         assertTrue(DriveLogRules.startsAfresh(parked, t0 + DriveLogRules.STOP_MS))
-        // A real drive is closed and logged by the drive log, never wiped here.
-        assertFalse(DriveLogRules.startsAfresh(trip, trip.updatedAt + 60 * 60_000L))
+        // A real drive too, when the unit slept through the tick that closes it: the drive log logs it on the new start.
+        assertFalse(DriveLogRules.startsAfresh(trip, trip.updatedAt + 60_000L))
+        assertTrue(DriveLogRules.startsAfresh(trip, trip.updatedAt + 12 * 60 * 60_000L))
     }
 
     @Test

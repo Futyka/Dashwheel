@@ -40,6 +40,17 @@ class LiveFeedsTest {
     }
 
     @Test
+    fun theMorningDriveIsNotAddedToLastNights() {
+        // A unit that slept overnight: last night's 39 km trip is still the trip computer's when the car moves again.
+        val now = 50_000_000L
+        val night = TripState(startedAt = now - 12 * 3_600_000L, distanceM = 39_000.0, movingMs = 40 * 60_000L, updatedAt = now - 11 * 3_600_000L)
+        val next = LocationFeed.tripStep(night, d = 25.0, dt = 1_000L, speedKmh = 30f, now = now)!!
+        assertEquals(now, next.startedAt)
+        assertEquals(25.0, next.distanceM, 0.0)
+        assertEquals(1_000L, next.movingMs)
+    }
+
+    @Test
     fun movingStepAddsDistanceAndTime() {
         val now = 1_000_000L
         val trip = TripState(startedAt = now - 1_000L, updatedAt = now - 1_000L)
