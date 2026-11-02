@@ -736,7 +736,7 @@ private fun ExWave(ms: MediaState, controller: CarMediaController, ink: Color, m
                 val y = size.height / 2f
                 val x0 = stroke.width / 2f
                 val end = size.width - track / 2f
-                val fw = (size.width * fraction).coerceIn(x0, end)
+                val fw = (size.width * fraction).coerceIn(x0, max(x0, end)) // a 0-wide spacer puts end below x0
                 if (fw + gap < end) drawLine(rest, Offset(fw + gap, y), Offset(end, y), track, StrokeCap.Round)
                 val a = height * amp.value
                 val shift = (run?.value ?: 0f) * 2f * PI.toFloat()
