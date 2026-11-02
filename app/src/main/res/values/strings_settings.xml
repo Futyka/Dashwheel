@@ -385,7 +385,6 @@
     <string name="settings_section_region">Language and units</string>
     <string name="settings_sum_sound">Volume, taps and music</string>
     <string name="settings_sum_dashboard">Bar, side rail and tabs</string>
-    <string name="settings_sum_expert">Lab, API keys, servers</string>
     <string name="alerts_say">Say</string>
     <string name="alerts_show">Show</string>
     <string name="alerts_intro">Say speaks it, Show puts Dashwheel\'s pop-up on the screen. Tap a pop-up for its design.</string>

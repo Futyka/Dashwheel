@@ -385,7 +385,6 @@
     <string name="settings_section_region">Idioma e unidades</string>
     <string name="settings_sum_sound">Volume, toques e música</string>
     <string name="settings_sum_dashboard">Barra, barra lateral e separadores</string>
-    <string name="settings_sum_expert">Laboratório, chaves API, servidores</string>
     <string name="alerts_say">Dizer</string>
     <string name="alerts_show">Mostrar</string>
     <string name="alerts_intro">Dizer anuncia em voz alta, Mostrar põe a janela do Dashwheel no ecrã. Toque numa janela para o seu estilo.</string>

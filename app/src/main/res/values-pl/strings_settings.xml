@@ -389,7 +389,6 @@
     <string name="settings_section_region">Język i jednostki</string>
     <string name="settings_sum_sound">Głośność, dotyk i muzyka</string>
     <string name="settings_sum_dashboard">Pasek, panel boczny i karty</string>
-    <string name="settings_sum_expert">Laboratorium, klucze API, serwery</string>
     <string name="alerts_say">Mów</string>
     <string name="alerts_show">Pokaż</string>
     <string name="alerts_intro">Mów odczytuje to na głos, Pokaż wyświetla okno Dashwheel. Dotknij okna, aby wybrać jego wygląd.</string>

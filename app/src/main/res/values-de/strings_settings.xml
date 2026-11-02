@@ -381,7 +381,6 @@
     <string name="settings_section_region">Sprache und Einheiten</string>
     <string name="settings_sum_sound">Lautstärke, Tippen und Musik</string>
     <string name="settings_sum_dashboard">Leiste, Seitenleiste und Tabs</string>
-    <string name="settings_sum_expert">Labor, API-Schlüssel, Server</string>
     <string name="alerts_say">Sagen</string>
     <string name="alerts_show">Zeigen</string>
     <string name="alerts_intro">Sagen spricht es aus, Zeigen blendet Dashwheels Fenster ein. Tippe auf ein Fenster für sein Design.</string>

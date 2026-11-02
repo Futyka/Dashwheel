@@ -385,7 +385,6 @@
     <string name="settings_section_region">Lingua e unità</string>
     <string name="settings_sum_sound">Volume, tocchi e musica</string>
     <string name="settings_sum_dashboard">Barra, barra laterale e schede</string>
-    <string name="settings_sum_expert">Laboratorio, chiavi API, server</string>
     <string name="alerts_say">Dire</string>
     <string name="alerts_show">Mostra</string>
     <string name="alerts_intro">Dire lo annuncia a voce, Mostra mette sullo schermo la finestra di Dashwheel. Tocca una finestra per il suo stile.</string>

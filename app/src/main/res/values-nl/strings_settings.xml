@@ -381,7 +381,6 @@
     <string name="settings_section_region">Taal en eenheden</string>
     <string name="settings_sum_sound">Volume, tikken en muziek</string>
     <string name="settings_sum_dashboard">Balk, zijbalk en tabbladen</string>
-    <string name="settings_sum_expert">Lab, API-sleutels, servers</string>
     <string name="alerts_say">Zeggen</string>
     <string name="alerts_show">Tonen</string>
     <string name="alerts_intro">Zeggen spreekt het uit, Tonen zet het venster van Dashwheel op het scherm. Tik op een venster voor de stijl.</string>

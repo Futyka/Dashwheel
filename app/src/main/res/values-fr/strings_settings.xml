@@ -385,7 +385,6 @@
     <string name="settings_section_region">Langue et unités</string>
     <string name="settings_sum_sound">Volume, touches et musique</string>
     <string name="settings_sum_dashboard">Barre, rail latéral et onglets</string>
-    <string name="settings_sum_expert">Labo, clés API, serveurs</string>
     <string name="alerts_say">Dire</string>
     <string name="alerts_show">Afficher</string>
     <string name="alerts_intro">Dire l\'annonce à voix haute, Afficher montre la fenêtre de Dashwheel. Touchez une fenêtre pour choisir son style.</string>

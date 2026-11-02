@@ -390,7 +390,6 @@
     <string name="settings_section_region">Язык и единицы</string>
     <string name="settings_sum_sound">Громкость, касания и музыка</string>
     <string name="settings_sum_dashboard">Панель, боковая полоса и вкладки</string>
-    <string name="settings_sum_expert">Лаборатория, API-ключи, серверы</string>
     <string name="alerts_say">Сказать</string>
     <string name="alerts_show">Показать</string>
     <string name="alerts_intro">«Сказать» произносит вслух, «Показать» выводит окно Dashwheel на экран. Нажмите на окно, чтобы выбрать его вид.</string>

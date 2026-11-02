@@ -385,7 +385,6 @@
     <string name="settings_section_region">Dil ve birimler</string>
     <string name="settings_sum_sound">Ses, dokunmalar ve müzik</string>
     <string name="settings_sum_dashboard">Çubuk, yan çubuk ve sekmeler</string>
-    <string name="settings_sum_expert">Deneysel, API anahtarları, sunucular</string>
     <string name="alerts_say">Söyle</string>
     <string name="alerts_show">Göster</string>
     <string name="alerts_intro">Söyle sesli söyler, Göster Dashwheel\'in açılır penceresini ekrana koyar. Tasarımı için bir açılır pencereye dokunun.</string>

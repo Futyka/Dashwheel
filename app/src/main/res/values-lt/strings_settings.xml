@@ -391,7 +391,6 @@
     <string name="settings_section_region">Kalba ir vienetai</string>
     <string name="settings_sum_sound">Garsumas, palietimai ir muzika</string>
     <string name="settings_sum_dashboard">Juosta, šoninė juosta ir skirtukai</string>
-    <string name="settings_sum_expert">Laboratorija, API raktai, serveriai</string>
     <string name="alerts_say">Sakyti</string>
     <string name="alerts_show">Rodyti</string>
     <string name="alerts_intro">Sakyti perskaito garsiai, Rodyti parodo Dashwheel langą ekrane. Palieskite langą, kad pasirinktumėte jo išvaizdą.</string>

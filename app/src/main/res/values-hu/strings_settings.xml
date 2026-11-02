@@ -382,7 +382,6 @@
     <string name="settings_section_region">Nyelv és mértékegységek</string>
     <string name="settings_sum_sound">Hangerő, érintések és zene</string>
     <string name="settings_sum_dashboard">Sáv, oldalsáv és lapok</string>
-    <string name="settings_sum_expert">Labor, API-kulcsok, szerverek</string>
     <string name="alerts_say">Mondja</string>
     <string name="alerts_show">Mutassa</string>
     <string name="alerts_intro">A Mondja felolvassa, a Mutassa megjeleníti a Dashwheel ablakát. Koppintson egy ablakra a kinézetéért.</string>
