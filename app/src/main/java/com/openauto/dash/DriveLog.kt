@@ -48,11 +48,15 @@ internal object DriveLogRules {
     fun isWorthLogging(trip: TripState): Boolean = trip.distanceM >= MIN_KM * 1000
 
     /**
-     * The car moves again after standing still: a trip that went nowhere
-     * starts afresh from now, so it says when the drive began. While parked it
+     * The car moves again after standing still for [STOP_MS]: the trip starts
+     * afresh from now, so it says when the drive began. A drive is normally
+     * closed by the tick before that, but a unit that slept instead of
+     * switching off runs no tick while parked, and the morning's drive was
+     * added to last night's (hours long, both distances in one); the drive log
+     * sees the new start and logs the old trip as it was. While parked the trip
      * is left alone rather than restarted every ten minutes.
      */
-    fun startsAfresh(trip: TripState, now: Long): Boolean = !isWorthLogging(trip) && isOver(trip, now)
+    fun startsAfresh(trip: TripState, now: Long): Boolean = isOver(trip, now)
 
     /**
      * The eco-driving card just closed [ended]: the trip is over too when the
@@ -159,7 +163,7 @@ internal object DriveLog {
         reports.collect { send(DriveReport(it)) }
     }
 
-    /** The driver reset the trip computer: the trip it showed is over. */
+    /** The trip computer started a new trip (the driver reset it, or the car moved again after standing still): the one it showed is over. */
     private suspend fun followTrip() {
         LocationFeed.trip.collect { trip ->
             if (DemoMode.isOn) return@collect
