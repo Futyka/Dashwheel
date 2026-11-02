@@ -74,12 +74,23 @@ object DebugLog {
     fun note(context: Context, message: String) {
         val line = "${stamp()} $message\n"
         val file = File(context.applicationContext.filesDir, EVENTS)
-        writer.launch {
-            synchronized(lock) {
-                runCatching {
-                    if (file.length() > KEEP_BYTES) file.writeText(file.readText().takeLast(KEEP_BYTES / 2))
-                    file.appendText(line)
-                }
+        writer.launch { append(file, line) }
+    }
+
+    /**
+     * [note], written before this returns: for the crash handler, on a thread
+     * about to die with the process; a line handed to the log's own thread
+     * would die with it, and the restart that follows would be unexplained.
+     */
+    fun noteNow(context: Context, message: String) {
+        append(File(context.applicationContext.filesDir, EVENTS), "${stamp()} $message\n")
+    }
+
+    private fun append(file: File, line: String) {
+        synchronized(lock) {
+            runCatching {
+                if (file.length() > KEEP_BYTES) file.writeText(file.readText().takeLast(KEEP_BYTES / 2))
+                file.appendText(line)
             }
         }
     }
@@ -149,6 +160,10 @@ object DebugLog {
             appendLine()
             appendLine("Lost deep sleeps:")
             appendLine(CarPower.sleepLost(context).joinToString("\n").ifBlank { "none" })
+            appendLine()
+            // The crashes the unit still holds ([CrashReports]): a restart every few seconds in the event log has its cause here.
+            appendLine("Crashes kept:")
+            appendLine(CrashReports.kept(context).joinToString("\n").ifBlank { "none" })
         }
         val events = synchronized(lock) { runCatching { File(context.filesDir, EVENTS).readText() }.getOrDefault("") }
         val snapshots = synchronized(lock) {
