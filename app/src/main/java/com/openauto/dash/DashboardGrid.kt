@@ -58,6 +58,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.layer.GraphicsLayer
+import androidx.compose.ui.graphics.layer.drawLayer
+import androidx.compose.ui.graphics.rememberGraphicsLayer
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.unit.IntSize
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -212,7 +223,7 @@ internal fun DashboardPage(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(h)
-                            .tileFrame(item.frame, DashShape.Large)
+                            .tileFrame(item.frame)
                             .clip(DashShape.Large)
                             .background(DashColors.Bar)
                     ) { tileContent(index, item, null) }
@@ -499,7 +510,7 @@ internal fun GridTile(
                     }
                 )
                 // The tile's own border and opacity (TileFrame), under the arranging outline.
-                .tileFrame(item.frame, frameShape)
+                .tileFrame(item.frame)
                 // Dimmed while arranging: the tile is the thing being moved, not
                 // read. Not the one whose panel is open: its new design shows as is.
                 .graphicsLayer { alpha = if (editing && !selected) 0.7f else 1f }
@@ -617,14 +628,50 @@ internal fun GridTile(
 private const val OVER_Z = 0.25f
 
 /**
- * A tile's frame ([TileFrame]) on its box: its border in the tile's corners
- * and its opacity, which fades the border with the content. Always applied,
- * at 1 too, so changing it never rebuilds the tile (and its map or widget).
+ * A tile's frame ([TileFrame]) on its box: its border around what the widget
+ * draws ([widgetOutline]) and its opacity, which fades the border with the
+ * content. The opacity is always applied, at 1 too, so changing it never
+ * rebuilds the tile (and its map or widget).
  */
 @Composable
-private fun Modifier.tileFrame(frame: TileFrame, shape: androidx.compose.ui.graphics.Shape): Modifier =
-    graphicsLayer { alpha = frame.opacity }
-        .then(if (frame.border > 0) Modifier.border(frame.border.dp, frame.borderColor.color(), shape) else Modifier)
+private fun Modifier.tileFrame(frame: TileFrame): Modifier {
+    val base = graphicsLayer { alpha = frame.opacity }
+    if (frame.border <= 0) return base
+    val colour = frame.borderColor.color()
+    val silhouette = rememberGraphicsLayer()
+    return base.widgetOutline(silhouette, frame.border.dp, colour)
+}
+
+/**
+ * A line of [width] in [colour] around whatever the content draws, not
+ * around its box: a round music tile gets a ring, a card its rounded edge, a
+ * bare widget's words and dial their own outline. The content is recorded
+ * into [silhouette], drawn in the colour alone (its alpha kept) a few times
+ * around itself, then drawn as it is on top.
+ */
+private fun Modifier.widgetOutline(silhouette: GraphicsLayer, width: Dp, colour: Color): Modifier = drawWithContent {
+    silhouette.record(this, layoutDirection, IntSize(size.width.roundToInt(), size.height.roundToInt())) {
+        this@drawWithContent.drawContent()
+    }
+    silhouette.colorFilter = ColorFilter.tint(colour, BlendMode.SrcIn)
+    val w = width.toPx()
+    // A ring of copies at the line's width; wide lines get an inner ring too, so the corners fill in.
+    for (i in 0 until OUTLINE_STEPS) {
+        val a = i * 2.0 * PI / OUTLINE_STEPS
+        translate((cos(a) * w).toFloat(), (sin(a) * w).toFloat()) { drawLayer(silhouette) }
+    }
+    if (w > OUTLINE_INNER_RING_PX) {
+        for (i in 0 until OUTLINE_STEPS) {
+            val a = (i + 0.5) * 2.0 * PI / OUTLINE_STEPS
+            translate((cos(a) * w / 2).toFloat(), (sin(a) * w / 2).toFloat()) { drawLayer(silhouette) }
+        }
+    }
+    drawContent()
+}
+
+/** How many copies make the ring around the content, and the width from which a second ring is needed. */
+private const val OUTLINE_STEPS = 16
+private const val OUTLINE_INNER_RING_PX = 6f
 
 /** The colour a border is drawn in, from the palette on screen where it has one. */
 @Composable
