@@ -2,6 +2,7 @@ package com.openauto.dash
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Speed
+import org.json.JSONObject
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
@@ -456,14 +457,19 @@ class DashboardStoreTest {
         val pages = listOf(listOf(plain, framed, bordered), emptyList(), emptyList())
         val saved = DashboardStore.serializePages(pages)
         assertEquals(pages, DashboardStore.parsePages(saved))
+        // Read back as JSON: org.json keeps no key order on the JVM, so the text itself is not searched.
+        val tiles = JSONObject(saved).getJSONArray("pages").getJSONArray(0)
         // A plain tile writes none of it, so an older build reads its layout as before.
-        val clockJson = saved.substringAfter("CLOCK").substringBefore("}")
-        assertFalse(clockJson.contains("\"ov\"") || clockJson.contains("\"op\"") || clockJson.contains("\"bw\""))
+        val clockJson = tiles.getJSONObject(0)
+        assertFalse(clockJson.has("ov") || clockJson.has("op") || clockJson.has("bw") || clockJson.has("bc"))
         // The accent is the default colour and is left out; a colour is kept only with a border.
-        val shortcutJson = saved.substringAfter("a.b").substringBefore("}")
-        assertTrue(shortcutJson.contains("\"bw\":2"))
-        assertFalse(shortcutJson.contains("\"bc\""))
-        assertTrue(saved.contains("\"bc\":\"RED\""))
+        val shortcutJson = tiles.getJSONObject(2)
+        assertEquals(2, shortcutJson.getInt("bw"))
+        assertFalse(shortcutJson.has("bc"))
+        val framedJson = tiles.getJSONObject(1)
+        assertTrue(framedJson.getBoolean("ov"))
+        assertEquals("RED", framedJson.getString("bc"))
+        assertEquals(3, framedJson.getInt("bw"))
         // Out-of-range values read back in range; an unknown colour is the accent.
         val odd = """{"v":2,"pages":[[{"t":"builtin","k":"CLOCK","gx":0,"gy":0,"gw":3,"gh":2,"op":0.01,"bw":99,"bc":"PINK"}]]}"""
         val read = DashboardStore.parsePages(odd)!![0].single()
