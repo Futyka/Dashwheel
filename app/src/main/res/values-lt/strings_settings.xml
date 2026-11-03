@@ -218,6 +218,8 @@
     <string name="about_tip_thanks">Ačiū, tai tikrai padeda.</string>
     <string name="about_project">Projekto puslapis</string>
     <string name="about_project_detail">Išeities kodas, versijos ir klaidų pranešimai</string>
+    <string name="about_telegram">Telegram grupė</string>
+    <string name="about_telegram_detail">Klausimai, naujienos ir kiti vairuotojai: t.me/Dashwheel</string>
     <string name="help_title">Pagalba</string>
     <string name="help_row_detail">Kiekviena funkcija paaiškinta wiki</string>
     <string name="help_detail">Kiekviena funkcija paaiškinta wiki. Nuskenuokite telefonu arba atidarykite čia.</string>
@@ -389,7 +391,6 @@
     <string name="settings_section_region">Kalba ir vienetai</string>
     <string name="settings_sum_sound">Garsumas, palietimai ir muzika</string>
     <string name="settings_sum_dashboard">Juosta, šoninė juosta ir skirtukai</string>
-    <string name="settings_sum_expert">Laboratorija, API raktai, serveriai</string>
     <string name="alerts_say">Sakyti</string>
     <string name="alerts_show">Rodyti</string>
     <string name="alerts_intro">Sakyti perskaito garsiai, Rodyti parodo Dashwheel langą ekrane. Palieskite langą, kad pasirinktumėte jo išvaizdą.</string>

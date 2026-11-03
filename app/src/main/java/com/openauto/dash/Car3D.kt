@@ -260,6 +260,25 @@ internal object Car3D {
         }
     }
 
+    /**
+     * [names] lit in r, g, b and every other part dark. The model and its
+     * materials are shared by every card showing the car: each one sets the
+     * whole of its own light before it draws, so a part another card lit (the
+     * door alert's open door) does not stay lit on this one.
+     */
+    fun setGlowOnly(names: Collection<String>, r: Float, g: Float, b: Float) {
+        val e = engine ?: return
+        val rm = e.renderableManager
+        for ((n, ent) in named) {
+            val on = n in names
+            val ri = rm.getInstance(ent)
+            if (ri == 0) continue
+            for (p in 0 until rm.getPrimitiveCount(ri)) {
+                rm.getMaterialInstanceAt(ri, p).setParameter("emissiveFactor", if (on) r else 0f, if (on) g else 0f, if (on) b else 0f)
+            }
+        }
+    }
+
     /** Hinge [name] opened by [k] (0 shut .. 1 open). */
     fun setHinge(name: String, k: Float) {
         val e = engine ?: return
@@ -688,6 +707,9 @@ private class Stage(context: Context) : Choreographer.FrameCallback {
     fun dispose() {
         disposed = true
         unpost()
+        // What this card lit goes dark with it.
+        Car3D.setGlow(glowing, 0f, 0f, 0f)
+        glowing = emptyList()
         ui.detach()
         val e = Car3D.engine() ?: return
         swapChain?.let { e.destroySwapChain(it) }
@@ -730,14 +752,13 @@ private class Stage(context: Context) : Choreographer.FrameCallback {
         val b = to
         if (a != null && b != null) pose = if (moving) lerp(a, b, smooth((now - moveStart).toFloat() / moveMs)) else b
         for (h in Car3D.hinges.keys) Car3D.setHinge(h, hingeNow(h, now))
-        if (glowing.isNotEmpty()) {
-            val k = when {
-                now < glowStart -> 0f
-                pulsing -> 0.55f + 0.45f * cos((now - glowStart) / 800f * 2f * PI.toFloat())
-                else -> 1f
-            } * glowStrength
-            Car3D.setGlow(glowing, glowColour[0] * k, glowColour[1] * k, glowColour[2] * k)
-        }
+        // This card's light, and no other card's: the parts are shared.
+        val k = when {
+            glowing.isEmpty() || now < glowStart -> 0f
+            pulsing -> 0.55f + 0.45f * cos((now - glowStart) / 800f * 2f * PI.toFloat())
+            else -> 1f
+        } * glowStrength
+        Car3D.setGlowOnly(glowing, glowColour[0] * k, glowColour[1] * k, glowColour[2] * k)
         if (draw(frameTimeNanos)) {
             lastDraw = frameTimeNanos
             owed = false

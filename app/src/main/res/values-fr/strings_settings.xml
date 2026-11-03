@@ -217,6 +217,8 @@
     <string name="about_tip_thanks">Merci, ça aide vraiment.</string>
     <string name="about_project">Page du projet</string>
     <string name="about_project_detail">Code source, versions et signalement de bugs</string>
+    <string name="about_telegram">Groupe Telegram</string>
+    <string name="about_telegram_detail">Questions, nouveautés et autres conducteurs : t.me/Dashwheel</string>
     <string name="help_title">Aide</string>
     <string name="help_row_detail">Chaque fonction expliquée, sur le wiki</string>
     <string name="help_detail">Chaque fonction expliquée sur le wiki. Scannez-le avec votre téléphone ou ouvrez-le ici.</string>
@@ -383,7 +385,6 @@
     <string name="settings_section_region">Langue et unités</string>
     <string name="settings_sum_sound">Volume, touches et musique</string>
     <string name="settings_sum_dashboard">Barre, rail latéral et onglets</string>
-    <string name="settings_sum_expert">Labo, clés API, serveurs</string>
     <string name="alerts_say">Dire</string>
     <string name="alerts_show">Afficher</string>
     <string name="alerts_intro">Dire l\'annonce à voix haute, Afficher montre la fenêtre de Dashwheel. Touchez une fenêtre pour choisir son style.</string>

@@ -217,6 +217,8 @@
     <string name="about_tip_thanks">Bedankt, dat helpt echt.</string>
     <string name="about_project">Projectpagina</string>
     <string name="about_project_detail">Broncode, versies en foutmeldingen</string>
+    <string name="about_telegram">Telegram-groep</string>
+    <string name="about_telegram_detail">Vragen, nieuws en andere bestuurders: t.me/Dashwheel</string>
     <string name="help_title">Help</string>
     <string name="help_row_detail">Elke functie uitgelegd, op de wiki</string>
     <string name="help_detail">Elke functie uitgelegd op de wiki. Scan hem met uw telefoon of open hem hier.</string>
@@ -379,7 +381,6 @@
     <string name="settings_section_region">Taal en eenheden</string>
     <string name="settings_sum_sound">Volume, tikken en muziek</string>
     <string name="settings_sum_dashboard">Balk, zijbalk en tabbladen</string>
-    <string name="settings_sum_expert">Lab, API-sleutels, servers</string>
     <string name="alerts_say">Zeggen</string>
     <string name="alerts_show">Tonen</string>
     <string name="alerts_intro">Zeggen spreekt het uit, Tonen zet het venster van Dashwheel op het scherm. Tik op een venster voor de stijl.</string>

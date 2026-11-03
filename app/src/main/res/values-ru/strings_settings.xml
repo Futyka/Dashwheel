@@ -218,6 +218,8 @@
     <string name="about_tip_thanks">Спасибо, это правда помогает.</string>
     <string name="about_project">Страница проекта</string>
     <string name="about_project_detail">Исходный код, релизы и сообщения об ошибках</string>
+    <string name="about_telegram">Группа в Telegram</string>
+    <string name="about_telegram_detail">Вопросы, новости и другие водители: t.me/Dashwheel</string>
     <string name="help_title">Справка</string>
     <string name="help_row_detail">Все функции с пояснениями в вики</string>
     <string name="help_detail">Все функции с пояснениями в вики. Отсканируйте телефоном или откройте здесь.</string>
@@ -388,7 +390,6 @@
     <string name="settings_section_region">Язык и единицы</string>
     <string name="settings_sum_sound">Громкость, касания и музыка</string>
     <string name="settings_sum_dashboard">Панель, боковая полоса и вкладки</string>
-    <string name="settings_sum_expert">Лаборатория, API-ключи, серверы</string>
     <string name="alerts_say">Сказать</string>
     <string name="alerts_show">Показать</string>
     <string name="alerts_intro">«Сказать» произносит вслух, «Показать» выводит окно Dashwheel на экран. Нажмите на окно, чтобы выбрать его вид.</string>

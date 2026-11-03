@@ -220,6 +220,8 @@
     <string name="about_tip_thanks">Teşekkürler, gerçekten yardımı oluyor.</string>
     <string name="about_project">Proje sayfası</string>
     <string name="about_project_detail">Kaynak kodu, sürümler ve hata raporları</string>
+    <string name="about_telegram">Telegram grubu</string>
+    <string name="about_telegram_detail">Sorular, haberler ve diğer sürücüler: t.me/Dashwheel</string>
     <string name="help_title">Yardım</string>
     <string name="help_row_detail">Her özellik wiki\'de açıklanmıştır</string>
     <string name="help_detail">Her özellik wiki\'de açıklanmıştır. Telefonunuzla tarayın ya da burada açın.</string>
@@ -383,7 +385,6 @@
     <string name="settings_section_region">Dil ve birimler</string>
     <string name="settings_sum_sound">Ses, dokunmalar ve müzik</string>
     <string name="settings_sum_dashboard">Çubuk, yan çubuk ve sekmeler</string>
-    <string name="settings_sum_expert">Deneysel, API anahtarları, sunucular</string>
     <string name="alerts_say">Söyle</string>
     <string name="alerts_show">Göster</string>
     <string name="alerts_intro">Söyle sesli söyler, Göster Dashwheel\'in açılır penceresini ekrana koyar. Tasarımı için bir açılır pencereye dokunun.</string>

@@ -76,6 +76,7 @@ import androidx.compose.material.icons.filled.DirectionsCar
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material.icons.automirrored.filled.HelpOutline
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Handyman
 import androidx.compose.material.icons.filled.Image
@@ -171,7 +172,7 @@ import kotlinx.coroutines.launch
  * pane, with a back arrow (SettingsSheet.kt). One subject, one place, named
  * the way a driver thinks of it, in three runs: every day (alerts, sound,
  * look, dashboard), the car (the car, reading it, driving it) and set once
- * (phone and screens, the head unit, general, expert). Groups are small
+ * (phone and screens, the head unit, general with its expert rows). Groups are small
  * enough to list everything. What this unit cannot have is not listed: one
  * card per group says how many more root would bring ([RootLockCard]).
  */
@@ -190,8 +191,7 @@ internal enum class SettingsTab(@StringRes val titleRes: Int, val icon: ImageVec
     // Set once: what talks to the unit, the unit itself, the app, and the tools for the few.
     DEVICES(R.string.settings_section_devices, Icons.Filled.Devices),
     HEAD_UNIT(R.string.unit_card_title, Icons.Filled.DeveloperBoard),
-    GENERAL(R.string.settings_section_general, Icons.Filled.Tune),
-    EXPERT(R.string.settings_section_expert, Icons.Filled.Science);
+    GENERAL(R.string.settings_section_general, Icons.Filled.Tune);
 
     companion object {
         /** The groups, without the overview that leads to them. */
@@ -322,7 +322,6 @@ internal fun SettingsScreen(
                         SettingsTab.DEVICES -> DevicesPane(open)
                         SettingsTab.HEAD_UNIT -> HeadUnitPane(open)
                         SettingsTab.GENERAL -> GeneralPane(m, open)
-                        SettingsTab.EXPERT -> ExpertPane(open)
                     }
                 }
                 MoreBelow(scroll, Modifier.align(Alignment.BottomCenter))
@@ -1310,11 +1309,13 @@ private fun GeneralPane(m: TopBarModel, open: (Deep) -> Unit) {
     SettingsSection(stringResource(R.string.settings_section_about))
     // Updates are in About only, beside the version (the overview's card shows one waiting).
     SettingsRow(Icons.Filled.Info, stringResource(R.string.settings_section_about), stringResource(R.string.settings_about_detail)) { open(Deep.ABOUT) }
+    Spacer(Modifier.height(20.dp))
+    ExpertRows(open)
 }
 
-/** For those who dig: Lab, the driver's own API keys, the map and route servers. */
+/** For those who dig, at the end of General: Lab, the driver's own API keys, the map and route servers. */
 @Composable
-private fun ExpertPane(open: (Deep) -> Unit) {
+private fun ExpertRows(open: (Deep) -> Unit) {
     val context = LocalContext.current
     SettingsSection(stringResource(R.string.settings_section_expert))
     SettingsRow(Icons.Filled.Science, stringResource(R.string.settings_lab), stringResource(R.string.settings_lab_detail)) { open(Deep.LAB) }
@@ -1467,6 +1468,7 @@ private fun MoreWithGithubRow() {
 
 internal const val KOFI_URL = "https://ko-fi.com/deviloufr"
 private const val PROJECT_URL = "https://github.com/deviloufr-ai/Dashwheel"
+private const val TELEGRAM_URL = "https://t.me/Dashwheel"
 /** A Google Play listing, the package name appended (the Play edition's own, and the companion's). */
 internal const val PLAY_LISTING = "https://play.google.com/store/apps/details?id="
 
@@ -1548,6 +1550,9 @@ private fun AboutBody(m: TopBarModel) {
     if (help) WikiHelpDialog(WikiPage.HOME) { help = false }
     SettingsRow(Icons.Filled.Favorite, stringResource(R.string.about_project), stringResource(R.string.about_project_detail)) {
         context.launchSafely(Intent(Intent.ACTION_VIEW, Uri.parse(PROJECT_URL)))
+    }
+    SettingsRow(Icons.AutoMirrored.Filled.Send, stringResource(R.string.about_telegram), stringResource(R.string.about_telegram_detail)) {
+        context.launchSafely(Intent(Intent.ACTION_VIEW, Uri.parse(TELEGRAM_URL)))
     }
 }
 

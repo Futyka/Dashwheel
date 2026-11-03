@@ -387,7 +387,6 @@ private fun groupSummary(group: SettingsTab, m: TopBarModel, theme: ThemeState):
             val units = Units.current.collectAsState().value
             "${languageName(AppLanguage.current(context))}, ${unitsSummary(units)}"
         }
-        SettingsTab.EXPERT -> stringResource(R.string.settings_sum_expert)
     }
 }
 
@@ -495,13 +494,13 @@ private val SETTINGS_INDEX: List<SettingsEntry> by lazy {
         SettingsEntry(R.string.help_title, SettingsTab.GENERAL, listOf(Deep.ABOUT)),
         SettingsEntry(R.string.tour_settings_row, SettingsTab.GENERAL, listOf(Deep.ABOUT)),
 
-        SettingsEntry(R.string.settings_lab, SettingsTab.EXPERT, listOf(Deep.LAB)),
-        SettingsEntry(R.string.api_keys_title, SettingsTab.EXPERT, listOf(Deep.API_KEYS), detail = R.string.api_keys_search_detail),
-        SettingsEntry(R.string.map_servers_title, SettingsTab.EXPERT, listOf(Deep.MAP_SERVERS)),
-        SettingsEntry(R.string.explore_title, SettingsTab.EXPERT, listOf(Deep.LAB, Deep.EXPLORER), detail = R.string.explore_settings_detail),
-        SettingsEntry(R.string.dead_strip_title, SettingsTab.EXPERT, listOf(Deep.LAB), detail = R.string.dead_strip_detail),
-        SettingsEntry(R.string.settings_sleep_title, SettingsTab.EXPERT, listOf(Deep.LAB), offered = { CarPower.available }),
-        SettingsEntry(R.string.settings_log_title, SettingsTab.EXPERT, listOf(Deep.LAB))
+        SettingsEntry(R.string.settings_lab, SettingsTab.GENERAL, listOf(Deep.LAB)),
+        SettingsEntry(R.string.api_keys_title, SettingsTab.GENERAL, listOf(Deep.API_KEYS), detail = R.string.api_keys_search_detail),
+        SettingsEntry(R.string.map_servers_title, SettingsTab.GENERAL, listOf(Deep.MAP_SERVERS)),
+        SettingsEntry(R.string.explore_title, SettingsTab.GENERAL, listOf(Deep.LAB, Deep.EXPLORER), detail = R.string.explore_settings_detail),
+        SettingsEntry(R.string.dead_strip_title, SettingsTab.GENERAL, listOf(Deep.LAB), detail = R.string.dead_strip_detail),
+        SettingsEntry(R.string.settings_sleep_title, SettingsTab.GENERAL, listOf(Deep.LAB), offered = { CarPower.available }),
+        SettingsEntry(R.string.settings_log_title, SettingsTab.GENERAL, listOf(Deep.LAB))
     )
 }
 

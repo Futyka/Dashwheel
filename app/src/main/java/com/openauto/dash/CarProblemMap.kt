@@ -139,8 +139,8 @@ internal object CarProblemMap {
             CarSpot.DOOR_RR -> listOf(f.at(0.62f, 1.05f))
             CarSpot.DOORS -> listOf(f.at(0.42f, -1.05f), f.at(0.42f, 1.05f), f.at(0.62f, -1.05f), f.at(0.62f, 1.05f))
             CarSpot.BOOT -> listOf(f.at(0.94f, 0f))
-            // On the right, behind the rear door, on most cars of this size.
-            CarSpot.FUEL_FLAP -> listOf(f.at(0.78f, 1.08f))
+            // On the left, behind the rear door, where a tester's car has it.
+            CarSpot.FUEL_FLAP -> listOf(f.at(0.78f, -1.08f))
             CarSpot.FRONT_SENSORS -> listOf(f.at(0.0f, -0.5f), f.at(0.0f, 0.5f))
             CarSpot.REAR_SENSORS -> listOf(f.at(1.0f, -0.5f), f.at(1.0f, 0.5f))
         }
