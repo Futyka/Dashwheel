@@ -73,6 +73,8 @@ internal object DashAssistant {
      * rings after that.
      */
     private const val ECHO_TAIL_MS = 600L
+    /** The most the unit may lag behind [speakingUntil] in playing the voice: past it, a stuck track position is not waited for. */
+    private const val PLAY_LAG_MAX_MS = 3_000L
     private const val GUIDANCE_CHECK_MS = 250L
     /** A turn instruction is over within this: a player left open with the guidance usage is not one. */
     private const val GUIDANCE_MAX_MS = 10_000L
@@ -105,7 +107,12 @@ internal object DashAssistant {
     private var session: Job? = null
 
     @Volatile private var socket: WebSocket? = null
+    /** When the voice queued so far would be over, were it played the moment it is queued. */
     @Volatile private var speakingUntil = 0L
+    /** Frames written to the track since it was opened or flushed: what it still has to play. */
+    @Volatile private var framesWritten = 0L
+    /** When the track was last seen still playing. */
+    @Volatile private var playingAt = 0L
     /** The line being heard is still growing (transcripts come in pieces). */
     @Volatile private var lineOpen = false
     private var track: AudioTrack? = null
@@ -126,6 +133,7 @@ internal object DashAssistant {
     @Volatile private var gainTop = 1f
     @Volatile private var heardLines = 0
     @Volatile private var saidLines = 0
+    @Volatile private var interruptions = 0
     @Volatile private var closedWith = ""
 
     private val client: OkHttpClient = Http.client.newBuilder()
@@ -209,6 +217,7 @@ internal object DashAssistant {
         gainTop = 1f
         heardLines = 0
         saidLines = 0
+        interruptions = 0
         closedWith = "ended"
         ws.send(setup(context, config, model).toString())
         val first = withTimeoutOrNull(SETUP_WAIT_MS) { events.receive() }
@@ -239,7 +248,7 @@ internal object DashAssistant {
                 "gemini live: $model, mic $micSource, ${(SystemClock.elapsedRealtime() - since) / 1000} s, " +
                     "$chunksSent chunks sent, mic peak ${"%.3f".format(java.util.Locale.ROOT, peakLevel)} " +
                     "brought up x${"%.0f".format(java.util.Locale.ROOT, gainTop)}, " +
-                    "heard $heardLines, answered $saidLines, $closedWith"
+                    "heard $heardLines, answered $saidLines, interrupted $interruptions, $closedWith"
             )
         }
         // Closed by Google or the network: the alert goes too.
@@ -315,7 +324,10 @@ internal object DashAssistant {
                 if (!lineOpen || _lines.value.lastOrNull()?.driver != false) saidLines++
                 hear(driver = false, it)
             }
-            if (content.optBoolean("interrupted")) hush()
+            if (content.optBoolean("interrupted")) {
+                interruptions++
+                hush()
+            }
             if (content.optBoolean("turnComplete")) {
                 lineOpen = false
                 heard = false
@@ -359,18 +371,17 @@ internal object DashAssistant {
     /**
      * Sends the microphone up, except while a navigation app gives a turn, and
      * while Gemini speaks and just after unless the driver talks over it
-     * ([BargeInGate]). The source is the one made for speech recognition, as
-     * for the mechanic's questions: the call source, tried first before, gave
-     * a voice so processed by some units that Gemini never took it for speech
-     * (the music pauses and the car's voice waits anyway, so there is nothing
-     * else to cancel out of it). Whenever the microphone pauses, Gemini is told,
-     * so what it already heard is taken as a whole sentence.
+     * ([BargeInGate]). The source is the one for calls, where the unit cancels
+     * its own speakers out of the microphone, Gemini's voice first of all; the
+     * voice it gives is quiet, and brought up ([MicGain]). Whenever the
+     * microphone pauses, Gemini is told, so what it already heard is taken as
+     * a whole sentence.
      */
     private suspend fun listen(ws: WebSocket) {
         val bytes = IN_RATE * 2 * CHUNK_MS / 1000
         val min = AudioRecord.getMinBufferSize(IN_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT)
-        val record = openRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION, maxOf(min, bytes * 4))
-            ?: openRecord(MediaRecorder.AudioSource.VOICE_COMMUNICATION, maxOf(min, bytes * 4))
+        val record = openRecord(MediaRecorder.AudioSource.VOICE_COMMUNICATION, maxOf(min, bytes * 4))
+            ?: openRecord(MediaRecorder.AudioSource.VOICE_RECOGNITION, maxOf(min, bytes * 4))
             ?: openRecord(MediaRecorder.AudioSource.MIC, maxOf(min, bytes * 4))
             ?: run {
                 // The microphone taken by another app, or a source this unit's audio
@@ -388,8 +399,9 @@ internal object DashAssistant {
         try {
             record.startRecording()
             val buffer = ByteArray(bytes)
-            val previous = ByteArray(bytes)
-            var previousSize = 0
+            // The last two chunks, newest first: the gate opens on the third loud one.
+            val previous = Array(2) { ByteArray(bytes) }
+            val previousSize = IntArray(2)
             val gate = BargeInGate()
             val gain = MicGain()
             var voiceAt = 0L
@@ -410,7 +422,7 @@ internal object DashAssistant {
                     continue
                 }
                 val now = SystemClock.elapsedRealtime()
-                val speaking = now < speakingUntil + ECHO_TAIL_MS
+                val speaking = geminiSpeaking(now)
                 if (navigationTalking(now)) {
                     gate.reset()
                     if (streaming) pauseAudio(ws)
@@ -422,13 +434,15 @@ internal object DashAssistant {
                 gain.apply(buffer, n, learn = !speaking)
                 if (speaking) {
                     val going = gate.hear(loudness)
-                    // The chunk before holds the first syllable of what the gate just let through.
-                    if (going == 2) sendAudio(ws, previous, previousSize)
+                    // The chunks before hold the first syllables of what the gate just let through.
+                    for (i in going - 2 downTo 0) if (previousSize[i] > 0) sendAudio(ws, previous[i], previousSize[i])
                     if (going > 0) sendAudio(ws, buffer, n)
                     else if (streaming) pauseAudio(ws)
                     streaming = going > 0
-                    buffer.copyInto(previous, endIndex = n)
-                    previousSize = n
+                    buffer.copyInto(previous[1], endIndex = n)
+                    previousSize[1] = n
+                    previous.reverse()
+                    previousSize.reverse()
                     continue
                 }
                 gate.reset()
@@ -540,9 +554,33 @@ internal object DashAssistant {
         val ms = pcm.size * 1000L / (OUT_RATE * 2)
         val now = SystemClock.elapsedRealtime()
         speakingUntil = maxOf(speakingUntil, now) + ms
+        playingAt = now
         heard = false
         _phase.value = Phase.SPEAKING
         playback.trySend(pcm)
+    }
+
+    /**
+     * Gemini's voice is being played, or its echo still rings in the cabin.
+     * [speakingUntil] counts from the moment the voice is queued; the unit
+     * plays it later, by its buffer and its output's delay (and longer over
+     * Bluetooth), and the last words leaked into the microphone as the driver's
+     * ([interruptions] of Gemini by itself). So the track's own position is
+     * followed too: the microphone waits until the track has played all it was
+     * given, then [ECHO_TAIL_MS] more.
+     */
+    private fun geminiSpeaking(now: Long): Boolean {
+        if (now < speakingUntil + ECHO_TAIL_MS) return true
+        // A track whose position never reaches the end (some units) would mute the microphone for good.
+        if (now < speakingUntil + PLAY_LAG_MAX_MS && stillPlaying()) playingAt = now
+        return now < playingAt + ECHO_TAIL_MS
+    }
+
+    /** The track has frames left to play. */
+    private fun stillPlaying(): Boolean {
+        val t = track ?: return false
+        val played = runCatching { t.playbackHeadPosition.toLong() and 0xFFFF_FFFFL }.getOrDefault(framesWritten)
+        return played < framesWritten
     }
 
     /** The driver spoke over Gemini: what it still had to say goes. */
@@ -554,9 +592,12 @@ internal object DashAssistant {
                 it.flush()
                 it.play()
             }
+            // What was flushed is never played: the track's position is taken as all played.
+            framesWritten = runCatching { it.playbackHeadPosition.toLong() and 0xFFFF_FFFFL }.getOrDefault(0L)
         }
         // Its voice is gone at once, so no echo to wait for: the driver is mid-sentence.
         speakingUntil = 0L
+        playingAt = 0L
         lineOpen = false
         heard = false
         _phase.value = Phase.LISTENING
@@ -565,7 +606,8 @@ internal object DashAssistant {
     private suspend fun play() {
         for (pcm in playback) {
             _level.value = rms(pcm, pcm.size)
-            track?.write(pcm, 0, pcm.size)
+            val written = track?.write(pcm, 0, pcm.size) ?: 0
+            if (written > 0) framesWritten += written / 2
         }
     }
 
@@ -589,6 +631,8 @@ internal object DashAssistant {
             .setTransferMode(AudioTrack.MODE_STREAM)
             .build()
             .also { it.play() }
+        framesWritten = 0L
+        playingAt = 0L
     }
 
     private fun releaseAudio(context: Context) {
@@ -597,6 +641,8 @@ internal object DashAssistant {
         track = null
         releaseFocus()
         speakingUntil = 0L
+        playingAt = 0L
+        framesWritten = 0L
         guidanceSeenAt = 0L
         guidance.reset()
         heard = false
@@ -607,7 +653,7 @@ internal object DashAssistant {
     internal fun endAfterSpeaking(context: Context) {
         scope.launch {
             delay(300)
-            while (SystemClock.elapsedRealtime() < speakingUntil + ECHO_TAIL_MS) delay(200)
+            while (geminiSpeaking(SystemClock.elapsedRealtime())) delay(200)
             withContext(Dispatchers.Main) { GeminiLive.end(context) }
         }
     }
@@ -628,29 +674,37 @@ internal fun rms(pcm: ByteArray, size: Int): Float {
 /**
  * Lets the microphone through while Gemini speaks only when the driver talks
  * over it. It learns how loud Gemini's echo is in the microphone, and a voice
- * has to stay well above that for two chunks; Gemini's own voice detection
+ * has to stay well above that for three chunks; Gemini's own voice detection
  * then decides whether it is really an interruption, so a bump costs nothing.
+ *
+ * The echo is the loudest chunk heard. An answer reaches the microphone a few
+ * chunks after it is queued, so what comes before the echo is heard is the
+ * quiet cabin; and an answer starts soft and rises, so for a while after the
+ * echo is first heard every chunk, loud or not, sets the echo and none opens
+ * the gate: a soft first word had set a low echo, and the rest of the answer
+ * came out well above it, so Gemini heard itself and interrupted itself.
  */
 internal class BargeInGate {
     private var floor = 0f
     private var chunks = 0
+    /** Chunks heard since the echo was first heard; the gate stays shut until [SETTLE_CHUNKS]. */
+    private var echoChunks = 0
     private var loud = 0
     private var open = 0
 
-    /** A chunk of [rms] loudness came in: how many of the latest chunks go up (2 = this and the one before). */
+    /** A chunk of [rms] loudness came in: how many of the latest chunks go up (3 = this and the two before). */
     fun hear(rms: Float): Int {
         if (open > 0) {
             open--
             return 1
         }
-        // The echo is the loudest chunk heard so far. An answer reaches the microphone
-        // a few chunks after it is queued, so what is learnt before the echo has really
-        // arrived is the quiet cabin, and the answer's own first word must not open the gate.
-        if (chunks >= LEARN_CHUNKS && floor >= ECHO_HEARD && rms > maxOf(MIN_RMS, floor * ABOVE_ECHO)) {
+        if (floor >= ECHO_HEARD || rms >= ECHO_HEARD) echoChunks++
+        val settled = chunks >= LEARN_CHUNKS && echoChunks > SETTLE_CHUNKS
+        if (settled && rms > maxOf(MIN_RMS, floor * ABOVE_ECHO)) {
             if (++loud >= LOUD_CHUNKS) {
                 loud = 0
                 open = OPEN_CHUNKS
-                return 2
+                return LOUD_CHUNKS
             }
             return 0
         }
@@ -664,13 +718,16 @@ internal class BargeInGate {
     fun reset() {
         floor = 0f
         chunks = 0
+        echoChunks = 0
         loud = 0
         open = 0
     }
 
     private companion object {
         const val LEARN_CHUNKS = 3
-        const val LOUD_CHUNKS = 2
+        /** How long the answer's start sets the echo before anything may open the gate (chunks of 100 ms). */
+        const val SETTLE_CHUNKS = 8
+        const val LOUD_CHUNKS = 3
         const val OPEN_CHUNKS = 15
         const val MIN_RMS = 0.03f
         const val ABOVE_ECHO = 2.5f
