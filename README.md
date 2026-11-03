@@ -35,13 +35,13 @@ Dashwheel is free, with no ads. If it makes your drives nicer, a coffee on Ko-fi
 - **Live car data**: ELM327 Bluetooth OBD, the head unit's own car data (doors, fuel, tyres, reversing), and a USB TPMS receiver of your own
 - **AI mechanic** (free Google Gemini key): fault codes explained and spoken, a sensor watch that speaks up when the car drifts from its usual before a fault code shows, start-up briefing, car care and servicing reminders
 - **Navigation**: free built-in 3D map with turn-by-turn guidance, or Google Maps / Waze next turn on any tile
-- **Phone link** (Dashwheel Companion app): notifications, messages, calls, typing and a touchpad that turns the phone into the car screen's mouse, where's my car, drive log, a warning-light photo explained by the AI, and a Rescue card for a car screen you're locked out of
+- **Phone link** (Dashwheel Companion app, over the phone's hotspot or Bluetooth): notifications, messages, calls with Dashwheel's own phone screen (the unit's phonebook, recent calls, a keypad), typing and a touchpad that turns the phone into the car screen's mouse, where's my car, drive log, a warning-light photo explained by the AI, and a Rescue card for a car screen you're locked out of
 - **Your own alerts and reverse view** instead of the head unit's pop-ups ([reverse view](docs/reverse-view.md))
-- **Road watch** (experimental, Dashwheel Companion): the phone in a windscreen holder watches the road with its camera; the car warns of a car ahead coming up fast, a wheel on the lane's line, following too close, and traffic moving off. Its **road recorder** (experimental too) keeps a one-minute clip around a knock, a hard brake, a warning or the hazard lights, with the time, place and the car's own speed in the picture, on the phone only
-- **Hands-free**: spoken alerts, steering-wheel buttons, volume that follows speed
+- **Road watch** (experimental, Dashwheel Companion): the phone in a windscreen holder watches the road with its camera; the car warns of a car ahead coming up fast, a wheel on the lane's line, following too close, and traffic moving off, and it reads speed-limit signs. Its **road recorder** (experimental too) keeps a one-minute clip around a knock, a hard brake, a warning or the hazard lights, with the time, place and the car's own speed in the picture, on the phone only
+- **Hands-free**: spoken alerts, steering-wheel buttons (two modes, and a focus for the second screen), a Gemini assistant you can talk over, volume that follows speed
 - **Share and automate**: share a dashboard and its look as a QR code or a short code; Tasker and similar apps can drive Dashwheel and react to the car ([automation](docs/automation.md))
 - **Second screen** (experimental): a Raspberry Pi drives a second monitor in the car
-- **12 languages**, day and night themes, updates from GitHub Releases on a stable or a beta channel
+- **12 languages**, day and night themes, updates from GitHub Releases on a stable or a beta channel, with a way back to a previous version
 - **Root is optional**: extra features appear only when the unit allows them ([what needs what](https://github.com/deviloufr-ai/Dashwheel/wiki/Root-and-PMPatch3)); without root, [Shizuku](https://shizuku.rikka.app/) brings the shell features (app windows, the car app's switches, the volume keys)
 
 ## Supported head units
@@ -53,6 +53,7 @@ Any Android 9+ head unit runs Dashwheel as a launcher. On top of that, Dashwheel
 | **QF** | Hizpo / ROCO K706 (UIS7862, UIS8581a) | Everything; the developer's own unit, daily use |
 | **FYT / SYU** | Joying, Atoto, Mekede, Junsun, Idoing, Isudar, NaviFly, Sinosmart, Winca, DUDU | Full support, waiting for testers |
 | **Microntek MTCD / MTCE, HCT MTCH** | Dasaita, Xtrons PX5 / PX6, Eonon, Pumpkin, Erisin | Full support, waiting for testers |
+| **HCN** | Junsun units with a Raise CAN box and the CarInfo app | Doors, reverse and ignition from the firmware | Basics, from a tester's unit |
 | **Topway TS**, **Reglink**, **Allwinner**, **Nowadays** | TS10 / TS18, MediaTek AC8227L / AC8257, T3 / T8, K4811 | Basics: plain Android, ignition and key broadcasts, help against the firmware's app killer |
 | Anything else | plain Android units, tablets, phones | Works as a launcher |
 
@@ -93,6 +94,7 @@ The Dashwheel Companion app is Android only, so an iPhone gets no notifications,
 
 - Something broken, or a unit that isn't listed? In the app, **Settings, General, About, Report how it works** fills in a GitHub issue with your unit's model and firmware (a QR code for your phone). Or [open an issue](https://github.com/deviloufr-ai/Dashwheel/issues/new/choose) yourself.
 - After a crash, Dashwheel offers to send the error the next time it starts, once the car is parked.
+- Questions, news and other drivers: the [Dashwheel Telegram group](https://t.me/Dashwheel).
 - If Dashwheel is useful to you, a ⭐ on this repo helps other drivers find it.
 - [Ko-fi](https://ko-fi.com/deviloufr) pays for test hardware.
 
