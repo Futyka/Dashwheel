@@ -339,6 +339,8 @@ object PhoneLink {
     fun forget(context: Context, id: String) {
         updatePhones(context) { phones -> phones.filter { it.id != id } }
         session?.takeIf { it.pairingId == id }?.close()
+        // A phone no longer paired takes its contacts with it.
+        editLists { PhoneLists() }
         refreshIdleState()
     }
 
@@ -680,9 +682,10 @@ object PhoneLink {
             if (session === link) session = null
             NotificationFeed.phoneClear()
             _call.value = null
-            // The tiles go back to this unit's own contacts and calendar.
             phoneDials = false
-            editLists { PhoneLists() }
+            // The phone's favourites and last calls stay on the tiles: the link drops and comes back
+            // now and then, and the Quick dial emptied each time (issue #118). The next link replaces them.
+            editLists { it.copy(agenda = null) }
             // An OBD link relayed by the phone ends with it; the unit's own Bluetooth takes over.
             PhoneObd.linkDown()
             _textsOn.value = false
