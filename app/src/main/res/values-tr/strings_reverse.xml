@@ -12,7 +12,10 @@
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">Geri görüş ekranının üzerinden de değiştirebilirsiniz.</string>
     <string name="reverse_radar_over">Görüntünün üzerinde radar</string>
-    <string name="reverse_radar_over_detail">Park sensörü yayları, bir sensör bir şey gördüğü sürece görüntünün altında yarı saydam.</string>
+    <string name="reverse_radar_over_detail">Bir sensör bir şey gördüğü sürece park sensörü yayları görüntünün üzerinde.</string>
+    <string name="reverse_radar_spot_bottom">Altta</string>
+    <string name="reverse_radar_spot_right">Sağda</string>
+    <string name="reverse_radar_spot_bottom_right">Sağ altta</string>
     <string name="reverse_stock_title">Araç uygulamasının çizgileri</string>
     <string name="reverse_stock_keep">Koru</string>
     <string name="reverse_stock_hide">Gizle</string>

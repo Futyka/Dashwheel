@@ -11,7 +11,10 @@
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">Puoi cambiarlo anche dalla schermata di retromarcia.</string>
     <string name="reverse_radar_over">Radar sull\'immagine</string>
-    <string name="reverse_radar_over_detail">Gli archi del radar di parcheggio, in trasparenza in basso nell\'immagine finché un sensore rileva qualcosa.</string>
+    <string name="reverse_radar_over_detail">Gli archi del radar di parcheggio sull\'immagine finché un sensore rileva qualcosa.</string>
+    <string name="reverse_radar_spot_bottom">In basso</string>
+    <string name="reverse_radar_spot_right">A destra</string>
+    <string name="reverse_radar_spot_bottom_right">In basso a destra</string>
     <string name="reverse_stock_title">Linee dell\'app auto</string>
     <string name="reverse_stock_keep">Tieni</string>
     <string name="reverse_stock_hide">Nascondi</string>

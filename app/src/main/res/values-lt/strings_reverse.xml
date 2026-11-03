@@ -12,7 +12,10 @@
     <string name="reverse_layout_radar">Radaras</string>
     <string name="reverse_layout_hint">Perjungti galite ir pačiame atbulinės ekrane.</string>
     <string name="reverse_radar_over">Radaras ant vaizdo</string>
-    <string name="reverse_radar_over_detail">Parkavimo radaro lankai permatomi vaizdo apačioje, kol jutiklis ką nors mato.</string>
+    <string name="reverse_radar_over_detail">Parkavimo radaro lankai ant vaizdo, kol jutiklis ką nors mato.</string>
+    <string name="reverse_radar_spot_bottom">Apačioje</string>
+    <string name="reverse_radar_spot_right">Dešinėje</string>
+    <string name="reverse_radar_spot_bottom_right">Apačioje dešinėje</string>
     <string name="reverse_stock_title">Automobilio programos linijos</string>
     <string name="reverse_stock_keep">Palikti</string>
     <string name="reverse_stock_hide">Slėpti</string>

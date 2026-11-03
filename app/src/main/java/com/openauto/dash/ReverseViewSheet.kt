@@ -13,6 +13,9 @@ import androidx.compose.material.icons.filled.LayersClear
 import androidx.compose.material.icons.filled.Sensors
 import androidx.compose.material.icons.filled.Terrain
 import androidx.compose.material.icons.filled.Videocam
+import androidx.compose.material.icons.filled.VerticalAlignBottom
+import androidx.compose.material.icons.filled.AlignHorizontalRight
+import androidx.compose.material.icons.filled.SouthEast
 import androidx.compose.material.icons.filled.ViewQuilt
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -141,6 +144,22 @@ internal fun ReverseViewSheet(onDismiss: () -> Unit) {
             val radarOver by ReverseView.radarOverPicture.collectAsState()
             SwitchRow(stringResource(R.string.reverse_radar_over), stringResource(R.string.reverse_radar_over_detail), checked = radarOver) {
                 ReverseView.setRadarOverPicture(context, it)
+            }
+            if (radarOver) {
+                val spot by ReverseView.radarSpot.collectAsState()
+                SegmentedSwitch(
+                    options = RadarSpot.entries,
+                    chosen = spot,
+                    icon = {
+                        when (it) {
+                            RadarSpot.BOTTOM -> Icons.Filled.VerticalAlignBottom
+                            RadarSpot.RIGHT -> Icons.Filled.AlignHorizontalRight
+                            RadarSpot.BOTTOM_RIGHT -> Icons.Filled.SouthEast
+                        }
+                    },
+                    title = { stringResource(it.titleRes) },
+                    onChoose = { ReverseView.setRadarSpot(context, it) }
+                )
             }
         }
 

@@ -128,6 +128,13 @@ internal enum class ReverseRadarLook(val titleRes: Int, val hintRes: Int) {
     ALERT(R.string.reverse_radar_alert, R.string.reverse_radar_alert_hint)
 }
 
+/** Where the radar sits over the camera picture (#125): a strip along the bottom, or a box on the right. */
+internal enum class RadarSpot(val titleRes: Int) {
+    BOTTOM(R.string.reverse_radar_spot_bottom),
+    RIGHT(R.string.reverse_radar_spot_right),
+    BOTTOM_RIGHT(R.string.reverse_radar_spot_bottom_right)
+}
+
 /**
  * Where the guide lines sit on the camera picture, set on the reverse screen
  * itself: [shift] moves them sideways (a share of the screen width), [bumper]
@@ -212,6 +219,9 @@ internal object ReverseView {
     private val _radarOverPicture = MutableStateFlow(false)
     /** The "Camera" layout with the radar see-through over the picture, while a sensor sees something (#125). */
     val radarOverPicture: StateFlow<Boolean> = _radarOverPicture.asStateFlow()
+
+    private val _radarSpot = MutableStateFlow(RadarSpot.BOTTOM)
+    val radarSpot: StateFlow<RadarSpot> = _radarSpot.asStateFlow()
 
     private val _tailgate = MutableStateFlow(DEFAULT_TAILGATE_M)
     /** Room the tailgate needs behind the bumper to open, in metres; 0 hides its line. */
@@ -304,6 +314,7 @@ internal object ReverseView {
         _tailgate.value = p.getFloat("tailgate", DEFAULT_TAILGATE_M)
         _radarLook.value = ReverseRadarLook.entries.firstOrNull { it.name == p.getString("radar_look", null) } ?: ReverseRadarLook.GROUND
         _radarOverPicture.value = p.getBoolean("radar_over_picture", false)
+        _radarSpot.value = RadarSpot.entries.firstOrNull { it.name == p.getString("radar_spot", null) } ?: RadarSpot.BOTTOM
         _secondScreen.value = when (val saved = p.getString("second_screen", null)) {
             null -> ReverseLayout.BOTH
             SECOND_SCREEN_OFF -> null
@@ -360,6 +371,11 @@ internal object ReverseView {
     fun setSecondScreen(context: Context, shown: ReverseLayout?) {
         _secondScreen.value = shown
         prefs(context).edit().putString("second_screen", shown?.name ?: SECOND_SCREEN_OFF).apply()
+    }
+
+    fun setRadarSpot(context: Context, spot: RadarSpot) {
+        _radarSpot.value = spot
+        prefs(context).edit().putString("radar_spot", spot.name).apply()
     }
 
     fun setRadarOverPicture(context: Context, over: Boolean) {
@@ -1055,8 +1071,16 @@ private fun FullScreen(
             }
             val radarOver by ReverseView.radarOverPicture.collectAsState()
             if (layout == ReverseLayout.CAMERA && radarOver && pictureUp && !adjusting && radar?.closest != null) {
-                // The parking radar's arcs see-through over the near end of the picture, only while a sensor sees something (#125).
-                RadarFromAbove(radar, Modifier.align(Alignment.BottomCenter).fillMaxWidth().fillMaxHeight(1f / 3).alpha(0.6f))
+                // The parking radar's arcs over the picture, only while a sensor sees something (#125), where the driver put them.
+                // Boxed on the right with a dark backing; see-through alone at 0.6 they were lost on a bright picture.
+                val spot by ReverseView.radarSpot.collectAsState()
+                val box = when (spot) {
+                    RadarSpot.BOTTOM -> Modifier.align(Alignment.BottomCenter).fillMaxWidth().fillMaxHeight(1f / 3)
+                    RadarSpot.RIGHT -> Modifier.align(Alignment.CenterEnd).padding(16.dp).fillMaxWidth(0.26f).fillMaxHeight(0.62f)
+                    RadarSpot.BOTTOM_RIGHT -> Modifier.align(Alignment.BottomEnd).padding(16.dp).fillMaxWidth(0.26f).fillMaxHeight(0.45f)
+                }
+                val backed = if (spot == RadarSpot.BOTTOM) box else box.clip(DashShape.Large).background(Color.Black.copy(alpha = 0.45f)).padding(8.dp)
+                RadarFromAbove(radar, backed.alpha(0.9f))
             }
         }
         // Everything along the top, over the far end of the picture: the bottom, right behind the bumper, stays clear.

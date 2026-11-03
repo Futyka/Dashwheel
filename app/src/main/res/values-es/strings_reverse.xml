@@ -11,7 +11,10 @@
     <string name="reverse_layout_radar">Radar</string>
     <string name="reverse_layout_hint">También puedes cambiarlo en la pantalla de marcha atrás.</string>
     <string name="reverse_radar_over">Radar sobre la imagen</string>
-    <string name="reverse_radar_over_detail">Los arcos del radar de aparcamiento, translúcidos en la parte baja de la imagen mientras un sensor detecta algo.</string>
+    <string name="reverse_radar_over_detail">Los arcos del radar de aparcamiento sobre la imagen mientras un sensor detecta algo.</string>
+    <string name="reverse_radar_spot_bottom">Abajo</string>
+    <string name="reverse_radar_spot_right">Derecha</string>
+    <string name="reverse_radar_spot_bottom_right">Abajo a la derecha</string>
     <string name="reverse_stock_title">Líneas de la app del coche</string>
     <string name="reverse_stock_keep">Mantener</string>
     <string name="reverse_stock_hide">Ocultar</string>
