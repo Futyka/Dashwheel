@@ -509,7 +509,7 @@ object DashboardStore {
      * accepting every older version, so a downgrade-then-upgrade never wipes
      * a layout.
      *
-     *  1: `{"v":1,"pages":[[tile...], ...]}`. Before v1 the value was the bare
+     *  1: `{"schema":1,"pages":[[tile...], ...]}`. Before v1 the value was the bare
      *     pages array, which is still accepted. A built-in tile may carry an
      *     optional `"d"` (its WidgetDesign name); absent means the standard
      *     design, so older builds simply ignore it.
