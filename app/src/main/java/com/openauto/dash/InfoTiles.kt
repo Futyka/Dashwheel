@@ -769,11 +769,17 @@ internal fun quickDialColumns(widthDp: Float, favourites: Int): Int =
  * without a phone. Never a real call during the demo: its contacts are made up.
  */
 internal fun dialNumber(context: Context, number: String) {
-    if (!DemoMode.isOn && PhoneLink.dial(number)) return
-    // The unit's own Bluetooth, where its firmware takes a number to call (FYT).
-    if (!DemoMode.isOn && UnitPhone.dial(number)) return
-    // A unit with no dialer (its phone is a car app of its own) at least opens that app.
-    if (!context.launchSafely(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null)))) UnitPhoneApp.open(context)
+    val way = when {
+        !DemoMode.isOn && PhoneLink.dial(number) -> "the linked phone"
+        // The unit's own Bluetooth, where its firmware takes a number to call (FYT).
+        !DemoMode.isOn && UnitPhone.dial(number) -> "the unit's Bluetooth"
+        context.launchSafely(Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", number, null))) -> "the unit's dialer"
+        // A unit with no dialer (its phone is a car app of its own) at least opens that app.
+        UnitPhoneApp.open(context) -> "the unit's phone app, no number"
+        else -> "nothing: no phone link, no dialer, no phone app"
+    }
+    // Which way a call went is what a tester's log needs when nothing rings (issue #118).
+    DebugLog.note(context, "Call: through $way")
 }
 
 /**

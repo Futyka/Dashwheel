@@ -164,7 +164,9 @@ internal fun PhoneDialog(onDismiss: () -> Unit) {
     var tab by remember { mutableStateOf(PhoneTab.CONTACTS) }
     val pending = rememberPendingAction()
     val unitApp = remember { UnitPhoneApp.exists(context) }
-    fun call(name: String, number: String) = pending.arm(context.getString(R.string.phone_calling, name)) { dialNumber(context, number) }
+    // The screen steps aside as the call goes: the call card, or the unit's phone app it opens, would be under it (issue #118).
+    fun dial(number: String) { onDismiss(); dialNumber(context, number) }
+    fun call(name: String, number: String) = pending.arm(context.getString(R.string.phone_calling, name)) { dial(number) }
 
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false, decorFitsSystemWindows = false)) {
         Surface(
@@ -210,7 +212,7 @@ internal fun PhoneDialog(onDismiss: () -> Unit) {
                         when (tab) {
                             PhoneTab.CONTACTS -> ContactsPane(::call)
                             PhoneTab.RECENTS -> RecentsPane(::call)
-                            PhoneTab.KEYPAD -> KeypadPane { number -> dialNumber(context, number) }
+                            PhoneTab.KEYPAD -> KeypadPane(::dial)
                         }
                     }
                 }
