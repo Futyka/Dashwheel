@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import com.openauto.dash.Cap
 import com.openauto.dash.UnitPlatform
+import com.openauto.dash.UnitSignals
 import com.openauto.dash.VehicleBusSource
 import com.openauto.dash.unitBusVolts
 import com.openauto.dash.vehicle.K
@@ -26,9 +27,9 @@ import kotlinx.coroutines.launch
 
 /**
  * The NWD firmware's car data, as the open K4811 launcher reads it ([NwdProtocol]; unconfirmed on a unit): the
- * battery voltage asked for every 10 s and answered by broadcast, the headlights from the MCU's input bits in
- * Settings.System, read once a second and put each time (the bus takes an unchanged value for no change). A unit
- * that answers neither stays a silent source.
+ * battery voltage asked for every 10 s and answered by broadcast, and from Settings.System read once a second and
+ * put each time (the bus takes an unchanged value for no change): the headlights from the MCU's input bits, and the
+ * outside temperature the CAN app stores as its status-bar text. A unit that answers none stays a silent source.
  */
 internal object NwdBus : VehicleBusSource {
     private const val TAG = "NwdBus"
@@ -49,6 +50,7 @@ internal object NwdBus : VehicleBusSource {
         _listening.value = true
         job = scope.launch {
             var seenLights = false
+            var seenTemp = false
             var tick = 0L
             while (isActive) {
                 if (tick++ % (NwdProtocol.QUERY_PERIOD_MS / POLL_MS) == 0L) {
@@ -63,6 +65,17 @@ internal object NwdBus : VehicleBusSource {
                         UnitPlatform.markUsed(Cap.HEADLIGHTS)
                     }
                     publisher.put(K.HEADLIGHTS, NwdProtocol.headlightsOn(inputs))
+                }
+                val tempText = runCatching { Settings.System.getString(app.contentResolver, NwdProtocol.SETTING_OUT_TEMP) }.getOrNull()
+                val tempC = UnitSignals.parseOutsideTemp(tempText)
+                if (tempC != null) {
+                    if (!seenTemp) {
+                        seenTemp = true
+                        Log.i(TAG, "the CAN app's outside temperature is in Settings.System: $tempText")
+                        UnitPlatform.markUsed(Cap.VEHICLE_BUS)
+                        UnitPlatform.markUsed(Cap.OUTSIDE_TEMP)
+                    }
+                    publisher.put(K.OUTSIDE_TEMP, tempC)
                 }
                 delay(POLL_MS)
             }

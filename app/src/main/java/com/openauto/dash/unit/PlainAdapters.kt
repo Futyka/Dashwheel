@@ -72,7 +72,7 @@ internal object PlainAdapters {
             )
             UnitFamily.NWD -> GenericAdapter(
                 family, emulator, AccBroadcastIgnition, KeyBroadcastSource, launcher = NwdLauncher,
-                bus = NwdBus, busCaps = setOf(Cap.VOLTS, Cap.HEADLIGHTS),
+                bus = NwdBus, busCaps = setOf(Cap.VOLTS, Cap.HEADLIGHTS, Cap.OUTSIDE_TEMP),
                 // The MCU's input bits (headlights) and the CAN SDK's own table (CanSettingTableKey) live in Settings.System.
                 catalogue = plainCatalogue.copy(broadcasts = plainCatalogue.broadcasts + NwdProtocol.BROADCASTS, propPrefixes = setOf("persist.nwd.", "ro.nwd."), settingsSystem = true)
             )
