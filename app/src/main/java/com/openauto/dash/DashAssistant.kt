@@ -67,8 +67,12 @@ internal object DashAssistant {
     private const val OUT_RATE = 24_000
     /** The microphone goes up in pieces of this long. */
     private const val CHUNK_MS = 100
-    /** After Gemini's last word, the car's echo dies down before the microphone is sent again. */
-    private const val ECHO_TAIL_MS = 400L
+    /**
+     * After Gemini's last word, the car's echo dies down before the microphone is sent
+     * again. The last word is queued 200 ms before the unit plays it (K706), and its echo
+     * rings after that.
+     */
+    private const val ECHO_TAIL_MS = 600L
     private const val GUIDANCE_CHECK_MS = 250L
     private const val SETUP_WAIT_MS = 10_000L
     /** Pause in the driver's voice that ends their turn, for Gemini and on the alert. */
@@ -335,6 +339,7 @@ internal object DashAssistant {
             val previous = ByteArray(bytes)
             var previousSize = 0
             val gate = BargeInGate()
+            val gain = MicGain()
             var voiceAt = 0L
             // This coroutine's own job: the object's scope is never cancelled, so
             // the loop would have read and sent on after converse() cancelled it.
@@ -356,7 +361,9 @@ internal object DashAssistant {
                     gate.reset()
                     continue
                 }
+                // The gate hears the microphone as it is; Gemini and the alert get it brought up.
                 val loudness = rms(buffer, n)
+                gain.apply(buffer, n, learn = !speaking)
                 if (speaking) {
                     val going = gate.hear(loudness)
                     // The chunk before holds the first syllable of what the gate just let through.
@@ -368,8 +375,9 @@ internal object DashAssistant {
                 }
                 gate.reset()
                 if (_phase.value == Phase.SPEAKING) _phase.value = Phase.LISTENING
-                _level.value = loudness
-                if (loudness >= VOICE_RMS) {
+                val broughtUp = rms(buffer, n)
+                _level.value = broughtUp
+                if (broughtUp >= VOICE_RMS) {
                     voiceAt = now
                     if (_phase.value == Phase.THINKING) _phase.value = Phase.LISTENING
                 } else if (heard && _phase.value == Phase.LISTENING && now - voiceAt >= SILENCE_MS) {
@@ -556,7 +564,10 @@ internal class BargeInGate {
             open--
             return 1
         }
-        if (chunks >= LEARN_CHUNKS && rms > maxOf(MIN_RMS, floor * ABOVE_ECHO)) {
+        // The echo is the loudest chunk heard so far. An answer reaches the microphone
+        // a few chunks after it is queued, so what is learnt before the echo has really
+        // arrived is the quiet cabin, and the answer's own first word must not open the gate.
+        if (chunks >= LEARN_CHUNKS && floor >= ECHO_HEARD && rms > maxOf(MIN_RMS, floor * ABOVE_ECHO)) {
             if (++loud >= LOUD_CHUNKS) {
                 loud = 0
                 open = OPEN_CHUNKS
@@ -565,7 +576,7 @@ internal class BargeInGate {
             return 0
         }
         loud = 0
-        floor = if (chunks == 0) rms else floor + (rms - floor) * FLOOR_FOLLOW
+        floor = maxOf(floor, rms)
         chunks++
         return 0
     }
@@ -584,7 +595,50 @@ internal class BargeInGate {
         const val OPEN_CHUNKS = 15
         const val MIN_RMS = 0.03f
         const val ABOVE_ECHO = 2.5f
-        const val FLOOR_FOLLOW = 0.2f
+        /** Quieter than this, the echo has not arrived yet (or the speakers are off). */
+        const val ECHO_HEARD = 0.01f
+    }
+}
+
+/**
+ * Brings the driver's voice up before it goes to Gemini. A head unit's built-in
+ * microphone hears the driver far under full scale (on the K706 speech peaks at
+ * 1/30 of it, which Gemini's speech detection does not take for a voice). The gain
+ * follows the loudest recent chunk, so a quiet cabin gets the most and a loud voice
+ * is not clipped, and it is learnt only while Gemini is quiet, so its echo (louder
+ * than the driver on such a unit) does not set it.
+ */
+internal class MicGain {
+    private var envelope = 0f
+    var gain = 1f
+        private set
+
+    /** Scales the 16-bit little-endian [pcm] in place; with [learn] false the last gain is kept. */
+    fun apply(pcm: ByteArray, size: Int, learn: Boolean) {
+        val samples = size / 2
+        if (learn) {
+            var peak = 0
+            for (i in 0 until samples) peak = maxOf(peak, kotlin.math.abs(sample(pcm, i)))
+            envelope = maxOf(peak / 32768f, envelope * RELEASE)
+            gain = (TARGET / maxOf(envelope, 1f / 32768f)).coerceIn(1f, MAX_GAIN)
+        }
+        if (gain == 1f) return
+        for (i in 0 until samples) {
+            val v = (sample(pcm, i) * gain).toInt().coerceIn(-32768, 32767)
+            pcm[i * 2] = v.toByte()
+            pcm[i * 2 + 1] = (v shr 8).toByte()
+        }
+    }
+
+    private fun sample(pcm: ByteArray, i: Int): Int =
+        ((pcm[i * 2].toInt() and 0xFF) or (pcm[i * 2 + 1].toInt() shl 8)).toShort().toInt()
+
+    private companion object {
+        /** Where the loudest chunk is brought to, of full scale. */
+        const val TARGET = 0.5f
+        const val MAX_GAIN = 32f
+        /** How much of the envelope is left after each 100 ms chunk: a voice that stopped gives way over seconds. */
+        const val RELEASE = 0.97f
     }
 }
 
