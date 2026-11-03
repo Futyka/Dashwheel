@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Plytelė</string>
+    <string name="frame_tab_layer">Sluoksnis</string>
+    <string name="frame_overlap">Virš kitų plytelių</string>
+    <string name="frame_overlap_on">Piešiama virš tinklelio plytelių. Tempkite ją kur norite, net ant kitos plytelės.</string>
+    <string name="frame_overlap_off">Tinklelyje su kitomis, niekada ant kitos plytelės.</string>
+    <string name="frame_to_front">Į priekį</string>
+    <string name="frame_to_back">Į galą</string>
+    <string name="frame_opacity">Nepermatomumas</string>
+    <string name="frame_fainter">Permatomesnė</string>
+    <string name="frame_more_solid">Sodresnė</string>
+    <string name="frame_border">Rėmelis</string>
+    <string name="frame_border_off">Nėra</string>
+    <string name="frame_thinner">Plonesnis</string>
+    <string name="frame_thicker">Storesnis</string>
+    <string name="frame_colour">Rėmelio spalva</string>
+    <string name="frame_colour_accent">Akcentas</string>
+    <string name="frame_colour_text">Tekstas</string>
+    <string name="frame_colour_white">Balta</string>
+    <string name="frame_colour_black">Juoda</string>
+    <string name="frame_colour_red">Raudona</string>
+    <string name="frame_colour_yellow">Geltona</string>
+    <string name="frame_colour_green">Žalia</string>
+    <string name="frame_colour_blue">Mėlyna</string>
+    <string name="frame_place">Perkelti po vieną langelį</string>
+    <string name="frame_up">Aukštyn</string>
+    <string name="frame_down">Žemyn</string>
+    <string name="frame_left">Kairėn</string>
+    <string name="frame_right">Dešinėn</string>
+    <string name="frame_size">Dydis langeliais</string>
+    <string name="frame_width">Plotis</string>
+    <string name="frame_height">Aukštis</string>
+    <string name="frame_narrower">Siauresnė</string>
+    <string name="frame_wider">Platesnė</string>
+    <string name="frame_shorter">Žemesnė</string>
+    <string name="frame_taller">Aukštesnė</string>
+</resources>

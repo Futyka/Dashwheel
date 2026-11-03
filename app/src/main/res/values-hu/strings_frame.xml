@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Csempe</string>
+    <string name="frame_tab_layer">Réteg</string>
+    <string name="frame_overlap">A többi csempe fölött</string>
+    <string name="frame_overlap_on">A rács csempéi fölé rajzolva. Húzza bárhová, akár egy másik csempére is.</string>
+    <string name="frame_overlap_off">A rácsban a többivel, soha nem egy másik csempén.</string>
+    <string name="frame_to_front">Előre</string>
+    <string name="frame_to_back">Hátra</string>
+    <string name="frame_opacity">Átlátszatlanság</string>
+    <string name="frame_fainter">Átlátszóbb</string>
+    <string name="frame_more_solid">Tömörebb</string>
+    <string name="frame_border">Keret</string>
+    <string name="frame_border_off">Nincs</string>
+    <string name="frame_thinner">Vékonyabb</string>
+    <string name="frame_thicker">Vastagabb</string>
+    <string name="frame_colour">Keret színe</string>
+    <string name="frame_colour_accent">Kiemelés</string>
+    <string name="frame_colour_text">Szöveg</string>
+    <string name="frame_colour_white">Fehér</string>
+    <string name="frame_colour_black">Fekete</string>
+    <string name="frame_colour_red">Piros</string>
+    <string name="frame_colour_yellow">Sárga</string>
+    <string name="frame_colour_green">Zöld</string>
+    <string name="frame_colour_blue">Kék</string>
+    <string name="frame_place">Mozgatás egy cellával</string>
+    <string name="frame_up">Fel</string>
+    <string name="frame_down">Le</string>
+    <string name="frame_left">Balra</string>
+    <string name="frame_right">Jobbra</string>
+    <string name="frame_size">Méret cellákban</string>
+    <string name="frame_width">Szélesség</string>
+    <string name="frame_height">Magasság</string>
+    <string name="frame_narrower">Keskenyebb</string>
+    <string name="frame_wider">Szélesebb</string>
+    <string name="frame_shorter">Alacsonyabb</string>
+    <string name="frame_taller">Magasabb</string>
+</resources>

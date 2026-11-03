@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Riquadro</string>
+    <string name="frame_tab_layer">Livello</string>
+    <string name="frame_overlap">Sopra gli altri riquadri</string>
+    <string name="frame_overlap_on">Disegnato sopra i riquadri della griglia. Trascinalo dove vuoi, anche su un altro riquadro.</string>
+    <string name="frame_overlap_off">Nella griglia con gli altri, mai su un altro riquadro.</string>
+    <string name="frame_to_front">In primo piano</string>
+    <string name="frame_to_back">In fondo</string>
+    <string name="frame_opacity">Opacità</string>
+    <string name="frame_fainter">Più trasparente</string>
+    <string name="frame_more_solid">Più opaco</string>
+    <string name="frame_border">Bordo</string>
+    <string name="frame_border_off">Nessuno</string>
+    <string name="frame_thinner">Più fino</string>
+    <string name="frame_thicker">Più spesso</string>
+    <string name="frame_colour">Colore del bordo</string>
+    <string name="frame_colour_accent">Accento</string>
+    <string name="frame_colour_text">Testo</string>
+    <string name="frame_colour_white">Bianco</string>
+    <string name="frame_colour_black">Nero</string>
+    <string name="frame_colour_red">Rosso</string>
+    <string name="frame_colour_yellow">Giallo</string>
+    <string name="frame_colour_green">Verde</string>
+    <string name="frame_colour_blue">Blu</string>
+    <string name="frame_place">Sposta di una cella alla volta</string>
+    <string name="frame_up">Su</string>
+    <string name="frame_down">Giù</string>
+    <string name="frame_left">Sinistra</string>
+    <string name="frame_right">Destra</string>
+    <string name="frame_size">Dimensione in celle</string>
+    <string name="frame_width">Larghezza</string>
+    <string name="frame_height">Altezza</string>
+    <string name="frame_narrower">Più stretto</string>
+    <string name="frame_wider">Più largo</string>
+    <string name="frame_shorter">Più basso</string>
+    <string name="frame_taller">Più alto</string>
+</resources>

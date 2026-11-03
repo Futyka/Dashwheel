@@ -56,6 +56,7 @@
     <string name="dash_notice_no_space">Šiame skydelyje nėra vietos šiai plytelei. Pašalinkite, sumažinkite ar naudokite kitą skydelį.</string>
     <string name="dash_notice_no_room_to_move">Nėra vietos kitoms plytelėms patraukti. Pirmiausia atlaisvinkite vietos.</string>
     <string name="dash_notice_resize_overlap">Toks dydis užeina ant kitos plytelės. Atlaisvinkite vietos prieš keisdami dydį.</string>
+    <string name="dash_notice_no_grid_spot">Tinklelyje nėra laisvos vietos šiai plytelei. Atlaisvinkite vietos arba palikite ją virš kitų.</string>
     <string name="dash_full_title">Šis skydelis pilnas</string>
     <string name="dash_full_body">Pašalinkite plytelę arba sumažinkite vieną, kad pridėtumėte kitą.</string>
 

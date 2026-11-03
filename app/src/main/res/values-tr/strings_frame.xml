@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Kutucuk</string>
+    <string name="frame_tab_layer">Katman</string>
+    <string name="frame_overlap">Diğer kutucukların üstünde</string>
+    <string name="frame_overlap_on">Izgaradaki kutucukların üstüne çizilir. İstediğiniz yere, başka bir kutucuğun üstüne bile sürükleyin.</string>
+    <string name="frame_overlap_off">Izgarada diğerleriyle birlikte, asla başka bir kutucuğun üstünde değil.</string>
+    <string name="frame_to_front">En öne</string>
+    <string name="frame_to_back">En arkaya</string>
+    <string name="frame_opacity">Opaklık</string>
+    <string name="frame_fainter">Daha saydam</string>
+    <string name="frame_more_solid">Daha dolgun</string>
+    <string name="frame_border">Kenarlık</string>
+    <string name="frame_border_off">Kapalı</string>
+    <string name="frame_thinner">Daha ince</string>
+    <string name="frame_thicker">Daha kalın</string>
+    <string name="frame_colour">Kenarlık rengi</string>
+    <string name="frame_colour_accent">Vurgu</string>
+    <string name="frame_colour_text">Metin</string>
+    <string name="frame_colour_white">Beyaz</string>
+    <string name="frame_colour_black">Siyah</string>
+    <string name="frame_colour_red">Kırmızı</string>
+    <string name="frame_colour_yellow">Sarı</string>
+    <string name="frame_colour_green">Yeşil</string>
+    <string name="frame_colour_blue">Mavi</string>
+    <string name="frame_place">Birer hücre taşı</string>
+    <string name="frame_up">Yukarı</string>
+    <string name="frame_down">Aşağı</string>
+    <string name="frame_left">Sola</string>
+    <string name="frame_right">Sağa</string>
+    <string name="frame_size">Hücre olarak boyut</string>
+    <string name="frame_width">Genişlik</string>
+    <string name="frame_height">Yükseklik</string>
+    <string name="frame_narrower">Daha dar</string>
+    <string name="frame_wider">Daha geniş</string>
+    <string name="frame_shorter">Daha alçak</string>
+    <string name="frame_taller">Daha yüksek</string>
+</resources>

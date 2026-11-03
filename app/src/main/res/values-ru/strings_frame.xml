@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Плитка</string>
+    <string name="frame_tab_layer">Слой</string>
+    <string name="frame_overlap">Поверх других плиток</string>
+    <string name="frame_overlap_on">Рисуется над плитками сетки. Перетащите её куда угодно, даже на другую плитку.</string>
+    <string name="frame_overlap_off">В сетке с остальными, никогда поверх другой плитки.</string>
+    <string name="frame_to_front">На передний план</string>
+    <string name="frame_to_back">На задний план</string>
+    <string name="frame_opacity">Непрозрачность</string>
+    <string name="frame_fainter">Прозрачнее</string>
+    <string name="frame_more_solid">Плотнее</string>
+    <string name="frame_border">Рамка</string>
+    <string name="frame_border_off">Нет</string>
+    <string name="frame_thinner">Тоньше</string>
+    <string name="frame_thicker">Толще</string>
+    <string name="frame_colour">Цвет рамки</string>
+    <string name="frame_colour_accent">Акцент</string>
+    <string name="frame_colour_text">Текст</string>
+    <string name="frame_colour_white">Белый</string>
+    <string name="frame_colour_black">Чёрный</string>
+    <string name="frame_colour_red">Красный</string>
+    <string name="frame_colour_yellow">Жёлтый</string>
+    <string name="frame_colour_green">Зелёный</string>
+    <string name="frame_colour_blue">Синий</string>
+    <string name="frame_place">Сдвинуть на одну ячейку</string>
+    <string name="frame_up">Вверх</string>
+    <string name="frame_down">Вниз</string>
+    <string name="frame_left">Влево</string>
+    <string name="frame_right">Вправо</string>
+    <string name="frame_size">Размер в ячейках</string>
+    <string name="frame_width">Ширина</string>
+    <string name="frame_height">Высота</string>
+    <string name="frame_narrower">Уже</string>
+    <string name="frame_wider">Шире</string>
+    <string name="frame_shorter">Ниже</string>
+    <string name="frame_taller">Выше</string>
+</resources>

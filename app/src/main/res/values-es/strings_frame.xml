@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Tarjeta</string>
+    <string name="frame_tab_layer">Capa</string>
+    <string name="frame_overlap">Sobre otras tarjetas</string>
+    <string name="frame_overlap_on">Dibujada encima de las tarjetas de la cuadrícula. Arrástrala a cualquier sitio, incluso sobre otra tarjeta.</string>
+    <string name="frame_overlap_off">En la cuadrícula con las demás, nunca sobre otra tarjeta.</string>
+    <string name="frame_to_front">Al frente</string>
+    <string name="frame_to_back">Al fondo</string>
+    <string name="frame_opacity">Opacidad</string>
+    <string name="frame_fainter">Más transparente</string>
+    <string name="frame_more_solid">Más opaca</string>
+    <string name="frame_border">Borde</string>
+    <string name="frame_border_off">Sin borde</string>
+    <string name="frame_thinner">Más fino</string>
+    <string name="frame_thicker">Más grueso</string>
+    <string name="frame_colour">Color del borde</string>
+    <string name="frame_colour_accent">Acento</string>
+    <string name="frame_colour_text">Texto</string>
+    <string name="frame_colour_white">Blanco</string>
+    <string name="frame_colour_black">Negro</string>
+    <string name="frame_colour_red">Rojo</string>
+    <string name="frame_colour_yellow">Amarillo</string>
+    <string name="frame_colour_green">Verde</string>
+    <string name="frame_colour_blue">Azul</string>
+    <string name="frame_place">Mover una celda a la vez</string>
+    <string name="frame_up">Arriba</string>
+    <string name="frame_down">Abajo</string>
+    <string name="frame_left">Izquierda</string>
+    <string name="frame_right">Derecha</string>
+    <string name="frame_size">Tamaño en celdas</string>
+    <string name="frame_width">Ancho</string>
+    <string name="frame_height">Alto</string>
+    <string name="frame_narrower">Más estrecha</string>
+    <string name="frame_wider">Más ancha</string>
+    <string name="frame_shorter">Más baja</string>
+    <string name="frame_taller">Más alta</string>
+</resources>

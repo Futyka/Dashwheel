@@ -56,6 +56,7 @@
     <string name="dash_notice_no_space">Bu gösterge panelinde o kutucuk için yer yok. Kaldırın, boyutlandırın ya da başka bir gösterge paneli kullanın.</string>
     <string name="dash_notice_no_room_to_move">Diğer kutucukları kenara çekecek yer yok. Önce biraz yer açın.</string>
     <string name="dash_notice_resize_overlap">Bu boyut başka bir kutucukla çakışıyor. Boyutlandırmadan önce yer açın.</string>
+    <string name="dash_notice_no_grid_spot">Izgarada bu kutucuk için boş yer yok. Yer açın ya da diğerlerinin üstünde bırakın.</string>
     <string name="dash_full_title">Bu gösterge paneli dolu</string>
     <string name="dash_full_body">Başka bir tane eklemek için bir kutucuğu kaldırın veya küçültün.</string>
 

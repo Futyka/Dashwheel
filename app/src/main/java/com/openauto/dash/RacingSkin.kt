@@ -1169,7 +1169,7 @@ private fun BarObd(state: ObdConnectionState, onConnect: () -> Unit) {
 // ---------------------------------------------------------------- shared tile bits
 
 /** Every tile: its own layer (the background redraws under it each step) and room for the neon halos. */
-private val TileFrame = Modifier.fillMaxSize().graphicsLayer().padding(6.dp)
+private val RacingTileFrame = Modifier.fillMaxSize().graphicsLayer().padding(6.dp)
 
 /** A moving time as a stage clock: "24:13", or "1:05:12" past the hour. */
 private fun stageTime(ms: Long): String {
@@ -1190,7 +1190,7 @@ private fun arrivalOf(nav: NavState): String? = nav.etaParts.firstOrNull { CLOCK
  */
 @Composable
 private fun HudMessage(title: String, hint: String?, rim: Color, editing: Boolean, onTap: (() -> Unit)?) {
-    HudPanel(TileFrame, rim, editing, onClick = onTap, clickLabel = hint, contentAlignment = Alignment.Center) {
+    HudPanel(RacingTileFrame, rim, editing, onClick = onTap, clickLabel = hint, contentAlignment = Alignment.Center) {
         val titleSp = min(maxHeight.value * 0.26f, maxWidth.value / (title.length.coerceAtLeast(4) * 0.5f)).coerceIn(15f, 48f)
         val hintSp = (titleSp * 0.45f).coerceIn(11f, 18f)
         val roomy = maxHeight >= 64.dp
@@ -2264,7 +2264,7 @@ private fun RaceClock(env: SkinTileEnv) {
     val date = remember(now, dateFmt) { dateFmt.format(now).caps() }
     val finish = stringResource(R.string.skin_racing_finish)
     HudPanel(
-        TileFrame, Magenta, env.editing,
+        RacingTileFrame, Magenta, env.editing,
         onClick = { openClockApp(context) }, clickLabel = stringResource(R.string.skin_racing_open_clock),
         contentAlignment = Alignment.Center
     ) {
@@ -2318,7 +2318,7 @@ private fun RaceWeather(env: SkinTileEnv) {
     val wind = stringResource(if (units.imperial) R.string.skin_racing_wind_mph else R.string.skin_racing_wind_kmh, units.speed(w.windKmh))
     // Either end can be missing from the forecast; rounding a NaN would throw.
     val range = if (!w.hiC.isNaN() && !w.loC.isNaN()) "${units.temp(w.loC)}° / ${units.temp(w.hiC)}°" else null
-    HudPanel(TileFrame, Cyan, env.editing, contentAlignment = Alignment.Center) {
+    HudPanel(RacingTileFrame, Cyan, env.editing, contentAlignment = Alignment.Center) {
         val wide = maxWidth > maxHeight * 1.7f
         val condSp = (min(maxWidth.value, maxHeight.value * 2f) / 16f).coerceIn(13f, 26f)
         val lineSp = (condSp * 0.75f).coerceIn(11f, 18f)
@@ -2387,7 +2387,7 @@ private fun RaceRange(item: DashboardItem, env: SkinTileEnv) {
     val range = units.distance(fuel.rangeKm).toString()
     val unit = units.distanceUnit.caps()
     val label = stringResource(R.string.skin_racing_fuel)
-    HudPanel(TileFrame, ink, env.editing) {
+    HudPanel(RacingTileFrame, ink, env.editing) {
         if (maxHeight < 76.dp) {
             val sp = (maxHeight.value * 0.36f).coerceIn(12f, 22f)
             Row(Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
