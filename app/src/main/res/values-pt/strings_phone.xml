@@ -12,6 +12,8 @@
     <string name="phone_pair_detail">Mostra o código a ler com o Dashwheel Companheiro</string>
     <string name="phone_gps">Usar o GPS do telemóvel</string>
     <string name="phone_gps_detail">Com o telemóvel ligado, o seu GPS substitui o da unidade: mais satélites, posição em segundos</string>
+    <string name="phone_unit_notifs">Notificações da unidade</string>
+    <string name="phone_unit_notifs_detail">Mostrar as notificações da própria unidade, como SMS do seu SIM, ao lado das do telemóvel</string>
     <string name="phone_gps_in_use">Em uso: %1$d satélites do telemóvel</string>
     <string name="phone_gps_waiting">Ainda sem posição do telemóvel. Na sua app companheira, permita Posição para o carro</string>
     <string name="phone_gps_refused">A unidade não o permite. Precisa de root ou do ADB da unidade</string>

@@ -13,6 +13,8 @@
     <string name="phone_pair_detail">Rodo kodą, kurį reikia nuskaityti su Dashwheel Companion</string>
     <string name="phone_gps">Naudoti telefono GPS</string>
     <string name="phone_gps_detail">Kai telefonas susietas, jo GPS pakeičia šio įrenginio GPS: daugiau palydovų, padėtis per kelias sekundes</string>
+    <string name="phone_unit_notifs">Įrenginio pranešimai</string>
+    <string name="phone_unit_notifs_detail">Rodyti paties įrenginio pranešimus, pvz., SMS į jo SIM, šalia telefono pranešimų</string>
     <string name="phone_gps_in_use">Naudojama, palydovų iš telefono: %1$d</string>
     <string name="phone_gps_waiting">Iš telefono padėties dar nėra. Jo Companion programoje leiskite automobiliui Padėtį</string>
     <string name="phone_gps_refused">Šis įrenginys to neleido. Reikia root arba įrenginio ADB</string>

@@ -13,6 +13,8 @@
     <string name="phone_pair_detail">Показывает код для сканирования в Dashwheel Companion</string>
     <string name="phone_gps">GPS телефона</string>
     <string name="phone_gps_detail">Когда телефон подключён, его GPS заменяет GPS магнитолы: больше спутников, местоположение за секунды</string>
+    <string name="phone_unit_notifs">Уведомления магнитолы</string>
+    <string name="phone_unit_notifs_detail">Показывать собственные уведомления магнитолы, например SMS на её SIM, рядом с уведомлениями телефона</string>
     <string name="phone_gps_in_use">Спутников с телефона: %1$d</string>
     <string name="phone_gps_waiting">С телефона пока нет местоположения. В приложении на телефоне разрешите передачу местоположения автомобилю</string>
     <string name="phone_gps_refused">Магнитола не разрешила это. Нужен root или ADB магнитолы</string>

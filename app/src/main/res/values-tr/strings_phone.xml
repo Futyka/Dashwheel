@@ -13,6 +13,8 @@
     <string name="phone_pair_detail">Dashwheel Companion ile taranacak kodu gösterir</string>
     <string name="phone_gps">Telefonun GPS\'ini kullan</string>
     <string name="phone_gps_detail">Telefon bağlıyken GPS\'i bu ünitenin yerine geçer: daha çok uydu, saniyeler içinde konum</string>
+    <string name="phone_unit_notifs">Ünite bildirimleri</string>
+    <string name="phone_unit_notifs_detail">Ünitenin kendi bildirimlerini, örneğin SIM kartına gelen SMS’leri, telefonunkilerin yanında göster</string>
     <string name="phone_gps_in_use">Kullanımda: telefondan %1$d uydu</string>
     <string name="phone_gps_waiting">Telefondan henüz konum gelmedi. Companion uygulamasında araç için Konum\'a izin verin</string>
     <string name="phone_gps_refused">Bu ünite buna izin vermedi. Root veya ünitenin ADB\'si gerekir</string>

@@ -12,6 +12,8 @@
     <string name="phone_pair_detail">Mostra il codice da scansionare con Dashwheel Companion</string>
     <string name="phone_gps">Usa il GPS del telefono</string>
     <string name="phone_gps_detail">Con il telefono collegato, il suo GPS sostituisce quello dell\'unità: più satelliti, posizione in pochi secondi</string>
+    <string name="phone_unit_notifs">Notifiche dell’unità</string>
+    <string name="phone_unit_notifs_detail">Mostra le notifiche dell’unità stessa, come gli SMS della sua SIM, accanto a quelle del telefono</string>
     <string name="phone_gps_in_use">In uso: %1$d satelliti dal telefono</string>
     <string name="phone_gps_waiting">Ancora nessuna posizione dal telefono. Nella sua app companion, consenti Posizione per l\'auto</string>
     <string name="phone_gps_refused">L\'unità non lo consente. Serve il root o l\'ADB dell\'unità</string>

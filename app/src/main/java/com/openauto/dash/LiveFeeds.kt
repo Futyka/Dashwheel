@@ -510,8 +510,20 @@ object NotificationFeed {
         _items.value = real
     }
 
+    // The unit's own notifications (its SIM's texts, its apps) can be left out, the phone's only then (#123).
+    private fun prefs(context: Context) = context.applicationContext.getSharedPreferences("notification_feed", Context.MODE_PRIVATE)
+
+    /** Whether this head unit's own notifications show beside the phone's. */
+    fun showsUnit(context: Context): Boolean = prefs(context).getBoolean("unit_shown", true)
+
+    fun setShowsUnit(context: Context, on: Boolean) {
+        prefs(context).edit().putBoolean("unit_shown", on).apply()
+        if (!on) edit { items -> items.filter { it.fromPhone } }
+    }
+
     fun onPosted(context: Context, sbn: StatusBarNotification) {
         if (sbn.packageName == context.packageName) return
+        if (!showsUnit(context)) return
         if (sbn.isOngoing) return
         val n = sbn.notification ?: return
         val title = n.extras.getCharSequence(android.app.Notification.EXTRA_TITLE)?.toString()?.trim().orEmpty()

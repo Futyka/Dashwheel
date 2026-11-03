@@ -324,6 +324,12 @@ internal fun PhonePane() {
             else -> stringResource(R.string.phone_gps_detail)
         }
         SettingsToggle(Icons.Filled.MyLocation, stringResource(R.string.phone_gps), gpsDetail, useGps) { PhoneGps.setEnabled(context, it) }
+        // The unit's own notifications next to the phone's, or the phone's only (#123).
+        var unitNotifs by remember { mutableStateOf(NotificationFeed.showsUnit(context)) }
+        SettingsToggle(Icons.Filled.Notifications, stringResource(R.string.phone_unit_notifs), stringResource(R.string.phone_unit_notifs_detail), unitNotifs) {
+            unitNotifs = it
+            NotificationFeed.setShowsUnit(context, it)
+        }
     }
 
     // Calls show in their own window over other apps; without that, only over the launcher.

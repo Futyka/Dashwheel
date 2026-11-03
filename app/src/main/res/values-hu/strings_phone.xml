@@ -13,6 +13,8 @@
     <string name="phone_pair_detail">Megjeleníti a Dashwheel Companionnel beolvasandó kódot</string>
     <string name="phone_gps">A telefon GPS-ének használata</string>
     <string name="phone_gps_detail">Ha a telefon csatlakozik, annak GPS-e helyettesíti az egységét: több műhold, pozíció másodpercek alatt</string>
+    <string name="phone_unit_notifs">Az egység értesítései</string>
+    <string name="phone_unit_notifs_detail">Az egység saját értesítései, például a SIM-kártyájára érkező SMS-ek, a telefonéi mellett</string>
     <string name="phone_gps_in_use">Használatban: %1$d műhold a telefonról</string>
     <string name="phone_gps_waiting">Még nincs pozíció a telefonról. A Companion alkalmazásban engedélyezze a Pozíciót az autó számára</string>
     <string name="phone_gps_refused">Az egység ezt nem engedte. Root vagy az egység ADB-je szükséges hozzá</string>
