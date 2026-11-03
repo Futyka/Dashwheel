@@ -31,9 +31,9 @@ class SpatialSkinTest {
         val nav = byKind.getValue(BuiltinKind.NAVIGATION)
         val media = byKind.getValue(BuiltinKind.MEDIA)
         val speed = byKind.getValue(BuiltinKind.SPEED_HUD)
-        assertEquals(-1, spatialTiltSide(nav.x, nav.w, 12))
-        assertEquals(1, spatialTiltSide(media.x, media.w, 12))
-        assertEquals(0, spatialTiltSide(speed.x, speed.w, 12))
+        assertEquals(-1, spatialTiltSide(nav.x, nav.w, GRID_COLS))
+        assertEquals(1, spatialTiltSide(media.x, media.w, GRID_COLS))
+        assertEquals(0, spatialTiltSide(speed.x, speed.w, GRID_COLS))
     }
 
     @Test

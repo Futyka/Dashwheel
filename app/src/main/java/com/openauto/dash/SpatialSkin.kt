@@ -142,9 +142,9 @@ internal val SpatialShapes = skinShapes(36, 32, 24)
 internal val SpatialLayout = SkinLayout(
     home = TemplatePage(listOf(BuiltinKind.NAVIGATION, BuiltinKind.MEDIA, BuiltinKind.SPEED_HUD, BuiltinKind.WEATHER)),
     wide = listOf(
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 0, w = 4, h = 5),
-        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 4, y = 0, w = 4, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 8, y = 0, w = 4, h = 5)
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 0, w = 12, h = 15),
+        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 12, y = 0, w = 12, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 24, y = 0, w = 12, h = 15)
     )
 )
 

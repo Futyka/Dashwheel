@@ -55,8 +55,8 @@ class DashTemplatesTest {
     fun everyTemplateTilesEveryPage_uprightScreen() {
         ScreenShape.vertical = true
         try {
-            assertEquals(7, GRID_COLS)
-            assertEquals(12, GRID_ROWS)
+            assertEquals(7 * GRID_SCALE, GRID_COLS)
+            assertEquals(12 * GRID_SCALE, GRID_ROWS)
             val upright = TemplateScreen.of(720f, 1120f, obdPaired = true, driverOnRight = false, mapsDocked = false, dockApps = listOf("a", "b"))
             val underDock = TemplateScreen.of(720f, 560f, obdPaired = true, driverOnRight = false, mapsDocked = true, dockApps = emptyList())
             for (template in DashTemplate.entries) for (screen in listOf(upright, underDock)) {
@@ -144,7 +144,8 @@ class DashTemplatesTest {
 
         val home = TemplatePlacer.pages(DashTemplate.ROAD_TRIP, full.copy(dockApps = apps))[DashboardStore.CENTER]
         val dock = home.filterIsInstance<DashboardItem.LaunchBar>().single()
-        assertEquals(listOf(GRID_ROWS - 1, GRID_COLS, 1), listOf(dock.y, dock.w, dock.h))
+        // One coarse row along the bottom.
+        assertEquals(listOf(GRID_ROWS - GRID_SCALE, GRID_COLS, GRID_SCALE), listOf(dock.y, dock.w, dock.h))
         assertTiled(home, full.minCols)
     }
 

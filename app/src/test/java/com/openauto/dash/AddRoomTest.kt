@@ -19,9 +19,11 @@ class AddRoomTest {
     fun aPageIsFullOnlyOnceNoCellIsLeft() {
         assertTrue(pageHasRoom(emptyList()))
         assertFalse(pageHasRoom(full))
-        // A single cell left in the corner is still room.
-        val nearly = listOf(tile(0, 0, GRID_COLS, GRID_ROWS - 1), tile(0, GRID_ROWS - 1, GRID_COLS - 1, 1))
+        // A single coarse cell left in the corner is still room; one of the finer cells alone is not.
+        val nearly = listOf(tile(0, 0, GRID_COLS, GRID_ROWS - GRID_SCALE), tile(0, GRID_ROWS - GRID_SCALE, GRID_COLS - GRID_SCALE, GRID_SCALE))
         assertTrue(pageHasRoom(nearly))
+        val sliver = listOf(tile(0, 0, GRID_COLS, GRID_ROWS - 1), tile(0, GRID_ROWS - 1, GRID_COLS - 1, 1))
+        assertFalse(pageHasRoom(sliver))
     }
 
     @Test

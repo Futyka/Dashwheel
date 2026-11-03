@@ -15,7 +15,7 @@ class BrutalSkinTest {
     @Test
     fun `the wide Home fills the whole grid`() {
         val cells = BrutalLayout.wide!!.sumOf { it.w * it.h }
-        assertEquals(12 * 7, cells)
+        assertEquals(GRID_COLS * GRID_ROWS, cells)
     }
 
     @Test

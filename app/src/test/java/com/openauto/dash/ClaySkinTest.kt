@@ -26,7 +26,7 @@ class ClaySkinTest {
 
     @Test
     fun `the wide Home fills the whole grid`() {
-        assertEquals(12 * 7, wide!!.sumOf { it.w * it.h })
+        assertEquals(GRID_COLS * GRID_ROWS, wide!!.sumOf { it.w * it.h })
     }
 
     @Test

@@ -92,11 +92,11 @@ private fun padFor(w: Dp, h: Dp): Dp = (min(w.value, h.value) * 0.07f).coerceIn(
 internal val PaperLayout = SkinLayout(
     home = TemplatePage(listOf(NAVIGATION, CLOCK, WEATHER, MEDIA, SPEED_HUD)),
     wide = listOf(
-        DashboardItem.BuiltinWidget(NAVIGATION, x = 0, y = 0, w = 6, h = 7),
-        DashboardItem.BuiltinWidget(CLOCK, x = 6, y = 0, w = 6, h = 3),
-        DashboardItem.BuiltinWidget(SPEED_HUD, x = 6, y = 3, w = 3, h = 2),
-        DashboardItem.BuiltinWidget(WEATHER, x = 9, y = 3, w = 3, h = 2),
-        DashboardItem.BuiltinWidget(MEDIA, x = 6, y = 5, w = 6, h = 2)
+        DashboardItem.BuiltinWidget(NAVIGATION, x = 0, y = 0, w = 18, h = 21),
+        DashboardItem.BuiltinWidget(CLOCK, x = 18, y = 0, w = 18, h = 9),
+        DashboardItem.BuiltinWidget(SPEED_HUD, x = 18, y = 9, w = 9, h = 6),
+        DashboardItem.BuiltinWidget(WEATHER, x = 27, y = 9, w = 9, h = 6),
+        DashboardItem.BuiltinWidget(MEDIA, x = 18, y = 15, w = 18, h = 6)
     )
 )
 

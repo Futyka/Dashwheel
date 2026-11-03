@@ -134,7 +134,8 @@ class DashboardStoreTest {
         val legacy = """[[{"t":"builtin","k":"CLOCK","gx":1,"gy":2,"gw":3,"gh":2}],[],[]]"""
         val pages = DashboardStore.parsePages(legacy)!!
         assertEquals(3, pages.size)
-        assertEquals(listOf(widget(BuiltinKind.CLOCK, 1, 2, 3, 2)), pages[0])
+        // Its cells were the coarse grid's: three of today's each way.
+        assertEquals(listOf(widget(BuiltinKind.CLOCK, 1 * GRID_SCALE, 2 * GRID_SCALE, 3 * GRID_SCALE, 2 * GRID_SCALE)), pages[0])
     }
 
     @Test
@@ -148,7 +149,7 @@ class DashboardStoreTest {
 
     @Test
     fun unknownTilesAreCarriedThroughToTheNextSave() {
-        val fromNewerBuild = """{"v":9,"pages":[[
+        val fromNewerBuild = """{"schema":9,"pages":[[
             {"t":"hologram","gx":0,"gy":0,"gw":3,"gh":2},
             {"t":"builtin","k":"WARP_DRIVE","gx":3,"gy":0,"gw":3,"gh":2},
             {"t":"app","pkg":"com.example.a","gx":6,"gy":0,"gw":2,"gh":2}
@@ -166,7 +167,7 @@ class DashboardStoreTest {
     fun droppedKindsLeaveTheLayoutInsteadOfBeingRetained() {
         // The 3D car widget was removed; a layout saved with one loses that tile
         // for good, while tiles from a newer build are still carried through.
-        val saved = """{"v":1,"pages":[[
+        val saved = """{"schema":1,"pages":[[
             {"t":"builtin","k":"CAR3D","gx":0,"gy":0,"gw":4,"gh":3},
             {"t":"builtin","k":"WARP_DRIVE","gx":4,"gy":0,"gw":3,"gh":2},
             {"t":"builtin","k":"CLOCK","gx":7,"gy":0,"gw":3,"gh":2}
@@ -181,8 +182,8 @@ class DashboardStoreTest {
 
     @Test
     fun unknownTilesStayWithTheirOwnLayout() {
-        val full = """{"v":9,"pages":[[{"t":"hologram","gx":0,"gy":0,"gw":3,"gh":2}]]}"""
-        val half = """{"v":9,"pages":[[{"t":"jetpack","gx":0,"gy":0,"gw":3,"gh":2}]]}"""
+        val full = """{"schema":9,"pages":[[{"t":"hologram","gx":0,"gy":0,"gw":3,"gh":2}]]}"""
+        val half = """{"schema":9,"pages":[[{"t":"jetpack","gx":0,"gy":0,"gw":3,"gh":2}]]}"""
         val fullPages = DashboardStore.parsePages(full, "")!!
         // Reading the other arrangement (as a page swipe does) must not swap its unknown tiles in.
         DashboardStore.parsePages(half, "_half")
@@ -218,7 +219,7 @@ class DashboardStoreTest {
     @Test
     fun unknownOrMissingDesignFallsBackToStandard() {
         val pages = DashboardStore.parsePages(
-            """{"v":1,"pages":[[{"t":"builtin","k":"CLOCK","d":"HOLOGRAM","gx":0,"gy":0,"gw":3,"gh":2},
+            """{"schema":1,"pages":[[{"t":"builtin","k":"CLOCK","d":"HOLOGRAM","gx":0,"gy":0,"gw":3,"gh":2},
                {"t":"builtin","k":"WEATHER","gx":3,"gy":0,"gw":4,"gh":2}]]}"""
         )!!
         assertEquals(WidgetDesign.STANDARD, (pages[0][0] as DashboardItem.BuiltinWidget).design)
@@ -233,7 +234,7 @@ class DashboardStoreTest {
         assertEquals(WidgetDesign.NEON, WidgetDesign.fromName("GAUGE"))
         assertEquals(WidgetDesign.CHRONO, WidgetDesign.fromName("BLUEPRINT"))
         val pages = DashboardStore.parsePages(
-            """{"v":1,"pages":[[{"t":"builtin","k":"MEDIA","d":"RING","gx":0,"gy":0,"gw":4,"gh":2}]]}"""
+            """{"schema":1,"pages":[[{"t":"builtin","k":"MEDIA","d":"RING","gx":0,"gy":0,"gw":4,"gh":2}]]}"""
         )!!
         assertEquals(WidgetDesign.GLASS, (pages[0][0] as DashboardItem.BuiltinWidget).design)
     }
@@ -471,7 +472,7 @@ class DashboardStoreTest {
         assertEquals("RED", framedJson.getString("bc"))
         assertEquals(3, framedJson.getInt("bw"))
         // Out-of-range values read back in range; an unknown colour is the accent.
-        val odd = """{"v":2,"pages":[[{"t":"builtin","k":"CLOCK","gx":0,"gy":0,"gw":3,"gh":2,"op":0.01,"bw":99,"bc":"PINK"}]]}"""
+        val odd = """{"schema":2,"pages":[[{"t":"builtin","k":"CLOCK","gx":0,"gy":0,"gw":3,"gh":2,"op":0.01,"bw":99,"bc":"PINK"}]]}"""
         val read = DashboardStore.parsePages(odd)!![0].single()
         assertEquals(TileFrame(opacity = OPACITY_MIN, border = BORDER_MAX, borderColor = TileBorderColor.ACCENT), read.frame)
         // The frame survives being resized or zoomed.
@@ -550,9 +551,12 @@ class DashboardStoreTest {
             assertTrue("$kind minimum wider than the grid", w <= GRID_COLS && h <= GRID_ROWS)
         }
         // The kinds read at speed never shrink to one cell; a list keeps three columns.
-        assertEquals(2 to 2, BuiltinKind.SPEED_HUD.minSize())
-        assertEquals(3 to 2, BuiltinKind.QUICK_DIAL.minSize())
-        assertEquals(3 to 3, BuiltinKind.NAVMAP.minSize())
+        assertEquals(2 to 2, BuiltinKind.SPEED_HUD.coarseMinSize())
+        assertEquals(3 to 2, BuiltinKind.QUICK_DIAL.coarseMinSize())
+        assertEquals(3 to 3, BuiltinKind.NAVMAP.coarseMinSize())
+        // In the grid's own cells, three to a coarse one.
+        assertEquals(2 * GRID_SCALE to 2 * GRID_SCALE, BuiltinKind.SPEED_HUD.minSize())
+        assertEquals(5 * GRID_SCALE to 3 * GRID_SCALE, BuiltinKind.NAVMAP.defaultW to BuiltinKind.NAVMAP.defaultH)
     }
 
     @Test
@@ -568,9 +572,34 @@ class DashboardStoreTest {
         assertEquals(1, small.minW())
         assertEquals(1, small.minH())
         // In the open its minimum is its kind's.
-        assertEquals(2, widget(BuiltinKind.SPEED_HUD, 0, 0, 1, 1).minW())
+        assertEquals(2 * GRID_SCALE, widget(BuiltinKind.SPEED_HUD, 0, 0, 1, 1).minW())
+        // A tile that is not a widget stops at one coarse cell.
+        assertEquals(GRID_SCALE, DashboardItem.AppShortcut("a.b", 0, 0, 1, 1).minW())
         // withCell keeps a saved span; the placer passes the minimum itself.
         assertEquals(1, widget(BuiltinKind.SPEED_HUD, 0, 0, 1, 1).withCell(0, 0, 1, 1).w)
+    }
+
+    @Test
+    fun aLayoutFromTheCoarseGridIsScaledUpOnLoad() {
+        assertEquals(COARSE_COLS * GRID_SCALE, GRID_COLS)
+        assertEquals(COARSE_ROWS * GRID_SCALE, GRID_ROWS)
+        // v1 and v2 placed tiles on the 12 x 7 grid: their cells are multiplied on load.
+        val v1 = """{"schema":1,"pages":[[{"t":"builtin","k":"CLOCK","gx":1,"gy":2,"gw":3,"gh":2}]]}"""
+        assertEquals(listOf(widget(BuiltinKind.CLOCK, 3, 6, 9, 6)), DashboardStore.parsePages(v1)!![0])
+        val v2 = """{"schema":2,"pages":[[{"t":"app","pkg":"a.b","gx":2,"gy":0,"gw":2,"gh":2,"ov":true}]]}"""
+        assertEquals(listOf(DashboardItem.AppShortcut("a.b", 6, 0, 6, 6).withFrame(TileFrame(overlap = true))), DashboardStore.parsePages(v2)!![0])
+        // The bare array from before v1 too.
+        val bare = """[[{"t":"app","pkg":"a.b","gx":2,"gy":0,"gw":2,"gh":2}]]"""
+        assertEquals(listOf(DashboardItem.AppShortcut("a.b", 6, 0, 6, 6)), DashboardStore.parsePages(bare)!![0])
+        // A tile saved without cells gets its kind's default span, not three times it, and is placed on load.
+        val unplaced = DashboardStore.parsePages("""{"schema":1,"pages":[[{"t":"builtin","k":"CLOCK"}]]}""")!![0].single()
+        assertEquals(-1, unplaced.x)
+        assertEquals(BuiltinKind.CLOCK.defaultW to BuiltinKind.CLOCK.defaultH, unplaced.w to unplaced.h)
+        // What this build saves says v3 and reads back as it is.
+        val page = listOf(widget(BuiltinKind.CLOCK, 3, 6, 9, 6), DashboardItem.AppShortcut("a.b", 12, 0, 6, 6))
+        val saved = DashboardStore.serializePages(listOf(page))
+        assertEquals(3, JSONObject(saved).getInt("schema"))
+        assertEquals(page, DashboardStore.parsePages(saved)!![0])
     }
 
     @Test
@@ -673,10 +702,10 @@ class DashboardStoreTest {
 
     @Test
     fun parsingOneVariantDoesNotLeakUnknownTilesIntoAnother() {
-        val withStranger = """{"v":1,"pages":[[{"t":"hologram","gx":0,"gy":0,"gw":3,"gh":2}],[],[]]}"""
+        val withStranger = """{"schema":1,"pages":[[{"t":"hologram","gx":0,"gy":0,"gw":3,"gh":2}],[],[]]}"""
         DashboardStore.parsePages(withStranger)
         // The next layout parsed (another variant) starts clean.
-        DashboardStore.parsePages("""{"v":1,"pages":[[],[],[]]}""")
+        DashboardStore.parsePages("""{"schema":1,"pages":[[],[],[]]}""")
         val saved = DashboardStore.serializePages(List(DashboardStore.PAGE_COUNT) { emptyList() })
         assertFalse(saved.contains("hologram"))
     }
@@ -684,9 +713,9 @@ class DashboardStoreTest {
     @Test
     fun peekingAtALayoutChangesNothing() {
         // The tiles kept for this layout's next save stay as they were...
-        DashboardStore.parsePages("""{"v":1,"pages":[[{"t":"hologram","gx":0,"gy":0,"gw":3,"gh":2}],[],[]]}""")
+        DashboardStore.parsePages("""{"schema":1,"pages":[[{"t":"hologram","gx":0,"gy":0,"gw":3,"gh":2}],[],[]]}""")
         val before = DashboardStore.placedKinds.value
-        val peeked = DashboardStore.peekItems("""{"v":1,"pages":[[{"t":"builtin","k":"CLOCK","gx":0,"gy":0,"gw":3,"gh":2},{"t":"stranger"}],[],[]]}""")
+        val peeked = DashboardStore.peekItems("""{"schema":1,"pages":[[{"t":"builtin","k":"CLOCK","gx":0,"gy":0,"gw":3,"gh":2},{"t":"stranger"}],[],[]]}""")
         assertEquals(listOf(BuiltinKind.CLOCK), peeked?.filterIsInstance<DashboardItem.BuiltinWidget>()?.map { it.kind })
         // ...and so do the kinds the add sheet marks as placed.
         assertEquals(before, DashboardStore.placedKinds.value)

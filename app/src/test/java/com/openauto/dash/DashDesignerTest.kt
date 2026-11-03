@@ -11,8 +11,8 @@ class DashDesignerTest {
 
     private val kinds = setOf("SPEED_LIMIT", "MEDIA", "FUEL_TO_DEST", "NAVMAP", "CLOCK")
 
-    private fun fit(vararg t: ProposedTile, cols: Int = 12, rows: Int = 7, installed: Set<String> = emptySet()) =
-        DesignFit.items(t.toList(), cols, rows, kinds, installed)
+    private fun fit(vararg t: ProposedTile, cols: Int = 12, rows: Int = 7, installed: Set<String> = emptySet(), scale: Int = 1) =
+        DesignFit.items(t.toList(), cols, rows, kinds, installed, scale)
 
     private fun overlapFree(items: List<DashboardItem>): Boolean = items.indices.all { i ->
         (i + 1 until items.size).none { j ->
@@ -78,11 +78,21 @@ class DashDesignerTest {
             ProposedTile("MEDIA", null, -3, 0, 20, 2)
         )
         val map = items.first { (it as DashboardItem.BuiltinWidget).kind == BuiltinKind.NAVMAP }
-        val (minW, minH) = BuiltinKind.NAVMAP.minSize()
+        val (minW, minH) = BuiltinKind.NAVMAP.coarseMinSize()
         assertTrue(map.w >= minW && map.h >= minH)
         assertTrue(map.x + map.w <= 12 && map.y + map.h <= 7)
         items.forEach { assertTrue(it.x >= 0 && it.x + it.w <= 12) }
         assertTrue(overlapFree(items))
+    }
+
+    @Test
+    fun theDashboardsTilesAreScaledFromTheCoarseGrid() {
+        // The AI lays out on 12 x 7; the dashboard's cells are GRID_SCALE to a coarse one.
+        val items = fit(ProposedTile("NAVMAP", null, 1, 0, 7, 7), ProposedTile("CLOCK", null, 8, 0, 3, 2), scale = GRID_SCALE)
+        val map = items[0]
+        assertEquals(listOf(3, 0, 21, 21), listOf(map.x, map.y, map.w, map.h))
+        assertEquals(listOf(24, 0, 9, 6), listOf(items[1].x, items[1].y, items[1].w, items[1].h))
+        assertTrue(items.all { it.x + it.w <= GRID_COLS && it.y + it.h <= GRID_ROWS })
     }
 
     @Test

@@ -12,8 +12,8 @@ import kotlin.math.abs
 /** Where a new tile goes on a page and the span it gets there. */
 internal data class TileFit(val x: Int, val y: Int, val w: Int, val h: Int)
 
-/** Whether [items] leave a free cell for even the smallest tile. */
-internal fun pageHasRoom(items: List<DashboardItem>): Boolean = DashboardStore.firstFreeCell(items, 1, 1) != null
+/** Whether [items] leave room for even the smallest tile: one coarse cell. */
+internal fun pageHasRoom(items: List<DashboardItem>): Boolean = DashboardStore.firstFreeCell(items, GRID_SCALE, GRID_SCALE) != null
 
 /**
  * The place for a new [w] x [h] tile on a page holding [items]: at its own

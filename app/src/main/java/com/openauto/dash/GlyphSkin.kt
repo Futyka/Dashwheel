@@ -145,11 +145,11 @@ internal val GlyphShapes = skinShapes(22, 22, 12)
 internal val GlyphLayout = SkinLayout(
     home = TemplatePage(listOf(BuiltinKind.NAVIGATION, BuiltinKind.RANGE, BuiltinKind.CLOCK, BuiltinKind.TELEMETRY, BuiltinKind.MEDIA)),
     wide = listOf(
-        DashboardItem.BuiltinWidget(BuiltinKind.CLOCK, x = 0, y = 0, w = 3, h = 3),
-        DashboardItem.BuiltinWidget(BuiltinKind.TELEMETRY, x = 0, y = 3, w = 3, h = 4),
-        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 3, y = 0, w = 6, h = 7),
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 9, y = 0, w = 3, h = 4),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 9, y = 4, w = 3, h = 3)
+        DashboardItem.BuiltinWidget(BuiltinKind.CLOCK, x = 0, y = 0, w = 9, h = 9),
+        DashboardItem.BuiltinWidget(BuiltinKind.TELEMETRY, x = 0, y = 9, w = 9, h = 12),
+        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 9, y = 0, w = 18, h = 21),
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 27, y = 0, w = 9, h = 12),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 27, y = 12, w = 9, h = 9)
     )
 )
 
