@@ -61,7 +61,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import java.util.Locale
 import kotlin.math.min
+import kotlin.math.roundToInt
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 
@@ -125,8 +127,10 @@ internal fun StopGuidancePrompt() {
 /**
  * Dashboard tile showing the next manoeuvre from Google Maps / Waze: the turn
  * glyph on a glowing disc, the distance in hero numerals, the street, and the
- * ETA line as chips. Tapping it brings the navigation app up beside the
- * dashboard. Needs the same Notification access grant as the music player.
+ * ETA line as chips. With no route the tile is a clock: the time large, the
+ * date, and in small type that no route runs. Tapping it brings the
+ * navigation app up beside the dashboard. Needs the same Notification access
+ * grant as the music player.
  */
 @Composable
 internal fun DirectionsCard(
@@ -201,13 +205,8 @@ internal fun DirectionsCard(
                         action = stringResource(R.string.info_directions_open_maps, navAppName(running)),
                         onAction = { openNavigationApp(context, nav) }
                     )
-                    !nav.active -> DirectionsEmpty(
-                        icon = Icons.Filled.Navigation,
-                        title = stringResource(R.string.info_directions_idle_title),
-                        hint = stringResource(R.string.info_directions_idle_hint),
-                        action = stringResource(R.string.info_directions_open_maps, navAppName(navAppToOpen(context))),
-                        onAction = { openNavigationApp(context, nav) }
-                    )
+                    // No route: the time and the date, and a word that nothing guides; the tap still opens the navigation app.
+                    !nav.active -> DirectionsIdleClock()
                     else -> {
                         Spacer(Modifier.height(6.dp))
                         Row(
@@ -284,6 +283,60 @@ internal fun DirectionsCard(
                 }
             }
             PendingActionStrip(pending, Modifier.align(Alignment.BottomCenter).padding(DashSpace.Sm))
+        }
+    }
+}
+
+/**
+ * The directions tile with no route: the time as the hero numerals, the date
+ * under it, and "No route" in small type, so the slot stays useful between
+ * drives instead of asking for a route. Ticks on the minute: the time has no
+ * seconds.
+ */
+@Composable
+private fun DirectionsIdleClock() {
+    val now = rememberNow(60_000L)
+    val locale = Locale.getDefault()
+    val units = LocalUnits.current
+    val timeFmt = rememberDateFormat(units.digitsPattern())
+    val dateFmt = rememberDateFormat("EEEEdMMMM", best = true)
+    val amPm = units.amPm(now, locale)
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        // Half the height goes to the digits; a wide, short tile is held by its height, a narrow one by its width.
+        val numSize = min(maxWidth.value * 0.22f, maxHeight.value * 0.5f).coerceIn(28f, 96f).roundToInt()
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Row(verticalAlignment = Alignment.Bottom) {
+                HeroNumber(text = timeFmt.format(now), size = numSize)
+                if (amPm != null) {
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        amPm,
+                        color = DashColors.TextSecondary,
+                        fontWeight = FontWeight.SemiBold,
+                        style = MaterialTheme.typography.titleMedium,
+                        modifier = Modifier.padding(bottom = (numSize * 0.16f).dp)
+                    )
+                }
+            }
+            Text(
+                dateFmt.format(now).replaceFirstChar { it.titlecase(locale) },
+                color = DashColors.TextSecondary,
+                letterSpacing = 1.sp,
+                style = MaterialTheme.typography.titleSmall,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
+            Spacer(Modifier.height(4.dp))
+            Text(
+                stringResource(R.string.info_directions_no_route),
+                color = DashColors.Muted,
+                style = MaterialTheme.typography.labelSmall,
+                maxLines = 1
+            )
         }
     }
 }
