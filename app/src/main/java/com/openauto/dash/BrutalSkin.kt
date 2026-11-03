@@ -131,11 +131,11 @@ internal val BrutalLayout = SkinLayout(
         listOf(BuiltinKind.NAVIGATION, BuiltinKind.SPEED_HUD, BuiltinKind.MEDIA, BuiltinKind.WEATHER, BuiltinKind.TELEMETRY)
     ),
     wide = listOf(
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 0, w = 6, h = 4),
-        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 6, y = 0, w = 3, h = 4),
-        DashboardItem.BuiltinWidget(BuiltinKind.WEATHER, x = 9, y = 0, w = 3, h = 4),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 0, y = 4, w = 6, h = 3),
-        DashboardItem.BuiltinWidget(BuiltinKind.TELEMETRY, x = 6, y = 4, w = 6, h = 3)
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 0, w = 18, h = 12),
+        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 18, y = 0, w = 9, h = 12),
+        DashboardItem.BuiltinWidget(BuiltinKind.WEATHER, x = 27, y = 0, w = 9, h = 12),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 0, y = 12, w = 18, h = 9),
+        DashboardItem.BuiltinWidget(BuiltinKind.TELEMETRY, x = 18, y = 12, w = 18, h = 9)
     )
 )
 

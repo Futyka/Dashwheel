@@ -123,10 +123,10 @@ internal val WindshieldShapes = skinShapes(24, 22, 12)
 internal val WindshieldLayout = SkinLayout(
     home = TemplatePage(listOf(BuiltinKind.SPEED_HUD, BuiltinKind.NAVIGATION, BuiltinKind.MEDIA, BuiltinKind.WEATHER), dock = true),
     wide = listOf(
-        DashboardItem.LaunchBar(x = 0, y = 1, w = 1, h = 5),
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 2, y = 1, w = 3, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.WEATHER, x = 8, y = 1, w = 3, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 9, y = 5, w = 3, h = 2)
+        DashboardItem.LaunchBar(x = 0, y = 3, w = 3, h = 15),
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 6, y = 3, w = 9, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.WEATHER, x = 24, y = 3, w = 9, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 27, y = 15, w = 9, h = 6)
     )
 )
 

@@ -137,10 +137,10 @@ internal val AmbientShapes = skinShapes(28, 26, 20)
 internal val AmbientLayout = SkinLayout(
     home = TemplatePage(listOf(BuiltinKind.SPEED_HUD, BuiltinKind.NAVIGATION, BuiltinKind.MEDIA, BuiltinKind.CLOCK)),
     wide = listOf(
-        DashboardItem.BuiltinWidget(BuiltinKind.CLOCK, x = 0, y = 0, w = 3, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 3, y = 0, w = 6, h = 4),
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 3, y = 4, w = 6, h = 3),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 9, y = 4, w = 3, h = 3)
+        DashboardItem.BuiltinWidget(BuiltinKind.CLOCK, x = 0, y = 0, w = 9, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 9, y = 0, w = 18, h = 12),
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 9, y = 12, w = 18, h = 9),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 27, y = 12, w = 9, h = 9)
     )
 )
 

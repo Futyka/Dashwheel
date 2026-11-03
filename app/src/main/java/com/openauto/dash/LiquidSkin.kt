@@ -144,11 +144,11 @@ internal val LiquidLayout = SkinLayout(
         dock = false
     ),
     wide = listOf(
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 0, w = 3, h = 4),
-        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 0, y = 4, w = 3, h = 3),
-        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 3, y = 0, w = 6, h = 7),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 9, y = 0, w = 3, h = 5),
-        DashboardItem.BuiltinWidget(BuiltinKind.TELEMETRY, x = 9, y = 5, w = 3, h = 2)
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 0, w = 9, h = 12),
+        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 0, y = 12, w = 9, h = 9),
+        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 9, y = 0, w = 18, h = 21),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 27, y = 0, w = 9, h = 15),
+        DashboardItem.BuiltinWidget(BuiltinKind.TELEMETRY, x = 27, y = 15, w = 9, h = 6)
     )
 )
 

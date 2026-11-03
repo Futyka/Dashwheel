@@ -128,11 +128,11 @@ internal val TerrainShapes = skinShapes(22, 22, 16)
 internal val TerrainLayout = SkinLayout(
     home = TemplatePage(listOf(BuiltinKind.RANGE, BuiltinKind.NAVIGATION, BuiltinKind.WEATHER, BuiltinKind.MEDIA, BuiltinKind.TELEMETRY)),
     wide = listOf(
-        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 0, y = 0, w = 8, h = 5),
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 5, w = 5, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.WEATHER, x = 8, y = 0, w = 4, h = 3),
-        DashboardItem.BuiltinWidget(BuiltinKind.TELEMETRY, x = 8, y = 3, w = 4, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 8, y = 5, w = 4, h = 2)
+        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 0, y = 0, w = 24, h = 15),
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 15, w = 15, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.WEATHER, x = 24, y = 0, w = 12, h = 9),
+        DashboardItem.BuiltinWidget(BuiltinKind.TELEMETRY, x = 24, y = 9, w = 12, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 24, y = 15, w = 12, h = 6)
     )
 )
 

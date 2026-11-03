@@ -21,16 +21,18 @@ enum class WidgetCategory(@StringRes val titleRes: Int) {
 /**
  * The kinds of built-in (app-provided) widgets a dashboard tile can show. These
  * are rendered by our own Compose panels, not by the Android app-widget host.
- * [defaultW] x [defaultH] is the span a fresh tile gets. Names are persisted,
- * so never rename an entry. [labelRes] / [blurbRes] are the picker's display
- * name and one-line description (read them in Compose as `label` / `blurb`).
+ * [coarseW] x [coarseH] is the span a fresh tile gets, in the coarse cells of
+ * the 12 x 7 grid ([defaultW] x [defaultH] in the grid's own cells). Names are
+ * persisted, so never rename an entry. [labelRes] / [blurbRes] are the
+ * picker's display name and one-line description (read them in Compose as
+ * `label` / `blurb`).
  */
 enum class BuiltinKind(
     @StringRes val labelRes: Int,
     val category: WidgetCategory,
     @StringRes val blurbRes: Int,
-    val defaultW: Int = 5,
-    val defaultH: Int = 3
+    val coarseW: Int = 5,
+    val coarseH: Int = 3
 ) {
     NAVMAP(R.string.apps_kind_navmap, WidgetCategory.NAVIGATION, R.string.apps_kind_navmap_blurb),
     NAVIGATION(R.string.apps_kind_navigation, WidgetCategory.NAVIGATION, R.string.apps_kind_navigation_blurb, 4, 3),
@@ -107,7 +109,11 @@ enum class BuiltinKind(
     // The last drives the drive log kept, with this week's total (DriveHistoryTile.kt).
     DRIVE_HISTORY(R.string.widgets_history, WidgetCategory.DRIVING, R.string.widgets_history_blurb, 4, 3),
     // The one thing that matters right now, picked from the other feeds (NowCard.kt).
-    NOW(R.string.widgets_now, WidgetCategory.DRIVING, R.string.widgets_now_blurb, 5, 2)
+    NOW(R.string.widgets_now, WidgetCategory.DRIVING, R.string.widgets_now_blurb, 5, 2);
+
+    /** The span a fresh tile gets, in the grid's cells. */
+    val defaultW: Int get() = coarseW * GRID_SCALE
+    val defaultH: Int get() = coarseH * GRID_SCALE
 }
 
 /**
@@ -154,7 +160,7 @@ sealed interface DashboardItem {
     data class AppShortcut(
         val packageName: String,
         override val x: Int = 0, override val y: Int = 0,
-        override val w: Int = 2, override val h: Int = 2,
+        override val w: Int = 2 * GRID_SCALE, override val h: Int = 2 * GRID_SCALE,
         override val zoom: Float = 1f,
         override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
@@ -163,7 +169,7 @@ sealed interface DashboardItem {
         val primaryPackage: String,
         val secondaryPackage: String,
         override val x: Int = 0, override val y: Int = 0,
-        override val w: Int = 2, override val h: Int = 2,
+        override val w: Int = 2 * GRID_SCALE, override val h: Int = 2 * GRID_SCALE,
         override val zoom: Float = 1f,
         override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
@@ -171,7 +177,7 @@ sealed interface DashboardItem {
     data class LaunchBar(
         val packages: List<String> = emptyList(),
         override val x: Int = 0, override val y: Int = 0,
-        override val w: Int = 8, override val h: Int = 1,
+        override val w: Int = 8 * GRID_SCALE, override val h: Int = GRID_SCALE,
         override val zoom: Float = 1f,
         override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
@@ -180,7 +186,7 @@ sealed interface DashboardItem {
     data class BuiltinWidget(
         val kind: BuiltinKind,
         override val x: Int = 0, override val y: Int = 0,
-        override val w: Int = 5, override val h: Int = 3,
+        override val w: Int = 5 * GRID_SCALE, override val h: Int = 3 * GRID_SCALE,
         val design: WidgetDesign = WidgetDesign.STANDARD,
         override val zoom: Float = 1f,
         override val frame: TileFrame = TileFrame.NONE
@@ -189,7 +195,7 @@ sealed interface DashboardItem {
     data class SystemWidget(
         val appWidgetId: Int,
         override val x: Int = 0, override val y: Int = 0,
-        override val w: Int = 5, override val h: Int = 3,
+        override val w: Int = 5 * GRID_SCALE, override val h: Int = 3 * GRID_SCALE,
         override val zoom: Float = 1f,
         override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
@@ -202,7 +208,7 @@ sealed interface DashboardItem {
     data class AppWindow(
         val packageName: String,
         override val x: Int = 0, override val y: Int = 0,
-        override val w: Int = 5, override val h: Int = 3,
+        override val w: Int = 5 * GRID_SCALE, override val h: Int = 3 * GRID_SCALE,
         override val zoom: Float = 1f,
         val inside: Boolean = false,
         override val frame: TileFrame = TileFrame.NONE
@@ -265,21 +271,43 @@ fun TileFrame.clamped(): TileFrame = copy(
     border = border.coerceIn(0, BORDER_MAX)
 )
 
-/** The dashboard grid: 12 cells across, 7 down; the other way round on an upright screen ([ScreenShape]). */
-val GRID_COLS: Int get() = if (ScreenShape.vertical) 7 else 12
-val GRID_ROWS: Int get() = if (ScreenShape.vertical) 12 else 7
+/**
+ * The coarse grid the dashboards were designed on: 12 cells across, 7 down.
+ * Templates, the skins' fixed layouts and the AI designer still think in it;
+ * the tiles are placed on the finer grid below.
+ */
+const val COARSE_COLS = 12
+const val COARSE_ROWS = 7
+
+/**
+ * How many of the grid's cells make one coarse cell, each way: the tiles
+ * snap to a third of what they used to, so one can be set exactly where it
+ * belongs, over another tile too (TileFrame). Saved layouts from before are
+ * scaled up on load ([DashboardStore.SCHEMA_VERSION] 3).
+ */
+const val GRID_SCALE = 3
+
+/** The dashboard grid: 36 cells across, 21 down; the other way round on an upright screen ([ScreenShape]). */
+val GRID_COLS: Int get() = (if (ScreenShape.vertical) COARSE_ROWS else COARSE_COLS) * GRID_SCALE
+val GRID_ROWS: Int get() = (if (ScreenShape.vertical) COARSE_COLS else COARSE_ROWS) * GRID_SCALE
 
 /** Compact icon tiles (shortcuts / split pairs) vs. larger widget cards. */
 fun DashboardItem.isCompactTile(): Boolean =
     this is DashboardItem.AppShortcut || this is DashboardItem.SplitPair
 
 /**
- * Smallest span a built-in kind stays readable at, width to height: a number
- * tile needs two cells each way, a list three across, the map three by three.
- * The resize handle, the templates and the placer never go under it; a saved
- * tile that is smaller still loads at its size.
+ * Smallest span a built-in kind stays readable at, width to height, in the
+ * grid's cells ([coarseMinSize] times [GRID_SCALE]). The resize handle, the
+ * templates and the placer never go under it; a saved tile that is smaller
+ * still loads at its size.
  */
-fun BuiltinKind.minSize(): Pair<Int, Int> = when (this) {
+fun BuiltinKind.minSize(): Pair<Int, Int> = coarseMinSize().let { (w, h) -> w * GRID_SCALE to h * GRID_SCALE }
+
+/**
+ * [minSize] in the coarse cells of the 12 x 7 grid: a number tile needs two
+ * cells each way, a list three across, the map three by three.
+ */
+fun BuiltinKind.coarseMinSize(): Pair<Int, Int> = when (this) {
     BuiltinKind.SPEED_HUD, BuiltinKind.SPEED_LIMIT, BuiltinKind.GEAR, BuiltinKind.CLOCK -> 2 to 2
     // Lists: rows need their width.
     BuiltinKind.CALENDAR, BuiltinKind.NOTIFICATIONS, BuiltinKind.QUICK_DIAL, BuiltinKind.FUEL_PRICES, BuiltinKind.WIFI_NETWORKS,
@@ -300,15 +328,16 @@ fun BuiltinKind.minSize(): Pair<Int, Int> = when (this) {
 
 /**
  * Smallest span this tile may be resized to where it sits: its kind's
- * [minSize] for a built-in widget, one cell for the rest, and never more than
- * the room left to the grid's edge, so a saved tile smaller than its kind's
- * minimum is kept where it is rather than pushed off or dropped.
+ * [minSize] for a built-in widget, one coarse cell ([GRID_SCALE]) for the
+ * rest, and never more than the room left to the grid's edge, so a saved tile
+ * smaller than its kind's minimum is kept where it is rather than pushed off
+ * or dropped.
  */
 fun DashboardItem.minW(): Int =
-    (if (this is DashboardItem.BuiltinWidget) kind.minSize().first else 1).coerceAtMost(GRID_COLS - x).coerceAtLeast(1)
+    (if (this is DashboardItem.BuiltinWidget) kind.minSize().first else GRID_SCALE).coerceAtMost(GRID_COLS - x).coerceAtLeast(1)
 
 fun DashboardItem.minH(): Int =
-    (if (this is DashboardItem.BuiltinWidget) kind.minSize().second else 1).coerceAtMost(GRID_ROWS - y).coerceAtLeast(1)
+    (if (this is DashboardItem.BuiltinWidget) kind.minSize().second else GRID_SCALE).coerceAtMost(GRID_ROWS - y).coerceAtLeast(1)
 
 /** How far a tile's content can be zoomed out and in, and by how much per tap. */
 const val ZOOM_MIN = 0.5f
@@ -489,8 +518,14 @@ object DashboardStore {
      *     `"bc"` the border's colour name; each absent at its default. An
      *     older build ignores them, and lays the tiles over the others back
      *     into the grid on load (its [repairOverlaps] knows no overlap).
+     *  3: the cells are the finer grid's ([GRID_SCALE] to a coarse cell each
+     *     way, 36 x 21). The same keys; a layout of v1 or v2 (or the bare
+     *     array) has its `gx`, `gy`, `gw`, `gh` multiplied by [GRID_SCALE]
+     *     on load. An older build reads v3 as it is and clamps the cells to
+     *     its 12 x 7 grid, which spoils the arrangement until this build runs
+     *     again, but loses no tile.
      */
-    private const val SCHEMA_VERSION = 2
+    internal const val SCHEMA_VERSION = 3
 
     /**
      * Tiles this build does not understand (a type or builtin kind added by a
@@ -783,21 +818,24 @@ object DashboardStore {
      */
     private fun parseItems(raw: String, retained: HashMap<Int, MutableList<JSONObject>>?): List<List<DashboardItem>>? = runCatching {
         val trimmed = raw.trim()
+        // Before v3 the cells were the coarse grid's.
+        var v = 1
         val pages = if (trimmed.startsWith("{")) {
             val obj = JSONObject(trimmed)
-            val v = obj.optInt(KEY_VERSION, 1)
+            v = obj.optInt(KEY_VERSION, 1)
             if (v > SCHEMA_VERSION) Log.w(TAG, "Layout schema v$v is newer than this build (v$SCHEMA_VERSION)")
             obj.optJSONArray(KEY_PAGES) ?: JSONArray()
         } else {
             JSONArray(trimmed)
         }
+        val scale = if (v < 3) GRID_SCALE else 1
         retained?.clear()
         (0 until pages.length()).map { p ->
             val page = pages.optJSONArray(p) ?: JSONArray()
             (0 until page.length()).mapNotNull { i ->
                 val o = page.optJSONObject(i) ?: return@mapNotNull null
                 if (o.isDroppedBuiltin()) return@mapNotNull null
-                o.toItem() ?: run {
+                o.toItem(scale) ?: run {
                     retained?.getOrPut(p) { mutableListOf() }?.add(o)
                     null
                 }
@@ -1100,11 +1138,12 @@ object DashboardStore {
     private fun JSONObject.isDroppedBuiltin(): Boolean =
         optString("t") == "builtin" && optString("k") in DROPPED_KINDS
 
-    private fun JSONObject.toItem(): DashboardItem? {
-        val gx = optInt("gx", -1)
-        val gy = optInt("gy", -1)
-        val gw = optInt("gw", -1)
-        val gh = optInt("gh", -1)
+    /** The tile in this JSON, its saved cells [scale] times the grid's (a layout from before the finer grid). */
+    private fun JSONObject.toItem(scale: Int): DashboardItem? {
+        val gx = optInt("gx", -1).let { if (it >= 0) it * scale else it }
+        val gy = optInt("gy", -1).let { if (it >= 0) it * scale else it }
+        val gw = optInt("gw", -1).let { if (it > 0) it * scale else it }
+        val gh = optInt("gh", -1).let { if (it > 0) it * scale else it }
         val zoom = optDouble("z", 1.0).toFloat().takeIf { it.isFinite() } ?: 1f
         val frame = TileFrame(
             overlap = optBoolean("ov"),

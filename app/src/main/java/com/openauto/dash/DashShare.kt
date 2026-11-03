@@ -51,6 +51,8 @@ object DashShare {
     fun encode(share: SharedDashboard): String {
         val json = JSONObject()
             .put("v", VERSION)
+            // The layout schema the cells are in: a code from before the finer grid has none, and is read as v1.
+            .put("sv", DashboardStore.SCHEMA_VERSION)
             .put("up", share.upright)
             .put("p", JSONObject(DashboardStore.serializePages(listOf(shareable(share.items)), VARIANT)).getJSONArray("pages").getJSONArray(0))
         share.name?.takeIf { it.isNotBlank() }?.let { json.put("n", it.take(MAX_NAME)) }
@@ -72,7 +74,7 @@ object DashShare {
         val json = JSONObject(String(inflate(unbase64(code.removePrefix(PREFIX))), Charsets.UTF_8))
         if (json.optInt("v") > VERSION) return null
         val page = json.getJSONArray("p")
-        val items = DashboardStore.parsePages(JSONObject().put("schema", 1).put("pages", JSONArray().put(page)).toString(), VARIANT)
+        val items = DashboardStore.parsePages(JSONObject().put("schema", json.optInt("sv", 1)).put("pages", JSONArray().put(page)).toString(), VARIANT)
             ?.firstOrNull() ?: return null
         val look = json.optJSONObject("look")?.let { l ->
             SharedLook(

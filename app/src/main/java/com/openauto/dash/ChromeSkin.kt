@@ -129,11 +129,11 @@ internal val ChromeLayout = SkinLayout(
         dock = true
     ),
     wide = listOf(
-        DashboardItem.BuiltinWidget(BuiltinKind.CLOCK, x = 0, y = 0, w = 4, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 2, w = 4, h = 5),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 4, y = 0, w = 4, h = 7),
-        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 8, y = 2, w = 4, h = 3),
-        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 8, y = 5, w = 4, h = 2)
+        DashboardItem.BuiltinWidget(BuiltinKind.CLOCK, x = 0, y = 0, w = 12, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 0, y = 6, w = 12, h = 15),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 12, y = 0, w = 12, h = 21),
+        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 24, y = 6, w = 12, h = 9),
+        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 24, y = 15, w = 12, h = 6)
     )
 )
 

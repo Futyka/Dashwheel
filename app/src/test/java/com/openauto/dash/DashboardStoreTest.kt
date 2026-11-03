@@ -550,9 +550,12 @@ class DashboardStoreTest {
             assertTrue("$kind minimum wider than the grid", w <= GRID_COLS && h <= GRID_ROWS)
         }
         // The kinds read at speed never shrink to one cell; a list keeps three columns.
-        assertEquals(2 to 2, BuiltinKind.SPEED_HUD.minSize())
-        assertEquals(3 to 2, BuiltinKind.QUICK_DIAL.minSize())
-        assertEquals(3 to 3, BuiltinKind.NAVMAP.minSize())
+        assertEquals(2 to 2, BuiltinKind.SPEED_HUD.coarseMinSize())
+        assertEquals(3 to 2, BuiltinKind.QUICK_DIAL.coarseMinSize())
+        assertEquals(3 to 3, BuiltinKind.NAVMAP.coarseMinSize())
+        // In the grid's own cells, three to a coarse one.
+        assertEquals(2 * GRID_SCALE to 2 * GRID_SCALE, BuiltinKind.SPEED_HUD.minSize())
+        assertEquals(5 * GRID_SCALE to 3 * GRID_SCALE, BuiltinKind.NAVMAP.defaultW to BuiltinKind.NAVMAP.defaultH)
     }
 
     @Test
@@ -568,9 +571,34 @@ class DashboardStoreTest {
         assertEquals(1, small.minW())
         assertEquals(1, small.minH())
         // In the open its minimum is its kind's.
-        assertEquals(2, widget(BuiltinKind.SPEED_HUD, 0, 0, 1, 1).minW())
+        assertEquals(2 * GRID_SCALE, widget(BuiltinKind.SPEED_HUD, 0, 0, 1, 1).minW())
+        // A tile that is not a widget stops at one coarse cell.
+        assertEquals(GRID_SCALE, DashboardItem.AppShortcut("a.b", 0, 0, 1, 1).minW())
         // withCell keeps a saved span; the placer passes the minimum itself.
         assertEquals(1, widget(BuiltinKind.SPEED_HUD, 0, 0, 1, 1).withCell(0, 0, 1, 1).w)
+    }
+
+    @Test
+    fun aLayoutFromTheCoarseGridIsScaledUpOnLoad() {
+        assertEquals(COARSE_COLS * GRID_SCALE, GRID_COLS)
+        assertEquals(COARSE_ROWS * GRID_SCALE, GRID_ROWS)
+        // v1 and v2 placed tiles on the 12 x 7 grid: their cells are multiplied on load.
+        val v1 = """{"v":1,"pages":[[{"t":"builtin","k":"CLOCK","gx":1,"gy":2,"gw":3,"gh":2}]]}"""
+        assertEquals(listOf(widget(BuiltinKind.CLOCK, 3, 6, 9, 6)), DashboardStore.parsePages(v1)!![0])
+        val v2 = """{"v":2,"pages":[[{"t":"app","pkg":"a.b","gx":2,"gy":0,"gw":2,"gh":2,"ov":true}]]}"""
+        assertEquals(listOf(DashboardItem.AppShortcut("a.b", 6, 0, 6, 6).withFrame(TileFrame(overlap = true))), DashboardStore.parsePages(v2)!![0])
+        // The bare array from before v1 too.
+        val bare = """[[{"t":"app","pkg":"a.b","gx":2,"gy":0,"gw":2,"gh":2}]]"""
+        assertEquals(listOf(DashboardItem.AppShortcut("a.b", 6, 0, 6, 6)), DashboardStore.parsePages(bare)!![0])
+        // A tile saved without cells gets its kind's default span, not three times it, and is placed on load.
+        val unplaced = DashboardStore.parsePages("""{"v":1,"pages":[[{"t":"builtin","k":"CLOCK"}]]}""")!![0].single()
+        assertEquals(-1, unplaced.x)
+        assertEquals(BuiltinKind.CLOCK.defaultW to BuiltinKind.CLOCK.defaultH, unplaced.w to unplaced.h)
+        // What this build saves says v3 and reads back as it is.
+        val page = listOf(widget(BuiltinKind.CLOCK, 3, 6, 9, 6), DashboardItem.AppShortcut("a.b", 12, 0, 6, 6))
+        val saved = DashboardStore.serializePages(listOf(page))
+        assertEquals(3, JSONObject(saved).getInt("v"))
+        assertEquals(page, DashboardStore.parsePages(saved)!![0])
     }
 
     @Test

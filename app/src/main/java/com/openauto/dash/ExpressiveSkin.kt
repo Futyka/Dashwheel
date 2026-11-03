@@ -153,12 +153,12 @@ internal val ExpressiveLayout = SkinLayout(
         dock = true
     ),
     wide = listOf(
-        DashboardItem.BuiltinWidget(BuiltinKind.CLOCK, x = 0, y = 0, w = 5, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 0, y = 2, w = 5, h = 5),
-        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 5, y = 0, w = 7, h = 2),
-        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 5, y = 2, w = 3, h = 4),
-        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 8, y = 2, w = 4, h = 4),
-        DashboardItem.LaunchBar(emptyList(), x = 5, y = 6, w = 7, h = 1)
+        DashboardItem.BuiltinWidget(BuiltinKind.CLOCK, x = 0, y = 0, w = 15, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.RANGE, x = 0, y = 6, w = 15, h = 15),
+        DashboardItem.BuiltinWidget(BuiltinKind.NAVIGATION, x = 15, y = 0, w = 21, h = 6),
+        DashboardItem.BuiltinWidget(BuiltinKind.SPEED_HUD, x = 15, y = 6, w = 9, h = 12),
+        DashboardItem.BuiltinWidget(BuiltinKind.MEDIA, x = 24, y = 6, w = 12, h = 12),
+        DashboardItem.LaunchBar(emptyList(), x = 15, y = 18, w = 21, h = 3)
     )
 )
 

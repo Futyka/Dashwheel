@@ -263,15 +263,19 @@ internal fun DashboardPage(
         if (editing) {
             // Grid guide-lines while arranging. Under the tiles, so a tap here
             // is one between them.
+            // The coarse cells' lines as before; the finer cells between them faint, so the page stays readable.
             Canvas(modifier = Modifier.fillMaxSize().pointerInput(Unit) { detectTapGestures { onTapEmpty() } }) {
                 val line = DashColors.TextSecondary.copy(alpha = 0.28f)
+                val fine = DashColors.TextSecondary.copy(alpha = 0.1f)
                 for (c in 0..GRID_COLS) {
                     val x = (cellWpx * c).coerceAtMost(size.width - 0.5f)
-                    drawLine(line, Offset(x, 0f), Offset(x, size.height), 2f)
+                    val coarse = c % GRID_SCALE == 0
+                    drawLine(if (coarse) line else fine, Offset(x, 0f), Offset(x, size.height), if (coarse) 2f else 1f)
                 }
                 for (r in 0..GRID_ROWS) {
                     val y = (cellHpx * r).coerceAtMost(size.height - 0.5f)
-                    drawLine(line, Offset(0f, y), Offset(size.width, y), 2f)
+                    val coarse = r % GRID_SCALE == 0
+                    drawLine(if (coarse) line else fine, Offset(0f, y), Offset(size.width, y), if (coarse) 2f else 1f)
                 }
             }
 
