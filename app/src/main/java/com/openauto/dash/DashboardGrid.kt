@@ -212,6 +212,7 @@ internal fun DashboardPage(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(h)
+                            .tileFrame(item.frame, DashShape.Large)
                             .clip(DashShape.Large)
                             .background(DashColors.Bar)
                     ) { tileContent(index, item, null) }
@@ -370,7 +371,9 @@ private suspend fun PointerInputScope.detectPageHold(items: () -> List<Dashboard
         val down = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
         val col = (down.position.x / cellW).toInt()
         val row = (down.position.y / cellH).toInt()
-        val under = items().firstOrNull { col in it.x until it.x + it.w && row in it.y until it.y + it.h }
+        // The tile on top: the last of those over the others, else the grid's.
+        val hits = items().filter { col in it.x until it.x + it.w && row in it.y until it.y + it.h }
+        val under = hits.lastOrNull { !it.inGrid() } ?: hits.firstOrNull()
         if (under != null && under.takesEveryTouch()) return@awaitEachGesture
         val slop = viewConfiguration.touchSlop
         val ended = withTimeoutOrNull(viewConfiguration.longPressTimeoutMillis) {
@@ -458,6 +461,9 @@ internal fun GridTile(
 
     // The drag and resize offsets are read in the layout phase only, so a
     // finger moving a tile re-lays it out each frame without recomposing it.
+    // A tile over the others stands above the grid's tiles (the ghost, at
+    // 0.5, above it, the tile in hand above all); two such tiles keep the
+    // page's order, the later on top.
     Box(
         modifier = Modifier
             .offset { IntOffset((basePxX + dragOffset.x).roundToInt(), (basePxY + dragOffset.y).roundToInt()) }
@@ -467,13 +473,14 @@ internal fun GridTile(
                 val placeable = measurable.measure(Constraints.fixed(w, h))
                 layout(w, h) { placeable.place(0, 0) }
             }
-            .zIndex(if (active) 1f else 0f)
+            .zIndex(if (active) 1f else if (item.inGrid()) 0f else OVER_Z)
             .padding(3.dp)
             .then(if (index == 0) Modifier.tourTarget(TourTarget.TILE) else Modifier)
             .graphicsLayer {
                 if (active) { scaleX = 1.03f; scaleY = 1.03f; shadowElevation = 20f }
             }
     ) {
+        val frameShape = skinChrome().shapes.large
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -482,11 +489,13 @@ internal fun GridTile(
                     when {
                         selected -> Modifier
                             .onGloballyPositioned { onSelectedBounds(it.boundsInRoot()) }
-                            .border(2.dp, DashColors.Accent, skinChrome().shapes.large)
+                            .border(2.dp, DashColors.Accent, frameShape)
                         editing && DashColors.Bare -> Modifier.border(1.dp, DashColors.TextSecondary.copy(alpha = 0.35f), DashShape.Large)
                         else -> Modifier
                     }
                 )
+                // The tile's own border and opacity (TileFrame), under the arranging outline.
+                .tileFrame(item.frame, frameShape)
                 // Dimmed while arranging: the tile is the thing being moved, not
                 // read. Not the one whose panel is open: its new design shows as is.
                 .graphicsLayer { alpha = if (editing && !selected) 0.7f else 1f }
@@ -598,6 +607,32 @@ internal fun GridTile(
             )
         }
     }
+}
+
+/** Where the tiles over the others stand: above the grid's (0), under the snap ghost (0.5) and the tile in hand (1). */
+private const val OVER_Z = 0.25f
+
+/**
+ * A tile's frame ([TileFrame]) on its box: its border in the tile's corners
+ * and its opacity, which fades the border with the content. Always applied,
+ * at 1 too, so changing it never rebuilds the tile (and its map or widget).
+ */
+@Composable
+private fun Modifier.tileFrame(frame: TileFrame, shape: androidx.compose.ui.graphics.Shape): Modifier =
+    graphicsLayer { alpha = frame.opacity }
+        .then(if (frame.border > 0) Modifier.border(frame.border.dp, frame.borderColor.color(), shape) else Modifier)
+
+/** The colour a border is drawn in, from the palette on screen where it has one. */
+@Composable
+internal fun TileBorderColor.color(): Color = when (this) {
+    TileBorderColor.ACCENT -> DashColors.Accent
+    TileBorderColor.TEXT -> DashColors.TextPrimary
+    TileBorderColor.WHITE -> Color.White
+    TileBorderColor.BLACK -> Color.Black
+    TileBorderColor.RED -> Color(0xFFE53935)
+    TileBorderColor.YELLOW -> Color(0xFFFFC107)
+    TileBorderColor.GREEN -> Color(0xFF43A047)
+    TileBorderColor.BLUE -> Color(0xFF1E88E5)
 }
 
 /** How far the resize target reaches past the tile's corner. */

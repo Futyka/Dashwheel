@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Kachel</string>
+    <string name="frame_tab_layer">Ebene</string>
+    <string name="frame_overlap">Über anderen Kacheln</string>
+    <string name="frame_overlap_on">Über den Kacheln des Rasters gezeichnet. Ziehen Sie sie überallhin, auch auf eine andere Kachel.</string>
+    <string name="frame_overlap_off">Im Raster mit den anderen, nie auf einer anderen Kachel.</string>
+    <string name="frame_to_front">Nach vorne</string>
+    <string name="frame_to_back">Nach hinten</string>
+    <string name="frame_opacity">Deckkraft</string>
+    <string name="frame_fainter">Durchsichtiger</string>
+    <string name="frame_more_solid">Deckender</string>
+    <string name="frame_border">Rahmen</string>
+    <string name="frame_border_off">Aus</string>
+    <string name="frame_thinner">Dünner</string>
+    <string name="frame_thicker">Dicker</string>
+    <string name="frame_colour">Rahmenfarbe</string>
+    <string name="frame_colour_accent">Akzent</string>
+    <string name="frame_colour_text">Text</string>
+    <string name="frame_colour_white">Weiß</string>
+    <string name="frame_colour_black">Schwarz</string>
+    <string name="frame_colour_red">Rot</string>
+    <string name="frame_colour_yellow">Gelb</string>
+    <string name="frame_colour_green">Grün</string>
+    <string name="frame_colour_blue">Blau</string>
+    <string name="frame_place">Um eine Zelle verschieben</string>
+    <string name="frame_up">Hoch</string>
+    <string name="frame_down">Runter</string>
+    <string name="frame_left">Links</string>
+    <string name="frame_right">Rechts</string>
+    <string name="frame_size">Größe in Zellen</string>
+    <string name="frame_width">Breite</string>
+    <string name="frame_height">Höhe</string>
+    <string name="frame_narrower">Schmaler</string>
+    <string name="frame_wider">Breiter</string>
+    <string name="frame_shorter">Niedriger</string>
+    <string name="frame_taller">Höher</string>
+</resources>

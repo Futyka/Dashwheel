@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Tegel</string>
+    <string name="frame_tab_layer">Laag</string>
+    <string name="frame_overlap">Over andere tegels</string>
+    <string name="frame_overlap_on">Boven de tegels van het raster getekend. Sleep hem overal heen, ook op een andere tegel.</string>
+    <string name="frame_overlap_off">In het raster met de rest, nooit op een andere tegel.</string>
+    <string name="frame_to_front">Naar voren</string>
+    <string name="frame_to_back">Naar achteren</string>
+    <string name="frame_opacity">Dekking</string>
+    <string name="frame_fainter">Doorzichtiger</string>
+    <string name="frame_more_solid">Dekkender</string>
+    <string name="frame_border">Rand</string>
+    <string name="frame_border_off">Uit</string>
+    <string name="frame_thinner">Dunner</string>
+    <string name="frame_thicker">Dikker</string>
+    <string name="frame_colour">Randkleur</string>
+    <string name="frame_colour_accent">Accent</string>
+    <string name="frame_colour_text">Tekst</string>
+    <string name="frame_colour_white">Wit</string>
+    <string name="frame_colour_black">Zwart</string>
+    <string name="frame_colour_red">Rood</string>
+    <string name="frame_colour_yellow">Geel</string>
+    <string name="frame_colour_green">Groen</string>
+    <string name="frame_colour_blue">Blauw</string>
+    <string name="frame_place">Per cel verplaatsen</string>
+    <string name="frame_up">Omhoog</string>
+    <string name="frame_down">Omlaag</string>
+    <string name="frame_left">Links</string>
+    <string name="frame_right">Rechts</string>
+    <string name="frame_size">Grootte in cellen</string>
+    <string name="frame_width">Breedte</string>
+    <string name="frame_height">Hoogte</string>
+    <string name="frame_narrower">Smaller</string>
+    <string name="frame_wider">Breder</string>
+    <string name="frame_shorter">Lager</string>
+    <string name="frame_taller">Hoger</string>
+</resources>

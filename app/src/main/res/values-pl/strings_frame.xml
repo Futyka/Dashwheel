@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Kafelek</string>
+    <string name="frame_tab_layer">Warstwa</string>
+    <string name="frame_overlap">Nad innymi kafelkami</string>
+    <string name="frame_overlap_on">Rysowany nad kafelkami siatki. Przeciągnij go gdziekolwiek, nawet na inny kafelek.</string>
+    <string name="frame_overlap_off">W siatce z innymi, nigdy na innym kafelku.</string>
+    <string name="frame_to_front">Na wierzch</string>
+    <string name="frame_to_back">Na spód</string>
+    <string name="frame_opacity">Krycie</string>
+    <string name="frame_fainter">Bardziej przezroczysty</string>
+    <string name="frame_more_solid">Bardziej kryjący</string>
+    <string name="frame_border">Obramowanie</string>
+    <string name="frame_border_off">Brak</string>
+    <string name="frame_thinner">Cieńsze</string>
+    <string name="frame_thicker">Grubsze</string>
+    <string name="frame_colour">Kolor obramowania</string>
+    <string name="frame_colour_accent">Akcent</string>
+    <string name="frame_colour_text">Tekst</string>
+    <string name="frame_colour_white">Biały</string>
+    <string name="frame_colour_black">Czarny</string>
+    <string name="frame_colour_red">Czerwony</string>
+    <string name="frame_colour_yellow">Żółty</string>
+    <string name="frame_colour_green">Zielony</string>
+    <string name="frame_colour_blue">Niebieski</string>
+    <string name="frame_place">Przesuń o jedną komórkę</string>
+    <string name="frame_up">W górę</string>
+    <string name="frame_down">W dół</string>
+    <string name="frame_left">W lewo</string>
+    <string name="frame_right">W prawo</string>
+    <string name="frame_size">Rozmiar w komórkach</string>
+    <string name="frame_width">Szerokość</string>
+    <string name="frame_height">Wysokość</string>
+    <string name="frame_narrower">Węższy</string>
+    <string name="frame_wider">Szerszy</string>
+    <string name="frame_shorter">Niższy</string>
+    <string name="frame_taller">Wyższy</string>
+</resources>

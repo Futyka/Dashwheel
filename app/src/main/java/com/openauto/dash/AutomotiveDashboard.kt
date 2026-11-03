@@ -801,15 +801,20 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
     fun moveToPage(page: Int, index: Int, target: Int) {
         val item = pages.getOrNull(page)?.getOrNull(index) ?: return
         val list = pages.getOrNull(target) ?: return
-        val cell = DashboardStore.firstFreeCell(list, item.w, item.h)
-            ?: DashboardStore.firstFreeCell(list, item.minW(), item.minH())
-        if (cell == null) {
-            layoutNotice = context.getString(R.string.dash_notice_no_space)
-            return
-        }
-        val fits = DashboardStore.canPlace(list, null, cell.first, cell.second, item.w, item.h)
-        val placed = if (fits) item.withCell(cell.first, cell.second, item.w, item.h)
+        val placed = if (!item.inGrid()) {
+            // Over the others there too, at its own cells: it needs no free ones.
+            item.withCell(item.x, item.y, item.w, item.h)
+        } else {
+            val cell = DashboardStore.firstFreeCell(list, item.w, item.h)
+                ?: DashboardStore.firstFreeCell(list, item.minW(), item.minH())
+            if (cell == null) {
+                layoutNotice = context.getString(R.string.dash_notice_no_space)
+                return
+            }
+            val fits = DashboardStore.canPlace(list, null, cell.first, cell.second, item.w, item.h)
+            if (fits) item.withCell(cell.first, cell.second, item.w, item.h)
             else item.withCell(cell.first, cell.second, item.minW(), item.minH())
+        }
         history = (history + Snapshot(pages, barTabsState.value)).takeLast(MAX_UNDO)
         pages = pages.mapIndexed { i, l ->
             when (i) {
@@ -859,6 +864,39 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
     /** Draws the tile at [index] with its text and icons [zoom] times their size. */
     fun zoomTile(page: Int, index: Int, zoom: Float) {
         mutatePage(page) { list -> list.mapIndexed { i, t -> if (i == index) t.withZoom(zoom) else t } }
+    }
+
+    /** Frames the tile at [index]: its opacity and border, and whether it lies over the others (TileFrame). */
+    fun frameTile(page: Int, index: Int, frame: TileFrame) {
+        mutatePage(page) { list -> list.mapIndexed { i, t -> if (i == index) t.withFrame(frame) else t } }
+    }
+
+    /**
+     * Lifts the tile at [index] over the other tiles, or lays it back into the
+     * grid: where it is when its cells are free, else at the nearest free ones.
+     * A page with no room for it says so, and the tile stays over the others.
+     */
+    fun setOverlap(page: Int, index: Int, over: Boolean) {
+        val list = pages.getOrNull(page) ?: return
+        val tile = list.getOrNull(index) ?: return
+        if (over) {
+            frameTile(page, index, tile.frame.copy(overlap = true))
+            return
+        }
+        val landed = DashboardStore.intoGrid(list, index)
+        if (landed == null) {
+            layoutNotice = context.getString(R.string.dash_notice_no_grid_spot)
+            return
+        }
+        mutatePage(page) { landed }
+    }
+
+    /** Puts the tile at [index], one over the others, on top of them ([toFront]) or under them; its panel follows it. */
+    fun layerTile(page: Int, index: Int, toFront: Boolean) {
+        val list = pages.getOrNull(page) ?: return
+        val (reordered, at) = DashboardStore.reorder(list, index, toFront)
+        mutatePage(page) { reordered }
+        tileOptions = page to at
     }
 
     /** Restores the layout from before the last add / move / resize / remove, and the dashboards' names and places with it. */
@@ -1762,7 +1800,8 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
                         PanelSide.BOTTOM -> Modifier.align(Alignment.BottomCenter).fillMaxWidth()
                     }.then(
                         when {
-                            widget == null -> Modifier
+                            // A tile with no designs and no layer to set: the panel is as tall as its few controls.
+                            widget == null && !tile.canFrame(insideAllowed) -> Modifier
                             vertical -> Modifier.height(with(density) { panelPx.toDp() })
                             else -> Modifier.fillMaxHeight()
                         }
@@ -1806,6 +1845,11 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
                             }
                         },
                         onZoom = { zoomTile(page, index, it) },
+                        onFrame = { frameTile(page, index, it) },
+                        onOverlap = { over -> setOverlap(page, index, over) },
+                        onLayer = { toFront -> layerTile(page, index, toFront) },
+                        onNudge = { dx, dy -> moveCell(page, index, tile.x + dx, tile.y + dy) },
+                        onResize = { dw, dh -> resizeCell(page, index, tile.w + dw, tile.h + dh) },
                         onMoveTo = { target ->
                             // A dashboard out of the swipes comes back with the tile; asked first.
                             if (target in crossState.value) { tileOptions = null; moveToPage(page, index, target) }

@@ -56,6 +56,7 @@
     <string name="dash_notice_no_space">Questo cruscotto non ha spazio per quel riquadro. Rimuovi o ridimensiona dei riquadri, oppure usa un altro cruscotto.</string>
     <string name="dash_notice_no_room_to_move">Non c\'è spazio per spostare gli altri riquadri. Libera prima un po\' di spazio.</string>
     <string name="dash_notice_resize_overlap">Questa dimensione si sovrappone a un altro riquadro. Fai spazio prima di ridimensionare.</string>
+    <string name="dash_notice_no_grid_spot">Nessun posto libero nella griglia per questo riquadro. Fai spazio, o lascialo sopra gli altri.</string>
     <string name="dash_full_title">Questo cruscotto è pieno</string>
     <string name="dash_full_body">Rimuovi un riquadro o riducine uno per aggiungerne un altro.</string>
 

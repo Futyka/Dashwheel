@@ -56,6 +56,7 @@
     <string name="dash_notice_no_space">Ezen a műszerfalon nincs hely ehhez a csempéhez. Távolítson el vagy méretezzen át csempéket, vagy használjon másik műszerfalat.</string>
     <string name="dash_notice_no_room_to_move">Nincs hely a többi csempe elmozdításához. Előbb szabadítson fel helyet.</string>
     <string name="dash_notice_resize_overlap">Ez a méret átfed egy másik csempét. Átméretezés előtt csináljon helyet.</string>
+    <string name="dash_notice_no_grid_spot">Nincs szabad hely a rácsban ennek a csempének. Csináljon helyet, vagy hagyja a többi fölött.</string>
     <string name="dash_full_title">Ez a műszerfal megtelt</string>
     <string name="dash_full_body">Egy újabb hozzáadásához távolítson el egy csempét, vagy kicsinyítsen le egyet.</string>
 

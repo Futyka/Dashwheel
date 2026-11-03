@@ -31,7 +31,7 @@ Dashwheel is free, with no ads. If it makes your drives nicer, a coffee on Ko-fi
 
 ## Highlights
 
-- **Dashboards your way**: free grid, drag to move and resize, templates, or describe one and the AI lays it out; Canvas theme with the map behind the tiles
+- **Dashboards your way**: free grid, drag to move and resize, tiles that lie over other tiles with their own opacity and border (a speed readout over the map), templates, or describe one and the AI lays it out; Canvas theme with the map behind the tiles
 - **Live car data**: ELM327 Bluetooth OBD, the head unit's own car data (doors, fuel, tyres, reversing), and a USB TPMS receiver of your own
 - **AI mechanic** (free Google Gemini key): fault codes explained and spoken, a sensor watch that speaks up when the car drifts from its usual before a fault code shows, start-up briefing, car care and servicing reminders
 - **Navigation**: free built-in 3D map with turn-by-turn guidance, or Google Maps / Waze next turn on any tile

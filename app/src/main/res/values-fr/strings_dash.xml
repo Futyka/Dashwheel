@@ -56,6 +56,7 @@
     <string name="dash_notice_no_space">Ce tableau de bord n\'a plus de place pour cette tuile. Retirez ou redimensionnez des tuiles, ou utilisez un autre tableau de bord.</string>
     <string name="dash_notice_no_room_to_move">Pas assez de place pour écarter les autres tuiles. Libérez d\'abord de l\'espace.</string>
     <string name="dash_notice_resize_overlap">Cette taille chevauche une autre tuile. Faites de la place avant de redimensionner.</string>
+    <string name="dash_notice_no_grid_spot">Aucune place libre dans la grille pour cette tuile. Faites de la place, ou laissez-la par-dessus les autres.</string>
     <string name="dash_full_title">Ce tableau de bord est plein</string>
     <string name="dash_full_body">Retirez une tuile ou réduisez-en une pour en ajouter une autre.</string>
 

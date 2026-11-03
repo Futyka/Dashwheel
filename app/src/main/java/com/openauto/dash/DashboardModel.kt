@@ -140,6 +140,8 @@ internal val BuiltinKind.offered: Boolean get() = this !in LEFT_OUT_OF_CATALOG |
  *
  * [zoom] scales what the tile draws (text, icons, spacing) inside its cells,
  * like the system's display size but for this tile alone; 1 is as designed.
+ * [frame] is how the tile sits among the others and what frames it: in the
+ * grid with them or over them, its opacity, its border ([TileFrame]).
  */
 sealed interface DashboardItem {
     val x: Int
@@ -147,12 +149,14 @@ sealed interface DashboardItem {
     val w: Int
     val h: Int
     val zoom: Float
+    val frame: TileFrame
 
     data class AppShortcut(
         val packageName: String,
         override val x: Int = 0, override val y: Int = 0,
         override val w: Int = 2, override val h: Int = 2,
-        override val zoom: Float = 1f
+        override val zoom: Float = 1f,
+        override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
 
     data class SplitPair(
@@ -160,14 +164,16 @@ sealed interface DashboardItem {
         val secondaryPackage: String,
         override val x: Int = 0, override val y: Int = 0,
         override val w: Int = 2, override val h: Int = 2,
-        override val zoom: Float = 1f
+        override val zoom: Float = 1f,
+        override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
 
     data class LaunchBar(
         val packages: List<String> = emptyList(),
         override val x: Int = 0, override val y: Int = 0,
         override val w: Int = 8, override val h: Int = 1,
-        override val zoom: Float = 1f
+        override val zoom: Float = 1f,
+        override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
 
     /** [design] is this tile's own look (see WidgetDesigns.kt); two clocks may differ. */
@@ -176,14 +182,16 @@ sealed interface DashboardItem {
         override val x: Int = 0, override val y: Int = 0,
         override val w: Int = 5, override val h: Int = 3,
         val design: WidgetDesign = WidgetDesign.STANDARD,
-        override val zoom: Float = 1f
+        override val zoom: Float = 1f,
+        override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
 
     data class SystemWidget(
         val appWidgetId: Int,
         override val x: Int = 0, override val y: Int = 0,
         override val w: Int = 5, override val h: Int = 3,
-        override val zoom: Float = 1f
+        override val zoom: Float = 1f,
+        override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
 
     /**
@@ -196,9 +204,66 @@ sealed interface DashboardItem {
         override val x: Int = 0, override val y: Int = 0,
         override val w: Int = 5, override val h: Int = 3,
         override val zoom: Float = 1f,
-        val inside: Boolean = false
+        val inside: Boolean = false,
+        override val frame: TileFrame = TileFrame.NONE
     ) : DashboardItem
 }
+
+/**
+ * How a tile sits among the others and what frames it. A tile that
+ * [overlap]s leaves the grid's one-tile-per-cell rule: it may cover the
+ * tiles in the grid and be covered by another such tile, is drawn above the
+ * grid's tiles (the later of two in the page's order on top), never pushes
+ * one aside and never blocks a cell for a new tile. [opacity] is how solid
+ * the whole tile is drawn, [OPACITY_MIN]..1; [border] its edge's width in dp,
+ * 0 for none, up to [BORDER_MAX], in [borderColor]. Persisted; the defaults
+ * write nothing, so a plain tile's layout reads as before.
+ */
+data class TileFrame(
+    val overlap: Boolean = false,
+    val opacity: Float = 1f,
+    val border: Int = 0,
+    val borderColor: TileBorderColor = TileBorderColor.ACCENT
+) {
+    companion object {
+        val NONE = TileFrame()
+    }
+}
+
+/** A tile's border colour; the names are persisted, so never rename one. */
+enum class TileBorderColor(@StringRes val labelRes: Int) {
+    ACCENT(R.string.frame_colour_accent),
+    TEXT(R.string.frame_colour_text),
+    WHITE(R.string.frame_colour_white),
+    BLACK(R.string.frame_colour_black),
+    RED(R.string.frame_colour_red),
+    YELLOW(R.string.frame_colour_yellow),
+    GREEN(R.string.frame_colour_green),
+    BLUE(R.string.frame_colour_blue);
+
+    companion object {
+        fun fromName(name: String?): TileBorderColor = entries.firstOrNull { it.name == name } ?: ACCENT
+    }
+}
+
+/** How faint a tile may be drawn, and by how much per tap. */
+const val OPACITY_MIN = 0.2f
+const val OPACITY_STEP = 0.1f
+
+/** The opacity one step down ([steps] < 0) or up (> 0) from [opacity], on whole tenths so it never drifts. */
+fun opacityStep(opacity: Float, steps: Int): Float {
+    val tenths = kotlin.math.round(opacity * 10f).toInt() + steps
+    return (tenths / 10f).coerceIn(OPACITY_MIN, 1f)
+}
+
+/** The widest border a tile gets, in dp. */
+const val BORDER_MAX = 8
+
+/** A tile's [frame], with its values kept in range. */
+fun TileFrame.clamped(): TileFrame = copy(
+    opacity = opacity.takeIf { it.isFinite() }?.coerceIn(OPACITY_MIN, 1f) ?: 1f,
+    border = border.coerceIn(0, BORDER_MAX)
+)
 
 /** The dashboard grid: 12 cells across, 7 down; the other way round on an upright screen ([ScreenShape]). */
 val GRID_COLS: Int get() = if (ScreenShape.vertical) 7 else 12
@@ -273,6 +338,27 @@ fun DashboardItem.canZoom(insideAllowed: Boolean = false): Boolean =
 fun DashboardItem.AppWindow.runsInside(insideAllowed: Boolean): Boolean =
     inside || (insideAllowed && zoom != 1f)
 
+/**
+ * Whether the frame's layer controls change anything: a floating window is a
+ * window of its own over everything, so neither overlapping nor opacity nor a
+ * border reaches it; an app inside its tile is drawn with the tile.
+ */
+fun DashboardItem.canFrame(insideAllowed: Boolean = false): Boolean =
+    !(this is DashboardItem.AppWindow && !runsInside(insideAllowed))
+
+/** Returns a copy framed as [frame] (its values kept in range, see [TileFrame.clamped]). */
+fun DashboardItem.withFrame(frame: TileFrame): DashboardItem {
+    val f = frame.clamped()
+    return when (this) {
+        is DashboardItem.AppShortcut -> copy(frame = f)
+        is DashboardItem.SplitPair -> copy(frame = f)
+        is DashboardItem.LaunchBar -> copy(frame = f)
+        is DashboardItem.BuiltinWidget -> copy(frame = f)
+        is DashboardItem.SystemWidget -> copy(frame = f)
+        is DashboardItem.AppWindow -> copy(frame = f)
+    }
+}
+
 /** Returns a copy whose content is drawn at [zoom] (clamped to [ZOOM_MIN]..[ZOOM_MAX]). */
 fun DashboardItem.withZoom(zoom: Float): DashboardItem {
     val z = zoom.coerceIn(ZOOM_MIN, ZOOM_MAX)
@@ -310,6 +396,9 @@ fun DashboardItem.withCell(x: Int, y: Int, w: Int, h: Int): DashboardItem {
 /** True when the two tiles' cell rectangles share at least one cell. */
 fun DashboardItem.overlaps(other: DashboardItem): Boolean =
     DashboardStore.rectanglesOverlap(x, y, w, h, other.x, other.y, other.w, other.h)
+
+/** A tile in the grid, which holds its cells: not one over the others ([TileFrame.overlap]). */
+fun DashboardItem.inGrid(): Boolean = !frame.overlap
 
 /**
  * The dashboards that are swiped: the pages of [DashboardStore.ROW] and
@@ -395,8 +484,13 @@ object DashboardStore {
      *     pages array, which is still accepted. A built-in tile may carry an
      *     optional `"d"` (its WidgetDesign name); absent means the standard
      *     design, so older builds simply ignore it.
+     *  2: a tile may carry its frame ([TileFrame]): `"ov"` true for one over
+     *     the other tiles, `"op"` its opacity, `"bw"` its border's width and
+     *     `"bc"` the border's colour name; each absent at its default. An
+     *     older build ignores them, and lays the tiles over the others back
+     *     into the grid on load (its [repairOverlaps] knows no overlap).
      */
-    private const val SCHEMA_VERSION = 1
+    private const val SCHEMA_VERSION = 2
 
     /**
      * Tiles this build does not understand (a type or builtin kind added by a
@@ -565,6 +659,8 @@ object DashboardStore {
     private fun fitNear(placed: List<DashboardItem>, item: DashboardItem): DashboardItem? {
         val w = item.w.coerceIn(1, GRID_COLS)
         val h = item.h.coerceIn(1, GRID_ROWS)
+        // A tile over the others needs no free cells: its own place, inside the new grid.
+        if (!item.inGrid()) return item.withCell(item.x, item.y, w, h)
         val minW = (if (item is DashboardItem.BuiltinWidget) item.kind.minSize().first else 1).coerceAtMost(w)
         val minH = (if (item is DashboardItem.BuiltinWidget) item.kind.minSize().second else 1).coerceAtMost(h)
         val fit = largestFit(placed, w, h, minW, minH) ?: largestFit(placed, w, h, 1, 1) ?: return null
@@ -756,7 +852,9 @@ object DashboardStore {
 
     /**
      * True when a proposed tile rectangle is fully in bounds and does not touch
-     * another tile. [ignoredIndex] is the tile currently being moved or resized.
+     * another tile of the grid. [ignoredIndex] is the tile currently being
+     * moved or resized; one over the others ([TileFrame.overlap]) only has to
+     * stay in bounds, and the tiles over the others are never in the way.
      */
     fun canPlace(
         items: List<DashboardItem>,
@@ -767,8 +865,9 @@ object DashboardStore {
         h: Int
     ): Boolean {
         if (!inBounds(x, y, w, h)) return false
+        if (ignoredIndex != null && items.getOrNull(ignoredIndex)?.inGrid() == false) return true
         return items.withIndex().none { (index, item) ->
-            index != ignoredIndex && rectanglesOverlap(x, y, w, h, item.x, item.y, item.w, item.h)
+            index != ignoredIndex && item.inGrid() && rectanglesOverlap(x, y, w, h, item.x, item.y, item.w, item.h)
         }
     }
 
@@ -782,6 +881,9 @@ object DashboardStore {
      *
      * Returns the new page, or null when the tiles in the way have nowhere to go
      * (the caller then keeps the layout and tells the user).
+     *
+     * A tile over the others goes anywhere in bounds and moves nothing; the
+     * tiles over the others are never in a grid tile's way either.
      */
     fun moveResolving(items: List<DashboardItem>, index: Int, x: Int, y: Int): List<DashboardItem>? {
         val mover = items.getOrNull(index) ?: return null
@@ -791,7 +893,7 @@ object DashboardStore {
             return items.mapIndexed { i, it -> if (i == index) moved else it }
         }
 
-        val blocking = items.withIndex().filter { (i, it) -> i != index && it.overlaps(moved) }
+        val blocking = items.withIndex().filter { (i, it) -> i != index && it.inGrid() && it.overlaps(moved) }
 
         // Swap: one tile in the way, and it fits where the mover came from
         // without touching anything else.
@@ -800,7 +902,7 @@ object DashboardStore {
             val swapped = b.withCell(mover.x, mover.y, b.w, b.h)
             val others = items.filterIndexed { i, _ -> i != index && i != bi }
             val clear = swapped.x == mover.x && swapped.y == mover.y &&
-                !swapped.overlaps(moved) && others.none { it.overlaps(swapped) }
+                !swapped.overlaps(moved) && others.none { it.inGrid() && it.overlaps(swapped) }
             if (clear) {
                 return items.mapIndexed { i, it ->
                     when (i) {
@@ -816,7 +918,7 @@ object DashboardStore {
         // first, so small ones fill the gaps) to the nearest free cell.
         val result = items.toMutableList()
         result[index] = moved
-        val fixed = items.indices.filter { i -> i != index && blocking.none { it.index == i } }
+        val fixed = items.indices.filter { i -> i != index && blocking.none { it.index == i } && items[i].inGrid() }
             .map { result[it] }.toMutableList()
         fixed += moved
         for ((bi, b) in blocking.sortedByDescending { it.value.w * it.value.h }) {
@@ -847,13 +949,15 @@ object DashboardStore {
     /**
      * Keeps the first of any overlapping tiles where it is and relocates the
      * later ones to the nearest free cell. A tile with no room left is dropped
-     * rather than drawn on top of another one.
+     * rather than drawn on top of another one. The tiles over the others
+     * ([TileFrame.overlap]) are meant to overlap: they stay where they are,
+     * only kept inside the grid, and take no cell from the rest.
      */
     fun repairOverlaps(items: List<DashboardItem>): List<DashboardItem> {
         val placed = mutableListOf<DashboardItem>()
         for (item in items) {
             val fixed = item.withCell(item.x, item.y, item.w, item.h)
-            if (placed.none { it.overlaps(fixed) }) {
+            if (!fixed.inGrid() || placed.none { it.inGrid() && it.overlaps(fixed) }) {
                 placed += fixed
                 continue
             }
@@ -871,12 +975,46 @@ object DashboardStore {
         return placed
     }
 
+    /**
+     * [items] with the tile at [index] drawn last of all ([toFront]), or first,
+     * so among the tiles over the others it is on top, or under the rest of
+     * them. Only such a tile moves in the order: the grid's tiles never cover
+     * one another, so their order shows nothing. Returns the new page and the
+     * tile's new index.
+     */
+    fun reorder(items: List<DashboardItem>, index: Int, toFront: Boolean): Pair<List<DashboardItem>, Int> {
+        val item = items.getOrNull(index) ?: return items to index
+        if (item.inGrid()) return items to index
+        val rest = items.filterIndexed { i, _ -> i != index }
+        return if (toFront) (rest + item) to rest.size else (listOf(item) + rest) to 0
+    }
+
+    /**
+     * The tile at [index], over the others until now, back in the grid: where
+     * it is when its cells are free, else at the nearest free cell at its
+     * size, else shrunk to its kind's minimum. Null when the page has no room
+     * for it; it then stays over the others.
+     */
+    fun intoGrid(items: List<DashboardItem>, index: Int): List<DashboardItem>? {
+        val item = items.getOrNull(index) ?: return null
+        val grid = items.filterIndexed { i, it -> i != index && it.inGrid() }
+        val landed = item.withFrame(item.frame.copy(overlap = false))
+        val placed = when {
+            grid.none { it.overlaps(landed) } -> landed
+            else -> listOf(landed.w to landed.h, landed.minW() to landed.minH()).firstNotNullOfOrNull { (w, h) ->
+                nearestFreeCell(grid, w, h, landed.x, landed.y)?.let { cell -> landed.withCell(cell.first, cell.second, w, h) }
+            } ?: return null
+        }
+        return items.mapIndexed { i, it -> if (i == index) placed else it }
+    }
+
     private fun inBounds(x: Int, y: Int, w: Int, h: Int): Boolean =
         x >= 0 && y >= 0 && w >= 1 && h >= 1 && x + w <= GRID_COLS && y + h <= GRID_ROWS
 
+    /** The cells the grid's tiles hold; a tile over the others holds none. */
     private fun occupancy(items: List<DashboardItem>): Array<BooleanArray> {
         val occ = Array(GRID_ROWS) { BooleanArray(GRID_COLS) }
-        items.forEach { mark(occ, it.x, it.y, it.w, it.h, true) }
+        items.forEach { if (it.inGrid()) mark(occ, it.x, it.y, it.w, it.h, true) }
         return occ
     }
 
@@ -933,6 +1071,12 @@ object DashboardStore {
                 .apply { if (inside) put("in", true) }
         }
         if (zoom != 1f) o.put("z", zoom.toDouble())
+        if (frame.overlap) o.put("ov", true)
+        if (frame.opacity != 1f) o.put("op", frame.opacity.toDouble())
+        if (frame.border > 0) {
+            o.put("bw", frame.border)
+            if (frame.borderColor != TileBorderColor.ACCENT) o.put("bc", frame.borderColor.name)
+        }
         return o.put("gx", x).put("gy", y).put("gw", w).put("gh", h)
     }
 
@@ -962,9 +1106,17 @@ object DashboardStore {
         val gw = optInt("gw", -1)
         val gh = optInt("gh", -1)
         val zoom = optDouble("z", 1.0).toFloat().takeIf { it.isFinite() } ?: 1f
+        val frame = TileFrame(
+            overlap = optBoolean("ov"),
+            opacity = optDouble("op", 1.0).toFloat(),
+            border = optInt("bw", 0),
+            borderColor = TileBorderColor.fromName(optString("bc"))
+        ).clamped()
         fun place(item: DashboardItem): DashboardItem =
             (if (gx >= 0 && gy >= 0 && gw > 0 && gh > 0) item.withCell(gx, gy, gw, gh)
-            else item.markUnplaced()).let { if (zoom != 1f) it.withZoom(zoom) else it }
+            else item.markUnplaced())
+                .let { if (zoom != 1f) it.withZoom(zoom) else it }
+                .let { if (frame != TileFrame.NONE) it.withFrame(frame) else it }
 
         return when (optString("t")) {
             "app" -> optString("pkg").takeIf { it.isNotBlank() }

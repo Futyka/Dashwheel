@@ -56,6 +56,7 @@
     <string name="dash_notice_no_space">На этой панели нет места для этой плитки. Удалите или уменьшите плитки, либо выберите другую панель.</string>
     <string name="dash_notice_no_room_to_move">Нет места, чтобы сдвинуть другие плитки. Сначала освободите место.</string>
     <string name="dash_notice_resize_overlap">Этот размер перекрывает другую плитку. Освободите место перед изменением размера.</string>
+    <string name="dash_notice_no_grid_spot">В сетке нет свободного места для этой плитки. Освободите место или оставьте её поверх других.</string>
     <string name="dash_full_title">Панель заполнена</string>
     <string name="dash_full_body">Удалите или уменьшите плитку, чтобы добавить новую.</string>
 

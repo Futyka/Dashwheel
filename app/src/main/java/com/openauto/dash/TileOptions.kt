@@ -23,15 +23,29 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.FlipToBack
+import androidx.compose.material.icons.filled.FlipToFront
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.Layers
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.filled.Widgets
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -58,10 +72,21 @@ import kotlin.math.roundToInt
  * side, or on the other one when the tile is under it there; an upright
  * screen has it along the bottom, or the top. Resizing stays on the tile's
  * corner, and the edit bar's Undo takes back any of it.
+ *
+ * Its Layer tab is the tile's frame (TileFrame): over the other tiles or in
+ * the grid with them, on top of or under the other tiles over the grid, its
+ * opacity, its border and the border's colour, and the tile's place and size
+ * a cell at a time, for setting one tile over another exactly.
  */
 
 /** Where the tile's panel stands on the pages. */
 internal enum class PanelSide { LEFT, RIGHT, TOP, BOTTOM }
+
+/** The panel's two tabs: the tile itself (design, text size, dashboard, remove) and its layer (TileFrame). */
+private enum class PanelSection(val icon: ImageVector, @androidx.annotation.StringRes val label: Int) {
+    TILE(Icons.Filled.Widgets, R.string.frame_tab_tile),
+    LAYER(Icons.Filled.Layers, R.string.frame_tab_layer)
+}
 
 /** The side panel's width. */
 internal val PANEL_WIDTH = 360.dp
@@ -129,13 +154,26 @@ internal fun TilePanel(
     /** A side panel widened for short pages (see [sidePanelWidth]): the shelf and the controls side by side. */
     wide: Boolean = false,
     /** The Dashboard bar's own actions, shown instead of the page picker (the bar is the same on every page). */
-    barActions: (@Composable () -> Unit)? = null
+    barActions: (@Composable () -> Unit)? = null,
+    /** The tile's frame changed: its opacity, its border, the border's colour (TileFrame). */
+    onFrame: (TileFrame) -> Unit = {},
+    /** Lifts the tile over the other tiles, or lays it back into the grid. */
+    onOverlap: (Boolean) -> Unit = {},
+    /** Among the tiles over the others: on top of them (true), or under them. */
+    onLayer: (Boolean) -> Unit = {},
+    /** Moves the tile by whole cells, across then down. */
+    onNudge: (Int, Int) -> Unit = { _, _ -> },
+    /** Grows (or shrinks) the tile by whole cells, across then down. */
+    onResize: (Int, Int) -> Unit = { _, _ -> }
 ) {
     val upright = side == PanelSide.TOP || side == PanelSide.BOTTOM
     // Short pages: the side panel has widened to hold the shelf beside the controls.
     val besideShelf = upright || (designs != null && wide)
     // The tile's own settings, the same page Settings opens (TileSettings.kt).
     val settings = (item as? DashboardItem.BuiltinWidget)?.let { tileSettings(it.kind) }
+    // A floating window has no layer to set: its tab is left out.
+    val framed = item.canFrame(rememberInsideAllowed())
+    var section by remember { mutableStateOf(PanelSection.TILE) }
     SolidCard(modifier = modifier.keepClearOfWindows()) {
         Column(modifier = Modifier.padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -149,6 +187,20 @@ internal fun TilePanel(
                     modifier = Modifier.weight(1f)
                 )
                 SquareButton(Icons.Filled.Close, stringResource(R.string.dash_close), onClick = onClose)
+            }
+            if (framed) {
+                SegmentedSwitch(
+                    options = PanelSection.entries,
+                    chosen = section,
+                    icon = { it.icon },
+                    title = { stringResource(it.label) },
+                    onChoose = { section = it }
+                )
+            }
+            if (framed && section == PanelSection.LAYER) {
+                // Along the bottom, or the widened side panel: the layer beside the place.
+                LayerControls(item, twoColumns = upright || wide, onFrame, onOverlap, onLayer, onNudge, onResize, Modifier.weight(1f))
+                return@Column
             }
             if (settings != null) TileSettingsButton(settings)
             if (besideShelf) {
@@ -235,6 +287,224 @@ private fun ColumnScope.Controls(
     if (stacked) RemoveButton(onRemove)
 }
 
+/**
+ * The Layer tab: the tile over the others or in the grid, and when over
+ * them on top or under the rest of them; its opacity; its border and the
+ * border's colour; then its place and size a cell at a time. Each change
+ * shows on the tile at once. One scrolling column, or two side by side
+ * ([twoColumns]) where the panel is wide and short.
+ */
+@Composable
+private fun LayerControls(
+    item: DashboardItem,
+    twoColumns: Boolean,
+    onFrame: (TileFrame) -> Unit,
+    onOverlap: (Boolean) -> Unit,
+    onLayer: (Boolean) -> Unit,
+    onNudge: (Int, Int) -> Unit,
+    onResize: (Int, Int) -> Unit,
+    modifier: Modifier
+) {
+    val frame = item.frame
+    val layer: @Composable ColumnScope.() -> Unit = {
+        OverlapSwitch(frame.overlap, onOverlap)
+        if (frame.overlap) {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                PanelButton(Icons.Filled.FlipToFront, stringResource(R.string.frame_to_front), Modifier.weight(1f)) { onLayer(true) }
+                PanelButton(Icons.Filled.FlipToBack, stringResource(R.string.frame_to_back), Modifier.weight(1f)) { onLayer(false) }
+            }
+        }
+        LabelledStepper(
+            label = stringResource(R.string.frame_opacity),
+            value = stringResource(R.string.zoom_percent, (frame.opacity * 100).roundToInt()),
+            downLabel = stringResource(R.string.frame_fainter), upLabel = stringResource(R.string.frame_more_solid),
+            canDown = frame.opacity > OPACITY_MIN, canUp = frame.opacity < 1f,
+            onDown = { onFrame(frame.copy(opacity = opacityStep(frame.opacity, -1))) },
+            onUp = { onFrame(frame.copy(opacity = opacityStep(frame.opacity, 1))) }
+        )
+        LabelledStepper(
+            label = stringResource(R.string.frame_border),
+            value = if (frame.border == 0) stringResource(R.string.frame_border_off) else frame.border.toString(),
+            downLabel = stringResource(R.string.frame_thinner), upLabel = stringResource(R.string.frame_thicker),
+            canDown = frame.border > 0, canUp = frame.border < BORDER_MAX,
+            onDown = { onFrame(frame.copy(border = frame.border - 1)) },
+            onUp = { onFrame(frame.copy(border = frame.border + 1)) }
+        )
+        if (frame.border > 0) {
+            PanelLabel(stringResource(R.string.frame_colour))
+            ColourSwatches(frame.borderColor) { onFrame(frame.copy(borderColor = it)) }
+        }
+    }
+    val place: @Composable ColumnScope.() -> Unit = {
+        PanelLabel(stringResource(R.string.frame_place))
+        NudgeCross(item, onNudge, Modifier.align(Alignment.CenterHorizontally))
+        PanelLabel(stringResource(R.string.frame_size))
+        LabelledStepper(
+            label = stringResource(R.string.frame_width),
+            value = item.w.toString(),
+            downLabel = stringResource(R.string.frame_narrower), upLabel = stringResource(R.string.frame_wider),
+            canDown = item.w > item.minW(), canUp = item.x + item.w < GRID_COLS,
+            onDown = { onResize(-1, 0) }, onUp = { onResize(1, 0) }
+        )
+        LabelledStepper(
+            label = stringResource(R.string.frame_height),
+            value = item.h.toString(),
+            downLabel = stringResource(R.string.frame_shorter), upLabel = stringResource(R.string.frame_taller),
+            canDown = item.h > item.minH(), canUp = item.y + item.h < GRID_ROWS,
+            onDown = { onResize(0, -1) }, onUp = { onResize(0, 1) }
+        )
+    }
+    if (twoColumns) {
+        Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+            Column(Modifier.weight(1f).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) { layer() }
+            VerticalDivider(color = DashColors.Line)
+            Column(Modifier.weight(1f).verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) { place() }
+        }
+    } else {
+        Column(modifier.verticalScroll(rememberScrollState()), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            layer()
+            HorizontalDivider(color = DashColors.Line)
+            place()
+        }
+    }
+}
+
+/** Over the other tiles, or in the grid with them: the switch, with a line on what it means. */
+@Composable
+private fun OverlapSwitch(over: Boolean, onOverlap: (Boolean) -> Unit) {
+    val tap = rememberTapFeedback()
+    Row(
+        modifier = Modifier
+            .heightIn(min = DashSize.Touch)
+            .clip(DashShape.Small)
+            .border(1.dp, if (over) DashColors.Accent else DashColors.Line, DashShape.Small)
+            .clickable(role = Role.Switch) { tap(); onOverlap(!over) }
+            .padding(horizontal = 12.dp, vertical = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(Icons.Filled.Layers, contentDescription = null, tint = if (over) DashColors.Accent else DashColors.TextSecondary, modifier = Modifier.size(22.dp))
+        Spacer(Modifier.width(10.dp))
+        Column(Modifier.weight(1f)) {
+            Text(stringResource(R.string.frame_overlap), color = DashColors.TextPrimary, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(
+                stringResource(if (over) R.string.frame_overlap_on else R.string.frame_overlap_off),
+                color = DashColors.TextSecondary, style = MaterialTheme.typography.labelSmall, maxLines = 2, overflow = TextOverflow.Ellipsis
+            )
+        }
+        Spacer(Modifier.width(10.dp))
+        Switch(
+            checked = over,
+            onCheckedChange = null,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = DashColors.OnAccent,
+                checkedTrackColor = DashColors.Accent,
+                uncheckedThumbColor = DashColors.TextSecondary,
+                uncheckedTrackColor = DashColors.CardHi,
+                uncheckedBorderColor = DashColors.Line
+            )
+        )
+    }
+}
+
+/** A labelled action in the panel's row style: its icon and its words. */
+@Composable
+private fun PanelButton(icon: ImageVector, label: String, modifier: Modifier = Modifier, onClick: () -> Unit) {
+    val tap = rememberTapFeedback()
+    Row(
+        modifier = modifier
+            .heightIn(min = DashSize.Touch)
+            .clip(DashShape.Small)
+            .background(DashColors.CardHi)
+            .clickable(role = Role.Button) { tap(); onClick() }
+            .padding(horizontal = 12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Icon(icon, contentDescription = null, tint = DashColors.TextPrimary, modifier = Modifier.size(22.dp))
+        Spacer(Modifier.width(8.dp))
+        Text(label, color = DashColors.TextPrimary, fontWeight = FontWeight.SemiBold, maxLines = 1, overflow = TextOverflow.Ellipsis)
+    }
+}
+
+/** A setting's name with its stepper beside it: minus, the value, plus. */
+@Composable
+private fun LabelledStepper(
+    label: String,
+    value: String,
+    downLabel: String,
+    upLabel: String,
+    canDown: Boolean,
+    canUp: Boolean,
+    onDown: () -> Unit,
+    onUp: () -> Unit
+) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        PanelLabel(label, Modifier.weight(1f))
+        Stepper(value, downLabel, upLabel, canDown, canUp, onDown, onUp)
+    }
+}
+
+@Composable
+private fun Stepper(value: String, downLabel: String, upLabel: String, canDown: Boolean, canUp: Boolean, onDown: () -> Unit, onUp: () -> Unit) {
+    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        SquareButton(Icons.Filled.Remove, downLabel, enabled = canDown, onClick = onDown)
+        Text(
+            value,
+            color = DashColors.TextPrimary, fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center, maxLines = 1, modifier = Modifier.width(56.dp)
+        )
+        SquareButton(Icons.Filled.Add, upLabel, enabled = canUp, onClick = onUp)
+    }
+}
+
+/** The border's colours as swatches, four to a row so they fit the narrow column too, the chosen one ringed in the accent. */
+@Composable
+private fun ColourSwatches(chosen: TileBorderColor, onPick: (TileBorderColor) -> Unit) {
+    val tap = rememberTapFeedback()
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        TileBorderColor.entries.chunked(4).forEach { row ->
+            Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                row.forEach { colour ->
+                    val name = stringResource(colour.labelRes)
+                    val picked = colour == chosen
+                    Box(
+                        modifier = Modifier
+                            .size(SWATCH)
+                            .clip(RoundedCornerShape(50))
+                            .border(if (picked) 3.dp else 1.dp, if (picked) DashColors.Accent else DashColors.Line, RoundedCornerShape(50))
+                            .padding(if (picked) 5.dp else 3.dp)
+                            .clip(RoundedCornerShape(50))
+                            .background(colour.color())
+                            .clickable(role = Role.RadioButton, onClickLabel = name) { tap(); onPick(colour) }
+                            .semantics { contentDescription = name }
+                    )
+                }
+            }
+        }
+    }
+}
+
+private val SWATCH = 34.dp
+
+/** Four arrows around the tile's cell: a tap moves it one cell that way, as far as the grid goes. */
+@Composable
+private fun NudgeCross(item: DashboardItem, onNudge: (Int, Int) -> Unit, modifier: Modifier = Modifier) {
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        SquareButton(Icons.Filled.KeyboardArrowUp, stringResource(R.string.frame_up), enabled = item.y > 0) { onNudge(0, -1) }
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
+            SquareButton(Icons.Filled.KeyboardArrowLeft, stringResource(R.string.frame_left), enabled = item.x > 0) { onNudge(-1, 0) }
+            // The tile's top-left cell, counted from one, as the grid shows it.
+            Text(
+                "${item.x + 1},${item.y + 1}",
+                color = DashColors.TextSecondary, style = MaterialTheme.typography.labelMedium,
+                textAlign = TextAlign.Center, maxLines = 1, modifier = Modifier.width(DashSize.Touch)
+            )
+            SquareButton(Icons.Filled.KeyboardArrowRight, stringResource(R.string.frame_right), enabled = item.x + item.w < GRID_COLS) { onNudge(1, 0) }
+        }
+        SquareButton(Icons.Filled.KeyboardArrowDown, stringResource(R.string.frame_down), enabled = item.y + item.h < GRID_ROWS) { onNudge(0, 1) }
+    }
+}
+
 @Composable
 private fun PanelLabel(text: String, modifier: Modifier = Modifier) {
     Text(text, color = DashColors.TextSecondary, style = MaterialTheme.typography.labelMedium, maxLines = 2, modifier = modifier)
@@ -243,15 +513,12 @@ private fun PanelLabel(text: String, modifier: Modifier = Modifier) {
 /** Smaller, the percentage, bigger: the tile's text and icons, as on the edit bar for the whole page. */
 @Composable
 private fun SizeStepper(zoom: Float, onZoom: (Float) -> Unit) {
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-        SquareButton(Icons.Filled.Remove, stringResource(R.string.zoom_out), enabled = zoom > ZOOM_MIN) { onZoom(zoomStep(zoom, -1)) }
-        Text(
-            stringResource(R.string.zoom_percent, (zoom * 100).roundToInt()),
-            color = DashColors.TextPrimary, fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center, modifier = Modifier.width(56.dp)
-        )
-        SquareButton(Icons.Filled.Add, stringResource(R.string.zoom_in), enabled = zoom < ZOOM_MAX) { onZoom(zoomStep(zoom, 1)) }
-    }
+    Stepper(
+        value = stringResource(R.string.zoom_percent, (zoom * 100).roundToInt()),
+        downLabel = stringResource(R.string.zoom_out), upLabel = stringResource(R.string.zoom_in),
+        canDown = zoom > ZOOM_MIN, canUp = zoom < ZOOM_MAX,
+        onDown = { onZoom(zoomStep(zoom, -1)) }, onUp = { onZoom(zoomStep(zoom, 1)) }
+    )
 }
 
 @Composable

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="frame_tab_tile">Tuile</string>
+    <string name="frame_tab_layer">Calque</string>
+    <string name="frame_overlap">Par-dessus les autres tuiles</string>
+    <string name="frame_overlap_on">Dessinée au-dessus des tuiles de la grille. Glissez-la où vous voulez, même sur une autre tuile.</string>
+    <string name="frame_overlap_off">Dans la grille avec les autres, jamais sur une autre tuile.</string>
+    <string name="frame_to_front">Au premier plan</string>
+    <string name="frame_to_back">À l\'arrière-plan</string>
+    <string name="frame_opacity">Opacité</string>
+    <string name="frame_fainter">Plus transparente</string>
+    <string name="frame_more_solid">Plus opaque</string>
+    <string name="frame_border">Bordure</string>
+    <string name="frame_border_off">Aucune</string>
+    <string name="frame_thinner">Plus fine</string>
+    <string name="frame_thicker">Plus épaisse</string>
+    <string name="frame_colour">Couleur de la bordure</string>
+    <string name="frame_colour_accent">Accent</string>
+    <string name="frame_colour_text">Texte</string>
+    <string name="frame_colour_white">Blanc</string>
+    <string name="frame_colour_black">Noir</string>
+    <string name="frame_colour_red">Rouge</string>
+    <string name="frame_colour_yellow">Jaune</string>
+    <string name="frame_colour_green">Vert</string>
+    <string name="frame_colour_blue">Bleu</string>
+    <string name="frame_place">Déplacer d\'une case à la fois</string>
+    <string name="frame_up">Haut</string>
+    <string name="frame_down">Bas</string>
+    <string name="frame_left">Gauche</string>
+    <string name="frame_right">Droite</string>
+    <string name="frame_size">Taille en cases</string>
+    <string name="frame_width">Largeur</string>
+    <string name="frame_height">Hauteur</string>
+    <string name="frame_narrower">Plus étroite</string>
+    <string name="frame_wider">Plus large</string>
+    <string name="frame_shorter">Plus basse</string>
+    <string name="frame_taller">Plus haute</string>
+</resources>

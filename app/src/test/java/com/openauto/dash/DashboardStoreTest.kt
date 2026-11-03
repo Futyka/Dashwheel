@@ -385,6 +385,155 @@ class DashboardStoreTest {
         assertEquals(pages, DashboardStore.parsePages(DashboardStore.serializePages(pages)))
     }
 
+    // --- tiles over the others (TileFrame) -----------------------------------
+
+    private fun over(kind: BuiltinKind, x: Int, y: Int, w: Int, h: Int) =
+        widget(kind, x, y, w, h).withFrame(TileFrame(overlap = true))
+
+    @Test
+    fun aTileOverTheOthersGoesAnywhereAndMovesNothing() {
+        val map = widget(BuiltinKind.NAVMAP, 0, 0, 6, 4)
+        val speed = over(BuiltinKind.SPEED_HUD, 8, 0, 2, 2)
+        val page = listOf(map, speed)
+        // Onto the map: allowed, and the map stays.
+        assertTrue(DashboardStore.canPlace(page, 1, 1, 1, 2, 2))
+        val moved = DashboardStore.moveResolving(page, 1, 1, 1)!!
+        assertEquals(map, moved[0])
+        assertEquals(speed.withCell(1, 1, 2, 2), moved[1])
+        // Never out of the grid, though.
+        assertFalse(DashboardStore.canPlace(page, 1, GRID_COLS - 1, 0, 2, 2))
+        assertNull(DashboardStore.moveResolving(page, 1, GRID_COLS - 1, 0))
+        // Resized over the map too.
+        assertTrue(DashboardStore.canPlace(page, 1, 8, 0, 4, 4))
+    }
+
+    @Test
+    fun tilesOverTheOthersAreNeverInTheGridsWay() {
+        val speed = over(BuiltinKind.SPEED_HUD, 3, 0, 2, 2)
+        val clock = widget(BuiltinKind.CLOCK, 0, 0, 3, 2)
+        val page = listOf(speed, clock)
+        // The clock moves under the speed without a swap or a nudge.
+        assertTrue(DashboardStore.canPlace(page, 1, 3, 0, 3, 2))
+        val moved = DashboardStore.moveResolving(page, 1, 3, 0)!!
+        assertEquals(speed, moved[0])
+        assertEquals(clock.withCell(3, 0, 3, 2), moved[1])
+        // Its cells are free for a new tile, and the page has room there.
+        assertEquals(0 to 0, DashboardStore.firstFreeCell(listOf(speed), 2, 2))
+        assertEquals(3 to 0, DashboardStore.firstFreeCell(listOf(speed, clock), 3, 2))
+        // A nudge of a grid tile never lands on cells only a tile over the others holds... it may: they are free.
+        val audio = widget(BuiltinKind.AUDIO, 6, 0, 3, 2)
+        val weather = widget(BuiltinKind.WEATHER, 9, 0, 3, 2)
+        val nudged = DashboardStore.moveResolving(listOf(speed, clock, audio, weather), 1, 7, 0)!!
+        noOverlaps(nudged.filter { it.inGrid() })
+        assertEquals(speed, nudged[0])
+    }
+
+    @Test
+    fun loadingKeepsTilesOverTheOthersWhereTheyAre() {
+        val map = widget(BuiltinKind.NAVMAP, 0, 0, 6, 4)
+        val speed = over(BuiltinKind.SPEED_HUD, 1, 1, 2, 2)
+        val clock = over(BuiltinKind.CLOCK, 1, 1, 3, 2)
+        // Meant to overlap: not moved apart, not dropped, in their order.
+        assertEquals(listOf(map, speed, clock), DashboardStore.repairOverlaps(listOf(map, speed, clock)))
+        // A grid tile on the same cells is still repaired, around the grid's tiles only.
+        val audio = widget(BuiltinKind.AUDIO, 1, 1, 3, 2)
+        val repaired = DashboardStore.repairOverlaps(listOf(map, speed, audio))
+        assertEquals(speed, repaired[1])
+        assertFalse(repaired[2].overlaps(map))
+        // One off the grid's edge is pulled in, not thrown out.
+        val far = over(BuiltinKind.GEAR, GRID_COLS - 1, GRID_ROWS - 1, 3, 3)
+        val pulled = DashboardStore.repairOverlaps(listOf(far)).single()
+        assertTrue(pulled.x + pulled.w <= GRID_COLS && pulled.y + pulled.h <= GRID_ROWS)
+        assertFalse(pulled.inGrid())
+    }
+
+    @Test
+    fun theFrameRoundTripsThroughTheLayoutJson() {
+        val plain = widget(BuiltinKind.CLOCK, 0, 0, 3, 2)
+        val framed = widget(BuiltinKind.SPEED_HUD, 1, 1, 2, 2)
+            .withFrame(TileFrame(overlap = true, opacity = 0.6f, border = 3, borderColor = TileBorderColor.RED))
+        val bordered = DashboardItem.AppShortcut("a.b", 5, 5, 2, 2).withFrame(TileFrame(border = 2))
+        val pages = listOf(listOf(plain, framed, bordered), emptyList(), emptyList())
+        val saved = DashboardStore.serializePages(pages)
+        assertEquals(pages, DashboardStore.parsePages(saved))
+        // A plain tile writes none of it, so an older build reads its layout as before.
+        val clockJson = saved.substringAfter("CLOCK").substringBefore("}")
+        assertFalse(clockJson.contains("\"ov\"") || clockJson.contains("\"op\"") || clockJson.contains("\"bw\""))
+        // The accent is the default colour and is left out; a colour is kept only with a border.
+        val shortcutJson = saved.substringAfter("a.b").substringBefore("}")
+        assertTrue(shortcutJson.contains("\"bw\":2"))
+        assertFalse(shortcutJson.contains("\"bc\""))
+        assertTrue(saved.contains("\"bc\":\"RED\""))
+        // Out-of-range values read back in range; an unknown colour is the accent.
+        val odd = """{"v":2,"pages":[[{"t":"builtin","k":"CLOCK","gx":0,"gy":0,"gw":3,"gh":2,"op":0.01,"bw":99,"bc":"PINK"}]]}"""
+        val read = DashboardStore.parsePages(odd)!![0].single()
+        assertEquals(TileFrame(opacity = OPACITY_MIN, border = BORDER_MAX, borderColor = TileBorderColor.ACCENT), read.frame)
+        // The frame survives being resized or zoomed.
+        assertEquals(framed.frame, framed.withCell(0, 0, 2, 2).withZoom(1.5f).frame)
+    }
+
+    @Test
+    fun opacityStepsOnTenthsAndStopsAtTheEnds() {
+        assertEquals(0.9f, opacityStep(1f, -1), 0.0001f)
+        assertEquals(0.5f, opacityStep(0.6f, -1), 0.0001f)
+        assertEquals(1f, opacityStep(1f, 1), 0.0001f)
+        assertEquals(OPACITY_MIN, opacityStep(OPACITY_MIN, -1), 0.0001f)
+        assertEquals(OPACITY_MIN, opacityStep(0.25f, -1), 0.0001f)
+    }
+
+    @Test
+    fun reorderingPutsATileOverTheOthersOnTopOrUnderThem() {
+        val map = widget(BuiltinKind.NAVMAP, 0, 0, 6, 4)
+        val speed = over(BuiltinKind.SPEED_HUD, 1, 1, 2, 2)
+        val clock = over(BuiltinKind.CLOCK, 1, 1, 3, 2)
+        val page = listOf(map, speed, clock)
+        val (front, atFront) = DashboardStore.reorder(page, 1, toFront = true)
+        assertEquals(listOf(map, clock, speed), front)
+        assertEquals(2, atFront)
+        val (back, atBack) = DashboardStore.reorder(page, 2, toFront = false)
+        assertEquals(listOf(clock, map, speed), back)
+        assertEquals(0, atBack)
+        // A grid tile has no layer to change.
+        assertEquals(page to 0, DashboardStore.reorder(page, 0, toFront = true))
+    }
+
+    @Test
+    fun backIntoTheGridWhereItIsOrAtTheNearestFreeCells() {
+        val map = widget(BuiltinKind.NAVMAP, 0, 0, 6, 4)
+        val speed = over(BuiltinKind.SPEED_HUD, 8, 0, 2, 2)
+        // Its cells are free: it lands where it is.
+        val landed = DashboardStore.intoGrid(listOf(map, speed), 1)!!
+        assertEquals(widget(BuiltinKind.SPEED_HUD, 8, 0, 2, 2), landed[1])
+        // Over the map: the nearest free cells beside it.
+        val onMap = DashboardStore.intoGrid(listOf(map, speed.withCell(1, 1, 2, 2)), 1)!!
+        assertTrue(onMap[1].inGrid())
+        noOverlaps(onMap)
+        // Under the map's bottom edge, three cells away, rather than beside it, five away.
+        assertEquals(1 to 4, onMap[1].x to onMap[1].y)
+        // A full page: nowhere to land, so it stays over the others.
+        val full = listOf(widget(BuiltinKind.NAVMAP, 0, 0, GRID_COLS, GRID_ROWS), speed)
+        assertNull(DashboardStore.intoGrid(full, 1))
+        // Another tile over the others does not take the cells.
+        val twoOver = listOf(map, over(BuiltinKind.CLOCK, 8, 0, 3, 2), speed)
+        assertEquals(widget(BuiltinKind.SPEED_HUD, 8, 0, 2, 2), DashboardStore.intoGrid(twoOver, 2)!![2])
+    }
+
+    @Test
+    fun turningTheScreenKeepsTilesOverTheOthers() {
+        val wide = List(DashboardStore.PAGE_COUNT) { if (it == DashboardStore.CENTER) listOf(widget(BuiltinKind.NAVMAP, 0, 0, 12, 7), over(BuiltinKind.SPEED_HUD, 9, 0, 3, 2)) else emptyList() }
+        ScreenShape.vertical = true
+        try {
+            val upright = DashboardStore.reflow(wide)
+            val home = upright[DashboardStore.CENTER]
+            assertEquals(2, home.size)
+            val speed = home.single { it is DashboardItem.BuiltinWidget && it.kind == BuiltinKind.SPEED_HUD }
+            assertFalse(speed.inGrid())
+            assertTrue(speed.x + speed.w <= GRID_COLS && speed.y + speed.h <= GRID_ROWS)
+        } finally {
+            ScreenShape.vertical = false
+        }
+    }
+
     // --- minimum sizes -------------------------------------------------------
 
     @Test

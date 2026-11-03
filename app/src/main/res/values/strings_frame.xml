@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- A tile's layer, on the tile panel's Layer tab while arranging (TileOptions.kt): over the other tiles, opacity, border, place and size by the cell -->
+    <string name="frame_tab_tile">Tile</string>
+    <string name="frame_tab_layer">Layer</string>
+    <string name="frame_overlap">Over other tiles</string>
+    <string name="frame_overlap_on">Drawn above the tiles of the grid. Drag it anywhere, even onto another tile.</string>
+    <string name="frame_overlap_off">In the grid with the others, never on another tile.</string>
+    <string name="frame_to_front">To the front</string>
+    <string name="frame_to_back">To the back</string>
+    <string name="frame_opacity">Opacity</string>
+    <string name="frame_fainter">Fainter</string>
+    <string name="frame_more_solid">More solid</string>
+    <string name="frame_border">Border</string>
+    <string name="frame_border_off">Off</string>
+    <string name="frame_thinner">Thinner</string>
+    <string name="frame_thicker">Thicker</string>
+    <string name="frame_colour">Border colour</string>
+    <string name="frame_colour_accent">Accent</string>
+    <string name="frame_colour_text">Text</string>
+    <string name="frame_colour_white">White</string>
+    <string name="frame_colour_black">Black</string>
+    <string name="frame_colour_red">Red</string>
+    <string name="frame_colour_yellow">Yellow</string>
+    <string name="frame_colour_green">Green</string>
+    <string name="frame_colour_blue">Blue</string>
+    <string name="frame_place">Move one cell at a time</string>
+    <string name="frame_up">Up</string>
+    <string name="frame_down">Down</string>
+    <string name="frame_left">Left</string>
+    <string name="frame_right">Right</string>
+    <string name="frame_size">Size in cells</string>
+    <string name="frame_width">Width</string>
+    <string name="frame_height">Height</string>
+    <string name="frame_narrower">Narrower</string>
+    <string name="frame_wider">Wider</string>
+    <string name="frame_shorter">Shorter</string>
+    <string name="frame_taller">Taller</string>
+</resources>
