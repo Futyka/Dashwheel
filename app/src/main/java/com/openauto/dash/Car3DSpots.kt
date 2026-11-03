@@ -86,8 +86,8 @@ internal object Car3DSpots {
             CarSpot.DOOR_RR -> spot(0.6f, 1f, 0.5f, 110f, 14f, 0.8f, listOf("Door_rr"), listOf("Hinge_door_rr"), 0.25f)
             CarSpot.DOORS -> spot(0.5f, 0f, 0.5f, 35f, 24f, 1.3f, listOf("Door_"), listOf("Hinge_door_"), 0.25f)
             CarSpot.BOOT -> spot(0.95f, 0f, 0.7f, 200f, 22f, 0.85f, listOf("Tailgate"), listOf(TAILGATE), 0.25f)
-            // On the right, behind the rear door, on most cars of this size (as on CarProblemMap's).
-            CarSpot.FUEL_FLAP -> spot(0.78f, 1f, 0.6f, 110f, 10f, 0.5f)
+            // On the left, behind the rear door, where a tester's car has it (as on CarProblemMap's).
+            CarSpot.FUEL_FLAP -> spot(0.78f, -1f, 0.6f, 250f, 10f, 0.5f)
             CarSpot.FRONT_SENSORS -> spot(0f, 0f, 0.3f, 10f, 8f, 0.6f)
             CarSpot.REAR_SENSORS -> spot(1f, 0f, 0.3f, 190f, 8f, 0.6f)
         }
