@@ -65,7 +65,6 @@ import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.unit.IntSize
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -650,9 +649,10 @@ private fun Modifier.tileFrame(frame: TileFrame): Modifier {
  * around itself, then drawn as it is on top.
  */
 private fun Modifier.widgetOutline(silhouette: GraphicsLayer, width: Dp, colour: Color): Modifier = drawWithContent {
-    silhouette.record(this, layoutDirection, IntSize(size.width.roundToInt(), size.height.roundToInt())) {
-        this@drawWithContent.drawContent()
-    }
+    // The draw scope's own record: it points the content's drawing into the
+    // layer for the block. The layer's plain record would not, and the
+    // content would go straight to the screen, leaving the layer empty.
+    silhouette.record { this@drawWithContent.drawContent() }
     silhouette.colorFilter = ColorFilter.tint(colour, BlendMode.SrcIn)
     val w = width.toPx()
     // A ring of copies at the line's width; wide lines get an inner ring too, so the corners fill in.
