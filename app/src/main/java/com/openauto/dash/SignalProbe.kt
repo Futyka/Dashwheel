@@ -26,6 +26,8 @@ enum class SignalSource(val prefix: String) {
     BROADCAST("bc"),
     /** One value of the FYT firmware's CAN module ("fyt:7:1031#0"), on FYT units. */
     FYT("fyt"),
+    /** One canbox frame of the Topway firmware's MCU link ("tw:1281:64[]"), on Topway units: bytes. */
+    TOPWAY("tw"),
     /** A system setting (Settings.System): MTC's Vehicle app keeps the doors there. */
     SYSTEM("sys"),
     /** A secure setting (Settings.Secure). */
@@ -205,7 +207,7 @@ object SignalMatch {
 
     /** Readable without root first: what works on every unit beats the car box's log. */
     private fun sourceRank(key: String): Int = when (SignalSource.of(key)) {
-        SignalSource.SHARED, SignalSource.FYT -> 0
+        SignalSource.SHARED, SignalSource.FYT, SignalSource.TOPWAY -> 0
         SignalSource.FLAG -> 1
         SignalSource.BROADCAST -> 2
         SignalSource.SETTING, SignalSource.SYSTEM, SignalSource.SECURE -> 3

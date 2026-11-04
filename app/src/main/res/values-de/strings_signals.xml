@@ -71,6 +71,7 @@
     <string name="signals_source_settings">Einstellungen des Radios</string>
     <string name="signals_source_messages">Meldungen des Radios</string>
     <string name="signals_source_fyt">FYT-Fahrzeugdaten</string>
+    <string name="signals_source_topway">Topway-Canbox</string>
     <string name="signals_source_system">Systemeinstellungen des Radios</string>
     <string name="signals_source_secure">Sichere Einstellungen des Radios</string>
     <string name="signals_tab_can">CAN-Box</string>
@@ -79,6 +80,7 @@
     <string name="signals_tab_settings">Einstell.</string>
     <string name="signals_tab_messages">Meldungen</string>
     <string name="signals_tab_fyt">FYT</string>
+    <string name="signals_tab_topway">Topway</string>
     <string name="signals_tab_system">System</string>
     <string name="signals_tab_secure">Sicher</string>
     <string name="signals_front_left">Tür vorne links</string>

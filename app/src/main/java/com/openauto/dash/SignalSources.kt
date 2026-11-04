@@ -131,7 +131,7 @@ object SignalSources {
             SignalSource.SETTING -> runCatching { Settings.Global.getString(context.contentResolver, name) }.getOrNull()
             SignalSource.SYSTEM -> runCatching { Settings.System.getString(context.contentResolver, name) }.getOrNull()
             SignalSource.SECURE -> runCatching { Settings.Secure.getString(context.contentResolver, name) }.getOrNull()
-            SignalSource.FYT, null -> bus[key]
+            SignalSource.FYT, SignalSource.TOPWAY, null -> bus[key]
         }
     }
 

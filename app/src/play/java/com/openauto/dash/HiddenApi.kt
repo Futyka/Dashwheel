@@ -11,6 +11,9 @@ object HiddenApi {
     fun invoke(cls: Class<*>, target: Any?, name: String, vararg args: Any?): Any? =
         throw UnsupportedOperationException(NOT_HERE)
 
+    fun newInstance(cls: Class<*>, vararg args: Any?): Any =
+        throw UnsupportedOperationException(NOT_HERE)
+
     fun getDeclaredMethod(cls: Class<*>, name: String, vararg types: Class<*>?): Method =
         throw NoSuchMethodException(NOT_HERE)
 

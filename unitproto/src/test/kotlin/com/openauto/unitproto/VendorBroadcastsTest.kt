@@ -13,6 +13,8 @@ class VendorBroadcastsTest {
         assertEquals(true, AccBroadcasts.decode("com.mediatek.intent.action.BOOT_IPO"))
         assertEquals(false, AccBroadcasts.decode("com.cayboy.action.ACC_OFF"))
         assertEquals(false, AccBroadcasts.decode("android.intent.action.ACTION_SHUTDOWN"))
+        assertEquals(true, AccBroadcasts.decode("com.unisound.intent.action.ACC_ON"))
+        assertEquals(false, AccBroadcasts.decode("com.unisound.intent.action.ACC_OFF"))
         assertNull(AccBroadcasts.decode("com.qf.action.ACC_ON"))
         assertNull(AccBroadcasts.decode(null))
         assertTrue(AccBroadcasts.BOOT_LIKE.all { it in AccBroadcasts.ON })

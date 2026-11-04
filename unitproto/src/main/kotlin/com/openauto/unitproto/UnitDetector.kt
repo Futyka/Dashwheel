@@ -137,6 +137,8 @@ object UnitDetector {
             pkg("com.tw.carchoose", strong = true),
             pkg("com.tw.carapps", strong = true),
             pkg("com.tv.carinfoservice", strong = true),
+            // The car info service com.tw.car binds (its CarService.Bind).
+            pkg("com.tw.carinfoservice", strong = true),
             Rule("build", "model", strong = false) { p -> p.model.takeIf { it.equals("ums512_1h10_Natv", true) } },
             Rule("build", "display", strong = false) { p -> p.display.takeIf { TS_BUILD.containsMatchIn(it) } },
             pkg("com.zjinnova.zlink", strong = false)

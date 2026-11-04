@@ -71,6 +71,7 @@
     <string name="signals_source_settings">Instellingen van de radio</string>
     <string name="signals_source_messages">Berichten van de radio</string>
     <string name="signals_source_fyt">FYT-autogegevens</string>
+    <string name="signals_source_topway">Topway-canbox</string>
     <string name="signals_source_system">Systeeminstellingen van de radio</string>
     <string name="signals_source_secure">Beveiligde instellingen van de radio</string>
     <string name="signals_tab_can">CAN-box</string>
@@ -79,6 +80,7 @@
     <string name="signals_tab_settings">Instellingen</string>
     <string name="signals_tab_messages">Berichten</string>
     <string name="signals_tab_fyt">FYT</string>
+    <string name="signals_tab_topway">Topway</string>
     <string name="signals_tab_system">Systeem</string>
     <string name="signals_tab_secure">Beveiligd</string>
     <string name="signals_front_left">Deur linksvoor</string>

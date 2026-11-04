@@ -84,6 +84,16 @@ internal object ReverseCamera {
     private const val FRAME_W = 320
     private const val FRAME_H = 180
     private const val SAMPLE_MS = 200L
+    /**
+     * A picture that stays black this long after its first frame has no
+     * signal behind it: the camera Dashwheel opened is not the one the video
+     * chip feeds, or the chip was never switched to it (a TS10, which Dashwheel
+     * has no switch for). The car app's picture is put back.
+     */
+    private const val BLACK_GIVE_UP_MS = 3_000L
+    private const val BLACK_CHECK_MS = 300L
+    private const val CHECK_W = 64
+    private const val CHECK_H = 36
     /** The copy the second screen shows ([mirror]): enough for its stream, at its pace. */
     private const val MIRROR_W = 960
     private const val MIRROR_H = 540
@@ -111,6 +121,7 @@ internal object ReverseCamera {
     private var opening: Job? = null
     private var watchdog: Job? = null
     private var sampler: Job? = null
+    private var blackCheck: Job? = null
     private var frame: Bitmap? = null
     private val _cameraFree = MutableStateFlow(true)
     /** The last [close] has run through on the camera's thread: its device is let go of. */
@@ -271,6 +282,7 @@ internal object ReverseCamera {
                     watchdog?.cancel()
                     DebugLog.note(app, "Reverse picture: ${took()}, first frame after ${sinceStart()} ms at ${picture.first}x${picture.second}")
                     sample(view)
+                    checkBlack(app, view)
                     liveView = view
                     startMirror(view)
                 }
@@ -289,7 +301,11 @@ internal object ReverseCamera {
      * left on the camera. The reverse flag is put back unless reverse really
      * ended meanwhile.
      */
-    private suspend fun stopRomCamera(context: Context): Boolean = runCatching {
+    private suspend fun stopRomCamera(context: Context): Boolean = if (rom == null) {
+        // No camera app Dashwheel knows how to stop on this firmware (Topway, FYT, HCN...):
+        // the K706's commands mean nothing here, and its video switch isn't there to write.
+        true
+    } else runCatching {
         val after = RomAfterReverse(systemProperty(RomAfterReverse.FRONT_TIME), systemProperty(RomAfterReverse.RIGHT_CAMERA))
         try {
             // Noted before the shell runs: a stop that went through but whose answer
@@ -467,6 +483,35 @@ internal object ReverseCamera {
         }
     }
 
+    /**
+     * Watches the first seconds of the live picture: black all along, it is
+     * given up ([BLACK_GIVE_UP_MS]); one frame with something in it and the
+     * watch ends.
+     */
+    private fun checkBlack(context: Context, view: TextureView) {
+        blackCheck?.cancel()
+        val mine = attempt
+        blackCheck = scope.launch {
+            val small = Bitmap.createBitmap(CHECK_W, CHECK_H, Bitmap.Config.ARGB_8888)
+            val pixels = IntArray(CHECK_W * CHECK_H)
+            val liveAt = SystemClock.elapsedRealtime()
+            try {
+                while (isActive && mine == attempt && _state.value == State.LIVE) {
+                    delay(BLACK_CHECK_MS)
+                    if (view.width == 0 || runCatching { view.getBitmap(small) }.isFailure) continue
+                    small.getPixels(pixels, 0, CHECK_W, 0, 0, CHECK_W, CHECK_H)
+                    if (!isBlackPicture(pixels)) return@launch
+                    if (SystemClock.elapsedRealtime() - liveAt >= BLACK_GIVE_UP_MS) {
+                        if (mine == attempt) fail(context, "the picture stayed black: no signal on camera $CAMERA_ID")
+                        return@launch
+                    }
+                }
+            } finally {
+                small.recycle()
+            }
+        }
+    }
+
     private fun sinceStart() = SystemClock.elapsedRealtime() - startedAt
 
     /** How this reverse's take went so far, for the debug log. */
@@ -483,6 +528,8 @@ internal object ReverseCamera {
         liveView = null
         sampler?.cancel()
         sampler = null
+        blackCheck?.cancel()
+        blackCheck = null
         opening?.cancel()
         opening = null
         watchdog?.cancel()
@@ -558,6 +605,18 @@ internal fun romMirror(setting: Int, platform: String): Int {
 }
 
 private val UNISOC_PLATFORMS = listOf("7862", "8581", "7861", "7870")
+
+/**
+ * Whether a picture's [pixels] (ARGB) are a camera with no signal: every one
+ * of them all but black. A dark scene at night still has the reversing
+ * lights, the sensor's noise and the camera's own date stamp in it.
+ */
+internal fun isBlackPicture(pixels: IntArray, threshold: Int = 16): Boolean = pixels.all { p ->
+    val r = (p shr 16) and 0xFF
+    val g = (p shr 8) and 0xFF
+    val b = p and 0xFF
+    maxOf(r, g, b) <= threshold
+}
 
 /** Turns a [w] x [h] picture's [pixels] in place: left to right with [flipX], upside down with [flipY]. */
 internal fun turnPixels(pixels: IntArray, w: Int, h: Int, flipX: Boolean, flipY: Boolean) {

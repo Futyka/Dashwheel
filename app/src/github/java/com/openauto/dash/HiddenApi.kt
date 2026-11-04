@@ -13,6 +13,9 @@ object HiddenApi {
     fun invoke(cls: Class<*>, target: Any?, name: String, vararg args: Any?): Any? =
         HiddenApiBypass.invoke(cls, target, name, *args)
 
+    fun newInstance(cls: Class<*>, vararg args: Any?): Any =
+        HiddenApiBypass.newInstance(cls, *args)
+
     fun getDeclaredMethod(cls: Class<*>, name: String, vararg types: Class<*>?): Method =
         HiddenApiBypass.getDeclaredMethod(cls, name, *types)
 }

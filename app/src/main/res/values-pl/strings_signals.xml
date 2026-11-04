@@ -71,6 +71,7 @@
     <string name="signals_source_settings">Ustawienia radia</string>
     <string name="signals_source_messages">Komunikaty radia</string>
     <string name="signals_source_fyt">Dane FYT</string>
+    <string name="signals_source_topway">Canbox Topway</string>
     <string name="signals_source_system">Ustawienia systemowe radia</string>
     <string name="signals_source_secure">Ustawienia bezpieczne radia</string>
     <string name="signals_tab_can">Moduł CAN</string>
@@ -79,6 +80,7 @@
     <string name="signals_tab_settings">Ustawienia</string>
     <string name="signals_tab_messages">Komunikaty</string>
     <string name="signals_tab_fyt">FYT</string>
+    <string name="signals_tab_topway">Topway</string>
     <string name="signals_tab_system">System</string>
     <string name="signals_tab_secure">Bezpieczne</string>
     <string name="signals_front_left">Lewe przednie drzwi</string>
