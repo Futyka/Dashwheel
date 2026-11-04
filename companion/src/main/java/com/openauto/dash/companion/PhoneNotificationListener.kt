@@ -3,6 +3,8 @@ package com.openauto.dash.companion
 import android.app.Notification
 import android.app.NotificationManager
 import android.app.RemoteInput
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Build
@@ -10,6 +12,7 @@ import android.os.Bundle
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.openauto.dash.link.ConversationLine
 import com.openauto.dash.link.NotificationPosted
@@ -40,6 +43,9 @@ class PhoneNotificationListener : NotificationListenerService() {
     override fun onListenerDisconnected() {
         if (instance === this) instance = null
         PhoneCalls.onListenerDisconnected()
+        // Android lets go of a listener now and then (memory, an update, a battery saver) while the
+        // access stays granted, and doesn't always come back by itself: asked back at once (issue #123).
+        rebind(this)
         LinkServer.send(LinkServer.abilities(this))
     }
 
@@ -178,6 +184,20 @@ class PhoneNotificationListener : NotificationListenerService() {
         @Volatile
         var instance: PhoneNotificationListener? = null
             private set
+
+        /**
+         * The driver granted Notification access. Not the same as [instance] being
+         * there: Android unbinds a granted listener for a while now and then, and
+         * telling the car "not granted" then had it ask the driver again (issue #123).
+         */
+        fun granted(context: Context): Boolean =
+            NotificationManagerCompat.getEnabledListenerPackages(context).contains(context.packageName)
+
+        /** Granted but not bound: asks Android to bind the listener again. */
+        fun rebind(context: Context) {
+            if (instance != null || !granted(context)) return
+            runCatching { NotificationListenerService.requestRebind(ComponentName(context, PhoneNotificationListener::class.java)) }
+        }
 
         /**
          * The newest notifications worth showing in the car, as one sync that

@@ -37,8 +37,9 @@ object DebugLog {
     /** The newest part of the event log that goes in a report, leaving room in it for the summary. */
     private const val REPORT_EVENTS_CHARS = 40_000
     // ActivityTaskManager: which app started which screen, to see who puts a launcher in front at boot.
+    // PhoneLink: each try to reach the phone, and why a link ended (issue #118).
     // chatty: where Android dropped lines of the app writing the most (a Hizpo's report lacked some of ours, issue #60).
-    private const val LOGCAT = "logcat -d -v threadtime -t 3000 CarPower:I EmbeddedApp:I MediaResume:I DebugLog:I UnitLauncher:I NavDirections:I WazeScreen:I MapsScreen:I TileText:I SystemDisplays:I SystemDisplayHelper:I ShadowRoute:I WazeDestination:I SecondScreen:I DisplayLink:I ActivityTaskManager:I chatty:I *:W"
+    private const val LOGCAT = "logcat -d -v threadtime -t 3000 CarPower:I EmbeddedApp:I MediaResume:I DebugLog:I UnitLauncher:I NavDirections:I WazeScreen:I MapsScreen:I TileText:I SystemDisplays:I SystemDisplayHelper:I ShadowRoute:I WazeDestination:I SecondScreen:I DisplayLink:I ActivityTaskManager:I chatty:I PhoneLink:I *:W"
 
     /**
      * Every screen opened or brought to the front, from the events log: it is

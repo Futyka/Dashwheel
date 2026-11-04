@@ -63,6 +63,7 @@ import com.openauto.dash.link.TextSent
 import kotlinx.coroutines.CompletableDeferred
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
 import com.openauto.dash.link.PairingOffer
 import com.openauto.dash.link.PairingStorage
@@ -203,6 +204,11 @@ object PhoneLink {
     private const val RETRY_MAX_MS = 2 * 60_000L
     private const val RETRY_PAIRING_MS = 2_000L
     /**
+     * A link that just ended is looked for again this soon, not after [RETRY_MS]: the phone
+     * is usually still there, and the tiles went without it for 10 s at each drop (issue #118).
+     */
+    private const val RETRY_AFTER_DROP_MS = 1_500L
+    /**
      * Any other driver's companion refuses a pairing it never saw, so one
      * refusal proves nothing: only this many, on occasions this far apart, with
      * none of this unit's pairings known there, mean the phone removed the car.
@@ -256,6 +262,8 @@ object PhoneLink {
     /** Bumped when the network changes or the phones change, to retry right away. */
     private val wake = MutableStateFlow(0)
     @Volatile private var session: LinkSession? = null
+    /** Links that came up since start, to tell a try that linked (and has since ended) from one that didn't. */
+    private val linksOpened = AtomicInteger()
     // Everything sent goes through one coroutine, so it reaches the phone in the order it was sent.
     private val outbox = Channel<Pair<LinkSession, LinkMessage>>(OUTBOX_SIZE)
 
@@ -341,6 +349,7 @@ object PhoneLink {
         session?.takeIf { it.pairingId == id }?.close()
         // A phone no longer paired takes its contacts with it.
         editLists { PhoneLists() }
+        _notificationsOn.value = false
         refreshIdleState()
     }
 
@@ -432,6 +441,7 @@ object PhoneLink {
         // Tries in a row where no phone answered at the gateway.
         var misses = 0
         while (scope.isActive) {
+            val linkedBefore = linksOpened.get()
             handover.getAndSet(null)?.let { runSession(context, it.gateway, it.link, it.phone, isPending = true) }
             val pending = _pending.value
             // The ones marked forgotten too: three refusals can be another driver's
@@ -451,7 +461,11 @@ object PhoneLink {
             val free = gateway == null && bluetooth == Reach.UNAVAILABLE
             misses = if (answered || free) 0 else misses + 1
             refreshIdleState()
-            val wait = if (_pending.value != null) RETRY_PAIRING_MS else retryDelay(misses)
+            val wait = when {
+                _pending.value != null -> RETRY_PAIRING_MS
+                linksOpened.get() != linkedBefore -> RETRY_AFTER_DROP_MS
+                else -> retryDelay(misses)
+            }
             // A network change or a new pairing code: look again at once, and quickly.
             if (withTimeoutOrNull(wait) { wake.first { it != last } } != null) misses = 0
             last = wake.value
@@ -622,6 +636,14 @@ object PhoneLink {
     ) {
         if (!link.sendOrClose(Hello(unitName(context), BuildConfig.VERSION_NAME))) return
         session = link
+        linksOpened.incrementAndGet()
+        // Each link's start and end go in the unit log, with why it ended: the drops testers see (issue #118)
+        // left nothing there, the system log's lines of this class being filtered out of the report.
+        val carried = if (gateway == null) "Bluetooth" else "Wi-Fi"
+        val upAt = SystemClock.elapsedRealtime()
+        var lastHeardAt = upAt // the reader's own: written and read on this thread only
+        val endedBy = AtomicReference<String?>(null)
+        DebugLog.note(context, "Phone link up over $carried")
         val pinger = scope.launch {
             while (isActive) {
                 delay(PING_EVERY_MS)
@@ -636,6 +658,7 @@ object PhoneLink {
                 val (stuckIn, since) = sending ?: continue
                 if (stuckIn === link && android.os.SystemClock.elapsedRealtime() - since > SEND_STALL_MS) {
                     Log.i(TAG, "link stalled: a send took over ${SEND_STALL_MS / 1000} s")
+                    endedBy.compareAndSet(null, "a send to the phone stuck over ${SEND_STALL_MS / 1000} s")
                     link.close()
                     break
                 }
@@ -658,6 +681,7 @@ object PhoneLink {
             while (true) {
                 val received = link.receive()
                 idle?.kick()
+                lastHeardAt = SystemClock.elapsedRealtime()
                 val message = received ?: continue
                 // One message this build can't make sense of is skipped: thrown out of
                 // here, it ended the launcher (nothing above catches it).
@@ -669,7 +693,12 @@ object PhoneLink {
             }
         } catch (e: IOException) {
             Log.i(TAG, "link ended: ${e.message}")
+            // A read timeout (Wi-Fi) or the idle guard (Bluetooth) both end the link after this long without a word.
+            val quiet = SystemClock.elapsedRealtime() - lastHeardAt >= READ_TIMEOUT_MS - 1_000
+            endedBy.compareAndSet(null, if (quiet) "nothing heard from the phone for ${READ_TIMEOUT_MS / 1000} s"
+                else "${e.javaClass.simpleName} ${e.message.orEmpty()}".trim())
         } finally {
+            DebugLog.note(context, "Phone link over $carried down after ${(SystemClock.elapsedRealtime() - upAt) / 1000} s: ${endedBy.get() ?: "closed here"}")
             idle?.stop()
             pinger.cancel()
             watchdog.cancel()
@@ -689,7 +718,8 @@ object PhoneLink {
             // An OBD link relayed by the phone ends with it; the unit's own Bluetooth takes over.
             PhoneObd.linkDown()
             _textsOn.value = false
-            _notificationsOn.value = false
+            // Kept: the phone says again as the next link comes up. Reset, the tile asked for the phone's
+            // Notification access for the moment between the link coming back and the phone saying so (#123).
             HeadUnitMedia.phoneGone()
             _battery.value = null
             PhoneGps.linkDown()
