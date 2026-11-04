@@ -54,4 +54,11 @@
     <string name="mine_err_address">Адрес состоит из 3 или 8 hex-цифр, а адресу ответа нужен адрес блока.</string>
     <string name="mine_err_session">Сессия: только 1001, 1003, 1081, 1092 или 10C0, с адресом блока.</string>
     <string name="mine_err_no_bytes">Буквы от A до H имеют смысл только в показании из машины.</string>
+    <string name="mine_vw_detail">Показания двигателя дизеля группы VW (Sharan, Alhambra...): наддув, температура масла, крутящий момент, мощность.</string>
+    <string name="mine_add_vw">Добавить показания VW</string>
+    <string name="mine_vw_boost">Наддув</string>
+    <string name="mine_vw_boost_target">Заданный наддув</string>
+    <string name="mine_vw_oil">Температура масла</string>
+    <string name="mine_vw_torque">Крутящий момент</string>
+    <string name="mine_vw_power">Мощность</string>
 </resources>

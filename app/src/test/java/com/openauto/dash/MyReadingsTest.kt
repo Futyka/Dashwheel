@@ -156,4 +156,17 @@ class MyReadingRulesTest {
         val v = MyReadingRules.values(ex, mapOf("speed" to 100.0), mapOf(ex[0].key to 20.0), emptyMap())
         assertEquals(20.0 * 3600 / 15.5 / 540, v[ex[1].key]!!, 1e-9)
     }
+
+    @Test
+    fun theVwSetIsValidAndWorksOutThePower() {
+        val vw = MyReadingRules.vwDiesel(listOf("Boost", "Boost target", "Oil temp", "Torque", "Power"), setOf("boost"))
+        assertEquals(5, vw.size)
+        assertEquals("boost_2", vw[0].key)
+        vw.forEachIndexed { i, r -> assertNull(r.key, MyReadingRules.problem(r, vw.take(i))) }
+        assertTrue(vw.take(4).all { it.header == "7E0" && it.kind == MyReadingKind.PID })
+        // 0x0BE8 = 3048: 31.7 °C once the 273.14 K are taken off.
+        assertEquals((3048 - 2731.4) / 10, MyReadingRules.read(vw[2], "62 11 BE 0B E8").value!!, 1e-9)
+        val v = MyReadingRules.values(vw, mapOf("rpm" to 2000.0), mapOf(vw[3].key to 130.1), emptyMap())
+        assertEquals(130.1 * 2000 / 7023, v[vw[4].key]!!, 1e-9)
+    }
 }

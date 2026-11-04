@@ -188,6 +188,15 @@ internal fun MyReadingsSheet(onDismiss: () -> Unit) {
                 MyReadings.addAll(MyReadingRules.examples(names, list.map { it.key }.toSet()))
             }
         }
+        // A VW group diesel's own engine readings, offered until they are in the list.
+        if (list.none { it.request == MyReadingRules.VW_BOOST_REQUEST }) Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(stringResource(R.string.mine_vw_detail), color = DashColors.TextSecondary, style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+            Spacer(Modifier.width(8.dp))
+            SheetButton(stringResource(R.string.mine_add_vw), primary = false) {
+                val names = listOf(R.string.mine_vw_boost, R.string.mine_vw_boost_target, R.string.mine_vw_oil, R.string.mine_vw_torque, R.string.mine_vw_power).map { context.getString(it) }
+                MyReadings.addAll(MyReadingRules.vwDiesel(names, list.map { it.key }.toSet()))
+            }
+        }
     }
 }
 

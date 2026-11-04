@@ -210,6 +210,32 @@ object MyReadingRules {
         add(names[3], "L/100 km", MyReadingKind.FORMULA, "if(speed > 5, $lh / speed * 100, 0)")
         return out
     }
+
+    /** The engine computer's own requests on a VW diesel, as a Sharan 7N driver found them: what the VW set reads first. */
+    const val VW_BOOST_REQUEST = "221057"
+
+    /**
+     * Ready-made readings for a VW group diesel's engine computer (7E0), from a
+     * Sharan 7N driver's list: boost and its target in mbar, oil temperature,
+     * torque, and the power that torque makes at the revs (Nm × rpm / 7023 is
+     * metric horsepower). [names] are the five names shown.
+     */
+    fun vwDiesel(names: List<String>, taken: Set<String>): List<MyReading> {
+        val out = mutableListOf<MyReading>()
+        fun add(name: String, unit: String, kind: MyReadingKind, formula: String, request: String = "", decimals: Int = 1): String {
+            val key = keyFor(name, taken + out.map { it.key })
+            out += MyReading(key, name, unit, kind, formula, request, header = if (kind == MyReadingKind.PID) VW_ENGINE else null, decimals = decimals)
+            return key
+        }
+        add(names[0], "mbar", MyReadingKind.PID, "A*256+B", VW_BOOST_REQUEST, decimals = 0)
+        add(names[1], "mbar", MyReadingKind.PID, "A*256+B", "221149", decimals = 0)
+        add(names[2], "°C", MyReadingKind.PID, "(A*256+B-2731.4)/10", "2211BE")
+        val torque = add(names[3], "Nm", MyReadingKind.PID, "(A*256+B)*0.1", "221047")
+        add(names[4], "PS", MyReadingKind.FORMULA, "$torque * rpm / 7023")
+        return out
+    }
+
+    private const val VW_ENGINE = "7E0"
 }
 
 /** Keeps the driver's readings, asks the car for theirs while connected, and works the rest out every second. */

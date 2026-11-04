@@ -54,4 +54,11 @@
     <string name="mine_err_address">A cím 3 vagy 8 hexadecimális számjegy, és a válaszcímhez ECU-cím is kell.</string>
     <string name="mine_err_session">Munkamenet: csak 1001, 1003, 1081, 1092 vagy 10C0, ECU-címmel.</string>
     <string name="mine_err_no_bytes">Az A-tól H-ig terjedő betűk csak az autóból kapott mérésnél értelmezhetők.</string>
+    <string name="mine_vw_detail">Egy VW-csoportos dízel motoradatai (Sharan, Alhambra...): töltőnyomás, olajhőmérséklet, nyomaték, teljesítmény.</string>
+    <string name="mine_add_vw">VW-értékek hozzáadása</string>
+    <string name="mine_vw_boost">Töltőnyomás</string>
+    <string name="mine_vw_boost_target">Töltőnyomás cél</string>
+    <string name="mine_vw_oil">Olajhőmérséklet</string>
+    <string name="mine_vw_torque">Nyomaték</string>
+    <string name="mine_vw_power">Teljesítmény</string>
 </resources>

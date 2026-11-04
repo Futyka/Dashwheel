@@ -54,4 +54,11 @@
     <string name="mine_err_address">Les adresses font 3 ou 8 chiffres hexadécimaux, et une adresse de réponse demande une adresse de calculateur.</string>
     <string name="mine_err_session">Session : 1001, 1003, 1081, 1092 ou 10C0 uniquement, avec une adresse de calculateur.</string>
     <string name="mine_err_no_bytes">Les lettres A à H n\'ont de sens que pour une mesure de la voiture.</string>
+    <string name="mine_vw_detail">Mesures moteur d\'un diesel du groupe VW (Sharan, Alhambra...) : pression de turbo, température d\'huile, couple, puissance.</string>
+    <string name="mine_add_vw">Ajouter les mesures VW</string>
+    <string name="mine_vw_boost">Pression turbo</string>
+    <string name="mine_vw_boost_target">Pression turbo visée</string>
+    <string name="mine_vw_oil">Température d\'huile</string>
+    <string name="mine_vw_torque">Couple</string>
+    <string name="mine_vw_power">Puissance</string>
 </resources>
