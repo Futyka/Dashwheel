@@ -4,6 +4,8 @@
 
     <!-- Bluetooth Permissions for OBD-II Adapter -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- The Topway car info service's AIDL (a normal permission): TopwayBus. -->
+    <uses-permission android:name="com.tw.carinfoservice.permission.USE_AIDL" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
 

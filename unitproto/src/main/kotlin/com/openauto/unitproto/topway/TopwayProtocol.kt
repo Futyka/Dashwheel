@@ -47,4 +47,120 @@ object TopwayProtocol {
 
     /** The channels whose bytes go to the finder. */
     fun carriesFrames(channel: Int): Boolean = channel == CH_CANBOX || channel == CH_CAR_TYPE
+
+    /** The car info service ([INFO_PACKAGE]), exported, its permission a normal one: bound like the car app binds it. */
+    const val INFO_PACKAGE = "com.tw.carinfoservice"
+    const val INFO_BIND_ACTION = "com.tw.carinfoservice.CarService.Bind"
+    const val INFO_PERMISSION = "com.tw.carinfoservice.permission.USE_AIDL"
+    const val INFO_DESCRIPTOR = "com.tw.carinfoservice.CarServiceAidl"
+    const val CALLBACK_DESCRIPTOR = "com.tw.carinfoservice.CarServiceCallBack"
+    /** The service's transaction that takes a callback binder (and 2 that lets it go). */
+    const val TX_REGISTER = 1
+    const val TX_UNREGISTER = 2
+
+    /** Sent ahead of every other callback; says nothing of the car by itself. */
+    const val CB_PREAMBLE = 63
+    /** Engine speed (the service logs it as such); its scale unconfirmed. */
+    const val CB_ENGINE_SPEED = 16
+    /** Next to the service's "Speed": the car's speed, scale unconfirmed. */
+    const val CB_SPEED = 15
+    /** The parking radar: 16 values. */
+    const val CB_RADAR = 59
+    /** The steering's guide-line track. */
+    const val CB_TRACK = 60
+
+    /**
+     * What each callback carries, in order, as the service's proxy writes it
+     * (version 251230): i an int, f a float, s a text. A code not listed is
+     * not read.
+     */
+    val CALLBACK_ARGS: Map<Int, String> = mapOf(
+        1 to "fs",
+        2 to "i",
+        3 to "i",
+        4 to "fs",
+        5 to "fs",
+        6 to "fs",
+        7 to "fs",
+        8 to "i",
+        9 to "i",
+        10 to "i",
+        11 to "i",
+        12 to "i",
+        13 to "i",
+        14 to "i",
+        15 to "i",
+        16 to "i",
+        17 to "is",
+        18 to "fs",
+        19 to "fs",
+        20 to "fs",
+        21 to "f",
+        22 to "i",
+        23 to "i",
+        24 to "i",
+        25 to "i",
+        26 to "i",
+        27 to "i",
+        28 to "i",
+        29 to "fs",
+        30 to "fs",
+        31 to "fs",
+        32 to "fs",
+        33 to "fs",
+        34 to "i",
+        35 to "i",
+        36 to "i",
+        37 to "fs",
+        38 to "fs",
+        39 to "fs",
+        40 to "fs",
+        41 to "fs",
+        42 to "fs",
+        43 to "fs",
+        44 to "fs",
+        45 to "fs",
+        46 to "fs",
+        47 to "s",
+        48 to "i",
+        49 to "is",
+        50 to "ii",
+        51 to "ii",
+        52 to "ii",
+        53 to "ii",
+        54 to "is",
+        55 to "is",
+        56 to "is",
+        57 to "is",
+        58 to "i",
+        59 to "iiiiiiiiiiiiiiii",
+        60 to "i",
+        61 to "i",
+        62 to "fs",
+        63 to "i",
+        64 to "fs",
+        65 to "i",
+        66 to "i"
+    )
+
+    /**
+     * The finder's keys for one callback: "tw:cb:15#0" = "57" for each number;
+     * a float with its text beside it (the service names some values so) is
+     * kept under that text, "tw:cb:4:Speed" = "12.5". Texts alone go as they are.
+     */
+    fun callbackValues(code: Int, args: List<Any?>): Map<String, String> {
+        val out = LinkedHashMap<String, String>()
+        val types = CALLBACK_ARGS[code] ?: return out
+        if (types == "fs" && args.size == 2 && args[1] is String) {
+            out["$PREFIX:cb:$code:${args[1]}"] = number(args[0])
+            return out
+        }
+        args.forEachIndexed { i, v -> if (v != null) out["$PREFIX:cb:$code#$i"] = if (v is String) v else number(v) }
+        return out
+    }
+
+    private fun number(v: Any?): String = when (v) {
+        is Float -> if (v == v.toLong().toFloat()) v.toLong().toString() else v.toString()
+        else -> v.toString()
+    }
 }
