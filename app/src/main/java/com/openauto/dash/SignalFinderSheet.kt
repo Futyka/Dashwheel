@@ -519,7 +519,7 @@ internal fun describe(context: Context, probe: SignalProbe): String {
     val where = when (SignalSource.of(probe.key)) {
         SignalSource.CAN -> context.getString(R.string.signals_probe_can, name)
         // The FYT module's values are the car app's data too, under the module's own numbering.
-        SignalSource.SHARED, SignalSource.FYT -> context.getString(R.string.signals_probe_shared, name)
+        SignalSource.SHARED, SignalSource.FYT, SignalSource.TOPWAY -> context.getString(R.string.signals_probe_shared, name)
         SignalSource.FLAG -> context.getString(R.string.signals_probe_flag, name)
         SignalSource.SETTING, SignalSource.SYSTEM, SignalSource.SECURE -> context.getString(R.string.signals_probe_setting, name)
         SignalSource.BROADCAST, null -> context.getString(R.string.signals_probe_message, name)
@@ -538,6 +538,7 @@ private fun sourceTitle(s: SignalSource): Int = when (s) {
     SignalSource.SETTING -> R.string.signals_source_settings
     SignalSource.BROADCAST -> R.string.signals_source_messages
     SignalSource.FYT -> R.string.signals_source_fyt
+    SignalSource.TOPWAY -> R.string.signals_source_topway
     SignalSource.SYSTEM -> R.string.signals_source_system
     SignalSource.SECURE -> R.string.signals_source_secure
 }
@@ -554,6 +555,7 @@ private fun sourcesHere(values: Map<String, String>): List<SignalSource> = Signa
     val qf = UnitPlatform.adapter.family == UnitFamily.QF
     when (it) {
         SignalSource.FYT -> UnitPlatform.adapter.family == UnitFamily.FYT
+        SignalSource.TOPWAY -> UnitPlatform.adapter.family == UnitFamily.TOPWAY
         SignalSource.SYSTEM -> catalogue.settingsSystem
         SignalSource.SECURE -> catalogue.settingsSecure
         SignalSource.CAN -> !Edition.play && (qf || values.keys.any { k -> k.startsWith(it.prefix + ":") })
@@ -569,6 +571,7 @@ private fun sourceShort(s: SignalSource): Int = when (s) {
     SignalSource.SETTING -> R.string.signals_tab_settings
     SignalSource.BROADCAST -> R.string.signals_tab_messages
     SignalSource.FYT -> R.string.signals_tab_fyt
+    SignalSource.TOPWAY -> R.string.signals_tab_topway
     SignalSource.SYSTEM -> R.string.signals_tab_system
     SignalSource.SECURE -> R.string.signals_tab_secure
 }
@@ -579,7 +582,7 @@ private fun sourceIcon(s: SignalSource): ImageVector = when (s) {
     SignalSource.FLAG -> Icons.Filled.Flag
     SignalSource.SETTING -> Icons.Filled.Tune
     SignalSource.BROADCAST -> Icons.Filled.Campaign
-    SignalSource.FYT -> Icons.Filled.DirectionsCar
+    SignalSource.FYT, SignalSource.TOPWAY -> Icons.Filled.DirectionsCar
     SignalSource.SYSTEM, SignalSource.SECURE -> Icons.Filled.Tune
 }
 

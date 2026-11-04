@@ -38,14 +38,14 @@ import kotlinx.coroutines.flow.StateFlow
 
 /*
  * The families Dashwheel knows only a little about, each a [GenericAdapter]
- * with its few hooks: Topway and Allwinner (detection and the vendor
+ * with its few hooks: Topway (the vendor broadcasts, its MCU link: [TopwayBus]), Allwinner (detection and the vendor
  * broadcasts), Reglink (how to live through its sleep), NWD (its launcher
  * choice, its voltage and headlights: [NwdBus]). And the plain unit nothing was recognised on, which still gets
  * the broadcasts: they cost nothing and some generic unit may send them.
  */
 internal object PlainAdapters {
     /** The Topway TS firmware's own apps (TS10, TS18, TS7/TS8). */
-    val TOPWAY_PACKAGES = setOf("com.tw.car", "com.tw.carchoose", "com.tw.carapps", "com.tw.ac2", "com.tv.carinfoservice", "com.zjinnova.zlink")
+    val TOPWAY_PACKAGES = setOf("com.tw.car", "com.tw.carchoose", "com.tw.carapps", "com.tw.ac2", "com.tv.carinfoservice", "com.tw.carinfoservice", "com.zjinnova.zlink")
     /** Reglink's own: its services and launcher, and the 360 camera app its units ship. */
     val REGLINK_PACKAGES = setOf("com.reglink.services", "com.reglink.launcher4", "com.baony.avm360")
 
@@ -76,7 +76,12 @@ internal object PlainAdapters {
                 // The MCU's input bits (headlights) and the CAN SDK's own table (CanSettingTableKey) live in Settings.System.
                 catalogue = plainCatalogue.copy(broadcasts = plainCatalogue.broadcasts + NwdProtocol.BROADCASTS, propPrefixes = setOf("persist.nwd.", "ro.nwd."), settingsSystem = true)
             )
-            UnitFamily.TOPWAY -> GenericAdapter(family, emulator, AccBroadcastIgnition, KeyBroadcastSource, catalogue = plainCatalogue, vendorPackages = TOPWAY_PACKAGES)
+            UnitFamily.TOPWAY -> GenericAdapter(
+                family, emulator, AccBroadcastIgnition, KeyBroadcastSource,
+                // The MCU's reverse and the canbox's frames through the framework's TWUtil ([TopwayBus]).
+                bus = TopwayBus, busCaps = setOf(Cap.REVERSE),
+                catalogue = plainCatalogue, vendorPackages = TOPWAY_PACKAGES
+            )
             else -> GenericAdapter(family, emulator, AccBroadcastIgnition, KeyBroadcastSource, catalogue = plainCatalogue)
         }
     }

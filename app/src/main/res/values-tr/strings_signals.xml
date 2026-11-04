@@ -72,6 +72,7 @@
     <string name="signals_source_settings">Ünite ayarları</string>
     <string name="signals_source_messages">Ünite mesajları</string>
     <string name="signals_source_fyt">FYT araç verisi</string>
+    <string name="signals_source_topway">Topway canbox</string>
     <string name="signals_source_system">Ünite sistem ayarları</string>
     <string name="signals_source_secure">Ünite güvenli ayarları</string>
     <string name="signals_tab_can">Araç kutusu</string>
@@ -80,6 +81,7 @@
     <string name="signals_tab_settings">Ayarlar</string>
     <string name="signals_tab_messages">Mesajlar</string>
     <string name="signals_tab_fyt">FYT</string>
+    <string name="signals_tab_topway">Topway</string>
     <string name="signals_tab_system">Sistem</string>
     <string name="signals_tab_secure">Güvenli</string>
     <string name="signals_front_left">Ön sol kapı</string>
