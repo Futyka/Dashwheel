@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.os.Looper
 import android.util.Log
 import android.view.View
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -73,7 +74,13 @@ object InAppNav {
     private val _voiceOn = MutableStateFlow(true)
     val voiceOn: StateFlow<Boolean> = _voiceOn
 
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+    /**
+     * A progress or reroute callback that throws (a step the library gave
+     * half-filled, say) must not take the whole app down with it: it is
+     * logged, and the guidance carries on with the next fix.
+     */
+    private val failures = CoroutineExceptionHandler { _, e -> Log.w("InAppNav", "guidance callback failed: ${e.message}", e) }
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main + failures)
     private var reroute: Job? = null
     private var lastReroute = 0L
     /** New routes refused in a row (offline, the router down): each one waits longer for the next ([Backoff]). */
