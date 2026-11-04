@@ -8,6 +8,9 @@ package com.openauto.unitproto
  * none is documented by its maker.
  */
 object AccBroadcasts {
+    const val UNISOUND_ACC_ON = "com.unisound.intent.action.ACC_ON"
+    const val UNISOUND_ACC_OFF = "com.unisound.intent.action.ACC_OFF"
+
     /** The car was switched on, or the unit woke from its sleep. */
     val ON = setOf(
         "com.mediatek.intent.action.QUICKBOOT_POWERON",
@@ -19,6 +22,8 @@ object AccBroadcasts {
         "com.glsx.boot.ACCON",
         "com.cayboy.action.ACC_ON",
         "com.carboy.action.ACC_ON",
+        // The Topway TS10's firmware, to its own Bluetooth and EQ apps (seen in a TS10.2.2 unit's log).
+        UNISOUND_ACC_ON,
         "android.intent.action.ACTION_MT_COMMAND_SLEEP_OUT"
     )
 
@@ -28,6 +33,8 @@ object AccBroadcasts {
         "com.carboy.action.ACC_OFF",
         "xy.android.acc.off",
         "com.glsx.boot.ACCOFF",
+        // The ACC_ON's pair: not seen in a log yet (unconfirmed).
+        UNISOUND_ACC_OFF,
         "android.intent.action.ACTION_SHUTDOWN"
     )
 
