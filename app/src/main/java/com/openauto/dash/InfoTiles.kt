@@ -920,7 +920,9 @@ internal fun NotificationsCard(hasAccess: Boolean, modifier: Modifier = Modifier
                     maxLines = 2, overflow = TextOverflow.Ellipsis, modifier = Modifier.padding(bottom = 6.dp))
             }
             when {
-                !hasAccess && !phoneConnected && items.none { it.fromPhone } -> NeedsAccess(
+                // The unit's own access is asked for only while its notifications are wanted: with
+                // them switched off, the phone's are the only ones, and a dropped link asked for it (#123).
+                !hasAccess && NotificationFeed.showsUnit(context) && !phoneConnected && items.none { it.fromPhone } -> NeedsAccess(
                     Icons.Filled.Notifications, stringResource(R.string.info_notif_needs_access),
                     stringResource(R.string.info_grant_access)
                 ) {

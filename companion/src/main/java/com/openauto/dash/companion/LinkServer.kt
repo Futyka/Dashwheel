@@ -186,7 +186,7 @@ object LinkServer {
     /** What this phone can do for the car right now ([PhoneAbilities]); sent on link up and whenever one changes. */
     fun abilities(context: Context) = PhoneAbilities(
         sendsTexts = TextSender.canSend(context),
-        notifications = PhoneNotificationListener.instance != null
+        notifications = PhoneNotificationListener.granted(context)
     )
 
     /** Sends to the connected head unit, if any. Safe from any thread. */
@@ -358,6 +358,8 @@ object LinkServer {
         replaced?.close()
 
         send(Hello(deviceName(context), appVersion(context)))
+        // A listener Android let go of meanwhile is asked back; its sync follows once it is (onListenerConnected).
+        PhoneNotificationListener.rebind(context)
         send(PhoneNotificationListener.syncMessage())
         send(PhoneCalls.snapshot())
         send(ObdRelay.offer(context))

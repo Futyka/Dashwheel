@@ -341,6 +341,7 @@ object PhoneLink {
         session?.takeIf { it.pairingId == id }?.close()
         // A phone no longer paired takes its contacts with it.
         editLists { PhoneLists() }
+        _notificationsOn.value = false
         refreshIdleState()
     }
 
@@ -689,7 +690,8 @@ object PhoneLink {
             // An OBD link relayed by the phone ends with it; the unit's own Bluetooth takes over.
             PhoneObd.linkDown()
             _textsOn.value = false
-            _notificationsOn.value = false
+            // Kept: the phone says again as the next link comes up. Reset, the tile asked for the phone's
+            // Notification access for the moment between the link coming back and the phone saying so (#123).
             HeadUnitMedia.phoneGone()
             _battery.value = null
             PhoneGps.linkDown()

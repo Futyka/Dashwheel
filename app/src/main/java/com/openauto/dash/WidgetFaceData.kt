@@ -895,10 +895,12 @@ private fun quickDialFace(): WidgetFace {
 
 @Composable
 private fun notificationsFace(env: SkinTileEnv): WidgetFace {
-    if (!env.hasMediaAccess) {
+    val items by NotificationFeed.items.collectAsState()
+    val phoneConnected = PhoneLink.state.collectAsState().value is PhoneLinkState.Connected
+    // As the plain tile: the unit's access only while its own notifications are wanted, and never over the phone's (#123).
+    if (!env.hasMediaAccess && NotificationFeed.showsUnit(env.context) && !phoneConnected && items.none { it.fromPhone }) {
         return idleFace(Icons.Filled.Notifications, BuiltinKind.NOTIFICATIONS.label, stringResource(R.string.info_notif_needs_access), action = grantAccessAction())
     }
-    val items by NotificationFeed.items.collectAsState()
     val timeFmt = rememberTimeFormat()
     val latest = items.firstOrNull()
     return WidgetFace(
