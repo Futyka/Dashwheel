@@ -367,6 +367,8 @@ object LinkServer {
         PhoneLists.linked()
         PhoneMedia.linked(context)
         PhoneBatteryWatch.current(context)?.let(::send)
+        val linkedAt = System.currentTimeMillis()
+        var ended = "replaced or closed here"
         try {
             while (true) {
                 val received = link.receive()
@@ -381,11 +383,14 @@ object LinkServer {
             }
         } catch (e: IOException) {
             // Link gone: the head unit left the hotspot, stopped, or went quiet.
+            ended = "${e.javaClass.simpleName} ${e.message.orEmpty()}".trim()
         } finally {
             guard?.stop()
             link.close()
             synchronized(this) {
                 if (session === link) {
+                    // Shown under the status: why the car went, for a link that keeps dropping (issue #118).
+                    note("${conn.label}: link ended after ${(System.currentTimeMillis() - linkedAt) / 1000} s: $ended")
                     session = null
                     if (running) _state.value = LinkState.Waiting
                     // No head unit to relay to: the OBD adapter is let go for the next start.
