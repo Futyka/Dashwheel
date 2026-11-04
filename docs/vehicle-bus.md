@@ -67,7 +67,7 @@ A key names one element of car data: its value type, unit, kind, domain and crit
 | `qf.car_app` | VEHICLE_APP | VEHICLE_SPEED, RPM (6 s), FUEL_LEVEL, RANGE (6 h), ODOMETER, FUEL_CONSUMPTION, TRIP_DISTANCE, HEADLIGHTS, LIGHTS, INDICATORS, DRIVER_BELT, HANDBRAKE (on a change), CLIMATE, RADAR, DOORS, REVERSE, STEERING_ANGLE (1 h) | not taken down as a whole; a body silent for 30 s withdraws the states the body puts (lights, belt, handbrake) |
 | `qf.mcu` | MCU | DOORS, HEADLIGHTS, HANDBRAKE, BATTERY_VOLTS (10 min) | 10 min, at once when the MCU service dies |
 | `qf.broadcast` | VEHICLE_APP | OUTSIDE_TEMP (2 h, a restored one with its real age), HEADLIGHTS, BATTERY_VOLTS (the firmware's property) | none (speaks on a change; lives with the app) |
-| `unit.bus` | CANBOX | VEHICLE_SPEED, RPM, DOORS, REVERSE, HEADLIGHTS, BATTERY_VOLTS, OUTSIDE_TEMP, STEERING_ANGLE, as the family's adapter decodes them | per family: FYT 30 s, MTC 15 s; at once when the family's `listening` goes false |
+| `unit.bus` | CANBOX | VEHICLE_SPEED, RPM, DOORS, REVERSE, HEADLIGHTS, BATTERY_VOLTS, OUTSIDE_TEMP, STEERING_ANGLE, HANDBRAKE and ODOMETER (FYT on a VW, `FytVw`), as the family's adapter decodes them | per family: FYT 30 s, MTC 15 s; at once when the family's `listening` goes false |
 | `tpms` | VEHICLE_APP | TYRES | 60 s (`TYRE_STALE_MS`) |
 | `tpms.usb` | LEARNED | TYRES | 60 s (beats `tpms`: a receiver the driver chose; its sensors report no battery, so the battery mark is shown only for `tpms`) |
 | `power` | VEHICLE_APP | IGNITION | none |

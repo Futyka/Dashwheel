@@ -190,3 +190,49 @@ object FytKey {
 
     private val KEY = Regex("^$PREFIX:(\\d+):(\\d+)#([fs]?)(\\d+)$")
 }
+
+/**
+ * Module CANBUS's per-car codes on a Volkswagen, as a tester logged them on a
+ * Sharan 7N (Xtrons IMH94MTVP, 2026-11): the CAN decoder's own codes, so not
+ * every VW decoder may use them. Read only on a car set up as a VW (or its
+ * Seat twin), and each value only within a plausible range. The seatbelt
+ * (101), the fuel level (104, unit unknown) and the wheel keys (124) are
+ * logged too but not decoded yet: their values aren't known.
+ */
+object FytVw {
+    const val U_DRIVER_BELT = 101
+    /** ints[0]: 0 applied, 1 released. */
+    const val U_HANDBRAKE = 103
+    const val U_FUEL_LEVEL = 104
+    /** ints[0]: the on-board voltage × 100. */
+    const val U_VOLTS = 105
+    /** ints[0]: the total mileage, km assumed. */
+    const val U_ODOMETER = 106
+    /** ints[0]: the speed × 100, km/h. */
+    const val U_SPEED = 109
+    /** ints[0]: engine revolutions per minute. */
+    const val U_ENGINE_SPEED = 110
+    /** ints[0]: the outside temperature × 10, °C. */
+    const val U_OUTSIDE_TEMP = 121
+    const val U_WHEEL_KEYS = 124
+
+    /** Every code logged, subscribed to on every FYT unit so the Signal Finder shows them whatever the car. */
+    val CODES = intArrayOf(U_DRIVER_BELT, U_HANDBRAKE, U_FUEL_LEVEL, U_VOLTS, U_ODOMETER, U_SPEED, U_ENGINE_SPEED, U_OUTSIDE_TEMP, U_WHEEL_KEYS)
+
+    /** The makes whose decoders are taken to send these codes. */
+    private val MAKES = setOf("vw", "volkswagen", "seat")
+
+    fun isVw(make: String): Boolean = make.trim().lowercase() in MAKES
+
+    fun handbrake(ints: IntArray?): Boolean? = when (ints?.firstOrNull()) { 0 -> true; 1 -> false; else -> null }
+
+    fun volts(ints: IntArray?): Double? = ints?.firstOrNull()?.div(100.0)?.takeIf { it in 6.0..18.0 }
+
+    fun odometerKm(ints: IntArray?): Double? = ints?.firstOrNull()?.takeIf { it in 1..2_000_000 }?.toDouble()
+
+    fun speedKmh(ints: IntArray?): Float? = ints?.firstOrNull()?.div(100f)?.takeIf { it in 0f..400f }
+
+    fun rpm(ints: IntArray?): Int? = ints?.firstOrNull()?.takeIf { it in 0..12_000 }
+
+    fun outsideTemp(ints: IntArray?): Double? = ints?.firstOrNull()?.div(10.0)?.takeIf { it in -50.0..70.0 }
+}

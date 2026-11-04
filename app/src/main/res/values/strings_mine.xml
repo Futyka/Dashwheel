@@ -54,4 +54,11 @@
     <string name="mine_err_address">Addresses are 3 or 8 hex digits, and an answer address needs an ECU address.</string>
     <string name="mine_err_session">Session: 1001, 1003, 1081, 1092 or 10C0 only, with an ECU address.</string>
     <string name="mine_err_no_bytes">The letters A to H only mean something in a reading from the car.</string>
+    <string name="mine_vw_detail">Engine readings of a VW group diesel (Sharan, Alhambra...): boost, oil temperature, torque, power.</string>
+    <string name="mine_add_vw">Add VW readings</string>
+    <string name="mine_vw_boost">Boost</string>
+    <string name="mine_vw_boost_target">Boost target</string>
+    <string name="mine_vw_oil">Oil temperature</string>
+    <string name="mine_vw_torque">Torque</string>
+    <string name="mine_vw_power">Power</string>
 </resources>

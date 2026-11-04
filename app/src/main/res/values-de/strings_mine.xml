@@ -54,4 +54,11 @@
     <string name="mine_err_address">Adressen haben 3 oder 8 Hex-Ziffern, und eine Antwortadresse braucht eine Steuergerät-Adresse.</string>
     <string name="mine_err_session">Sitzung: nur 1001, 1003, 1081, 1092 oder 10C0, mit Steuergerät-Adresse.</string>
     <string name="mine_err_no_bytes">Die Buchstaben A bis H gibt es nur bei einem Messwert vom Auto.</string>
+    <string name="mine_vw_detail">Motorwerte eines Diesels aus dem VW-Konzern (Sharan, Alhambra...): Ladedruck, Öltemperatur, Drehmoment, Leistung.</string>
+    <string name="mine_add_vw">VW-Werte hinzufügen</string>
+    <string name="mine_vw_boost">Ladedruck</string>
+    <string name="mine_vw_boost_target">Ladedruck Soll</string>
+    <string name="mine_vw_oil">Öltemperatur</string>
+    <string name="mine_vw_torque">Drehmoment</string>
+    <string name="mine_vw_power">Leistung</string>
 </resources>

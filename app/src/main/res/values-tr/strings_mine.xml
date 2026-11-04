@@ -54,4 +54,11 @@
     <string name="mine_err_address">Adresler 3 ya da 8 onaltılık rakamdır ve yanıt adresi bir ECU adresi gerektirir.</string>
     <string name="mine_err_session">Oturum: yalnızca 1001, 1003, 1081, 1092 ya da 10C0, bir ECU adresiyle.</string>
     <string name="mine_err_no_bytes">A\'dan H\'ye harfler yalnızca araçtan gelen bir okumada anlam taşır.</string>
+    <string name="mine_vw_detail">VW grubu bir dizelin motor değerleri (Sharan, Alhambra...): turbo basıncı, yağ sıcaklığı, tork, güç.</string>
+    <string name="mine_add_vw">VW değerlerini ekle</string>
+    <string name="mine_vw_boost">Turbo basıncı</string>
+    <string name="mine_vw_boost_target">Hedef turbo basıncı</string>
+    <string name="mine_vw_oil">Yağ sıcaklığı</string>
+    <string name="mine_vw_torque">Tork</string>
+    <string name="mine_vw_power">Güç</string>
 </resources>

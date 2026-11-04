@@ -28,8 +28,12 @@ import com.openauto.dash.UnitCaps
 import com.openauto.dash.UnitKeyPress
 import com.openauto.dash.UnitPlatform
 import com.openauto.dash.VehicleBusSource
+import com.openauto.dash.CarProfileStore
+import com.openauto.dash.unitBusOutsideTemp
 import com.openauto.dash.unitBusRpm
 import com.openauto.dash.unitBusSpeed
+import com.openauto.dash.unitBusVolts
+import com.openauto.dash.vehicle.K
 import com.openauto.dash.vehicle.Publisher
 import com.openauto.dash.VolumeControl
 import com.openauto.unitproto.UnitFamily
@@ -39,6 +43,7 @@ import com.openauto.unitproto.fyt.FytKey
 import com.openauto.unitproto.fyt.FytMain
 import com.openauto.unitproto.fyt.FytModules
 import com.openauto.unitproto.fyt.FytProtocol
+import com.openauto.unitproto.fyt.FytVw
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -110,6 +115,8 @@ internal object FytIgnition : IgnitionSource {
  * ([watch]); while the finder's sniffer is open, the whole range ([sniff]),
  * so the finder can see which code moved with a door. Every update is
  * handed to the finder as raw values; speed and revs go to the dashboard.
+ * The codes a VW's decoder was seen to send ([FytVw]) are listened to on
+ * every car, and decoded only on one set up as a VW.
  */
 internal class FytCanbusSource(private val toolkit: FytToolkit) : VehicleBusSource {
     private val _listening = MutableStateFlow(false)
@@ -147,7 +154,7 @@ internal class FytCanbusSource(private val toolkit: FytToolkit) : VehicleBusSour
         val m = toolkit.module(FytModules.CANBUS) ?: run { Log.w(TAG, "no CANBUS module"); return }
         module = m
         registered.clear()
-        register(m, FytCanbus.GENERIC.toList() + watched + if (sniffing) FytCanbus.SNIFF_RANGE.toList() else emptyList())
+        register(m, FytCanbus.GENERIC.toList() + FytVw.CODES.toList() + watched + if (sniffing) FytCanbus.SNIFF_RANGE.toList() else emptyList())
         _listening.value = true
     }
 
@@ -177,7 +184,7 @@ internal class FytCanbusSource(private val toolkit: FytToolkit) : VehicleBusSour
             sniffing = on
             val m = module ?: return@post
             if (on) register(m, FytCanbus.SNIFF_RANGE.toList())
-            else for (code in FytCanbus.SNIFF_RANGE) if (code !in watched && code !in FytCanbus.GENERIC) {
+            else for (code in FytCanbus.SNIFF_RANGE) if (code !in watched && code !in FytCanbus.GENERIC && code !in FytVw.CODES) {
                 if (registered.remove(code)) m.unregister(callback, code)
             }
         }
@@ -197,6 +204,18 @@ internal class FytCanbusSource(private val toolkit: FytToolkit) : VehicleBusSour
             }
             FytCanbus.U_CUR_SPEED -> unitBusSpeed(o, FytCanbus.speedKmh(ints))
             FytCanbus.U_ENGINE_SPEED -> unitBusRpm(o, FytCanbus.rpm(ints))
+            else -> if (code in FytVw.CODES && FytVw.isVw(CarProfileStore.current.make)) onVw(o, code, ints)
+        }
+    }
+
+    private fun onVw(o: Publisher, code: Int, ints: IntArray?) {
+        when (code) {
+            FytVw.U_HANDBRAKE -> o.put(K.HANDBRAKE, FytVw.handbrake(ints))
+            FytVw.U_VOLTS -> FytVw.volts(ints)?.let { unitBusVolts(o, it) }
+            FytVw.U_ODOMETER -> o.put(K.ODOMETER, FytVw.odometerKm(ints))
+            FytVw.U_SPEED -> unitBusSpeed(o, FytVw.speedKmh(ints))
+            FytVw.U_ENGINE_SPEED -> unitBusRpm(o, FytVw.rpm(ints))
+            FytVw.U_OUTSIDE_TEMP -> unitBusOutsideTemp(o, FytVw.outsideTemp(ints))
         }
     }
 

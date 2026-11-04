@@ -54,4 +54,11 @@
     <string name="mine_err_address">Adresy mają 3 lub 8 cyfr hex, a adres odpowiedzi wymaga adresu sterownika.</string>
     <string name="mine_err_session">Sesja: tylko 1001, 1003, 1081, 1092 lub 10C0, z adresem sterownika.</string>
     <string name="mine_err_no_bytes">Litery od A do H mają sens tylko w odczycie z samochodu.</string>
+    <string name="mine_vw_detail">Odczyty silnika diesla z grupy VW (Sharan, Alhambra...): ciśnienie doładowania, temperatura oleju, moment, moc.</string>
+    <string name="mine_add_vw">Dodaj odczyty VW</string>
+    <string name="mine_vw_boost">Doładowanie</string>
+    <string name="mine_vw_boost_target">Doładowanie zadane</string>
+    <string name="mine_vw_oil">Temperatura oleju</string>
+    <string name="mine_vw_torque">Moment obrotowy</string>
+    <string name="mine_vw_power">Moc</string>
 </resources>

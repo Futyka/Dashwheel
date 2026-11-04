@@ -54,4 +54,11 @@
     <string name="mine_err_address">Adressen hebben 3 of 8 hexcijfers, en een antwoordadres vraagt om een adres van de regeleenheid.</string>
     <string name="mine_err_session">Sessie: alleen 1001, 1003, 1081, 1092 of 10C0, met een adres van de regeleenheid.</string>
     <string name="mine_err_no_bytes">De letters A tot H betekenen alleen iets bij een meting van de auto.</string>
+    <string name="mine_vw_detail">Motorwaarden van een diesel uit de VW-groep (Sharan, Alhambra...): turbodruk, olietemperatuur, koppel, vermogen.</string>
+    <string name="mine_add_vw">VW-waarden toevoegen</string>
+    <string name="mine_vw_boost">Turbodruk</string>
+    <string name="mine_vw_boost_target">Turbodruk doel</string>
+    <string name="mine_vw_oil">Olietemperatuur</string>
+    <string name="mine_vw_torque">Koppel</string>
+    <string name="mine_vw_power">Vermogen</string>
 </resources>

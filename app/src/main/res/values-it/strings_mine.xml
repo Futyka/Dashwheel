@@ -54,4 +54,11 @@
     <string name="mine_err_address">Gli indirizzi hanno 3 o 8 cifre esadecimali, e un indirizzo di risposta richiede un indirizzo centralina.</string>
     <string name="mine_err_session">Sessione: solo 1001, 1003, 1081, 1092 o 10C0, con indirizzo centralina.</string>
     <string name="mine_err_no_bytes">Le lettere da A a H hanno senso solo in una lettura dall\'auto.</string>
+    <string name="mine_vw_detail">Letture del motore di un diesel del gruppo VW (Sharan, Alhambra...): pressione turbo, temperatura olio, coppia, potenza.</string>
+    <string name="mine_add_vw">Aggiungi letture VW</string>
+    <string name="mine_vw_boost">Pressione turbo</string>
+    <string name="mine_vw_boost_target">Pressione turbo richiesta</string>
+    <string name="mine_vw_oil">Temperatura olio</string>
+    <string name="mine_vw_torque">Coppia</string>
+    <string name="mine_vw_power">Potenza</string>
 </resources>

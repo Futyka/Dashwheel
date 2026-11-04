@@ -54,4 +54,11 @@
     <string name="mine_err_address">Os endereços têm 3 ou 8 dígitos hexadecimais, e um endereço de resposta precisa de um endereço de centralina.</string>
     <string name="mine_err_session">Sessão: só 1001, 1003, 1081, 1092 ou 10C0, com endereço de centralina.</string>
     <string name="mine_err_no_bytes">As letras A a H só fazem sentido numa leitura do carro.</string>
+    <string name="mine_vw_detail">Leituras do motor de um diesel do grupo VW (Sharan, Alhambra...): pressão do turbo, temperatura do óleo, binário, potência.</string>
+    <string name="mine_add_vw">Adicionar leituras VW</string>
+    <string name="mine_vw_boost">Pressão do turbo</string>
+    <string name="mine_vw_boost_target">Pressão do turbo pedida</string>
+    <string name="mine_vw_oil">Temperatura do óleo</string>
+    <string name="mine_vw_torque">Binário</string>
+    <string name="mine_vw_power">Potência</string>
 </resources>

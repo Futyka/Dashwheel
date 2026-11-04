@@ -65,4 +65,25 @@ class FytProtocolTest {
         assertTrue(FytCanbus.U_CUR_SPEED in FytCanbus.SNIFF_RANGE)
         assertTrue(FytCanbus.GENERIC.contains(FytCanbus.U_CANBUS_ID))
     }
+
+    @Test
+    fun theVwCodes_areReadAsTheTesterLoggedThem() {
+        assertTrue(FytVw.isVw("Volkswagen"))
+        assertTrue(FytVw.isVw(" VW "))
+        assertTrue(FytVw.isVw("SEAT"))
+        assertFalse(FytVw.isVw("Peugeot"))
+        assertFalse(FytVw.isVw(""))
+        assertEquals(true, FytVw.handbrake(intArrayOf(0)))
+        assertEquals(false, FytVw.handbrake(intArrayOf(1)))
+        assertNull(FytVw.handbrake(intArrayOf(7)))
+        assertEquals(12.34, FytVw.volts(intArrayOf(1234))!!, 1e-9)
+        assertNull(FytVw.volts(intArrayOf(0)))
+        assertEquals(57.5f, FytVw.speedKmh(intArrayOf(5750)))
+        assertNull(FytVw.speedKmh(intArrayOf(-100)))
+        assertEquals(-4.5, FytVw.outsideTemp(intArrayOf(-45))!!, 1e-9)
+        assertNull(FytVw.outsideTemp(intArrayOf(9999)))
+        assertEquals(187_654.0, FytVw.odometerKm(intArrayOf(187_654))!!, 1e-9)
+        assertEquals(850, FytVw.rpm(intArrayOf(850)))
+        assertTrue(FytVw.CODES.all { it in FytCanbus.SNIFF_RANGE && it !in FytCanbus.GENERIC })
+    }
 }

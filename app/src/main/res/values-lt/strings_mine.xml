@@ -54,4 +54,11 @@
     <string name="mine_err_address">Adresai turi 3 arba 8 šešioliktainius skaitmenis, o atsakymo adresui reikia ECU adreso.</string>
     <string name="mine_err_session">Sesija: tik 1001, 1003, 1081, 1092 arba 10C0, su ECU adresu.</string>
     <string name="mine_err_no_bytes">Raidės nuo A iki H turi prasmę tik rodmeniui iš automobilio.</string>
+    <string name="mine_vw_detail">VW grupės dyzelio variklio rodmenys (Sharan, Alhambra...): pripūtimas, alyvos temperatūra, sukimo momentas, galia.</string>
+    <string name="mine_add_vw">Pridėti VW rodmenis</string>
+    <string name="mine_vw_boost">Pripūtimas</string>
+    <string name="mine_vw_boost_target">Pripūtimo tikslas</string>
+    <string name="mine_vw_oil">Alyvos temperatūra</string>
+    <string name="mine_vw_torque">Sukimo momentas</string>
+    <string name="mine_vw_power">Galia</string>
 </resources>
