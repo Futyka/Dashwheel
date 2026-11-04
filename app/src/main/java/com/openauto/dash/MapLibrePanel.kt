@@ -6,6 +6,7 @@ import android.content.ComponentCallbacks2
 import android.content.Context
 import android.content.res.Configuration
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.horizontalScroll
@@ -383,7 +384,9 @@ fun MapLibrePanel(modifier: Modifier = Modifier, wallpaper: Boolean = false) {
     LaunchedEffect(navRoute, guidedRoute) {
         val line = navRoute ?: return@LaunchedEffect
         if (guidedRoute != null) {
-            line.addRoute(guidedRoute)
+            // A long route the line cannot draw leaves the map without it, not the app dead.
+            runCatching { line.addRoute(guidedRoute) }
+                .onFailure { Log.w("MapLibrePanel", "guided route not drawn: ${it.message}") }
             wasGuiding = true
         } else if (wasGuiding) {
             wasGuiding = false
