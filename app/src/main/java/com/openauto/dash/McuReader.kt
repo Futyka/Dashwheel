@@ -445,8 +445,7 @@ object McuReader {
     @Synchronized
     private fun ingest(cmdId: Int, bytes: List<Int>, live: Boolean) {
 
-        val sub = if (bytes.size >= 3 && bytes[1] == 0xfd) bytes[2] else -1
-        val key = if (sub >= 0) cmdId.toString() + "." + hex2(sub) else cmdId.toString()
+        val key = keyOf(cmdId, bytes)
         // Runs for every line the CANbox logs (dozens a second): no String.format per byte.
         val hex = buildString(bytes.size * 3) {
             bytes.forEachIndexed { i, b ->
@@ -483,6 +482,21 @@ object McuReader {
             val b = bytes[4]
             busPublisher.put(K.DOORS, doorsOf(b))
         }
+    }
+
+    /**
+     * The key one message is kept under: the MCU's command, and for the CAN box's channel the frame's own type,
+     * so frames of different types don't overwrite each other. An RZC box sends `41 FD <type> …`; a Hiworld box
+     * `41 5A A5 <len> <type> …` (the Hiworld Peugeot 508 of issue #122), its frames otherwise all one key the
+     * radar frame took over several times a second, and the raw view could show none of them changing.
+     */
+    internal fun keyOf(cmdId: Int, bytes: List<Int>): String {
+        val type = when {
+            bytes.size >= 3 && bytes[1] == 0xfd -> bytes[2]
+            bytes.size >= 5 && bytes[1] == 0x5a && bytes[2] == 0xa5 -> bytes[4]
+            else -> return cmdId.toString()
+        }
+        return cmdId.toString() + "." + hex2(type)
     }
 
     internal fun doorsOf(b: Int) = DoorState(
