@@ -30,6 +30,9 @@ import java.util.UUID
 object ObdRelay {
     private const val TAG = "ObdRelay"
     private const val PREFS = "obd_relay"
+    private const val KEY_WAY = "way"
+    /** Two ways fit in the head unit's 15 s wait for the phone, which then hears the reason. */
+    private const val CONNECT_TIMEOUT_MS = 6_000L
     private val SPP: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
 
     enum class Status { IDLE, CONNECTING, RELAYING, FAILED }
@@ -45,6 +48,14 @@ object ObdRelay {
     private val lock = Any()
     @Volatile private var socket: BluetoothSocket? = null
     @Volatile private var output: OutputStream? = null
+    /**
+     * The socket still dialling the adapter: closed by the next open or close,
+     * so a connect the head unit gave up on stops at once instead of dialling
+     * on beside the next one (an ELM327 takes one link at a time) (issue #120).
+     */
+    @Volatile private var dialling: BluetoothSocket? = null
+    /** When the adapter link came up, to say how long it held when it ends. */
+    @Volatile private var relayingSince = 0L
     /** Bumped by every open and close: a reader or a connect from before stops quietly. */
     @Volatile private var generation = 0
 
@@ -62,7 +73,7 @@ object ObdRelay {
         close()
         _adapter.value = device
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().apply {
-            if (device == null) clear() else putString("address", device.address).putString("name", device.name)
+            if (device == null) clear() else putString("address", device.address).putString("name", device.name).remove(KEY_WAY)
         }.apply()
         _status.value = Status.IDLE
         LinkServer.send(offer(context))
@@ -112,8 +123,10 @@ object ObdRelay {
     }
 
     private fun closeLocked() {
+        runCatching { dialling?.close() }
         runCatching { output?.close() }
         runCatching { socket?.close() }
+        dialling = null
         output = null
         socket = null
     }
@@ -125,21 +138,47 @@ object ObdRelay {
         if (adapter == null || !adapter.isEnabled) return failed(gen, "Bluetooth is off on the phone")
         val device = runCatching { adapter.getRemoteDevice(chosen.address) }.getOrNull() ?: return failed(gen, "unknown adapter")
         // The same three ways the head unit tries: clone adapters answer on one or another.
+        // The way that last worked goes first, as on the head unit.
+        val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         val ways = listOf<(BluetoothDevice) -> BluetoothSocket>(
             { it.createRfcommSocketToServiceRecord(SPP) },
             { it.createInsecureRfcommSocketToServiceRecord(SPP) },
             { it.javaClass.getMethod("createRfcommSocket", Int::class.javaPrimitiveType).invoke(it, 1) as BluetoothSocket }
         )
-        for (way in ways) {
+        val last = prefs.getInt(KEY_WAY, 0).coerceIn(ways.indices)
+        var why = "the adapter refused the phone"
+        for (i in listOf(last) + ways.indices.filter { it != last }) {
             if (gen != generation) return
             runCatching { adapter.cancelDiscovery() }
-            val s = runCatching { way(device) }.getOrNull() ?: continue
+            val s = runCatching { ways[i](device) }.getOrNull() ?: continue
+            synchronized(lock) {
+                if (gen != generation) {
+                    runCatching { s.close() }
+                    return
+                }
+                dialling = s
+            }
+            // A connect can hang well past the head unit's patience: closing the socket ends it.
+            val watchdog = Thread({
+                try {
+                    Thread.sleep(CONNECT_TIMEOUT_MS)
+                    runCatching { s.close() }
+                } catch (_: InterruptedException) {
+                }
+            }, "obd-relay-watchdog").apply { isDaemon = true; start() }
             try {
                 s.connect()
             } catch (e: IOException) {
                 runCatching { s.close() }
+                why = if (watchdog.isAlive) "the adapter refused the phone: ${e.message.orEmpty()}".trim().trimEnd(':')
+                else "the adapter did not answer the phone in ${CONNECT_TIMEOUT_MS / 1000} s"
+                Log.w(TAG, "way ${i + 1}: ${e.message}")
+                if (gen != generation) return
                 Thread.sleep(500)
                 continue
+            } finally {
+                watchdog.interrupt()
+                synchronized(lock) { if (dialling === s) dialling = null }
             }
             val input: InputStream
             synchronized(lock) {
@@ -151,12 +190,15 @@ object ObdRelay {
                 output = s.outputStream
                 input = s.inputStream
             }
+            prefs.edit().putInt(KEY_WAY, i).apply()
+            relayingSince = System.currentTimeMillis()
             _status.value = Status.RELAYING
+            LinkServer.note("OBD: ${chosen.name.ifEmpty { "adapter" }} connected, passing it on to the car")
             LinkServer.send(ObdRelayState(true))
             read(input, gen)
             return
         }
-        failed(gen, "the adapter refused the phone")
+        failed(gen, why)
     }
 
     /** Passes the adapter's bytes on until the link to it ends. */
@@ -179,6 +221,10 @@ object ObdRelay {
             generation++
             closeLocked()
         }
+        val held = (System.currentTimeMillis() - relayingSince) / 1000
+        Log.w(TAG, "$reason after $held s")
+        // Shown under the status on the phone: why the adapter went, for a link that keeps dropping.
+        LinkServer.note("OBD: $reason after $held s")
         _status.value = Status.FAILED
         LinkServer.send(ObdRelayState(false, reason))
     }
@@ -186,6 +232,7 @@ object ObdRelay {
     private fun failed(gen: Int, reason: String) {
         if (gen != generation) return
         Log.w(TAG, reason)
+        LinkServer.note("OBD: $reason")
         _status.value = Status.FAILED
         LinkServer.send(ObdRelayState(false, reason))
     }
