@@ -76,7 +76,7 @@ private fun FaceLook.overImage() = copy(
 // --- Orb ----------------------------------------------------------------------------------
 
 @Composable
-internal fun OrbLayout(f: WidgetFace, look: FaceLook, m: FaceMetrics) {
+internal fun OrbLayout(f: WidgetFace, look: FaceLook, m: FaceMetrics, discClick: (() -> Unit)? = null) {
     val side = m.w / m.h >= 1.8f && (f.stats.isNotEmpty() || f.rows.isNotEmpty())
     Row(
         modifier = Modifier.fillMaxSize().padding(m.pad.dp),
@@ -84,7 +84,7 @@ internal fun OrbLayout(f: WidgetFace, look: FaceLook, m: FaceMetrics) {
         horizontalArrangement = if (side) Arrangement.spacedBy(m.dp(6f)) else Arrangement.Center
     ) {
         val d = min(m.h - m.pad * 2f, if (side) m.w * 0.5f else m.w - m.pad * 2f).coerceAtLeast(24f)
-        Orb(f, look, d)
+        Orb(f, look, d, discClick)
         if (side) {
             Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(m.dp(2.6f), Alignment.CenterVertically)) {
                 FaceHeader(f, look, m)
@@ -95,9 +95,12 @@ internal fun OrbLayout(f: WidgetFace, look: FaceLook, m: FaceMetrics) {
     }
 }
 
-/** The whole reading inside a disc of diameter [d] dp: the cover (or a colour) behind, the progress round the rim. */
+/**
+ * The whole reading inside a disc of diameter [d] dp: the cover (or a colour) behind, the progress round the rim.
+ * [onClick], when given, is taken by the disc alone: the clip keeps the corners of its square from answering.
+ */
 @Composable
-private fun Orb(f: WidgetFace, look: FaceLook, d: Float) {
+private fun Orb(f: WidgetFace, look: FaceLook, d: Float, onClick: (() -> Unit)? = null) {
     val spin by rememberSpin(7000, f.active)
     val over = look.overImage()
     val inner = d * 0.88f
@@ -106,7 +109,10 @@ private fun Orb(f: WidgetFace, look: FaceLook, d: Float) {
     }
     val fillBrush = remember(look) { Brush.sweepGradient(listOf(look.accent, look.accent2, look.accent)) }
     val shade = remember { Brush.radialGradient(listOf(Color.Black.copy(alpha = 0.30f), Color.Black.copy(alpha = 0.72f))) }
-    Box(modifier = Modifier.size(d.dp), contentAlignment = Alignment.Center) {
+    Box(
+        modifier = Modifier.size(d.dp).then(onClick?.let { Modifier.clip(CircleShape).clickable(onClick = it) } ?: Modifier),
+        contentAlignment = Alignment.Center
+    ) {
         // Its own layer: the glint's steps redraw the ring, not the words inside.
         Canvas(modifier = Modifier.fillMaxSize().graphicsLayer()) {
             val stroke = size.minDimension * 0.03f

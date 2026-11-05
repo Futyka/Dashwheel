@@ -108,7 +108,12 @@ internal fun DesignedFace(face: WidgetFace, design: WidgetDesign, modifier: Modi
         return
     }
     val look = (if (design.look == FaceLookKind.THEME) LocalThemeFaceLook.current else null) ?: faceLook(design.look)
-    FaceSurface(look, modifier.then(face.onClick?.let { Modifier.clickable(onClick = it) } ?: Modifier)) {
+    // An orb on a bare theme shows only its disc: the empty corners around it take no
+    // tap, so a finger there reaches whatever lies below (a map's buttons under a
+    // tile laid over it). The disc itself takes the tap instead.
+    val discOnly = design.layout == FaceLayout.ORB && look.background == null && DashColors.Bare
+    val surfaceClick = if (discOnly) null else face.onClick
+    FaceSurface(look, modifier.then(surfaceClick?.let { Modifier.clickable(onClick = it) } ?: Modifier)) {
         BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
             // The same one for as long as the tile keeps its size: made anew at
             // every reading, each part of the face took it for a change and was
@@ -124,7 +129,7 @@ internal fun DesignedFace(face: WidgetFace, design: WidgetDesign, modifier: Modi
                 FaceLayout.TERMINAL -> TerminalLayout(face, look, m)
                 FaceLayout.DIAL -> DialLayout(face, look, m)
                 FaceLayout.FLAP -> FlapLayout(face, look, m)
-                FaceLayout.ORB -> OrbLayout(face, look, m)
+                FaceLayout.ORB -> OrbLayout(face, look, m, discClick = if (discOnly) face.onClick else null)
                 FaceLayout.LIQUID -> LiquidLayout(face, look, m)
                 FaceLayout.DOTS -> DotsLayout(face, look, m)
                 FaceLayout.POSTER -> PosterLayout(face, look, m)
