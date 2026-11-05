@@ -179,8 +179,11 @@ internal object UsbTpms {
                 val adapter = UsbObd.attached(app).firstOrNull { it.key == key }
                 when {
                     adapter == null -> _state.value = UsbTpmsState.UNPLUGGED
-                    // Asked only from its settings page: nothing pops up by itself mid-drive.
-                    !UsbObd.permitted(app, adapter) -> _state.value = UsbTpmsState.NOT_ALLOWED
+                    // Android forgets the permission at each unplug or restart: given again through the
+                    // privileged shell where there is one, with no dialog ([UsbGrant]). Otherwise asked
+                    // only from its settings page: nothing pops up by itself mid-drive.
+                    !UsbObd.permitted(app, adapter) && !UsbGrant.silently(app, adapter.device) ->
+                        _state.value = UsbTpmsState.NOT_ALLOWED
                     else -> read(app, adapter)
                 }
                 withTimeoutOrNull(RETRY_MS) { wake.receive() }

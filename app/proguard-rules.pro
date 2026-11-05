@@ -32,3 +32,6 @@
 
 # Run by name through the privileged shell (app_process) when the home window was left floating (StuckSplit).
 -keep class com.openauto.dash.LaunchParamsReset { public static void main(java.lang.String[]); }
+
+# Run by name through the privileged shell (app_process) to allow a USB device without the dialog (UsbTpms, UsbObd).
+-keep class com.openauto.dash.UsbGrant { public static void main(java.lang.String[]); }
