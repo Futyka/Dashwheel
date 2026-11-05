@@ -57,8 +57,6 @@ internal class DashboardUiState(
     var removeChoice by mutableStateOf<Int?>(null)
     /** Asked before a template replaces dashboards. */
     var confirmTemplate by mutableStateOf<TemplateChoice?>(null)
-    /** A tile moved to a dashboard out of the swipes: asked whether to bring it back first (page, tile index, target). */
-    var confirmBringBack by mutableStateOf<Triple<Int, Int, Int>?>(null)
 
     /** System-app install (root): unlocks embedding the real Google Maps app. */
     var showSystemDialog by mutableStateOf(false)
@@ -117,7 +115,6 @@ internal class DashboardUiState(
         showAddSheet = false
         tileOptions = null
         removeChoice = null
-        confirmBringBack = null
         confirmTemplate = null
         // A first setup the lock closes comes back where it was, once parked.
         if (setupStep != null && !setupDone) setupResume = setupShownStep

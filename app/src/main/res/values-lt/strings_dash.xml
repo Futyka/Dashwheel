@@ -205,7 +205,6 @@
     <string name="dash_dashboard_options">Skydelio parinktys</string>
     <string name="dash_remove_dashboard_title">Pašalinti %1$s?</string>
     <string name="dash_remove_dashboard_body">Ištuštinkite jį arba išimkite iš perbraukimų su plytelėmis. Anuliavus jos grįš.</string>
-    <string name="dash_tile_move">Perkelti į kitą skydelį</string>
     <string name="dash_tile_remove">Pašalinti</string>
     <string name="dash_tile_restart_app">Paleisti programą iš naujo</string>
     <!-- The bar's Apps button, labelled -->
@@ -228,11 +227,6 @@
     <string name="dash_dashboard_removed">%1$s pašalintas</string>
     <string name="dash_remove_empty">Ištuštinti</string>
     <string name="dash_remove_take_out">Išimti iš perbraukimų</string>
-    <string name="dash_bring_back_title">Grąžinti %1$s?</string>
-    <string name="dash_bring_back_body">Plytelė bus perkelta ten, o skydelis vėl bus perbraukimuose.</string>
-    <string name="dash_bring_back">Grąžinti</string>
-    <string name="dash_moved_to">Perkelta į %1$s</string>
-    <string name="dash_page_removed">%1$s išimtas iš perbraukimų</string>
     <string name="dash_way_home_up">Perbraukite aukštyn į Pradžią</string>
     <string name="dash_way_home_down">Perbraukite žemyn į Pradžią</string>
     <string name="dash_add_tile">Pridėti plytelę</string>

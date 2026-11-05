@@ -201,7 +201,6 @@
     <string name="dash_dashboard_options">Dashboardopties</string>
     <string name="dash_remove_dashboard_title">%1$s verwijderen?</string>
     <string name="dash_remove_dashboard_body">Leegmaken, of uit het vegen halen met de tegels. Ongedaan maken brengt ze terug.</string>
-    <string name="dash_tile_move">Naar een ander dashboard</string>
     <string name="dash_tile_remove">Verwijderen</string>
     <string name="dash_tile_restart_app">App opnieuw starten</string>
     <string name="dash_apps">Apps</string>
@@ -220,11 +219,6 @@
     <string name="dash_dashboard_removed">%1$s verwijderd</string>
     <string name="dash_remove_empty">Leegmaken</string>
     <string name="dash_remove_take_out">Uit het vegen halen</string>
-    <string name="dash_bring_back_title">%1$s terughalen?</string>
-    <string name="dash_bring_back_body">De tegel gaat erheen en het dashboard doet weer mee met vegen.</string>
-    <string name="dash_bring_back">Terughalen</string>
-    <string name="dash_moved_to">Verplaatst naar %1$s</string>
-    <string name="dash_page_removed">%1$s, buiten het vegen</string>
     <string name="dash_way_home_up">Veeg omhoog voor Start</string>
     <string name="dash_way_home_down">Veeg omlaag voor Start</string>
     <string name="dash_add_tile">Tegel toevoegen</string>

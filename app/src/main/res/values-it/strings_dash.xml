@@ -205,7 +205,6 @@
     <string name="dash_dashboard_options">Opzioni del cruscotto</string>
     <string name="dash_remove_dashboard_title">Rimuovere %1$s?</string>
     <string name="dash_remove_dashboard_body">Svuotalo, o toglilo dagli scorrimenti con i suoi riquadri. Annulla li riporta.</string>
-    <string name="dash_tile_move">Sposta in un altro cruscotto</string>
     <string name="dash_tile_remove">Rimuovi</string>
     <string name="dash_tile_restart_app">Riavvia l\'app</string>
     <string name="dash_apps">App</string>
@@ -225,11 +224,6 @@
     <string name="dash_dashboard_removed">%1$s rimosso</string>
     <string name="dash_remove_empty">Svuotalo</string>
     <string name="dash_remove_take_out">Toglilo dagli scorrimenti</string>
-    <string name="dash_bring_back_title">Ripristinare %1$s?</string>
-    <string name="dash_bring_back_body">Il riquadro va lì e il pannello torna negli scorrimenti.</string>
-    <string name="dash_bring_back">Ripristina</string>
-    <string name="dash_moved_to">Spostato in %1$s</string>
-    <string name="dash_page_removed">%1$s, fuori dagli scorrimenti</string>
     <string name="dash_way_home_up">Scorri in alto per la Home</string>
     <string name="dash_way_home_down">Scorri in basso per la Home</string>
     <string name="dash_add_tile">Aggiungi un riquadro</string>

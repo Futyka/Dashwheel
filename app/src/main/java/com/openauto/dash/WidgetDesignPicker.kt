@@ -4,10 +4,11 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +19,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Icon
@@ -92,6 +92,7 @@ internal fun DesignedTile(item: DashboardItem.BuiltinWidget, env: SkinTileEnv, s
  * tile at once; the panel stays, so several can be tried in a row.
  * [standardPreview] draws the tile as it is without a design.
  */
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun DesignShelf(
     kind: BuiltinKind,
@@ -120,9 +121,11 @@ internal fun DesignShelf(
     val quick = if (atTheWheel) shown.filter { it.glanceable } else shown
     val parked = if (atTheWheel) shown.filter { !it.glanceable } else emptyList()
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        Row(
-            modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
-            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        // Wrapped, not scrolled: a family cut at the panel's edge went unseen.
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             shelves.forEach { f ->
                 CategoryChip(if (f == null) kind.label else stringResource(f.titleRes), shelf == f) { shelf = f }
@@ -176,8 +179,8 @@ internal fun DesignShelf(
     }
 }
 
-/** Below this width the shelf gives up a column: two to a row in the side panel. */
-private val DESIGN_THUMB_MIN_WIDTH = 140.dp
+/** Below this width the shelf gives up a column: two big ones to a row in the side panel. */
+private val DESIGN_THUMB_MIN_WIDTH = 190.dp
 
 /**
  * The widget's live reading for the shelf's previews, refreshed at most once

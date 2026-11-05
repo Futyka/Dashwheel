@@ -205,7 +205,6 @@
     <string name="dash_dashboard_options">Options du tableau de bord</string>
     <string name="dash_remove_dashboard_title">Supprimer %1$s ?</string>
     <string name="dash_remove_dashboard_body">Le vider, ou le retirer des balayages avec ses tuiles. Annuler les ramène.</string>
-    <string name="dash_tile_move">Vers un autre tableau de bord</string>
     <string name="dash_tile_remove">Retirer</string>
     <string name="dash_tile_restart_app">Relancer l\'appli</string>
     <string name="dash_apps">Applis</string>
@@ -225,11 +224,6 @@
     <string name="dash_dashboard_removed">%1$s supprimé</string>
     <string name="dash_remove_empty">Le vider</string>
     <string name="dash_remove_take_out">Le retirer des balayages</string>
-    <string name="dash_bring_back_title">Rétablir %1$s ?</string>
-    <string name="dash_bring_back_body">La tuile y va et le tableau de bord revient dans les balayages.</string>
-    <string name="dash_bring_back">Rétablir</string>
-    <string name="dash_moved_to">Déplacé vers %1$s</string>
-    <string name="dash_page_removed">%1$s, hors des balayages</string>
     <string name="dash_way_home_up">Balayez vers le haut pour l\'Accueil</string>
     <string name="dash_way_home_down">Balayez vers le bas pour l\'Accueil</string>
     <string name="dash_add_tile">Ajouter une tuile</string>

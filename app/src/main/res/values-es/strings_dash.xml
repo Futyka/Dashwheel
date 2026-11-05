@@ -201,7 +201,6 @@
     <string name="dash_dashboard_options">Opciones del panel</string>
     <string name="dash_remove_dashboard_title">¿Quitar %1$s?</string>
     <string name="dash_remove_dashboard_body">Vaciarlo, o quitarlo de los deslizamientos con sus fichas. Deshacer las recupera.</string>
-    <string name="dash_tile_move">Mover a otro panel</string>
     <string name="dash_tile_remove">Quitar</string>
     <string name="dash_tile_restart_app">Reiniciar la app</string>
     <string name="dash_apps">Apps</string>
@@ -221,11 +220,6 @@
     <string name="dash_dashboard_removed">%1$s quitado</string>
     <string name="dash_remove_empty">Vaciarlo</string>
     <string name="dash_remove_take_out">Quitarlo de los deslizamientos</string>
-    <string name="dash_bring_back_title">¿Recuperar %1$s?</string>
-    <string name="dash_bring_back_body">La ficha va allí y el panel vuelve a los deslizamientos.</string>
-    <string name="dash_bring_back">Recuperar</string>
-    <string name="dash_moved_to">Movido a %1$s</string>
-    <string name="dash_page_removed">%1$s, fuera de los deslizamientos</string>
     <string name="dash_way_home_up">Desliza hacia arriba para Inicio</string>
     <string name="dash_way_home_down">Desliza hacia abajo para Inicio</string>
     <string name="dash_add_tile">Añadir una ficha</string>

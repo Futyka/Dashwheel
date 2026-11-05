@@ -201,7 +201,6 @@
     <string name="dash_dashboard_options">Opcje pulpitu</string>
     <string name="dash_remove_dashboard_title">Usunąć %1$s?</string>
     <string name="dash_remove_dashboard_body">Opróżnij go lub usuń z przesuwania razem z kafelkami. Cofnij je przywraca.</string>
-    <string name="dash_tile_move">Przenieś na inny pulpit</string>
     <string name="dash_tile_remove">Usuń</string>
     <string name="dash_tile_restart_app">Uruchom aplikację ponownie</string>
     <string name="dash_apps">Aplikacje</string>
@@ -222,11 +221,6 @@
     <string name="dash_dashboard_removed">Usunięto: %1$s</string>
     <string name="dash_remove_empty">Opróżnij</string>
     <string name="dash_remove_take_out">Usuń z przesuwania</string>
-    <string name="dash_bring_back_title">Przywrócić %1$s?</string>
-    <string name="dash_bring_back_body">Kafelek trafia tam, a pulpit wraca do przesuwania.</string>
-    <string name="dash_bring_back">Przywróć</string>
-    <string name="dash_moved_to">Przeniesiono do %1$s</string>
-    <string name="dash_page_removed">%1$s, poza przesuwaniem</string>
     <string name="dash_way_home_up">Przesuń w górę do Startu</string>
     <string name="dash_way_home_down">Przesuń w dół do Startu</string>
     <string name="dash_add_tile">Dodaj kafelek</string>

@@ -201,7 +201,6 @@
     <string name="dash_dashboard_options">Dashboard-Optionen</string>
     <string name="dash_remove_dashboard_title">%1$s entfernen?</string>
     <string name="dash_remove_dashboard_body">Leeren, oder mit seinen Kacheln aus dem Wischen nehmen. Rückgängig holt sie zurück.</string>
-    <string name="dash_tile_move">Auf ein anderes Dashboard</string>
     <string name="dash_tile_remove">Entfernen</string>
     <string name="dash_tile_restart_app">App neu starten</string>
     <string name="dash_apps">Apps</string>
@@ -220,11 +219,6 @@
     <string name="dash_dashboard_removed">%1$s entfernt</string>
     <string name="dash_remove_empty">Leeren</string>
     <string name="dash_remove_take_out">Aus dem Wischen nehmen</string>
-    <string name="dash_bring_back_title">%1$s zurückholen?</string>
-    <string name="dash_bring_back_body">Die Kachel kommt dorthin und das Dashboard ist wieder im Wischen.</string>
-    <string name="dash_bring_back">Zurückholen</string>
-    <string name="dash_moved_to">Verschoben nach %1$s</string>
-    <string name="dash_page_removed">%1$s, nicht im Wischen</string>
     <string name="dash_way_home_up">Nach oben wischen für Start</string>
     <string name="dash_way_home_down">Nach unten wischen für Start</string>
     <string name="dash_add_tile">Kachel hinzufügen</string>

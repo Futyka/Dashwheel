@@ -201,7 +201,6 @@
     <string name="dash_dashboard_options">Opções do painel</string>
     <string name="dash_remove_dashboard_title">Remover %1$s?</string>
     <string name="dash_remove_dashboard_body">Esvaziar, ou tirar dos deslizes com os seus mosaicos. Anular repõe-nos.</string>
-    <string name="dash_tile_move">Mover para outro painel</string>
     <string name="dash_tile_remove">Remover</string>
     <string name="dash_tile_restart_app">Reiniciar a app</string>
     <string name="dash_apps">Apps</string>
@@ -221,11 +220,6 @@
     <string name="dash_dashboard_removed">%1$s removido</string>
     <string name="dash_remove_empty">Esvaziar</string>
     <string name="dash_remove_take_out">Tirar dos deslizes</string>
-    <string name="dash_bring_back_title">Repor %1$s?</string>
-    <string name="dash_bring_back_body">O mosaico vai para lá e o painel volta aos deslizes.</string>
-    <string name="dash_bring_back">Repor</string>
-    <string name="dash_moved_to">Movido para %1$s</string>
-    <string name="dash_page_removed">%1$s, fora dos deslizes</string>
     <string name="dash_way_home_up">Deslize para cima para o Início</string>
     <string name="dash_way_home_down">Deslize para baixo para o Início</string>
     <string name="dash_add_tile">Adicionar um mosaico</string>

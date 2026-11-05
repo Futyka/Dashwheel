@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -67,7 +67,7 @@ import kotlin.math.roundToInt
 
 /*
  * A tile's panel while arranging (a tap on the tile): its design, its text
- * size, the page to move it to, and removing it, all on one level beside the
+ * size and removing it, all on one level beside the
  * page, so each change shows on the tile itself. It opens on the driver's
  * side, or on the other one when the tile is under it there; an upright
  * screen has it along the bottom, or the top. Resizing stays on the tile's
@@ -82,14 +82,14 @@ import kotlin.math.roundToInt
 /** Where the tile's panel stands on the pages. */
 internal enum class PanelSide { LEFT, RIGHT, TOP, BOTTOM }
 
-/** The panel's two tabs: the tile itself (design, text size, dashboard, remove) and its layer (TileFrame). */
+/** The panel's two tabs: the tile itself (design, text size, remove) and its layer (TileFrame). */
 private enum class PanelSection(val icon: ImageVector, @androidx.annotation.StringRes val label: Int) {
     TILE(Icons.Filled.Widgets, R.string.frame_tab_tile),
     LAYER(Icons.Filled.Layers, R.string.frame_tab_layer)
 }
 
 /** The side panel's width. */
-internal val PANEL_WIDTH = 360.dp
+internal val PANEL_WIDTH = 460.dp
 
 /**
  * Below this height a side panel can't stack a widget's designs over its
@@ -142,18 +142,16 @@ internal fun TilePanel(
     item: DashboardItem,
     /** What the tile is: the widget, or the app by its name. */
     title: String,
-    page: Int,
     side: PanelSide,
     /** The design shelf for a tile that has designs, given the room left for it; null otherwise. */
     designs: (@Composable (Modifier) -> Unit)?,
     onZoom: (Float) -> Unit,
-    onMoveTo: (Int) -> Unit,
     onRemove: () -> Unit,
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
     /** A side panel widened for short pages (see [sidePanelWidth]): the shelf and the controls side by side. */
     wide: Boolean = false,
-    /** The Dashboard bar's own actions, shown instead of the page picker (the bar is the same on every page). */
+    /** The Dashboard bar's own actions, shown above Remove. */
     barActions: (@Composable () -> Unit)? = null,
     /** The tile's frame changed: its opacity, its border, the border's colour (TileFrame). */
     onFrame: (TileFrame) -> Unit = {},
@@ -218,7 +216,7 @@ internal fun TilePanel(
                         modifier = Modifier.width(220.dp).verticalScroll(rememberScrollState()),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        Controls(item, page, stacked = true, onZoom, onMoveTo, onRemove, barActions)
+                        Controls(item, stacked = true, onZoom, onRemove, barActions)
                     }
                 }
             } else {
@@ -226,25 +224,23 @@ internal fun TilePanel(
                     designs(Modifier.weight(1f))
                     HorizontalDivider(color = DashColors.Line)
                 }
-                Controls(item, page, stacked = false, onZoom, onMoveTo, onRemove, barActions)
+                Controls(item, stacked = false, onZoom, onRemove, barActions)
             }
         }
     }
 }
 
 /**
- * Text size, then the page cross to move to with Remove beside it; kept
- * short, so the design shelf above has the room. [stacked] is the narrow
- * column of the upright sheet: the text size's label over its stepper, and
- * Remove under the cross.
+ * Text size, then Remove on a line of its own, well apart from the stepper's +
+ * so a tap meant for it never removes the tile; kept short, so the design
+ * shelf above has the room. [stacked] is the narrow column of the upright
+ * sheet: the text size's label over its stepper.
  */
 @Composable
 private fun ColumnScope.Controls(
     item: DashboardItem,
-    page: Int,
     stacked: Boolean,
     onZoom: (Float) -> Unit,
-    onMoveTo: (Int) -> Unit,
     onRemove: () -> Unit,
     barActions: (@Composable () -> Unit)?
 ) {
@@ -268,23 +264,9 @@ private fun ColumnScope.Controls(
     ) {
         RestartButton { EmbeddedApp.restartInTile(item.packageName) }
     }
-    if (barActions != null) {
-        barActions()
-        RemoveButton(onRemove)
-        return
-    }
-    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-        Column(modifier = Modifier.weight(1f).height(PAGE_CROSS_HEIGHT)) {
-            PanelLabel(stringResource(R.string.dash_tile_move))
-            if (!stacked) {
-                Spacer(Modifier.weight(1f))
-                RemoveButton(onRemove)
-            }
-        }
-        PageCrossPicker(current = page, onPick = onMoveTo)
-    }
-    // Beside the cross there is no room for it in the narrow column.
-    if (stacked) RemoveButton(onRemove)
+    barActions?.invoke()
+    Spacer(Modifier.height(6.dp))
+    RemoveButton(onRemove)
 }
 
 /**
@@ -560,11 +542,13 @@ private fun RemoveButton(onRemove: () -> Unit) {
     val tap = rememberTapFeedback()
     Row(
         modifier = Modifier
+            .fillMaxWidth()
             .heightIn(min = DashSize.Touch)
             .clip(DashShape.Small)
             .border(1.dp, DashColors.Critical.copy(alpha = 0.5f), DashShape.Small)
             .clickable(role = Role.Button) { tap(); onRemove() }
             .padding(horizontal = 14.dp),
+        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(Icons.Filled.Delete, contentDescription = null, tint = DashColors.Critical, modifier = Modifier.size(22.dp))
@@ -573,70 +557,3 @@ private fun RemoveButton(onRemove: () -> Unit) {
     }
 }
 
-private val PAGE_CELL = 24.dp
-private val PAGE_GAP = 4.dp
-private val PAGE_CROSS_HEIGHT = PAGE_CELL * 5 + PAGE_GAP * 4
-
-/**
- * The seven pages as the cross they make (the page indicator's shape): the
- * tile's own page filled in, a tap on another sends the tile there. The
- * dashboards taken out of the swipes are dotted: a tap on one still works,
- * the caller asks whether to bring it back first.
- */
-@Composable
-internal fun PageCrossPicker(current: Int, onPick: (Int) -> Unit) {
-    val dashboards = LocalDashboards.current
-    if (dashboards?.tabbed == true) {
-        TabPicker(dashboards.tabs, current, onPick)
-        return
-    }
-    val shown = dashboards?.let { d -> DashboardStore.shownCross(d.tabs.map { it.page }) }
-    val centreCol = DashboardStore.ROW.indexOf(DashboardStore.CENTER)
-    val cells = DashboardStore.COLUMN.mapIndexed { row, p -> Triple(p, centreCol, row) } +
-        DashboardStore.ROW.mapIndexedNotNull { col, p -> if (p == DashboardStore.CENTER) null else Triple(p, col, DashboardStore.COLUMN_HOME) }
-    Box(modifier = Modifier.size(width = PAGE_CELL * 3 + PAGE_GAP * 2, height = PAGE_CROSS_HEIGHT)) {
-        cells.forEach { (p, col, row) -> PageCell(p, p == current, col, row, dotted = shown != null && p !in shown) { onPick(p) } }
-    }
-}
-
-/** Over an app: the tabs with their icons, two to a row in the rail's order, the tile's own filled in. */
-@Composable
-private fun TabPicker(tabs: List<CanvasTab>, current: Int, onPick: (Int) -> Unit) {
-    // Three rows fit where the cross does; a seventh tab makes a fourth, which ran over what is below.
-    val rows = (tabs.size + 1) / 2
-    val height = maxOf(PAGE_CROSS_HEIGHT, TAB_CELL * rows + PAGE_GAP * (rows - 1).coerceAtLeast(0))
-    Box(modifier = Modifier.size(width = PAGE_CELL * 3 + PAGE_GAP * 2, height = height)) {
-        tabs.forEachIndexed { t, tab -> PageCell(tab.page, tab.page == current, t % 2, t / 2, TAB_CELL, tab.icon) { onPick(tab.page) } }
-    }
-}
-
-/** A tab's cell: room for its icon. Two to a row and three rows fit where the cross does. */
-private val TAB_CELL = 36.dp
-
-/** One spot of the cross; [dotted] is a dashboard out of the swipes (a faint frame with a dot in it). */
-@Composable
-private fun PageCell(page: Int, here: Boolean, col: Int, row: Int, cell: Dp = PAGE_CELL, icon: ImageVector? = null, dotted: Boolean = false, onClick: () -> Unit) {
-    val tap = rememberTapFeedback()
-    val shape = RoundedCornerShape(6.dp)
-    val name = if (dotted) stringResource(R.string.dash_page_removed, pageName(page)) else pageName(page)
-    Box(
-        modifier = Modifier
-            .offset(x = (cell + PAGE_GAP) * col, y = (cell + PAGE_GAP) * row)
-            .size(cell)
-            .clip(shape)
-            .then(
-                if (here) Modifier.background(DashColors.Accent).semantics { contentDescription = name }
-                else Modifier
-                    .border(1.5.dp, if (dotted) DashColors.Muted.copy(alpha = 0.5f) else DashColors.TextSecondary, shape)
-                    .clickable(role = Role.Button, onClickLabel = name) { tap(); onClick() }
-                    .semantics { contentDescription = name }
-            ),
-        contentAlignment = Alignment.Center
-    ) {
-        if (icon != null) {
-            Icon(icon, contentDescription = null, tint = if (here) DashColors.OnAccent else DashColors.TextSecondary, modifier = Modifier.size(20.dp))
-        } else if (dotted) {
-            Box(Modifier.size(5.dp).clip(RoundedCornerShape(50)).background(DashColors.Muted.copy(alpha = 0.6f)))
-        }
-    }
-}

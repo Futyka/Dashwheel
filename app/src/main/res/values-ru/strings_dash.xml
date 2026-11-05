@@ -205,7 +205,6 @@
     <string name="dash_dashboard_options">Настройки панели</string>
     <string name="dash_remove_dashboard_title">Удалить «%1$s»?</string>
     <string name="dash_remove_dashboard_body">Очистите её или уберите из пролистывания вместе с плитками. «Отменить» вернёт их.</string>
-    <string name="dash_tile_move">На другую панель</string>
     <string name="dash_tile_remove">Удалить</string>
     <string name="dash_tile_restart_app">Перезапустить приложение</string>
     <!-- The bar's Apps button, labelled -->
@@ -228,11 +227,6 @@
     <string name="dash_dashboard_removed">«%1$s» удалена</string>
     <string name="dash_remove_empty">Очистить</string>
     <string name="dash_remove_take_out">Убрать из пролистывания</string>
-    <string name="dash_bring_back_title">Вернуть «%1$s»?</string>
-    <string name="dash_bring_back_body">Плитка попадёт туда, а панель снова появится в пролистывании.</string>
-    <string name="dash_bring_back">Вернуть</string>
-    <string name="dash_moved_to">Перемещено: %1$s</string>
-    <string name="dash_page_removed">%1$s, вне пролистывания</string>
     <string name="dash_way_home_up">Проведите вверх к Главной</string>
     <string name="dash_way_home_down">Проведите вниз к Главной</string>
     <string name="dash_add_tile">Добавить плитку</string>

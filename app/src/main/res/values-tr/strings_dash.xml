@@ -206,7 +206,6 @@
     <string name="dash_dashboard_options">Gösterge paneli seçenekleri</string>
     <string name="dash_remove_dashboard_title">%1$s kaldırılsın mı?</string>
     <string name="dash_remove_dashboard_body">Boşaltın ya da kutucuklarıyla birlikte kaydırmalardan çıkarın. Geri al onları geri getirir.</string>
-    <string name="dash_tile_move">Başka bir gösterge paneline taşı</string>
     <string name="dash_tile_remove">Kaldır</string>
     <string name="dash_tile_restart_app">Uygulamayı yeniden başlat</string>
     <!-- The bar's Apps button, labelled -->
@@ -227,11 +226,6 @@
     <string name="dash_dashboard_removed">%1$s kaldırıldı</string>
     <string name="dash_remove_empty">Boşalt</string>
     <string name="dash_remove_take_out">Kaydırmalardan çıkar</string>
-    <string name="dash_bring_back_title">%1$s geri getirilsin mi?</string>
-    <string name="dash_bring_back_body">Kutucuk oraya gider ve gösterge paneli yeniden kaydırmalara katılır.</string>
-    <string name="dash_bring_back">Geri getir</string>
-    <string name="dash_moved_to">%1$s paneline taşındı</string>
-    <string name="dash_page_removed">%1$s, kaydırmaların dışında</string>
     <string name="dash_way_home_up">Ana ekran için yukarı kaydırın</string>
     <string name="dash_way_home_down">Ana ekran için aşağı kaydırın</string>
     <string name="dash_add_tile">Kutucuk ekle</string>

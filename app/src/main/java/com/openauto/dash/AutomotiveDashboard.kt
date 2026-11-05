@@ -513,9 +513,6 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
     var pagesArea by remember { mutableStateOf(Rect.Zero) }
     var removeChoice by ui::removeChoice
     var confirmTemplate by ui::confirmTemplate
-    var confirmBringBack by ui::confirmBringBack
-    // A tile just sent to another dashboard: its chip, with the way there, for a moment.
-    var movedTo by remember { mutableStateOf<Int?>(null) }
     // A template, a shared dashboard or a look's Home just put on, said in words: the dashboard offers Undo for a while.
     var templateUndo by remember { mutableStateOf<String?>(null) }
     // Share (DashShare.kt): open from the edit bar, or by itself when the phone sends a code.
@@ -525,12 +522,6 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
         if (templateUndo != null) {
             delay(TEMPLATE_UNDO_MS)
             templateUndo = null
-        }
-    }
-    LaunchedEffect(movedTo) {
-        if (movedTo != null) {
-            delay(MOVED_CHIP_MS)
-            movedTo = null
         }
     }
     var setupDone by ui::setupDone
@@ -791,40 +782,6 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
         if (item is DashboardItem.SystemWidget) WidgetHostHolder.retire(context, item.appWidgetId)
         mutatePage(page) { list -> list.filterIndexed { i, _ -> i != index } }
         releaseMapsAnchorIfGone()
-    }
-
-    /**
-     * Moves the tile at [index] on [page] to the first free cell of [target];
-     * a full target page says so. The page being arranged stays on screen: a
-     * chip says where the tile went, and takes you there.
-     */
-    fun moveToPage(page: Int, index: Int, target: Int) {
-        val item = pages.getOrNull(page)?.getOrNull(index) ?: return
-        val list = pages.getOrNull(target) ?: return
-        val placed = if (!item.inGrid()) {
-            // Over the others there too, at its own cells: it needs no free ones.
-            item.withCell(item.x, item.y, item.w, item.h)
-        } else {
-            val cell = DashboardStore.firstFreeCell(list, item.w, item.h)
-                ?: DashboardStore.firstFreeCell(list, item.minW(), item.minH())
-            if (cell == null) {
-                layoutNotice = context.getString(R.string.dash_notice_no_space)
-                return
-            }
-            val fits = DashboardStore.canPlace(list, null, cell.first, cell.second, item.w, item.h)
-            if (fits) item.withCell(cell.first, cell.second, item.w, item.h)
-            else item.withCell(cell.first, cell.second, item.minW(), item.minH())
-        }
-        history = (history + Snapshot(pages, barTabsState.value)).takeLast(MAX_UNDO)
-        pages = pages.mapIndexed { i, l ->
-            when (i) {
-                page -> l.filterIndexed { j, _ -> j != index }
-                target -> l + placed
-                else -> l
-            }
-        }
-        DashboardStore.save(context, pages, variant())
-        movedTo = target
     }
 
     /** Replaces the tile at [index] (same cell) with [item], e.g. an edited launch bar. */
@@ -1763,14 +1720,6 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
                 wayHome = wayHomeShown,
                 modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 12.dp)
             )
-            // A tile just moved to another dashboard: where it went, one tap away.
-            movedTo?.let { target ->
-                MovedChip(
-                    name = pageName(target),
-                    onGo = { movedTo = null; showPage(target) },
-                    modifier = Modifier.align(Alignment.TopCenter).padding(top = 6.dp)
-                )
-            }
             if (barAutoHide && !arranging && !railOn) BarHandle(barState, Modifier.align(Alignment.BottomCenter))
 
             // The tapped tile's panel, over the side of the pages that leaves
@@ -1815,7 +1764,6 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
                             }
                             else -> null
                         } ?: tile.describe(),
-                        page = page,
                         side = side,
                         designs = widget?.takeIf { it.kind != BuiltinKind.DASH_BAR }?.let {
                             { shelfModifier ->
@@ -1850,11 +1798,6 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
                         onLayer = { toFront -> layerTile(page, index, toFront) },
                         onNudge = { dx, dy -> moveCell(page, index, tile.x + dx, tile.y + dy) },
                         onResize = { dw, dh -> resizeCell(page, index, tile.w + dw, tile.h + dh) },
-                        onMoveTo = { target ->
-                            // A dashboard out of the swipes comes back with the tile; asked first.
-                            if (target in crossState.value) { tileOptions = null; moveToPage(page, index, target) }
-                            else confirmBringBack = Triple(page, index, target)
-                        },
                         barActions = if (widget?.kind == BuiltinKind.DASH_BAR) {
                             {
                                 DashBarPanelActions(
@@ -2194,16 +2137,6 @@ fun AutomotiveDashboard(inSplitMode: Boolean = false) {
             onDismiss = { removeChoice = null }
         )
     }
-    confirmBringBack?.let { (page, index, target) ->
-        ConfirmDialog(
-            title = stringResource(R.string.dash_bring_back_title, pageName(target)),
-            body = stringResource(R.string.dash_bring_back_body),
-            action = stringResource(R.string.dash_bring_back),
-            onConfirm = { confirmBringBack = null; tileOptions = null; moveToPage(page, index, target) },
-            onDismiss = { confirmBringBack = null }
-        )
-    }
-
     // --- The dashboard bar's sheets (CanvasTabs.kt) ---
     val barKey = CanvasTabs.keyFor(variant())
     if (showBarChooser) {
@@ -2548,27 +2481,6 @@ private fun FadingPageIndicator(shown: Boolean, page: Int, cross: ShownCross, wa
 
 /** One Undo step while arranging: the pages, and the dashboards' names and places as they were. */
 private class Snapshot(val pages: List<List<DashboardItem>>, val tabs: List<CanvasTab>)
-
-/** How long the "Moved to ..." chip stays after a tile was sent to another dashboard. */
-private const val MOVED_CHIP_MS = 4_000L
-
-/** "Moved to Left of Home": a tile went to another dashboard; the chip takes you there. */
-@Composable
-private fun MovedChip(name: String, onGo: () -> Unit, modifier: Modifier = Modifier) {
-    val tap = rememberTapFeedback()
-    Text(
-        stringResource(R.string.dash_moved_to, name),
-        color = DashColors.OnAccent,
-        fontWeight = FontWeight.SemiBold,
-        style = MaterialTheme.typography.labelLarge,
-        maxLines = 1,
-        modifier = modifier
-            .clip(DashShape.Pill)
-            .background(DashColors.Accent)
-            .clickable(role = Role.Button) { tap(); onGo() }
-            .padding(horizontal = 16.dp, vertical = 10.dp)
-    )
-}
 
 /**
  * "Remove dashboard": empty it (the tiles go, it stays in the swipes), or

@@ -16,7 +16,6 @@ class DashboardUiStateTest {
         showAddSheet = true
         tileOptions = 1 to 3
         removeChoice = 4
-        confirmBringBack = Triple(1, 2, 3)
         confirmTemplate = TemplateChoice(DashTemplate.entries.first(), setOf(0), replace = true)
         setupStep = SetupStep.ACCESS
         setupShownStep = SetupStep.LOOK
@@ -95,7 +94,6 @@ class DashboardUiStateTest {
         assertFalse(ui.showAddSheet)
         assertNull(ui.tileOptions)
         assertNull(ui.removeChoice)
-        assertNull(ui.confirmBringBack)
         assertNull(ui.confirmTemplate)
         assertNull(ui.setupStep)
         assertFalse(ui.offerCarTiles)

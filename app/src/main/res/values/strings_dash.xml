@@ -206,7 +206,6 @@
     <string name="dash_dashboard_options">Dashboard options</string>
     <string name="dash_remove_dashboard_title">Remove %1$s?</string>
     <string name="dash_remove_dashboard_body">Empty it, or take it out of the swipes with its tiles. Undo brings them back.</string>
-    <string name="dash_tile_move">Move to another dashboard</string>
     <string name="dash_tile_remove">Remove</string>
     <string name="dash_tile_restart_app">Restart the app</string>
     <!-- The bar's Apps button, labelled -->
@@ -227,11 +226,6 @@
     <string name="dash_dashboard_removed">%1$s removed</string>
     <string name="dash_remove_empty">Empty it</string>
     <string name="dash_remove_take_out">Take it out of the swipes</string>
-    <string name="dash_bring_back_title">Bring back %1$s?</string>
-    <string name="dash_bring_back_body">The tile goes there and the dashboard joins the swipes again.</string>
-    <string name="dash_bring_back">Bring back</string>
-    <string name="dash_moved_to">Moved to %1$s</string>
-    <string name="dash_page_removed">%1$s, out of the swipes</string>
     <string name="dash_way_home_up">Swipe up for Home</string>
     <string name="dash_way_home_down">Swipe down for Home</string>
     <string name="dash_add_tile">Add a tile</string>
