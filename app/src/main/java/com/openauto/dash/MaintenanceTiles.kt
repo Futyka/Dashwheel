@@ -225,7 +225,8 @@ internal fun UpkeepDialog(onDismiss: () -> Unit) {
     // typed in onto another item (the air filter's mileage ended up in the oil's).
     val order = remember { state.statuses(now).map { it.kind } }
     val dues = remember(state) { UpkeepRules.inOrder(state.statuses(now), order) }
-    val monthFmt = remember { SimpleDateFormat("yyyy-MM", Locale.US) }
+    val zone = rememberZone()
+    val monthFmt = remember(zone) { SimpleDateFormat("yyyy-MM", Locale.US).inZone(zone) }
     val toKm = { shown: Int? -> shown?.let { u.km(it.toDouble()).roundToInt() } }
 
     fun commitOdometer() {

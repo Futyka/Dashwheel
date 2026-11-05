@@ -61,6 +61,8 @@ class DashApp : Application() {
         Thread({ PREFS_FILES.forEach { getSharedPreferences(it, MODE_PRIVATE) } }, "prefs-warm").start()
         // Which head unit firmware this is, before anything asks its adapter.
         UnitPlatform.init(this)
+        // The clocks follow the unit's time zone when it changes.
+        ZoneWatch.init(this)
     }
 
     private companion object {

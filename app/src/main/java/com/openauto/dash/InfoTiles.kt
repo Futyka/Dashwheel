@@ -247,8 +247,9 @@ private fun ClockReadout(numSize: Int) {
     val now = rememberNow(1_000L)
     val locale = Locale.getDefault()
     val u = LocalUnits.current
-    val timeFmt = remember(locale, u.clock24) { SimpleDateFormat(u.digitsPattern(), locale) }
-    val dateFmt = remember(locale) { SimpleDateFormat(android.text.format.DateFormat.getBestDateTimePattern(locale, "EEEEdMMMM"), locale) }
+    val zone = rememberZone()
+    val timeFmt = remember(locale, u.clock24, zone) { SimpleDateFormat(u.digitsPattern(), locale).inZone(zone) }
+    val dateFmt = remember(locale, zone) { SimpleDateFormat(android.text.format.DateFormat.getBestDateTimePattern(locale, "EEEEdMMMM"), locale).inZone(zone) }
     val time = timeFmt.format(now)
     val date = dateFmt.format(now)
     // Hours and minutes only: seconds ticking beside them pulled the eye for nothing. A 12-hour clock's AM / PM stays small.
@@ -539,7 +540,7 @@ internal fun CalendarCard(modifier: Modifier = Modifier) {
 @Composable
 private fun AgendaRow(e: AgendaEvent, onGuide: () -> Unit) {
     val timeFmt = rememberTimeFormat()
-    val dayFmt = remember { SimpleDateFormat("EEE", Locale.getDefault()) }
+    val dayFmt = remember(timeFmt) { SimpleDateFormat("EEE", Locale.getDefault()).inZone(timeFmt.timeZone) }
     val today = remember(e.begin) {
         val a = java.util.Calendar.getInstance(); val b = java.util.Calendar.getInstance().apply { timeInMillis = e.begin }
         a.get(java.util.Calendar.DAY_OF_YEAR) == b.get(java.util.Calendar.DAY_OF_YEAR) && a.get(java.util.Calendar.YEAR) == b.get(java.util.Calendar.YEAR)
@@ -793,7 +794,8 @@ internal fun QuickDialCard(modifier: Modifier = Modifier) {
     val source = rememberQuickDialSource()
     val perm = source.access
     val favourites = source.favourites
-    val timeFmt = remember { SimpleDateFormat("HH:mm", Locale.getDefault()) }
+    val zone = rememberZone()
+    val timeFmt = remember(zone) { SimpleDateFormat("HH:mm", Locale.getDefault()).inZone(zone) }
     val pending = rememberPendingAction()
     fun call(name: String, number: String) = pending.arm(context.getString(R.string.phone_calling, name)) { dialNumber(context, number) }
 

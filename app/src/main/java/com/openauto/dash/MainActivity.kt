@@ -363,6 +363,7 @@ open class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         inMultiWindow.value = isInMultiWindowMode
+        ZoneWatch.check()
         StuckSplit.check(this)
         FreeformBar.dashboardInFront = true
         MainScreenCover.onResumed(true)

@@ -124,7 +124,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
-import java.util.TimeZone
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.max
@@ -1922,7 +1921,7 @@ private fun CockpitClock(env: SkinTileEnv) {
 @Composable
 private fun AnalogClock(side: Dp) {
     val wall = rememberWallClock(secondHandStepMs)
-    val zone = remember { TimeZone.getDefault() }
+    val zone = rememberZone()
     val today = rememberNow(60_000L)
     val locale = Locale.getDefault()
     val dateFmt = rememberDateFormat("EEEd", best = true)

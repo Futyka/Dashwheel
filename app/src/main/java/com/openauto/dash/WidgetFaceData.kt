@@ -745,8 +745,9 @@ private fun clockFace(): WidgetFace {
     val locale = Locale.getDefault()
     val u = LocalUnits.current
     // The digits alone: a 12-hour clock's AM / PM goes in the unit, which every design sets small.
-    val timeFmt = remember(locale, u.clock24) { SimpleDateFormat(u.digitsPattern(), locale) }
-    val dateFmt = remember(locale) { SimpleDateFormat(android.text.format.DateFormat.getBestDateTimePattern(locale, "EEEEdMMMM"), locale) }
+    val zone = rememberZone()
+    val timeFmt = remember(locale, u.clock24, zone) { SimpleDateFormat(u.digitsPattern(), locale).inZone(zone) }
+    val dateFmt = remember(locale, zone) { SimpleDateFormat(android.text.format.DateFormat.getBestDateTimePattern(locale, "EEEEdMMMM"), locale).inZone(zone) }
     val cal = remember(now) { Calendar.getInstance().apply { time = now } }
     val h = cal.get(Calendar.HOUR_OF_DAY)
     val m = cal.get(Calendar.MINUTE)
@@ -809,7 +810,7 @@ private fun agendaFace(): WidgetFace {
             action = if (agenda.phoneSent) null else FaceAction(Icons.Filled.Event, stringResource(R.string.info_open), onClick = openCalendar))
     }
     val timeFmt = rememberTimeFormat()
-    val dayFmt = remember(timeFmt) { SimpleDateFormat("EEE " + timeFmt.toPattern(), Locale.getDefault()) }
+    val dayFmt = remember(timeFmt) { SimpleDateFormat("EEE " + timeFmt.toPattern(), Locale.getDefault()).inZone(timeFmt.timeZone) }
     val noTitle = stringResource(R.string.info_agenda_no_title)
     val allDay = stringResource(R.string.info_agenda_all_day)
     val today = Calendar.getInstance().get(Calendar.DAY_OF_YEAR)

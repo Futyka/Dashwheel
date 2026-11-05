@@ -608,7 +608,8 @@ private fun PaperWeather(env: SkinTileEnv) {
             return@BoxWithConstraints
         }
         val wet = remember(nowMs / HOUR_MS, w.rainFromMs, w.rainUntilMs) { wetHours(nowMs, w.rainFromMs, w.rainUntilMs) }
-        val start = remember(nowMs / HOUR_MS) { hourStart(nowMs, java.util.TimeZone.getDefault()) }
+        val zone = rememberZone()
+        val start = remember(nowMs / HOUR_MS, zone) { hourStart(nowMs, zone) }
         val labels = remember(start, hourFmt) { List(PAPER_RAIN_HOURS) { hourFmt.format(Date(start + it * HOUR_MS)).lowercase(Locale.getDefault()).removeSuffix("m") } }
         val raining = w.rainFromMs != null && w.rainFromMs <= nowMs
         val title = stringResource(if (wet.any { it }) R.string.paper_rain_next else R.string.paper_dry_next, PAPER_RAIN_HOURS)

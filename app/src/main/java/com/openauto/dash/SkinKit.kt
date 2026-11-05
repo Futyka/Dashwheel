@@ -128,8 +128,9 @@ internal fun rememberBlink(halfPeriodMs: Long = 500L): State<Boolean> {
 @Composable
 internal fun rememberDateFormat(pattern: String, best: Boolean = false): SimpleDateFormat {
     val locale = Locale.getDefault()
-    return remember(pattern, best, locale) {
-        SimpleDateFormat(if (best) android.text.format.DateFormat.getBestDateTimePattern(locale, pattern) else pattern, locale)
+    val zone = rememberZone()
+    return remember(pattern, best, locale, zone) {
+        SimpleDateFormat(if (best) android.text.format.DateFormat.getBestDateTimePattern(locale, pattern) else pattern, locale).inZone(zone)
     }
 }
 

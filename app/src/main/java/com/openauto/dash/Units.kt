@@ -335,5 +335,6 @@ fun ProvideUnits(content: @Composable () -> Unit) {
 fun rememberTimeFormat(): SimpleDateFormat {
     val units = LocalUnits.current
     val locale = LocalConfiguration.current.locales[0]
-    return remember(units.clock24, locale) { units.timeFormat(locale) }
+    val zone = rememberZone()
+    return remember(units.clock24, locale, zone) { units.timeFormat(locale).inZone(zone) }
 }

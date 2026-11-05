@@ -747,7 +747,8 @@ private fun JourneyLine(
     val faint = DashColors.Muted
     // The hours as the dashboard's clock writes them: "15:00", or "3 PM" on a 12-hour clock.
     val clock24 = LocalUnits.current.clock24
-    val hourFmt = remember(clock24) { java.text.SimpleDateFormat(if (clock24) "H:mm" else "h a", Locale.getDefault()) }
+    val zone = rememberZone()
+    val hourFmt = remember(clock24, zone) { java.text.SimpleDateFormat(if (clock24) "H:mm" else "h a", Locale.getDefault()).inZone(zone) }
     BoxWithConstraints(modifier = modifier) {
         val w = maxWidth
         val lineY = maxHeight * if (header != null) 0.40f else 0.34f
