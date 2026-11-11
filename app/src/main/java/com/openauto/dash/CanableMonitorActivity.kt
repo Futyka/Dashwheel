@@ -73,9 +73,8 @@ class CanableMonitorActivity : Activity() {
         scope.launch {
             val usb = getSystemService(Context.USB_SERVICE) as UsbManager
             // The driver already selected this USB device in Dashwheel settings.
-            val adapter = UsbObd.chosen(this@CanableMonitorActivity)
-                ?: UsbObd.attached(this@CanableMonitorActivity)
-                    .firstOrNull { it.label.contains("CANable", true) }
+            val adapter = UsbObd.attached(this@CanableMonitorActivity)
+                .firstOrNull { it.label.contains("CANable", true) }
             if (adapter == null) {
                 status.text = "No selected CANable2 USB serial adapter"
                 return@launch
