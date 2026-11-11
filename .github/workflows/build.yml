@@ -133,6 +133,11 @@ jobs:
       - name: Work out the version
         run: |
           code=$(( $(git rev-list --count --first-parent HEAD) + 200 ))
+          # Test branch must upgrade Dashwheel 1.0.886 already installed on the user devices.
+          # Keep the branch-only version strictly above 886 without changing main.
+          if [ "$GITHUB_REF_NAME" = "feature/canable2-slcan-monitor" ] && [ "$code" -lt 887 ]; then
+            code=887
+          fi
           echo "VERSION_CODE=$code" >> "$GITHUB_ENV"
           echo "VERSION_NAME=1.0.$code" >> "$GITHUB_ENV"
           echo "Version 1.0.$code"
