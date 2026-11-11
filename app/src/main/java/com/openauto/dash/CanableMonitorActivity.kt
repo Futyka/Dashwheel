@@ -191,11 +191,15 @@ internal object SlcanFrames {
         val remote = type == 'r' || type == 'R'
         val start = 2 + idChars
         if (!remote && line.length < start + dlc * 2) return null
-        val bytes = if (remote) "" else (0 until dlc).joinToString(" ") { n ->
-            line.substring(start + n * 2, start + n * 2 + 2).also {
-                if (it.toIntOrNull(16) == null) return null
-            }.uppercase(Locale.US)
+        val parts = mutableListOf<String>()
+        if (!remote) {
+            for (n in 0 until dlc) {
+                val value = line.substring(start + n * 2, start + n * 2 + 2)
+                if (value.toIntOrNull(16) == null) return null
+                parts.add(value.uppercase(Locale.US))
+            }
         }
+        val bytes = parts.joinToString(" ")
         return "%0${idChars}X [%d] %s%s".format(Locale.US, id, dlc, bytes, if (remote) " RTR" else "")
     }
 }
