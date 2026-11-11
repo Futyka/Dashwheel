@@ -1555,7 +1555,10 @@ class Painter(val width: Int, val height: Int, private val overscanPct: Int, pri
             mapOf(EncodeHintType.MARGIN to 0, EncodeHintType.ERROR_CORRECTION to ErrorCorrectionLevel.M)
         )
         // Whole pixels per module, on a white quiet zone: phones read it off a TV that way.
-        val module = max(1, (size - 8 * unit.roundToInt()) / matrix.width)
+        // Reserve at least four *modules* on every side for the QR quiet zone.
+        // Subtracting a fixed pixel count could leave fewer than four modules
+        // for some QR versions, making decoding intermittent with random offers.
+        val module = max(1, size / (matrix.width + 8))
         val side = module * matrix.width
         val quiet = (size - side) / 2
         g.color = Color.WHITE
