@@ -98,7 +98,7 @@ class CanableMonitorActivity : Activity() {
                 try {
                     serial.open(connection)
                     port = serial
-                    serial.setParameters(115200, 8, 1, 0)
+                    serial.setParameters(115200, UsbSerialPort.DATABITS_8, UsbSerialPort.STOPBITS_1, UsbSerialPort.PARITY_NONE)
                     // Close any old channel; never issue a CAN transmit command.
                     serial.write("C\r".toByteArray(), 1000)
                     serial.write("V\r".toByteArray(), 1000)
