@@ -11,6 +11,9 @@ internal object Smart451CanPreset {
     const val SLCAN_BITRATE_COMMAND = "S6"
     const val FUEL_CANDIDATE_ID = 0x408L
     const val FUEL_EXTENDED_ID = false
+    /** Earlier Smart451 CAN logger observations associated byte D0 with the raw fuel display. */
+    const val FUEL_RAW_BYTE_INDEX = 0
+    const val FUEL_RAW_FORMULA = "A"
 
     /**
      * Fuel level has not yet been mapped to payload bytes and a scaling formula.
